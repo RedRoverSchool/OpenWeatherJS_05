@@ -2,6 +2,7 @@
 
 
 describe('pop-up windows', () => {
+
     before(() => {
         cy.visit('https://demoqa.com/');
         cy.get('div.card-body h5').contains('Elements').click();
@@ -31,17 +32,17 @@ describe('pop-up windows', () => {
     })
 
     it('verify window:prompt after clicking cancel', function () {
-        
+
         cy.window().then(win => {
             cy.get('#promtButton').click();
             cy.stub(win, 'prompt').callsFake(() => null);
         })
         cy.get('#promptResult').should('not.exist')
     })
-    
-    it('verify window:prompt', function () { 
-        cy.window().then(function(name){
-             // click on Click for JS Prompt button
+
+    it('verify window:prompt', function () {
+        cy.window().then(function (name) {
+            // click on Click for JS Prompt button
             cy.get('#promtButton').click();
 
             //stubbing prompt window
@@ -52,3 +53,4 @@ describe('pop-up windows', () => {
         });
     })
 })
+
