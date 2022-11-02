@@ -24,7 +24,7 @@ jobs:
         cache: 'npm'
 
     - name: Npm install
-      run: npm install
+      run: npm ci
 
     - name: Npx run
       run: npx cypress run --headless
