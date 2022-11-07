@@ -6,9 +6,9 @@ describe('groupBugBusters', () => {
 
     it('AT_003.001 | Search City', function () {
         cy.visit('https://openweathermap.org')
-        cy.get('div#desktop-menu a[href="/guide"]').click()
-        cy.get('main.wrapper a[href]:not(.btn-orange)').each(($el) => {
-            cy.wrap($el).should('have.css', 'color').and('eq', 'rgb(233, 110, 80)');
+        cy.get('div#desktop-menu a[href*="marketplace"]').click()
+        cy.get('div.market-place a[href]:not(.button-round)').each(($el) => {
+            cy.wrap($el).should('have.css', 'color').and('eq', 'rgb(235, 110, 75)');
         })
     })
 })     
