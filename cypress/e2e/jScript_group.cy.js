@@ -20,4 +20,10 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/openweather-sponsors-world-data-league');
         cy.go('back');
     });
+
+    it('AT_002.001 | Header > Logo', () => {
+        cy.visit('https://openweathermap.org/examples');
+        cy.get('.logo').click();
+        cy.url().should('eq', 'https://openweathermap.org/');
+     });
 });
