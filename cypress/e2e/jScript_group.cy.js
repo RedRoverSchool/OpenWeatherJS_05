@@ -20,10 +20,9 @@ describe('Group jScript_group', () => {
         cy.get('.post-list .post').should('have.length', 10);
     });
 
-    it('AT_030.001 | Footer > After clicking on the `Website terms and conditions` in the footer the expected page is opened', () => {
-
+    it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', () => {
         cy.visit('https://openweathermap.org/');
-        cy.get('[href*="use.pdf"]').click();
+        cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click();
         cy.url().should('include','terms_and_conditions_of_use.pdf')
     });
 });
