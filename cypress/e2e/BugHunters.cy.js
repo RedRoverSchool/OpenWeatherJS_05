@@ -9,8 +9,8 @@ describe('groupBugHunters', () => {
           .should('have.attr', 'placeholder', 'Enter email')
           .type('oforostinko@gmail.com') 
         //cy.get('#user_password.form-control')
-          .should('have.attr', 'placeholder', 'Enter password')
-          .type('12341234')
+        // .should('have.attr', 'placeholder', 'Enter password')
+        //  .type('12341234')
         
     })
     
