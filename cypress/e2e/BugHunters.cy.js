@@ -10,8 +10,8 @@ describe('groupBugHunters', () => {
           .type('oforostinko@gmail.com') 
         cy.get('#user_password.form-control')
           .should('have.attr', 'placeholder', 'Password')
-          .type('12341234')
-        
+          .type('12341234') 
+        cy.get('#user_remember_me').check().should('be.checked')
+        cy.contains('Submit').click()
     })
-    
 })
