@@ -8,7 +8,7 @@ describe('Group jScript_group', () => {
         cy.url().should('be.equal', 'https://openweather.co.uk/blog/category/weather');
     });
 
-    it('AT_002.001 | Header > Logo', () => {
+    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', () => {
         cy.visit('https://openweathermap.org/examples');
         cy.get('.logo').click();
         cy.url().should('eq', 'https://openweathermap.org/');
