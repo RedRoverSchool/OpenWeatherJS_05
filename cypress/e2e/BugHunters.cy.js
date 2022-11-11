@@ -11,7 +11,9 @@ describe('groupBugHunters', () => {
         cy.get('#user_password.form-control')
           .should('have.attr', 'placeholder', 'Password')
           .type('12341234')
+        cy.get('#user_remember_me').check().should('be.checked')
+        cy.contains('Submit').click()
+        cy.get('.panel-body').should('have.text','Signed in successfully.')
         
-    })
-    
+    })   
 })
