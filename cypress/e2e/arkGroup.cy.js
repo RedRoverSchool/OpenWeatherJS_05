@@ -9,6 +9,7 @@ describe('group Ark', () => {
     cy.url().should("eq", "https://openweathermap.org/guide");
   }); 
 
+ 
 it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
     cy.visit('https://openweathermap.org/')
     cy.get('#desktop-menu [href*=market]').invoke('removeAttr', 'target').click()
@@ -29,9 +30,11 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
          cy.url().should('include', 'website_terms_and_conditions_of_use.pdf')
     })
 
+
     it(`AT_002.002 | Header > Verifying the website's logo is clickable and it redirects a User to the Main page`, () => {
         cy.visit('https://openweathermap.org/guide');
         cy.get('li[class="logo"]').click();
         cy.url().should('eq', 'https://openweathermap.org/')
     })
+
 });

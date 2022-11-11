@@ -13,5 +13,11 @@ describe('groupBugHunters', () => {
           .type('12341234')
         
     })
+
+    it ('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function() {
+        cy.visit('https://openweathermap.org/')
+        cy.get('.my-5 a[href*=apple]').should('be.visible')
+        cy.get('.my-5 a[href*=google]').should('be.visible')
+    })
     
 })
