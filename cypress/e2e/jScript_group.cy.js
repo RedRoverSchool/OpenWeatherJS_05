@@ -45,4 +45,15 @@ describe('Group jScript_group', () => {
         cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     })
+
+    it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', () => {
+        cy.visit('https://openweathermap.org/')
+        cy.get('li[class="user-li"] a[href$="sign_in"]').click()
+        cy.get('#user_email').type('3065606@gmail.com')
+        cy.get('#user_password.form-control').type('Qwerty1234')
+        cy.get('[value="Submit"]').click({force: true})
+        cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true})
+        cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true})
+        cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
+      })
 });
