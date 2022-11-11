@@ -6,5 +6,5 @@ describe("arkGroup", () => {
     cy.get('a[href="/guide"]').contains("Guide").click();
     cy.url().should("eq", "https://openweathermap.org/guide");
   });
-  
-});
+
+})
