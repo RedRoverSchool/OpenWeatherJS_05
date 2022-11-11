@@ -13,5 +13,5 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
       })
     })
   });
-
+  
 });
