@@ -12,7 +12,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org/examples');
         cy.get('.logo').click();
         cy.url().should('eq', 'https://openweathermap.org/');
-     });
+    });
 
     it('AT_013.002 | NavBar > After redirecting to the Blog page 10 posts are displayed on the first page', () => {
         cy.visit('https://openweathermap.org');
@@ -45,4 +45,11 @@ describe('Group jScript_group', () => {
         cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     })
+
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
 });
