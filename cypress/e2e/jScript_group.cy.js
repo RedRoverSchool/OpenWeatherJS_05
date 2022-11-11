@@ -25,4 +25,11 @@ describe('Group jScript_group', () => {
         cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click();
         cy.url().should('include','terms_and_conditions_of_use.pdf')
     });
+
+    it('AT_017.002 | Support > "How to start" > Verify "How to start" link redirection', () => {
+        cy.visit('https://openweathermap.org/')
+        cy.get('#support-dropdown').click({force: true})
+        cy.get('.dropdown-menu [href*="/appid"]').click({force: true})
+        cy.url().should('eq', 'https://openweathermap.org/appid') 
+     })
 });
