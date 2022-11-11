@@ -31,11 +31,18 @@ describe('Group jScript_group', () => {
         cy.get('#support-dropdown').click({force: true})
         cy.get('.dropdown-menu [href*="/appid"]').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/appid') 
-     })
+    })
 
-     it('AT_050.001 | Footer >Terms and conditions of sale', () => {
+    it('AT_050.001 | Footer >Terms and conditions of sale', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('#footer-website [href*="sale"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
-     })
+    })  
+    
+    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://www.drupal.org/project/olowm');
+    })
 });
