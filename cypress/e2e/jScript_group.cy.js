@@ -12,7 +12,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org/examples');
         cy.get('.logo').click();
         cy.url().should('eq', 'https://openweathermap.org/');
-     });
+    });
 
     it('AT_013.002 | NavBar > After redirecting to the Blog page 10 posts are displayed on the first page', () => {
         cy.visit('https://openweathermap.org');
@@ -46,6 +46,13 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     })
 
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
+
     it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', () => {
         cy.visit('https://openweathermap.org/')
         cy.get('li[class="user-li"] a[href$="sign_in"]').click()
@@ -55,5 +62,5 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true})
         cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true})
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
-      })
+    })
 });
