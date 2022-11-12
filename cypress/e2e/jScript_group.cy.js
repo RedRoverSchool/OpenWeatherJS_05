@@ -86,8 +86,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
-        cy.title().should('exist');
-        cy.url().should('be.equal','https://www.facebook.com/groups/270748973021342');
+        cy.url().should('include','270748973021342');
     });
 });
 
