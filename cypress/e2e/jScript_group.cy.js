@@ -66,7 +66,13 @@ describe('Group jScript_group', () => {
 
     it('AT_022.001 | Footer > Verification of displayed six Social Media icons', () => {
         cy.visit('https://openweathermap.org/');
-        cy.get('.social a').should('have.length', 6).and('be.visible');
+        cy.get('.social a').should('have.length', 6).and('be.visible')
+    })
+    
+    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#desktop-menu [href$=-dashboard]').click();
+        cy.url().should('include', '/weather-dashboard');
     })
     
     it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
@@ -76,4 +82,3 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/api#current')
     })
 });
-
