@@ -74,4 +74,11 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
     });
+
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a:first-child').should('be.visible');
+        cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('be.equal','https://www.facebook.com/groups/270748973021342');
+    });
 });
