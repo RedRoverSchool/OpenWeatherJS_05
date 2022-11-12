@@ -81,10 +81,29 @@ describe('Group jScript_group', () => {
         cy.get("ol [href='/api#current']").click()
         cy.url().should('include', '/api#current')
     })
+
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
         cy.visit('https://openweathermap.org/');
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
       });
-});
+
+      it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
+        cy.visit('https://openweathermap.org/');
+        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
+        cy.get(dashboard_button).click()
+        let try_the_dashboard = '.col-lg-6 > .row > p > .btn_like'
+        cy.get(try_the_dashboard).invoke('removeAttr','target').click()
+        cy.url().should('include','/users/sign_in')
+      });
+
+      it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', () => {
+         cy.visit('https://openweathermap.org/');
+         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
+         cy.get(dashboard_button).click()
+         let contact_us = '.below > .btn_like'
+         cy.get(contact_us).invoke('removeAttr','target').click();
+         cy.url().should('include','/questions')
+        });
+      });
