@@ -99,5 +99,12 @@ describe('Group jScript_group', () => {
             expect($a.eq(3)).to.contain('View plugin');
         })
     })
+
+    it('AT_012.004 | Partners > CMS > Verify "View widget" button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
+    }) 
 });
 
