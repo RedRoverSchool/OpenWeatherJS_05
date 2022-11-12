@@ -66,19 +66,27 @@ describe('Group jScript_group', () => {
 
     it('AT_022.001 | Footer > Verification of displayed six Social Media icons', () => {
         cy.visit('https://openweathermap.org/');
-        cy.get('.social a').should('have.length', 6).and('be.visible');
-    });
+        cy.get('.social a').should('have.length', 6).and('be.visible')
+    })
     
     it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
     });
-
-    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+    
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get("#desktop-menu ul li a[href='/guide']").click()
+        cy.get("ol [href='/api#current']").click()
+        cy.url().should('include', '/api#current')
+    })
+    
+     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('be.equal','https://www.facebook.com/groups/270748973021342');
     });
 });
+
