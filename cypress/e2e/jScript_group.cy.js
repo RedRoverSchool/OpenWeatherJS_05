@@ -73,7 +73,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
-    })
+    });
     
     it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
         cy.visit('https://openweathermap.org');
@@ -81,6 +81,7 @@ describe('Group jScript_group', () => {
         cy.get("ol [href='/api#current']").click()
         cy.url().should('include', '/api#current')
     })
+
 
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
         cy.visit('https://openweathermap.org/');
@@ -106,4 +107,25 @@ describe('Group jScript_group', () => {
          cy.get(contact_us).invoke('removeAttr','target').click();
          cy.url().should('include','/questions')
         });
-      });
+      })
+    
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a:first-child').should('be.visible');
+        cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('include','270748973021342');
+    });
+
+    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', () => {
+        cy.visit('https://openweathermap.org/examples')
+        cy.get('#cms a').should(($a) => {
+            expect($a).to.have.length(4);
+            expect($a.eq(0)).to.contain('See on the website');
+            expect($a.eq(1)).to.contain('View widget');
+            expect($a.eq(2)).to.contain('View plugin');
+            expect($a.eq(3)).to.contain('View plugin');
+        })
+    })
+});
+
+
