@@ -47,7 +47,6 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
                   .contains($supportMenu[$i][0]).should('be.visible')
                   .invoke('removeAttr', 'target').click()
               cy.url().should('include', $supportMenu[$i][1])
-              cy.go('back')
           })
       })
 
