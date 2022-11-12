@@ -86,5 +86,27 @@ describe('Group jScript_group', () => {
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
-      });
+    });
+
+        cy.get('.social a:first-child').should('be.visible');
+        cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('include','270748973021342');
+    });
+
+    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', () => {
+        cy.visit('https://openweathermap.org/examples')
+        cy.get('#cms a').should(($a) => {
+            expect($a).to.have.length(4);
+            expect($a.eq(0)).to.contain('See on the website');
+            expect($a.eq(1)).to.contain('View widget');
+            expect($a.eq(2)).to.contain('View plugin');
+            expect($a.eq(3)).to.contain('View plugin');
+        })
+
+    it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
+        cy.visit('https://openweathermap.org/');
+        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
+        cy.get(dashboard_button).click()
+        cy.url().should('include','weather-dashboard')
+    });
 });
