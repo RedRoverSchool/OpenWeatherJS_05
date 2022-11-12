@@ -63,4 +63,11 @@ describe('Group jScript_group', () => {
         cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true})
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     })
+
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get("#desktop-menu ul li a[href='/guide']").click()
+        cy.get("ol [href='/api#current']").click()
+        cy.url().should('include', '/api#current')
+    });
 });
