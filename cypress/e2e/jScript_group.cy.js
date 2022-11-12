@@ -12,7 +12,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org/examples');
         cy.get('.logo').click();
         cy.url().should('eq', 'https://openweathermap.org/');
-     });
+    });
 
     it('AT_013.002 | NavBar > After redirecting to the Blog page 10 posts are displayed on the first page', () => {
         cy.visit('https://openweathermap.org');
@@ -31,5 +31,73 @@ describe('Group jScript_group', () => {
         cy.get('#support-dropdown').click({force: true})
         cy.get('.dropdown-menu [href*="/appid"]').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/appid') 
-     })
+    })
+
+    it('AT_050.001 | Footer >Terms and conditions of sale', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#footer-website [href*="sale"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
+    })  
+    
+    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://www.drupal.org/project/olowm');
+    })
+
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
+
+    it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', () => {
+        cy.visit('https://openweathermap.org/')
+        cy.get('li[class="user-li"] a[href$="sign_in"]').click()
+        cy.get('#user_email').type('3065606@gmail.com')
+        cy.get('#user_password.form-control').type('Qwerty1234')
+        cy.get('[value="Submit"]').click({force: true})
+        cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true})
+        cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true})
+        cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
+    })
+
+    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a').should('have.length', 6).and('be.visible')
+    })
+    
+    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#desktop-menu [href$=-dashboard]').click();
+        cy.url().should('include', '/weather-dashboard');
+    });
+    
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get("#desktop-menu ul li a[href='/guide']").click()
+        cy.get("ol [href='/api#current']").click()
+        cy.url().should('include', '/api#current')
+    })
+    
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a:first-child').should('be.visible');
+        cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('include','270748973021342');
+    });
+
+    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', () => {
+        cy.visit('https://openweathermap.org/examples')
+        cy.get('#cms a').should(($a) => {
+            expect($a).to.have.length(4);
+            expect($a.eq(0)).to.contain('See on the website');
+            expect($a.eq(1)).to.contain('View widget');
+            expect($a.eq(2)).to.contain('View plugin');
+            expect($a.eq(3)).to.contain('View plugin');
+        })
+    })
 });
+
