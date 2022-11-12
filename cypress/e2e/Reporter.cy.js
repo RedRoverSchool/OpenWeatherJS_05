@@ -12,5 +12,6 @@ describe('GroupReporters', () => {
         cy.get('.sub.not-found')
             .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).")
         cy.get('div.widget-notification').should('have.text', `No results for ${inputCity}`)
+        
     })
 })
