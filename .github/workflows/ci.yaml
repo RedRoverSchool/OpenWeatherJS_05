@@ -48,8 +48,8 @@ jobs:
           runs-on: ubuntu-20.04
           name: Artifacts
           steps:
-            - uses: actions/checkout@v2
-            - uses: cypress-io/github-action@v4
+            # - uses: actions/checkout@v2
+            # - uses: cypress-io/github-action@v4
             - uses: actions/upload-artifact@v2
               if: failure()
               with:
