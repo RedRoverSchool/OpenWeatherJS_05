@@ -64,6 +64,11 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     })
 
+    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a').should('have.length', 6).and('be.visible');
+    });
+    
     it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
