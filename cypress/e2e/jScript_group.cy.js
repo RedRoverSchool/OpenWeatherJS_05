@@ -52,4 +52,10 @@ describe('Group jScript_group', () => {
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');
     });
+
+    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#desktop-menu [href$=-dashboard]').click();
+        cy.url().should('include', '/weather-dashboard');
+    });
 });
