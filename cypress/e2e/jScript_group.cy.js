@@ -82,11 +82,22 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/api#current')
     })
     
-     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','270748973021342');
     });
+
+    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', () => {
+        cy.visit('https://openweathermap.org/examples')
+        cy.get('#cms a').should(($a) => {
+            expect($a).to.have.length(4);
+            expect($a.eq(0)).to.contain('See on the website');
+            expect($a.eq(1)).to.contain('View widget');
+            expect($a.eq(2)).to.contain('View plugin');
+            expect($a.eq(3)).to.contain('View plugin');
+        })
+    })
 });
 
