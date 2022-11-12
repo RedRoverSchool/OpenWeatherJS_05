@@ -1,5 +1,6 @@
 /// <reference types="cypress"/> 
 
+
 describe('GroupReporters', () => {
 
     it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
