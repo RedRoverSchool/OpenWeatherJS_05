@@ -31,7 +31,6 @@ describe('GroupReporters', () => {
     })
 
     it('AT_005.001 | Verify the website name and description', () => {
-        cy.visit('https://openweathermap.org')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
         cy.get('h2 .white-text')
             .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
