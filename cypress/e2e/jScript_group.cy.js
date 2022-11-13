@@ -87,7 +87,7 @@ describe('Group jScript_group', () => {
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
       });
-    
+
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
