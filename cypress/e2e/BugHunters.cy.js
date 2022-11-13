@@ -11,7 +11,22 @@ describe('groupBugHunters', () => {
         cy.get('#user_password.form-control')
           .should('have.attr', 'placeholder', 'Password')
           .type('12341234')
-        
+        cy.get('#user_remember_me').check().should('be.checked')
+        cy.contains('Submit').click()
+        cy.get('.panel-body').should('have.text','Signed in successfully.')
+  
+    })
+
+    it ('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function() {
+        cy.visit('https://openweathermap.org/')
+        cy.get('.my-5 a[href*=apple]').should('be.visible')
+        cy.get('.my-5 a[href*=google]').should('be.visible')
+    })
+
+    it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
+      cy.visit('https://openweathermap.org/')
+      cy.get('.my-5 a[href*=apple]').invoke('removeAttr', 'target').click()
+      cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')        
     })
     
 })
