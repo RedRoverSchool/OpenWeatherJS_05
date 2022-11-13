@@ -7,6 +7,8 @@ describe('group_javascript_for_qas', () => {
 
     it('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
         cy.visit('https://openweathermap.org/');
+        cy.get('li.user-li a').should('have.text','Sign in');
+        
         cy.get("li.with-dropdown div").click();
         cy.get("ul#support-dropdown-menu a[href='https://home.openweathermap.org/questions']").invoke('removeAttr', 'target').click()
         cy.title().should('eq', 'Members');
