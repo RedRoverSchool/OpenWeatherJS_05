@@ -45,5 +45,5 @@ jobs:
       uses: actions/upload-artifact@v2
       if: failure()
       with:
-        name: cypress-snapshots
-        path: ./cypress/snapshots
+        name: cypress-screenshots
+        path: ./cypress/screenshots
