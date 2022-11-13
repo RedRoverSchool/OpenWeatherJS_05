@@ -28,6 +28,7 @@ describe('GroupReporters', () => {
         cy.get('.sub.not-found')
             .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).")
         cy.get('div.widget-notification').should('have.text', `No results for ${inputCity}`)
+        
     })
 
     it('AT_005.001 | Verify the website name and description', () => {
@@ -42,6 +43,11 @@ describe('GroupReporters', () => {
         enterCityOrZipCode(zipCode);
         submit();
         cy.get(inputSearchCity).invoke('val').should('eq', zipCode);
+    });
+
+    it('AT_034.001 | <Header > verify "For Business" button', () => {
+        cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
+        cy.url().should('eq','https://openweather.co.uk/')
     });
 });
 
