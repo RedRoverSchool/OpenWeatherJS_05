@@ -1,18 +1,17 @@
 /// <reference types="cypress"/> 
+const inputSearchCity = 'input[placeholder = "Search city"]';
 
 
 describe('GroupReporters', () => {
-
-    const inputSearchCity = 'input[placeholder = "Search city"]';
 
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
     });
 
-    function enterCityOrZipCode(city) {
+    function enterCityOrZipCode(inputText) {
         cy.get(inputSearchCity)
             .clear()
-            .type(city);
+            .type(inputText);
         return this
     };
 
@@ -51,5 +50,12 @@ describe('GroupReporters', () => {
         cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
-});
 
+    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
+        const cityName = 'Washington DC';
+
+        enterCityOrZipCode(cityName);
+        submit();
+        cy.get(inputSearchCity).invoke('val').should('eq', cityName);
+    });
+});

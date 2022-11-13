@@ -86,10 +86,15 @@ describe('Group jScript_group', () => {
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
+<<<<<<< HEAD
     });
 
     
     
+=======
+      });
+
+>>>>>>> abda1560f9b1e0d6352c41f49b723e0b55d83ef3
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
