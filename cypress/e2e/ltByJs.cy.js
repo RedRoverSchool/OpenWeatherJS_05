@@ -1,7 +1,7 @@
 /// <reference types="cypress"/>
 
 describe('Group lt_by_js', () => {
-   it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu item', () => {
+    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu item', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
@@ -86,7 +86,7 @@ describe('Group lt_by_js', () => {
 
     });
   
-  it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options exist', () => {
+    it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options exist', () => {
 
         const email = "random_user@gmail.com"
         const password = "hysty7-noktoJ-jujxuo"
@@ -96,13 +96,13 @@ describe('Group lt_by_js', () => {
         const submitButton = 'input[value="Submit"]'
 
         cy.visit('https://openweathermap.org/')
-        cy.get(signInButton).click({force:true})
+        cy.get(signInButton).click()
         cy.get(enterEmail).type(email)
         cy.get(enterPassword).type(password)
         cy.get(submitButton).click()
         cy.get('.panel-body')
           .should('have.text', 'Signed in successfully.')
-        cy.get('#user-dropdown').click({force:true})
+        cy.get('#user-dropdown').click()
         cy.get('#user-dropdown-menu')
           .should('exist')
           .and('have.class', 'dropdown-menu dropdown-visible')
@@ -115,6 +115,16 @@ describe('Group lt_by_js', () => {
             expect($el.eq(3)).to.include.text('My profile')
             expect($el.eq(4)).to.include.text('Logout')
         });
+    });
+
+    it('AT_018.001 | Support > Drop down menu > Verify "FAQ" menu link', () => {
+        const faq = '#support-dropdown-menu a[href="/faq"]'
+    
+        cy.visit('https://openweathermap.org')
+        cy.get('#support-dropdown').click()
+        cy.get('#support-dropdown-menu').should('be.visible')
+        cy.get(faq).click()
+        cy.url().should('include', '/faq')
     });
   
 });
