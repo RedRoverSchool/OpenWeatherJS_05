@@ -99,5 +99,13 @@ describe('Group jScript_group', () => {
             expect($a.eq(3)).to.contain('View plugin');
         })
     })
+
+
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+        cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com')
+    });
 });
 
