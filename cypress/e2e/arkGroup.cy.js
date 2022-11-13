@@ -58,4 +58,11 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.get('div[class="col-sm-12"]').contains('Weather data in a fast and easy-to-use way').should('be.visible')
     })
 
+    it('AT_008.006.02 | Main menu > Guide > Verify The text "OpenWeather products" is displayed.', () => {
+      cy.visit('https://openweathermap.org/');
+      cy.get('a[href="/guide"]').contains("Guide").click();
+      cy.get('.wrapper').should('be.visible')
+      cy.get('div[class="col-sm-12"]').contains('OpenWeather products').should('be.visible')
+    })
+
 });
