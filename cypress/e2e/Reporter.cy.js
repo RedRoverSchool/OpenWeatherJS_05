@@ -20,7 +20,7 @@ describe('GroupReporters', () => {
         cy.get('.search-block button').click()
     };
 
-    it.scip('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
+    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
         const inputCity = "$$$"
 
         cy.get('input[placeholder = "Search city"]').type(inputCity, { force: true })
@@ -31,7 +31,7 @@ describe('GroupReporters', () => {
         
     })
 
-    it.scip('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
+    it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
         const zipCode = '60604';
 
         enterCityOrZipCode(zipCode);
@@ -40,8 +40,7 @@ describe('GroupReporters', () => {
     });
 
     it('AT_034.001 | <Header > verify "For Business" button', () => {
-        cy.get(#desktop-menu :nth-child(10) > a).click()
-        cy.url().should('https://openweather.co.uk/')
-        
+        cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
+        cy.url().should('eq','https://openweather.co.uk/')
     });
 });
