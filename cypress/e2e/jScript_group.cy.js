@@ -73,7 +73,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
-    })
+    });
     
     it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', () => {
         cy.visit('https://openweathermap.org');
@@ -87,4 +87,36 @@ describe('Group jScript_group', () => {
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
       });
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a:first-child').should('be.visible');
+        cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('include','270748973021342');
+    });
+
+    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', () => {
+        cy.visit('https://openweathermap.org/examples')
+        cy.get('#cms a').should(($a) => {
+            expect($a).to.have.length(4);
+            expect($a.eq(0)).to.contain('See on the website');
+            expect($a.eq(1)).to.contain('View widget');
+            expect($a.eq(2)).to.contain('View plugin');
+            expect($a.eq(3)).to.contain('View plugin');
+        })
+    })
+
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+        cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com')
+    });
+    
+    it('AT_012.004 | Partners > CMS > Verify "View widget" button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
+    })  
 });
+
