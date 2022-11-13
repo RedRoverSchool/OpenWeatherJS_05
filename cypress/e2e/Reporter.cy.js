@@ -7,6 +7,9 @@ describe('GroupReporters', () => {
 
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
+        cy.fixture('reporters').then((data) => {
+            this.data = data
+        });
     });
 
     function enterCityOrZipCode(city) {
@@ -48,6 +51,14 @@ describe('GroupReporters', () => {
     it('AT_034.001 | <Header > verify "For Business" button', () => {
         cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
         cy.url().should('eq','https://openweather.co.uk/')
+    });
+
+        it('AT_022.005 | Footer > Social media > 6 social media icons on the footernpx ', function () {
+            cy.get('.social a').each(($el, index) => {
+                expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        
+               });
+
     });
 });
 
