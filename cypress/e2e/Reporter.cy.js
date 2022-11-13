@@ -1,17 +1,18 @@
-/// <reference types="cypress"/> 
-const inputSearchCity = 'input[placeholder = "Search city"]';
+/// <reference types="cypress"/>
 
 
 describe('GroupReporters', () => {
+
+    const inputSearchCity = 'input[placeholder = "Search city"]';
 
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
     });
 
-    function enterCityOrZipCode(inputText) {
+    function enterCityOrZipCode(city) {
         cy.get(inputSearchCity)
             .clear()
-            .type(inputText);
+            .type(city);
         return this
     };
 
@@ -51,11 +52,18 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
 
-    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
-        const cityName = 'Washington DC';
-
-        enterCityOrZipCode(cityName);
-        submit();
-        cy.get(inputSearchCity).invoke('val').should('eq', cityName);
+    it('AT_001.010 | Main page > Section with search > Verify entered a city or Zip code into the Search city field', () => {
+        cy.get(inputSearchCity)
+          .type('Buffalo Grove')
+          .click()
+        cy.get('button[class="button-round dark"]')
+          .click()
+        cy.get('ul[class="search-dropdown-menu"]')
+          .click()
+        cy.url()
+          .should('include', '/city/4885955')
+        cy.get('div[class="current-container mobile-padding"]')
+          .should('include.text', 'Buffalo Grove')
     });
 });
+
