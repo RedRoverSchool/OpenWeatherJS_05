@@ -28,5 +28,11 @@ describe('groupBugHunters', () => {
       cy.get('.my-5 a[href*=apple]').invoke('removeAttr', 'target').click()
       cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')        
     })
-    
+
+    it ('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
+      cy.visit('https://openweathermap.org/');
+      cy.get('#desktop-menu').contains('Guide').click({force: true});
+      cy.get('center a[href="/price"]').click();
+      cy.url().should('contain', '/price');
+  })
 })
