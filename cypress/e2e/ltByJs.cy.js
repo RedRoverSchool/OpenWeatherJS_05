@@ -40,4 +40,18 @@ describe('Group lt_by_js', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
     });
     
+    it('AT_009.002 | Main menu > Marketplace verification of displayed content History bulk and it"s price', () => {
+
+        const marketplace = '#desktop-menu a[href*="marketplace"]'
+        const historyBulk = 'div:nth-child(1) > div.product-container > div:nth-child(1) > h5 > a'
+        const price = 'div.price-container > div > h5.price'
+
+        cy.visit('https://openweathermap.org/')
+        cy.get(marketplace).invoke('removeAttr', 'target').click()
+        cy.get(historyBulk).should('be.visible') 
+        cy.get(price).should('contain', '10 USD') 
+
+     });
+
+
 });
