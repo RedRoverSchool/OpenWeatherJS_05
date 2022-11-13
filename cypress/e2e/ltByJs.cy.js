@@ -39,5 +39,36 @@ describe('Group lt_by_js', () => {
         cy.get(marketplace).invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
     });
+
+    it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options exist', () => {
+
+        const email = "random_user@gmail.com"
+        const password = "hysty7-noktoJ-jujxuo"
+        const enterEmail = '.input-group #user_email'
+        const enterPassword = '#user_password'
+        const signInButton ='.user-li a'
+        const submitButton = 'input[value="Submit"]'
+
+        cy.visit('https://openweathermap.org/')
+        cy.get(signInButton).click({force:true})
+        cy.get(enterEmail).type(email)
+        cy.get(enterPassword).type(password)
+        cy.get(submitButton).click()
+        cy.get('.panel-body')
+          .should('have.text', 'Signed in successfully.')
+        cy.get('#user-dropdown').click({force:true})
+        cy.get('#user-dropdown-menu')
+          .should('exist')
+          .and('have.class', 'dropdown-menu dropdown-visible')
+        cy.get('#user-dropdown-menu li')
+          .should(($el) => {
+            expect($el).to.have.length(5)
+            expect($el.eq(0)).to.include.text('My services')
+            expect($el.eq(1)).to.include.text('My API keys')
+            expect($el.eq(2)).to.include.text('My payments')
+            expect($el.eq(3)).to.include.text('My profile')
+            expect($el.eq(4)).to.include.text('Logout')
+        });
+    });
     
 });
