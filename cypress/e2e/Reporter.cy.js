@@ -1,18 +1,17 @@
 /// <reference types="cypress"/> 
+const inputSearchCity = 'input[placeholder = "Search city"]';
 
 
 describe('GroupReporters', () => {
-
-    const inputSearchCity = 'input[placeholder = "Search city"]';
 
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
     });
 
-    function enterCityOrZipCode(city) {
+    function enterCityOrZipCode(inputText) {
         cy.get(inputSearchCity)
             .clear()
-            .type(city);
+            .type(inputText);
         return this
     };
 
@@ -21,13 +20,16 @@ describe('GroupReporters', () => {
     };
 
     it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
-        const inputCity = "$$$"
+        const inputCity = "$$$";
 
-        cy.get('input[placeholder = "Search city"]').type(inputCity, { force: true })
-        cy.get('.search-block button').click()
+        enterCityOrZipCode(inputCity);
+        submit();
         cy.get('.sub.not-found')
-            .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).")
-        cy.get('div.widget-notification').should('have.text', `No results for ${inputCity}`)
+            .should('be.visible')
+            .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).");
+        cy.get('div.widget-notification')
+            .should('be.visible')
+            .should('have.text', `No results for ${inputCity}`);
     })
 
     it('AT_005.001 | Verify the website name and description', () => {
@@ -43,5 +45,17 @@ describe('GroupReporters', () => {
         submit();
         cy.get(inputSearchCity).invoke('val').should('eq', zipCode);
     });
-});
 
+    it('AT_034.001 | <Header > verify "For Business" button', () => {
+        cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweather.co.uk/')
+    });
+
+    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
+        const cityName = 'Washington DC';
+
+        enterCityOrZipCode(cityName);
+        submit();
+        cy.get(inputSearchCity).invoke('val').should('eq', cityName);
+    });
+});
