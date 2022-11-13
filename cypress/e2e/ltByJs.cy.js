@@ -126,5 +126,15 @@ describe('Group lt_by_js', () => {
         cy.get(faq).click()
         cy.url().should('include', '/faq')
     });
+
+    it('AT_018.002 | Support > Drop down menu > Verify "How to start" menu link', () => {
+        const howToStart = '#support-dropdown-menu a[href="/appid"]'
+       
+        cy.visit('https://openweathermap.org')
+        cy.get('#support-dropdown').click()
+        cy.get('#support-dropdown-menu').should('be.visible')
+        cy.get(howToStart).click()
+        cy.url().should('include', '/appid')
+    });
   
 });
