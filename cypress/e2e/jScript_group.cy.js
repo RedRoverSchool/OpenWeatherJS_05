@@ -100,11 +100,18 @@ describe('Group jScript_group', () => {
         })
     })
 
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+        cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com')
+    });
+    
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('div#desktop-menu a[href*="examples"]').click();
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
-    }) 
+    })  
 });
 

@@ -30,6 +30,12 @@ describe('GroupReporters', () => {
         cy.get('div.widget-notification').should('have.text', `No results for ${inputCity}`)
     })
 
+    it('AT_005.001 | Verify the website name and description', () => {
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
+        cy.get('h2 .white-text')
+            .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
+    })
+
     it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
         const zipCode = '60604';
 
@@ -38,3 +44,4 @@ describe('GroupReporters', () => {
         cy.get(inputSearchCity).invoke('val').should('eq', zipCode);
     });
 });
+
