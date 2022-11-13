@@ -125,4 +125,12 @@ describe('Group jScript_group', () => {
         cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf')
     });
+
+    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('a[href="#cms"]').click();
+        cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
+    });
 });
