@@ -58,4 +58,11 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.get('div[class="col-sm-12"]').contains('Weather data in a fast and easy-to-use way').should('be.visible')
     })
 
+    it('AT_028.004 | About us, verify “Buy in the Marketplace” button', () => {
+      cy.visit('https://openweathermap.org/')
+      cy.get('a[href="/about-us"]').click()
+      cy.get('a.round[href*="marketplace"]').click()
+      cy.url().should('include', '/marketplace')
+  });
+  
 });
