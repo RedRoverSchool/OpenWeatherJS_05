@@ -52,6 +52,4 @@ describe('Group lt_by_js', () => {
         cy.get(price).should('contain', '10 USD') 
 
      });
-
-
 });
