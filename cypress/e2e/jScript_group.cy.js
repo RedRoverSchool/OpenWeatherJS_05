@@ -107,5 +107,10 @@ describe('Group jScript_group', () => {
         cy.get('#dialogDesc div.more-options').click();
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com')
     });
-});
 
+    it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf')
+    })
+})      
