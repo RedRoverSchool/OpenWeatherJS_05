@@ -153,4 +153,12 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('ul.day-list li').should('have.length', 8)
     });
+
+    it('AT_028.005 | Footer > About us > Verify New and Updates button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('a[href="/about-us"]').click();
+        cy.get('a.round[href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', '/blog/category/weather');
+    })
+
 });
