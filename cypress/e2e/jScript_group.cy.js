@@ -153,4 +153,10 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('ul.day-list li').should('have.length', 8)
     });
+
+    it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', () => {
+        cy.visit('https://openweathermap.org');
+         cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click()
+        cy.url().should('eq','https://openweathermap.org/price')
+    });
 });
