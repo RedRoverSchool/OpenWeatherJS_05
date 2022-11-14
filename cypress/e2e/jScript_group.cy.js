@@ -183,7 +183,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
-        cy.url().should('include', 'https://openweather.co.uk/blog/post/')
+        cy.url().should('include', 'https://openweather.co.uk/blog/post/');
     });
 });
 
