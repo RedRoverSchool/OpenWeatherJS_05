@@ -183,6 +183,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
+
     it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
@@ -239,5 +240,13 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
+
+    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href="/appid"]').click();
+        cy.url().should('eq','https://openweathermap.org/appid');
+    });    
 });
 
