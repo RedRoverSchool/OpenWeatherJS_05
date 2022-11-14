@@ -13,13 +13,6 @@ describe('ark group', () => {
     } ) 
      })
          
-        
-        it('AT_033.009 | Header > Navigation > Verify “API” menu link', () => {
-            cy.visit('https://openweathermap.org/');
-            cy.get('div#desktop-menu a[href*="/api"]').click();
-            cy.url().should('eq', 'https://openweathermap.org/api');
-        });
-    
     
 
 
