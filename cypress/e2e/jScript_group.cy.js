@@ -172,9 +172,16 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
     });
 
+    it("AT_002.012 | Header > Checking the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
+    
     it('AT_005.002 | Main page > Verify the website\'s description', () => {
         cy.visit('https://openweathermap.org');
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
-    })
+    });
 });
 
