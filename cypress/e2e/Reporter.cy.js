@@ -86,5 +86,24 @@ describe('GroupReporters', () => {
         cy.get('.panel-body')
             .should('have.text', 'Signed in successfully.')
     });
+
+    it('AT_002.009 | Header > Clicking the logo>Verify the logo and redirected to the Main page', () => {
+        const navBarGuide = '[id="desktop-menu"] [href="/guide"]';
+        const headerGuide = 'h1[class="breadcrumb-title"]';
+        const headerMainPage = 'h1 [class="orange-text"]'
+
+        cy.get(navBarGuide)
+          .click()
+        cy.url()
+          .should('include', '/guide')
+        cy.get(headerGuide)
+          .should('have.text', 'Guide')
+        cy.get('li[class="logo"]')
+          .click()
+        cy.url()
+          .should('include', '')
+        cy.get(headerMainPage)
+          .should('have.text', 'OpenWeather')
+    });
 });
 
