@@ -141,7 +141,6 @@ describe('Group jScript_group', () => {
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
     });
-
     
     it('AT_002.014 | Header > After clicking the logo user is redirected to the main page', () => {
         cy.visit('https://openweathermap.org/examples');
@@ -153,4 +152,31 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('ul.day-list li').should('have.length', 8)
     });
+
+    it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', () => {
+        cy.visit('https://openweathermap.org');
+         cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click()
+        cy.url().should('eq','https://openweathermap.org/price')
+    });
+    
+    it('AT_022.003 | Footer > Verify Tweeter icon redirection', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('.social a:nth-child(2)').should('be.visible');
+        cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
+        cy.url().should('be.equal','https://twitter.com/OpenWeatherMap');
+    });
+    
+    it('AT_033.008 | Header > Navigation > “Our Initiatives” menu link', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href*="initiatives"]').click();
+        cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
+    });
+
+    it("AT_002.012 | Header > Checking the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
 });
+

@@ -164,4 +164,18 @@ describe('Group lt_by_js', () => {
         
     });
 
+    it('AT_009.003 | Main menu > Marketplace verification of displayed content History bulk buttons "Documentation" and "Place order"', () => {
+        const marketplace = '#desktop-menu a[href*="marketplace"]'
+        const documentationButton = 'div.button-container > a[href="https://openweathermap.org/history-bulk"]'
+        const placeOrderbutton = 'div.button-container a[href="/history_bulks/new"].button-round'
+
+        cy.visit('https://openweathermap.org/')
+        cy.get(marketplace).invoke('removeAttr', 'target').click()
+        cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweathermap.org/history-bulk')
+        cy.go('back')
+        cy.get(placeOrderbutton).should('be.visible').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new' )
+
+    });
 });

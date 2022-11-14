@@ -1,29 +1,28 @@
 /// <reference types="cypress"/>
+const inputSearchCity = 'input[placeholder = "Search city"]';
+const differentWeatherBtn = '.controls span.owm-switch';
+const differentWeatherPopup = 'div.pop-up-container';
+const differentWeatherIcon = 'ul.icons span'; // should be used with method .contains('icon text')
+const diffWeathMoreOptions = 'div.more-options';
+const diffWeathTemperatureField = '[type="number"]';
+const diffWeathWindStrong = '#strong';
+const diffWeathEmail = 'input[type="email"]';
+const diffWeathDataSourseDropArr = '.dropdown-selector svg.icon-down';
+const diffWeathDataSourseDropItem = 'div.menu-item span'; // should be used with method .contains('item text')
+const diffWeathAddInfo = '.owm_textarea';
+const diffWeathSendBtn = '.pop-up-footer .button-round';
 
 
 describe('GroupReporters', () => {
 
-    const inputSearchCity = 'input[placeholder = "Search city"]';
-    const differentWeatherBtn = '.controls span.owm-switch';
-    const differentWeatherPopup = 'div.pop-up-container';
-    const differentWeatherIcon = 'ul.icons span'; // should be used with method .contains('icon text')
-    const diffWeathMoreOptions = 'div.more-options';
-    const diffWeathTemperatureField = '[type="number"]';
-    const diffWeathWindStrong = '#strong';
-    const diffWeathEmail = 'input[type="email"]';
-    const diffWeathDataSourseDropArr = '.dropdown-selector svg.icon-down';
-    const diffWeathDataSourseDropItem = 'div.menu-item span'; // should be used with method .contains('item text')
-    const diffWeathAddInfo = '.owm_textarea';
-    const diffWeathSendBtn = '.pop-up-footer .button-round';
-   
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
     });
 
-    function enterCityOrZipCode(city) {
+    function enterCityOrZipCode(inputText) {
         cy.get(inputSearchCity)
             .clear()
-            .type(city);
+            .type(inputText);
         return this
     };
 
@@ -77,6 +76,14 @@ describe('GroupReporters', () => {
     it('AT_034.001 | <Header > verify "For Business" button', () => {
         cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://openweather.co.uk/')
+    });
+
+    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
+        const cityName = 'Washington DC';
+
+        enterCityOrZipCode(cityName);
+        submit();
+        cy.get(inputSearchCity).invoke('val').should('eq', cityName);
     });
 
     it('AT_001.010 | Main page > Section with search > Verify entered a city or Zip code into the Search city field', () => {
