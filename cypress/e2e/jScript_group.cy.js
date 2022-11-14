@@ -183,5 +183,13 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
+
+    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href="/appid"]').click();
+        cy.url().should('eq','https://openweathermap.org/appid');
+    });
 });
 
