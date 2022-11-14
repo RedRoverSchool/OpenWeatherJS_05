@@ -179,7 +179,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
     
-        it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
+    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
@@ -189,6 +189,6 @@ describe('Group jScript_group', () => {
           .click();
         cy.get('h1.post-page__title')
           .should('have.text', 'The Road to a New Thinking in Transport Power')
-    })
+    });
 });
 
