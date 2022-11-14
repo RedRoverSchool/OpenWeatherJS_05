@@ -137,7 +137,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/appid')
     });
 
-    it.only('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
+    it('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
         const askAQuestion = '#support-dropdown-menu a[href$="/questions"]'
 
         cy.visit('https://openweathermap.org')
@@ -148,6 +148,13 @@ describe('Group lt_by_js', () => {
           .invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://home.openweathermap.org/questions')
   
+    });
+
+    it('AT_021.002 | Footer >Verify Widgets is clickable and redirects User to the Widgets page', function () {
+        cy.visit('https://openweathermap.org')
+        cy.get('a[href="/widgets-constructor"]').click();
+        cy.url().should('eq', 'https://openweathermap.org/widgets-constructor')
+        
     });
 
 });
