@@ -141,4 +141,11 @@ describe('Group jScript_group', () => {
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
     });
+
+    it('AT_033.008 | Header > Navigation > “Our Initiatives” menu link', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href*="initiatives"]').click();
+        cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
+    });
+
 });
