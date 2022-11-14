@@ -66,6 +66,12 @@ describe('groupBugHunters', () => {
     cy.visit('https://openweathermap.org/')
     cy.get('#desktop-menu a[href="/guide"]').click()
     cy.url().should('include', '/guide')
-  });
+  })
+
+  it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('eq', 'https://openweathermap.org/api')
+})
 
 })
