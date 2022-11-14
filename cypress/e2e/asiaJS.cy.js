@@ -31,4 +31,10 @@ describe('asiaJS', () => {
     
   });
 
+
+  it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', () => {
+    cy.get('[href$="website_terms_and_conditions_of_use.pdf"]').invoke('removeAttr', 'target').click()
+    cy.url().should('include', 'terms_and_conditions_of_use.pdf')
+  });
+  
 });
