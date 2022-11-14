@@ -2,7 +2,7 @@
 
 describe('groupBugHunters', () => {
 
-    xit('AT_006.001 | Main page > Sign in', function () {
+    it('AT_006.001 | Main page > Sign in', function () {
         cy.visit('https://openweathermap.org/')
         cy.get('li.user-li').contains('Sign in').click({force: true})
         cy.get('#user_email')
@@ -17,24 +17,25 @@ describe('groupBugHunters', () => {
   
     })
 
-    xit ('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function() {
+    it ('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function() {
         cy.visit('https://openweathermap.org/')
         cy.get('.my-5 a[href*=apple]').should('be.visible')
         cy.get('.my-5 a[href*=google]').should('be.visible')
     })
 
-    xit("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
+    it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
       cy.visit('https://openweathermap.org/')
       cy.get('.my-5 a[href*=apple]').invoke('removeAttr', 'target').click()
       cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')        
     })
 
-    it('AT_018.005 | Support > Drop down menu> FAQ link opens'), function() {
+    it('AT_018.005 | Support > Drop down menu> FAQ link opens',()=> {
+      let faqInSupport = '.dropdown-menu a[href="/faq"]'
       cy.visit('https://openweathermap.org/')
       cy.get('#support-dropdown').click()
       cy.get('#support-dropdown-menu').should('be.visible')
-      cy.get('.dropdown-menu a[href="/faq"]').click()
+      cy.get(faqInSupport).click()
       cy.url().should('contain', '/faq')
-    }
+    })
     
 })
