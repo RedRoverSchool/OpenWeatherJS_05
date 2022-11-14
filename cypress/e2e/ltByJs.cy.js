@@ -137,7 +137,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/appid')
     });
 
-    it.only('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
+    it('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
         const askAQuestion = '#support-dropdown-menu a[href$="/questions"]'
 
         cy.visit('https://openweathermap.org')
