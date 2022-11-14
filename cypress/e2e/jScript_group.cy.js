@@ -171,5 +171,10 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href*="initiatives"]').click();
         cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
     });
+
+    it('TC_005.002 | Main page > Verify the website\'s description', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
+    })
 });
 
