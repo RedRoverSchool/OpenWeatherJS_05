@@ -142,6 +142,13 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
     });
 
+    
+    it('AT_002.014 | Header > After clicking the logo user is redirected to the main page', () => {
+        cy.visit('https://openweathermap.org/examples');
+        cy.get('.logo').click();
+        cy.url().should('eq', 'https://openweathermap.org/');
+    });
+    
     it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', () => {
         cy.visit('https://openweathermap.org');
         cy.get('ul.day-list li').should('have.length', 8)
