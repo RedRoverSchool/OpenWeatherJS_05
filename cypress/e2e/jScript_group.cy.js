@@ -171,8 +171,15 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href*="initiatives"]').click();
         cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
     });
+
+    it("AT_002.012 | Header > Checking the website's logo is clickable and redirects User to the Main page", () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('.logo').click();
+        cy.url().should('include', 'https://openweathermap.org/');
+    });
     
-    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
+        it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
