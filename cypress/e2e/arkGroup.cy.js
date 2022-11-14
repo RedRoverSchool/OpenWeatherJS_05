@@ -86,7 +86,5 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.url().should('eq', 'https://openweathermap.org/appid#apicare')
       cy.get('#apicare h3').should('have.text', 'API care recommendations ')
     });
-
   
-
 });
