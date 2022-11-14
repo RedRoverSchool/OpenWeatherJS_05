@@ -154,7 +154,7 @@ describe('Group jScript_group', () => {
         cy.get('ul.day-list li').should('have.length', 8)
     });
 
-    it.only('AT_022.003 | Footer > Verify Tweeter icon redirection', () => {
+    it('AT_022.003 | Footer > Verify Tweeter icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:nth-child(2)').should('be.visible');
         cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
