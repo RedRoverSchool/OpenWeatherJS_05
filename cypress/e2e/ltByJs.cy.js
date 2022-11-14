@@ -117,7 +117,7 @@ describe('Group lt_by_js', () => {
         });
     });
 
-    it('AT_018.001 | Support > Drop down menu > Verify "FAQ" menu link', () => {
+    it('AT_018.001 | Support > Dropdown menu > Verify "FAQ" menu link', () => {
         const faq = '#support-dropdown-menu a[href="/faq"]'
     
         cy.visit('https://openweathermap.org')
@@ -127,7 +127,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/faq')
     });
 
-    it('AT_018.002 | Support > Drop down menu > Verify "How to start" menu link', () => {
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', () => {
         const howToStart = '#support-dropdown-menu a[href="/appid"]'
        
         cy.visit('https://openweathermap.org')
@@ -136,5 +136,18 @@ describe('Group lt_by_js', () => {
         cy.get(howToStart).click()
         cy.url().should('include', '/appid')
     });
+
+    it.only('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
+        const askAQuestion = '#support-dropdown-menu a[href$="/questions"]'
+
+        cy.visit('https://openweathermap.org')
+        cy.get('#support-dropdown').click()
+        cy.get('#support-dropdown-menu').should('be.visible')
+        cy.get(askAQuestion)
+          .should('have.attr', 'target', '_blank')
+          .invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/questions')
   
+    });
+
 });
