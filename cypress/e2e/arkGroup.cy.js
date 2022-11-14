@@ -74,6 +74,15 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.url().should('include', '/marketplace')
   });
 
+  
+  it('AT_050.003 | Footer > The User is redirected to Terms and conditions of sale page', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('p[class="section-heading"]').contains('Terms & Conditions').click()
+    cy.get('div[class="section-content"]').contains('Terms and conditions of sale').invoke('removeAttr', 'target').click();
+    cy.url().should('eq','https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf' )
+});
+  
+
     it('AT_017.003 |Support >How to start > Verify navigation to "API care recommendations" page', function () {
       cy.visit('https://openweathermap.org/');
       cy.get('#support-dropdown').click({force: true})
