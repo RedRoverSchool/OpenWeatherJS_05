@@ -81,7 +81,13 @@ describe('Group jScript_group', () => {
         cy.get("ol [href='/api#current']").click()
         cy.url().should('include', '/api#current')
     })
-    
+    it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
+        cy.visit('https://openweathermap.org/');
+        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
+        cy.get(dashboard_button).click()
+        cy.url().should('include','weather-dashboard')
+      });
+
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
@@ -99,5 +105,40 @@ describe('Group jScript_group', () => {
             expect($a.eq(3)).to.contain('View plugin');
         })
     })
-});
 
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+        cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com')
+    });
+    
+    it('AT_012.004 | Partners > CMS > Verify "View widget" button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
+    });
+
+    it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf')
+    });
+
+    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('a[href="#cms"]').click();
+        cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
+    });
+
+    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('a[href="#cms"]').click();
+        cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
+    });
+});

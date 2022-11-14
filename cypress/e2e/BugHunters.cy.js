@@ -22,5 +22,11 @@ describe('groupBugHunters', () => {
         cy.get('.my-5 a[href*=apple]').should('be.visible')
         cy.get('.my-5 a[href*=google]').should('be.visible')
     })
+
+    it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
+      cy.visit('https://openweathermap.org/')
+      cy.get('.my-5 a[href*=apple]').invoke('removeAttr', 'target').click()
+      cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')        
+    })
     
 })
