@@ -141,7 +141,6 @@ describe('GroupReporters', () => {
     });
 
     it('AT_033.012 | Header > Navigation > Verify "Maps" menu link',() => {
-      cy.visit('https://openweathermap.org')
       cy.get('div#desktop-menu a[href*="/weathermap"]').click()
       cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
   })
