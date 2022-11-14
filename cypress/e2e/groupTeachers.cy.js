@@ -9,7 +9,7 @@ describe('group jsTeachers', () => {
     cy.get('div#desktop-menu a[href*="marketplace"]').invoke('removeAttr', 'target').click()
 
     cy.get('div.market-place a[href]:not(.button-round)').each(($el, index) => {
-      cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)')
+      cy.wrap($el).should('have.css', 'color', 'rgb(235, 11, 75)')
     })
   })
 
