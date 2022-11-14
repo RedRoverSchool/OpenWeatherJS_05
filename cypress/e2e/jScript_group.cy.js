@@ -171,5 +171,17 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href*="initiatives"]').click();
         cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
     });
+    
+    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
+          .invoke('removeAttr', 'target')
+          .click();
+        cy.get('h2.post__title')
+          .contains('The Road to a New Thinking in Transport Power')
+          .click();
+        cy.get('h1.post-page__title')
+          .should('have.text', 'The Road to a New Thinking in Transport Power')
+    })
 });
 
