@@ -133,4 +133,12 @@ describe('Group jScript_group', () => {
         cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
     });
+
+    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('a[href="#cms"]').click();
+        cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
+        cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
+    });
 });
