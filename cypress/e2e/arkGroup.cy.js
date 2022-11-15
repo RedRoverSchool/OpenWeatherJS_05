@@ -155,10 +155,4 @@ it('AT_033.010 Header > Navigation >  “API” ', () => {
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api');
 })
-
-it('AT_033.010 Header > Navigation >  “API” ', () => {
-  cy.visit('https://openweathermap.org/')
-  cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
-  cy.url().should('include', '/api');
-})
 })
