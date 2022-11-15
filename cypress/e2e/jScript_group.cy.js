@@ -202,5 +202,12 @@ describe('Group jScript_group', () => {
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
         cy.url().should('include', 'https://openweather.co.uk/blog/post/');
     });
+
+    it('AT_028.005 | Footer > About us > Verify New and Updates button', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('a[href="/about-us"]').click();
+        cy.get('a.round[href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.url().should('include', '/blog/category/weather');
+    })
 });
 
