@@ -8,9 +8,11 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
     })
 
-    it('AT_013.001 | NavBar > After clicking the Blog menu User is redirected to the Blog page', function () {
+    it('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
-        cy.url().should('be.equal', 'https://openweather.co.uk/blog/category/weather');
+
+        cy.url().should('be.equal', this.data.blogPageLink);
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
     });
 
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
@@ -18,9 +20,10 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
     });
 
-    it('AT_013.002 | NavBar > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
+    it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
-        cy.get('.post-list .post').should('have.length', 10);
+
+        cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
     });
 
     it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
@@ -171,10 +174,12 @@ describe('Group jScript_group', () => {
         cy.get('h1.post-page__title').should('have.text', 'The Road to a New Thinking in Transport Power');
     });     
     
-    it('AT_013.003 | Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
+    it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
-        cy.url().should('include', 'https://openweather.co.uk/blog/post/');
+
+        cy.url().should('include', this.data.blogPagePostLink);
+        cy.get('.post-page__img').should('be.visible');
     });
 
     it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {

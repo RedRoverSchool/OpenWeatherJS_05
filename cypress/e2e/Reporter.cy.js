@@ -179,5 +179,16 @@ describe('GroupReporters', () => {
         });
     });
 
+    it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', () => {
+        const cityName = 'Tampa'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.url().should('include', '/city/')
+        cy.get('div.current-container h2').should('contain', cityName)
+    })
+
 });
 
