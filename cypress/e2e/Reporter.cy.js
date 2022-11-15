@@ -166,5 +166,11 @@ describe('GroupReporters', () => {
             cy.wrap($el).should('contain', cityName)
         })
     })
+
+    it('AT_002.005 | Guide > Verifying the website logo is clickable and redirects User to the Main page', () => {
+        cy.get('div#desktop-menu a[href*="guide"]').click()
+        cy.get('#first-level-nav > li.logo > a > img').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    })
 });
 
