@@ -59,6 +59,6 @@ describe('GroupReporters', () => {
         
                });
 
-    });
+    });cy.get('#panelid-header).eq(0).click()
 });
 
