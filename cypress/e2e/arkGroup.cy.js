@@ -58,4 +58,54 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.get('div[class="col-sm-12"]').contains('Weather data in a fast and easy-to-use way').should('be.visible')
     })
 
+
+    it('AT_008.006.02 | Main menu > Guide > Verify The text "OpenWeather products" is displayed.', () => {
+      cy.visit('https://openweathermap.org/');
+      cy.get('a[href="/guide"]').contains("Guide").click();
+      cy.get('.wrapper').should('be.visible')
+      cy.get('div[class="col-sm-12"]').contains('OpenWeather products').should('be.visible')
+    })
+
+
+    it('AT_028.004 | About us, verify “Buy in the Marketplace” button', () => {
+      cy.visit('https://openweathermap.org/')
+      cy.get('a[href="/about-us"]').click()
+      cy.get('a.round[href*="marketplace"]').click()
+      cy.url().should('include', '/marketplace')
+  });
+
+  
+  it('AT_050.003 | Footer > The User is redirected to Terms and conditions of sale page', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('p[class="section-heading"]').contains('Terms & Conditions').click()
+    cy.get('div[class="section-content"]').contains('Terms and conditions of sale').invoke('removeAttr', 'target').click();
+    cy.url().should('eq','https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf' )
+});
+  
+
+    it('AT_017.003 |Support >How to start > Verify navigation to "API care recommendations" page', function () {
+      cy.visit('https://openweathermap.org/');
+      cy.get('#support-dropdown').click({force: true})
+      cy.get('#support-dropdown-menu:nth-child(2) a[href ="/appid"]').click({force: true})
+      cy.url().should('eq', 'https://openweathermap.org/appid')
+      cy.get('.breadcrumb-title')
+       .should('have.text', "How to start using professional collections")
+
+      cy.get('.doc-container li a[href ="#apicare"]').click({force: true})
+      cy.url().should('eq', 'https://openweathermap.org/appid#apicare')
+      cy.get('#apicare h3').should('have.text', 'API care recommendations ')
+    });
+
+    it('AT_045.003 | Main page > Section with 8-day forecast. Detailed weather for each of these days is displayed', () => {
+      cy.visit('https://openweathermap.org/')  
+      cy.get('.daily-container ul.day-list li').first().click()
+      cy.get('.daily-container .scrolling-container ul.options-scroller li') 
+        .each($el => {
+          if($el.hasClass('active')){
+            cy.wrap($el).parents('.scrolling-container-header').next().find('.daily-detail-container').should('be.visible')
+          }else {
+            cy.wrap($el).click().parents('.scrolling-container-header').next().find('.daily-detail-container').should('be.visible')
+          }      
+        })
+      })
 });

@@ -19,4 +19,10 @@ describe('group_javascript_for_qas', () => {
         cy.get('div#prompt').should('have.class','alert-info');
         cy.get('div#prompt').should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)') 
     });
+    
+    it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
+        cy.visit('https://openweathermap.org');
+        cy.get('.switch-container > div:nth-of-type(3)').should('contain', 'Imperial: °F, mph');
+        cy.get('.switch-container > div:nth-of-type(2)').should('contain', 'Metric: °C, m/s').click();
+    });
 });
