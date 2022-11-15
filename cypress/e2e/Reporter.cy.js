@@ -18,7 +18,7 @@ describe("GroupReporters", () => {
         cy.fixture("reporterFix").then((data) => {
             this.data = data;
         });
-        cy.fixture("reporters").then((data) => {
+        cy.fixture("reporter").then((data) => {
             this.data = data;
         });
     });
