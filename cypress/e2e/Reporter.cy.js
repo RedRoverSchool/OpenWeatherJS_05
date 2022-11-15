@@ -155,5 +155,16 @@ describe('GroupReporters', () => {
                 expect($el.text()).to.include(this.data.diffWeathIcons[idx])
             })
         });
+
+    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
+        const cityName = 'Moscow'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li').each($el => {
+            cy.wrap($el).should('contain', cityName)
+        })
+    })
 });
 
