@@ -2,6 +2,8 @@
 
 describe('Group jScript_group', () => {
 
+    let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
+
     it('AT_013.001 | NavBar > After clicking the Blog menu User is redirected to the Blog page', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
@@ -81,15 +83,7 @@ describe('Group jScript_group', () => {
         cy.get("ol [href='/api#current']").click()
         cy.url().should('include', '/api#current')
     })
-    it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
-        cy.visit('https://openweathermap.org/');
-        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
-        cy.get(dashboard_button).click()
-        cy.url().should('include','weather-dashboard')
-    });
 
-    
-    
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('.social a:first-child').should('be.visible');
@@ -110,14 +104,12 @@ describe('Group jScript_group', () => {
     
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
         cy.visit('https://openweathermap.org/');
-        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
         cy.get(dashboard_button).click()
         cy.url().should('include','weather-dashboard')
     });
 
     it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
         cy.visit('https://openweathermap.org/');
-        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
         cy.get(dashboard_button).click()
         let try_the_dashboard = '.col-lg-6 > .row > p > .btn_like'
         cy.get(try_the_dashboard).invoke('removeAttr','target').click()
