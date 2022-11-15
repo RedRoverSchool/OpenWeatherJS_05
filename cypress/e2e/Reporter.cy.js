@@ -21,8 +21,8 @@ describe('GroupReporters', () => {
 
     function enterCityOrZipCode(inputText) {
         cy.get(inputSearchCity)
-            .clear()
-            .type(inputText);
+          .clear()
+          .type(inputText);
         return this
     };
 
@@ -36,17 +36,17 @@ describe('GroupReporters', () => {
         enterCityOrZipCode(inputCity);
         submit();
         cy.get('.sub.not-found')
-            .should('be.visible')
-            .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).");
+          .should('be.visible')
+          .should('have.text', "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).");
         cy.get('div.widget-notification')
-            .should('be.visible')
-            .should('have.text', `No results for ${inputCity}`);
+          .should('be.visible')
+          .should('have.text', `No results for ${inputCity}`);
     })
 
     it('AT_005.001 | Verify the website name and description', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
         cy.get('h2 .white-text')
-            .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
+          .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
     })
 
     it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
@@ -106,19 +106,19 @@ describe('GroupReporters', () => {
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click({force: true})
+          .click({force: true})
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
-            .type(emailLogin)
+          .type(emailLogin)
         cy.get('.input-group > #user_password')
-            .type(password)
+          .type(password)
         cy.get('#user_remember_me')
-            .click({force: true})
+          .click({force: true})
         cy.contains('Submit')
-            .click()
+          .click()
         cy.url().should('include', '/')
         cy.get('.panel-body')
-            .should('have.text', 'Signed in successfully.')
+          .should('have.text', 'Signed in successfully.')
     });
 
     it('AT_002.009 | Header > Clicking the logo>Verify the logo and redirected to the Main page', () => {
@@ -141,8 +141,19 @@ describe('GroupReporters', () => {
     });
 
     it('AT_033.012 | Header > Navigation > Verify "Maps" menu link',() => {
-      cy.get('div#desktop-menu a[href*="/weathermap"]').click()
-      cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
+        cy.get('div#desktop-menu a[href*="/weathermap"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
   })
+
+    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
+        const cityName = 'Moscow'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li').each($el => {
+            cy.wrap($el).should('contain', cityName)
+        })
+    })
 });
 
