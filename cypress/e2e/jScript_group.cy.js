@@ -81,6 +81,7 @@ describe('Group jScript_group', () => {
         cy.get("ol [href='/api#current']").click()
         cy.url().should('include', '/api#current')
     })
+    
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
         cy.visit('https://openweathermap.org/');
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
@@ -153,7 +154,6 @@ describe('Group jScript_group', () => {
         cy.get('ul.day-list li').should('have.length', 8)
     });
 
-
     it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click()
@@ -166,6 +166,7 @@ describe('Group jScript_group', () => {
         cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('be.equal','https://twitter.com/OpenWeatherMap');
     });
+
     it('AT_028.005 | Footer > About us > Verify New and Updates button', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('a[href="/about-us"]').click();
