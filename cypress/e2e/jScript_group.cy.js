@@ -209,5 +209,12 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
+
+    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', () => {
+        cy.visit('https://openweathermap.org/guide');
+        cy.get ('nav#nav-website a[href="/"]').click();
+        cy.url().should ('eq', 'https://openweathermap.org/');
+    });
+    
 });
 
