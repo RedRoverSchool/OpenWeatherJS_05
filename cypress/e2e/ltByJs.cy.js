@@ -207,4 +207,18 @@ describe('Group lt_by_js', () => {
         cy.url().should('eq', 'https://openweathermap.medium.com/')
         
     })
+
+    it('AT_014.002| Support > Ask a question > Check captcha message', function () {
+        
+        cy.get('#support-dropdown').click()
+        cy.get('.dropdown-menu a[href="https://home.openweathermap.org/questions"]').invoke('removeAttr', 'target').click()
+
+        cy.get('#question_form_email').type('gromStr@gmail.com')
+        cy.get('#question_form_subject').select('Technical questions about products: documentations, API request/response, API errors')
+        cy.get('#question_form_message').type('I want to check form')
+        cy.get('.btn-default').click()
+
+        cy.get('.has-error .help-block').should('have.text', 'reCAPTCHA verification failed, please try again.')
+
+    })
 })

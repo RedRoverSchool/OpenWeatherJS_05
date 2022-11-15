@@ -139,11 +139,20 @@ describe('group Ark', () => {
       })
   })
 
-});
 
+  it('AT_027.003 |Maps > Section "weather control" > scale-details changes when switching data to Pressure', () => {
+    cy.visit("https://openweathermap.org/");
+    cy.get('a[href="/weathermap"]').contains("Maps").click()
+    cy.url().should("include", "https://openweathermap.org/weathermap?")
+
+    cy.get('div.weather-layer-container input[id ="Pressure"]').click({force: true})
+    cy.get('div.leaflet-control-color-scale-line')
+      .should('contain', 'Pressure, hPa')
+  })
+   
 it('AT_033.010 Header > Navigation >  “API” ', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api');
 })
-
+})
