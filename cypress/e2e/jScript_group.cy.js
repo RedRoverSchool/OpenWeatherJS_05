@@ -217,5 +217,12 @@ describe('Group jScript_group', () => {
 
         cy.url().should('eq','https://openweathermap.org/appid');
     });
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        cy.get('li.logo').click();
+    
+        cy.url().should('include', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
 });
 
