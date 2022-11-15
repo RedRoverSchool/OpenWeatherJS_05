@@ -18,6 +18,9 @@ describe("GroupReporters", () => {
         cy.fixture("reporterFix").then((data) => {
             this.data = data;
         });
+        cy.fixture('reporters').then((data) => {
+            this.data = data
+        });
     });
 
     function enterCityOrZipCode(inputText) {
