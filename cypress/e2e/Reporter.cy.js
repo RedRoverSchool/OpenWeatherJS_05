@@ -160,9 +160,8 @@ describe("GroupReporters", () => {
             cy.wrap($el).should("contain", cityName);
         });
     });
-    
-    it("AT_022.005 | Footer > Social media > 6 social media icons on the footernpx ", function () {
-        cy.get(".social a").should("have.length", this.data.socialIcons.length);
+
+    it("AT_022.005 | Footer > Social media > 6 social media icons on the footer", function () {
         cy.get(".social a").each(($el, index) => {
             expect($el.attr("href")).to.include(this.data.socialIcons[index]);
         });
