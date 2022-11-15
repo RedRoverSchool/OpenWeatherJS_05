@@ -215,5 +215,14 @@ describe('Group jScript_group', () => {
         cy.get('a.round[href*="blog"]').invoke('removeAttr', 'target').click();
         cy.url().should('include', '/blog/category/weather');
     })
+
+    it('AT_002.011 | Header > Clicking the logo> Verify the Main page is opened after clicking the logo.', () => {
+        cy.visit('https://openweathermap.org/api');
+
+        cy.get('#first-level-nav .logo').invoke('removeAttr', 'target').click();
+
+        cy.url().should('eq', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
 });
 
