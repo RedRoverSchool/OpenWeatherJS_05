@@ -127,7 +127,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/faq')
     });
 
-    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', () => {
+   it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', () => {
         const howToStart = '#support-dropdown-menu a[href="/appid"]'
        
         cy.visit('https://openweathermap.org')
@@ -177,5 +177,13 @@ describe('Group lt_by_js', () => {
         cy.get(placeOrderbutton).should('be.visible').click()
         cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new' )
 
+    });
+
+    it('AT_022.004 | Footer > Check Medium icon is clickable', function () {
+        cy.visit('https://openweathermap.org')
+        cy.get('a[href="https://medium.com/@openweathermap"]').should('be.visible');
+        cy.get('a[href="https://medium.com/@openweathermap"]').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweathermap.medium.com/')
+        
     });
 });

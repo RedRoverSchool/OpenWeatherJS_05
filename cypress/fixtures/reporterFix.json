@@ -1,0 +1,13 @@
+{
+    "diffWeathIcons": [
+        "clear sky",
+        "few clouds",
+        "overcast clouds",
+        "drizzle",
+        "rain",
+        "shower rain",
+        "thunderstorm",
+        "snow",
+        "mist"
+    ]
+}
