@@ -185,7 +185,7 @@ describe('GroupReporters', () => {
         cy.get('div.current-container h2').should('contain', cityName)
     })
 
-    it.only('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
         const cityName = 'New York'
 
         enterCityOrZipCode(cityName)
