@@ -210,12 +210,22 @@ describe('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
-    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', () => {
+    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
 
-        cy.url().should('eq','https://openweathermap.org/appid');
+        cy.url().should('eq', 'https://openweathermap.org/appid');
+        cy.get('head title').should('include.text', 'How to start to work with Openweather API');
+    });
+
+    it('AT_033.014 | Header > Navigation > Support > "FAQ" menu link', function () {
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href="/faq"]').click();
+
+        cy.url().should('eq', 'https://openweathermap.org/faq');
+        cy.get('head title').should('include.text', 'Frequently Asked Questions');
     });
 });
 
