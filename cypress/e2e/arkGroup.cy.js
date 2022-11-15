@@ -123,3 +123,10 @@ describe('group Ark', () => {
     cy.url().should('include', '/guide');
   })
 });
+
+it('AT_033.010 Header > Navigation >  “API” ', () => {
+  cy.visit('https://openweathermap.org/')
+  cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
+  cy.url().should('include', '/api');
+})
+
