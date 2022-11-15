@@ -74,6 +74,15 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.url().should('include', '/marketplace')
   });
 
+  
+  it('AT_050.003 | Footer > The User is redirected to Terms and conditions of sale page', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('p[class="section-heading"]').contains('Terms & Conditions').click()
+    cy.get('div[class="section-content"]').contains('Terms and conditions of sale').invoke('removeAttr', 'target').click();
+    cy.url().should('eq','https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf' )
+});
+  
+
     it('AT_017.003 |Support >How to start > Verify navigation to "API care recommendations" page', function () {
       cy.visit('https://openweathermap.org/');
       cy.get('#support-dropdown').click({force: true})
@@ -86,5 +95,26 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.url().should('eq', 'https://openweathermap.org/appid#apicare')
       cy.get('#apicare h3').should('have.text', 'API care recommendations ')
     });
+
+
+    it('AT_023.002 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', () => {
+      cy.visit('https://openweathermap.org/')
+      cy.get('div[class="section-content"]').find('li').contains('FAQ').click()
+      cy.url().should('eq','https://openweathermap.org/faq')
+  });
   
+
+    it('AT_045.003 | Main page > Section with 8-day forecast. Detailed weather for each of these days is displayed', () => {
+      cy.visit('https://openweathermap.org/')  
+      cy.get('.daily-container ul.day-list li').first().click()
+      cy.get('.daily-container .scrolling-container ul.options-scroller li') 
+        .each($el => {
+          if($el.hasClass('active')){
+            cy.wrap($el).parents('.scrolling-container-header').next().find('.daily-detail-container').should('be.visible')
+          }else {
+            cy.wrap($el).click().parents('.scrolling-container-header').next().find('.daily-detail-container').should('be.visible')
+          }      
+        })
+      })
+
 });
