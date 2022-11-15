@@ -203,6 +203,13 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweather.co.uk/blog/post/');
     });
 
+    it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('div#footer-website a[href="/about-us"]').click();
+        cy.get('div.grid-container [href="/api"]').click();
+        cy.url().should('include', 'https://openweathermap.org/api');
+    });
+    
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('#support-dropdown').click();
@@ -210,6 +217,5 @@ describe('Group jScript_group', () => {
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
         cy.url().should('eq','https://openweathermap.org/appid');
     });     
-
 });
 
