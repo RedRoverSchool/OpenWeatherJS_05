@@ -178,10 +178,28 @@ describe('Group jScript_group', () => {
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');
     });
-    
+
     it('AT_005.002 | Main page > Verify the website\'s description', () => {
         cy.visit('https://openweathermap.org');
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
+    });
+    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
+          .invoke('removeAttr', 'target')
+          .click();
+        cy.get('h2.post__title')
+          .contains('The Road to a New Thinking in Transport Power')
+          .click();
+        cy.get('h1.post-page__title')
+          .should('have.text', 'The Road to a New Thinking in Transport Power')
+    });     
+    
+    it('AT_013.003 | Verifying the first post\'s link is clickable and redirects User to the post on a new page', () => {
+        cy.visit('https://openweathermap.org');
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('.post-list .post:nth-child(1) .post__title-link').click();
+        cy.url().should('include', 'https://openweather.co.uk/blog/post/');
     });
 
     it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', () => {
