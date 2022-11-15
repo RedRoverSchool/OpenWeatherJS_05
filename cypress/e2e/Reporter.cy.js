@@ -147,7 +147,7 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
     });
 
-    it.only('AT_024.003 | Main page > "Different weather?" option > verify 9 weather icons are shown and their text',
+    it('AT_024.003 | Main page > "Different weather?" option > verify 9 weather icons are shown and their text',
         function () {
             cy.get(differentWeatherBtn).click()
             cy.get(differentWeatherIcon).should('have.length', 9)
