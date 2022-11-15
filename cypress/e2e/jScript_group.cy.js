@@ -216,6 +216,21 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/blog/category/weather');
     })
 
+    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click();
+        cy.get('.headline').should('have.text', 'Ask a question');
+
+        cy.get('#question_form_is_user_false').check();
+        cy.get('#question_form_email').type('testemail@gmail.com');
+        cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions');
+        cy.get('#question_form_message').type('My message to the world!');
+        cy.get('.btn').click();
+
+        cy.get('.has-error').should('have.text', 'reCAPTCHA verification failed, please try again.');
+    });
+    
     it('AT_002.011 | Header > Clicking the logo> Verify the Main page is opened after clicking the logo.', () => {
         cy.visit('https://openweathermap.org/api');
 
