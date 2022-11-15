@@ -1,7 +1,7 @@
 /// <reference types="cypress"/>
 
 describe('Group lt_by_js', () => {
-    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu item', () => {
+   it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu item', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href$=-dashboard]').click();
         cy.url().should('include', '/weather-dashboard');
@@ -117,7 +117,7 @@ describe('Group lt_by_js', () => {
         });
     });
 
-    it('AT_018.001 | Support > Drop down menu > Verify "FAQ" menu link', () => {
+    it('AT_018.001 | Support > Dropdown menu > Verify "FAQ" menu link', () => {
         const faq = '#support-dropdown-menu a[href="/faq"]'
     
         cy.visit('https://openweathermap.org')
@@ -126,5 +126,56 @@ describe('Group lt_by_js', () => {
         cy.get(faq).click()
         cy.url().should('include', '/faq')
     });
+
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', () => {
+        const howToStart = '#support-dropdown-menu a[href="/appid"]'
+       
+        cy.visit('https://openweathermap.org')
+        cy.get('#support-dropdown').click()
+        cy.get('#support-dropdown-menu').should('be.visible')
+        cy.get(howToStart).click()
+        cy.url().should('include', '/appid')
+    });
+
+    it('AT_018.003 | Support > Dropdown menu > Verify "Ask a question" menu link', () => {
+        const askAQuestion = '#support-dropdown-menu a[href$="/questions"]'
+
+        cy.visit('https://openweathermap.org')
+        cy.get('#support-dropdown').click()
+        cy.get('#support-dropdown-menu').should('be.visible')
+        cy.get(askAQuestion)
+          .should('have.attr', 'target', '_blank')
+          .invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/questions')
   
+    });
+
+    it('AT_021.002 | Footer >Verify Widgets is clickable and redirects User to the Widgets page', function () {
+        cy.visit('https://openweathermap.org')
+        cy.get('a[href="/widgets-constructor"]').click();
+        cy.url().should('eq', 'https://openweathermap.org/widgets-constructor')
+        
+    });
+
+    it('AT_033.006 | Header > Navigation>> Verify "Partners" menu link', function () {
+        cy.visit('https://openweathermap.org')
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.url().should('eq', 'https://openweathermap.org/examples')
+        
+    });
+
+    it('AT_009.003 | Main menu > Marketplace verification of displayed content History bulk buttons "Documentation" and "Place order"', () => {
+        const marketplace = '#desktop-menu a[href*="marketplace"]'
+        const documentationButton = 'div.button-container > a[href="https://openweathermap.org/history-bulk"]'
+        const placeOrderbutton = 'div.button-container a[href="/history_bulks/new"].button-round'
+
+        cy.visit('https://openweathermap.org/')
+        cy.get(marketplace).invoke('removeAttr', 'target').click()
+        cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
+        cy.url().should('eq', 'https://openweathermap.org/history-bulk')
+        cy.go('back')
+        cy.get(placeOrderbutton).should('be.visible').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new' )
+
+    });
 });
