@@ -122,4 +122,21 @@ describe('group Ark', () => {
     cy.get('div#desktop-menu a[href*="/guide"]').invoke('removeAttr', 'target').click()
     cy.url().should('include', '/guide');
   })
+
+  it('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', () => {
+    cy.visit('https://openweathermap.org/')  
+    cy.get('.daily-container ul.day-list li > span')
+      .then($elArr => {
+        expect($elArr).to.have.length(8)
+        const startDate = new Date().getTime()
+        const formatDate = { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' };
+        let itemDate         
+        cy.wrap($elArr).each(($el, $i) => {
+          itemDate = startDate + 86400000 * $i
+          itemDate = new Date(itemDate).toLocaleDateString('en', formatDate)
+          cy.wrap($el).should('include.text', itemDate)
+        })  
+      })
+    })
+
 });
