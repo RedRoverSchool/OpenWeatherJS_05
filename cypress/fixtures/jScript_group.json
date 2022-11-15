@@ -1,6 +1,6 @@
 {
     "firstName": "Donald",
-    "lastNAme": "Duck",
+    "lastName": "Duck",
     "email": "testEmail.com",
     "message": "My message to the world!"
   }
