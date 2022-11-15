@@ -184,6 +184,7 @@ describe('Group jScript_group', () => {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
+    
     it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
@@ -194,8 +195,8 @@ describe('Group jScript_group', () => {
           .click();
         cy.get('h1.post-page__title')
           .should('have.text', 'The Road to a New Thinking in Transport Power')
-    });     
-    
+    });  
+        
     it('AT_013.003 | Verifying the first post\'s link is clickable and redirects User to the post on a new page', () => {
         cy.visit('https://openweathermap.org');
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
@@ -209,13 +210,13 @@ describe('Group jScript_group', () => {
         cy.get('div.grid-container [href="/api"]').click();
         cy.url().should('include', 'https://openweathermap.org/api');
     });
-
+        
     it('AT_028.005 | Footer > About us > Verify New and Updates button', () => {
         cy.visit('https://openweathermap.org/');
         cy.get('a[href="/about-us"]').click();
         cy.get('a.round[href*="blog"]').invoke('removeAttr', 'target').click();
         cy.url().should('include', '/blog/category/weather');
-    })
+    });
 
     it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', () => {
         cy.visit('https://openweathermap.org/');
@@ -246,7 +247,8 @@ describe('Group jScript_group', () => {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
+        
         cy.url().should('eq','https://openweathermap.org/appid');
-    });    
+    });
 });
 
