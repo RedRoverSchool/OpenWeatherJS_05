@@ -96,6 +96,14 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
       cy.get('#apicare h3').should('have.text', 'API care recommendations ')
     });
 
+
+    it('AT_023.002 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', () => {
+      cy.visit('https://openweathermap.org/')
+      cy.get('div[class="section-content"]').find('li').contains('FAQ').click()
+      cy.url().should('eq','https://openweathermap.org/faq')
+  });
+  
+
     it('AT_045.003 | Main page > Section with 8-day forecast. Detailed weather for each of these days is displayed', () => {
       cy.visit('https://openweathermap.org/')  
       cy.get('.daily-container ul.day-list li').first().click()
@@ -108,4 +116,5 @@ it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
           }      
         })
       })
+
 });

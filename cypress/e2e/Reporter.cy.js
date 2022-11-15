@@ -17,6 +17,9 @@ describe('GroupReporters', () => {
 
     beforeEach(function () {
         cy.visit('https://openweathermap.org/')
+        cy.fixture('reporterFix').then((data) => {
+            this.data = data
+        })
     });
 
     function enterCityOrZipCode(inputText) {
@@ -58,13 +61,12 @@ describe('GroupReporters', () => {
     });
 
     it('AT_024.002 | After clicking on "send" button, the form window automatically disappears', () => {
-       
         cy.get(differentWeatherBtn).click()
         cy.get(differentWeatherPopup).should('be.be.visible')
         cy.get(differentWeatherIcon).contains('clear sky')
         cy.get(diffWeathMoreOptions).click()
-        cy.get(diffWeathTemperatureField).clear({force: true}).type('50')
-        cy.get(diffWeathWindStrong).click({force: true})
+        cy.get(diffWeathTemperatureField).clear({ force: true }).type('50')
+        cy.get(diffWeathWindStrong).click({ force: true })
         cy.get(diffWeathEmail).type('test@mail.com')
         cy.get(diffWeathDataSourseDropArr).click()
         cy.get(diffWeathDataSourseDropItem).contains('Personal feelings').click()
@@ -88,16 +90,16 @@ describe('GroupReporters', () => {
 
     it('AT_001.010 | Main page > Section with search > Verify entered a city or Zip code into the Search city field', () => {
         cy.get(inputSearchCity)
-          .type('Buffalo Grove')
-          .click()
+            .type('Buffalo Grove')
+            .click()
         cy.get('button[class="button-round dark"]')
-          .click()
+            .click()
         cy.get('ul[class="search-dropdown-menu"]')
-          .click()
+            .click()
         cy.url()
-          .should('include', '/city/4885955')
+            .should('include', '/city/4885955')
         cy.get('div[class="current-container mobile-padding"]')
-          .should('include.text', 'Buffalo Grove')
+            .should('include.text', 'Buffalo Grove')
     });
 
     it('AT_006.003 | Sign in > Verifying successful sign in', () => {
@@ -106,14 +108,14 @@ describe('GroupReporters', () => {
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click({force: true})
+            .click({ force: true })
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
             .type(emailLogin)
         cy.get('.input-group > #user_password')
             .type(password)
         cy.get('#user_remember_me')
-            .click({force: true})
+            .click({ force: true })
         cy.contains('Submit')
             .click()
         cy.url().should('include', '/')
@@ -127,22 +129,31 @@ describe('GroupReporters', () => {
         const headerMainPage = 'h1 [class="orange-text"]'
 
         cy.get(navBarGuide)
-          .click()
+            .click()
         cy.url()
-          .should('include', '/guide')
+            .should('include', '/guide')
         cy.get(headerGuide)
-          .should('have.text', 'Guide')
+            .should('have.text', 'Guide')
         cy.get('li[class="logo"]')
-          .click()
+            .click()
         cy.url()
-          .should('include', '')
+            .should('include', '')
         cy.get(headerMainPage)
-          .should('have.text', 'OpenWeather')
+            .should('have.text', 'OpenWeather')
     });
 
-    it('AT_033.012 | Header > Navigation > Verify "Maps" menu link',() => {
-      cy.get('div#desktop-menu a[href*="/weathermap"]').click()
-      cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
-  })
+    it('AT_033.012 | Header > Navigation > Verify "Maps" menu link', () => {
+        cy.get('div#desktop-menu a[href*="/weathermap"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
+    });
+
+    it('AT_024.003 | Main page > "Different weather?" option > verify 9 weather icons are shown and their text',
+        function () {
+            cy.get(differentWeatherBtn).click()
+            cy.get(differentWeatherIcon).should('have.length', 9)
+            cy.get(differentWeatherIcon).each(($el, idx) => {
+                expect($el.text()).to.include(this.data.diffWeathIcons[idx])
+            })
+        });
 });
 
