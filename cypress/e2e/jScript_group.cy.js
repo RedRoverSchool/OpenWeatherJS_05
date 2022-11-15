@@ -106,14 +106,7 @@ describe('Group jScript_group', () => {
             expect($a.eq(2)).to.contain('View plugin');
             expect($a.eq(3)).to.contain('View plugin');
         })
-     
-    it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
-        cy.visit('https://openweathermap.org/');
-        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
-        cy.get(dashboard_button).click()
-        cy.url().should('include','weather-dashboard')
     });
-});
 
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', () => {
@@ -165,7 +158,7 @@ describe('Group jScript_group', () => {
 
     it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', () => {
         cy.visit('https://openweathermap.org');
-         cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click()
+        cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click()
         cy.url().should('eq','https://openweathermap.org/price')
     });
     
@@ -217,5 +210,18 @@ describe('Group jScript_group', () => {
         cy.get('div#footer-website a[href="/about-us"]').click();
         cy.get('div.grid-container [href="/api"]').click();
         cy.url().should('include', 'https://openweathermap.org/api');
+    });
+
+    it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.url().should('include','weather-dashboard')
+    });
+
+    it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
+        cy.visit('https://openweathermap.org/');
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
+        cy.url().should('include','/users/sign_in')
     });
 });
