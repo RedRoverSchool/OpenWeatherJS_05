@@ -5,6 +5,7 @@ describe('Group jScript_group', () => {
         cy.fixture('jScript_group').then(data => {
             this.data = data;
         })
+        cy.visit('https://openweathermap.org')
     })
 
     it('AT_013.001 | NavBar > After clicking the Blog menu User is redirected to the Blog page', function () {
