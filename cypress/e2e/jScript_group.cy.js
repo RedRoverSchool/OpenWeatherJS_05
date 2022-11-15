@@ -239,5 +239,14 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', () => {
+        cy.visit('https://openweathermap.org/guide');
+
+        cy.get('li.logo').click();
+        
+        cy.url().should('include', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
 });
 
