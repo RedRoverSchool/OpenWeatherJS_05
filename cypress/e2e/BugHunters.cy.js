@@ -66,6 +66,24 @@ describe('groupBugHunters', () => {
     cy.visit('https://openweathermap.org/')
     cy.get('#desktop-menu a[href="/guide"]').click()
     cy.url().should('include', '/guide')
-  });
+  })
+
+  it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('eq', 'https://openweathermap.org/api')
+  })
+
+  it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
+    const cityName = 'New York'
+
+    cy.visit('https://openweathermap.org')
+    cy.get('.search input').type(cityName)
+    cy.get('button[type = "submit"]').click()
+    cy.get('ul.search-dropdown-menu')
+      .should('be.visible')
+      .should('contain.text', cityName)
+  })
 
 })
+
