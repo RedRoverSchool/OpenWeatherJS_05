@@ -89,6 +89,7 @@ describe('Group jScript_group', () => {
     });
 
     it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
+        cy.visit('https://openweathermap.org/examples')
         cy.get('#cms a').should(($a) => {
             expect($a).to.have.length(4);
             expect($a.eq(0)).to.contain('See on the website');
