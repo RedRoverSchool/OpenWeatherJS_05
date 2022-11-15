@@ -31,7 +31,6 @@ describe('group_javascript_for_qas', () => {
     });
 
     it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
-        cy.visit('https://openweathermap.org/');
         cy.get('.section-content a[href="/faq"]').click();
         cy.url().should('contain','/faq');  
     });
