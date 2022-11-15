@@ -50,7 +50,7 @@ describe('asiaJS', () => {
       .should('include', 'terms_and_conditions_of_use.pdf');
   });
 
-  it('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', () => {
+  it.skip('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', () => {
     cy.get('.option')
       .eq(1)
       .click();
