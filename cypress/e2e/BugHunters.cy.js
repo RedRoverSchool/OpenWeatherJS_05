@@ -83,16 +83,35 @@ describe('groupBugHunters', () => {
       .should('contain.text', cityName)
   })
   
-    it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
-      const marketplace = '#desktop-menu a[href*="marketplace"]'
-      cy.visit('https://openweathermap.org/')
-       cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
-       cy.url().should('eq','https://home.openweathermap.org/marketplace')
-    })
+  it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
+    const marketplace = '#desktop-menu a[href*="marketplace"]'
+    cy.visit('https://openweathermap.org/')
+    cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+    cy.url().should('eq','https://home.openweathermap.org/marketplace')
+  })
 
   it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
     cy.visit('https://openweathermap.org');
     cy.get('#desktop-menu a[href="/guide"]').click({force: true});
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
+
+  it.only ('TC_056.001 | My API keys > Managing API keys> Verify creating API key', function() {
+    cy.visit('https://openweathermap.org')
+    cy.get('.user-li').as('SignInButton').click()
+    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
+    cy.get('#user_password').as('PasswordField').type('123456789')
+    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
+    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
+    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+    cy.url().should('include', '/api_keys')
+
+    cy.get('#api_key_form_name').as('API_keyNameField')
+      .type('testAPIkey').and('have.value', 'testAPIkey').and('be.visible')
+    cy.get('.col-md-4 .button-round').as('GenerateButton').click()
+    
+    
+  })
+
+
 })
