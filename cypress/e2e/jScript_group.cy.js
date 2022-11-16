@@ -44,7 +44,11 @@ describe('Group jScript_group', () => {
     
     it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').click();
-        cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
+
+        cy.get('a[href="http://drupal.org/project/olowm"]')
+          .invoke('removeAttr', 'target')
+          .click();
+
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     });
 
@@ -110,7 +114,11 @@ describe('Group jScript_group', () => {
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').click();
-        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
+
+        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
+          .invoke('removeAttr', 'target')
+          .click();
+        
         cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
     });
 
@@ -169,8 +177,14 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
-        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]').invoke('removeAttr', 'target').click();
-        cy.get('h2.post__title').contains('The Road to a New Thinking in Transport Power').click();
+        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
+          .invoke('removeAttr', 'target')
+          .click();
+
+        cy.get('h2.post__title')
+          .contains('The Road to a New Thinking in Transport Power')
+          .click();
+          
         cy.get('h1.post-page__title').should('have.text', 'The Road to a New Thinking in Transport Power');
     });     
     
@@ -247,6 +261,14 @@ describe('Group jScript_group', () => {
 
         cy.url().should('eq', 'https://home.openweathermap.org/questions');
         cy.get('.headline').should('have.text', 'Ask a question');
+    });
+        
+    it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
+
+        cy.get('#cms a').should((a) => {
+            expect(a).to.have.length(4)});
     });
 });
 
