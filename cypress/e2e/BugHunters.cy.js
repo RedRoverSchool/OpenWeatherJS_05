@@ -1,10 +1,9 @@
 /// <reference types="cypress"/> 
 
-const { should } = require("chai")
 
 describe('groupBugHunters', () => {
 
-  it('AT_006.001 | Main page > Sign in', function () {
+   it('AT_006.001 | Main page > Sign in', function () {
     cy.visit('https://openweathermap.org/')
     cy.get('li.user-li').contains('Sign in').click({ force: true })
     cy.get('#user_email')
@@ -103,8 +102,7 @@ describe('groupBugHunters', () => {
     const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
 
     cy.visit('https://openweathermap.org/')
-    cy.get(marketplace).invoke('removeAttr', 'target').click()
-    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
-
+    cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
   })
 })
