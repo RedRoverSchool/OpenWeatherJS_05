@@ -81,5 +81,16 @@ describe('asiaJS', () => {
         .contains('Cambridge, GB')
         .click();
       });
+
+  it('TC_008.003 | Main menu > Guide | Verifying the link on the page "Guide"',()=>{
+      const buttonGuide = '#mobile-menu a[href="/guide"]';
+      const titleGuide = 'h1.breadcrumb-title';
+
+      cy.get(buttonGuide).should('contain.text', 'Guide');
+      cy.get(buttonGuide).click({force: true});
+
+      cy.url().should('include', '/guide');
+      cy.get(titleGuide).should('be.visible');
+      });
   
 });
