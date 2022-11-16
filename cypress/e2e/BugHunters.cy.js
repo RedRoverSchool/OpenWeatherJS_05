@@ -102,12 +102,7 @@ describe('groupBugHunters', () => {
     cy.get('.btn-default[value="Change Password"]').as('ChangePasswordButton').click()
 
     cy.get('div[class="panel panel-green"]').as('NoticeChangePassword')
-      .should('be.visible')
-      .should('have.css', 'color', 'rgb(72, 72, 74)')
-      .should('have.css', 'background-color', 'rgb(255, 255, 255)')
-      .should('have.css', 'border-color', 'rgb(148, 186, 101)')
-      .should('include.text', 'Notice')
-      .should('include.text', 'Password was changed successfully')
+      .should('be.visible').and('include.text', 'Notice').and('include.text', 'Password was changed successfully')
   })
 
 })
