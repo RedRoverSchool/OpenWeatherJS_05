@@ -50,25 +50,28 @@ describe('asiaJS', () => {
       .should('include', 'terms_and_conditions_of_use.pdf');
   });
 
-  it.skip('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', () => {
+  it('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
+    const Imperial_F = '#selected:not(.slideRight)';
+    const Metric_C = '#selected:not(.slideLeft)';
     cy.get('.option')
       .eq(1)
       .click();
-    cy.wait(2000)
-    let math_operation;
-    cy.get('.current-temp .heading')
+    cy.get(Imperial_F); // Ожидаем, когда cypress найдет id selected в котором не будет содержаться класс slideRight (.slideRight пропадет, когда на сайте преобразуется температура в °F)
+    const result = Array();
+    cy.get(`.current-temp .heading`)
       .invoke('text')
       .then((tempF) => {
-        math_operation = Math.round((parseInt(tempF) - 32) * 5 / 9)
+        let formula_convert_tempF_to_tempC = Math.round((parseInt(tempF) - 32) * 5 / 9);
+        result.push(formula_convert_tempF_to_tempC, formula_convert_tempF_to_tempC - 1, formula_convert_tempF_to_tempC + 1, formula_convert_tempF_to_tempC - 2, formula_convert_tempF_to_tempC + 2)
       });
     cy.get('.option')
       .eq(0)
       .click();
-    cy.wait(2000);
+    cy.get(Metric_C); // Ожидаем, когда cypress найдет id selected в котором не будет содержаться класс slideLeft (.slideLeft пропадет, когда на сайте преобразуется температура °C)
     cy.get('.current-temp .heading')
       .invoke('text')
       .then((tempC) => {
-        expect(parseInt(tempC)).to.eql(math_operation)
+        expect(result).to.includes(parseInt(tempC))
       });
   });
 
