@@ -216,7 +216,7 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_is_user_false').check();
         cy.get('#question_form_email').type(this.data.email);
         cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions');
-        cy.get('#question_form_message').type('My message to the world!');
+        cy.get('#question_form_message').type(this.data.message);
         cy.get('.btn').click();
 
         cy.get('.has-error').should('have.text', 'reCAPTCHA verification failed, please try again.');
@@ -263,6 +263,12 @@ describe('Group jScript_group', () => {
         cy.get('.headline').should('have.text', 'Ask a question');
     });
         
+    it('AT_044.001 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel .stick-footer-panel').should('be.visible');
+        cy.get('#stick-footer-panel button').should('have.text', 'Allow all');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+    });
+    
     it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
         cy.get('#desktop-menu a[href="/examples"]').click();
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
