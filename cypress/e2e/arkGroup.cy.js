@@ -150,9 +150,18 @@ describe('group Ark', () => {
       .should('contain', 'Pressure, hPa')
   })
    
+
 it('AT_033.010 Header > Navigation >  “API” ', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api');
 })
+
+it('AT_002.013 | Header > Verifying the Main page is open after clicking the logo', () => {
+  cy.visit('https://openweathermap.org');
+  cy.get('.logo').click();
+  cy.url().should('eq', 'https://openweathermap.org/');
+});
 })
+
+

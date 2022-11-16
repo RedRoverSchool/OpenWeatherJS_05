@@ -185,6 +185,18 @@ describe('GroupReporters', () => {
         cy.get('div.current-container h2').should('contain', cityName)
     })
 
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        cy.get('.social a').each(($el, index) => {
+            expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
+
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+      cy.get('#support-dropdown').should('be.visible').click();
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
+  });
+
     it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
         const cityName = 'New York'
 
