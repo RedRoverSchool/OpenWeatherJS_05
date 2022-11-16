@@ -92,5 +92,11 @@ describe('asiaJS', () => {
       cy.url().should('include', '/guide');
       cy.get(titleGuide).should('be.visible');
       });
+
+  it('AT_005.005 | Main page > Verifying the website"s description is correct and visible', () => {
+    cy.get('.mobile-padding h2 .white-text')
+      .should('be.visible')
+      .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');    
+  });
   
 });
