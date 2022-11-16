@@ -82,7 +82,7 @@ describe('asiaJS', () => {
         .click();
       });
 
-  it('TC_008.003 | Main menu > Guide | Verifying the link on the page "Guide"',()=>{
+  it('AT_008.003 | Main menu > Guide | Verifying the link on the page "Guide"',()=>{
       const buttonGuide = '#mobile-menu a[href="/guide"]';
       const titleGuide = 'h1.breadcrumb-title';
 
