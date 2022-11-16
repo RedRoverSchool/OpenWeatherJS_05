@@ -286,7 +286,7 @@ describe('Group jScript_group', () => {
         cy.get('.sign-form').should('exist');
     });
             
-     it.only('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+     it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
         cy.visit('https://openweathermap.org/guide');
         
         cy.get ('nav#nav-website a[href="/"]').click();
