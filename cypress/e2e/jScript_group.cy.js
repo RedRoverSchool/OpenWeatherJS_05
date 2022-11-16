@@ -285,6 +285,15 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in');
         cy.get('.sign-form').should('exist');
     });
+
+    it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel a').should('be.visible');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+        cy.get('#stick-footer-panel a').click();
+        
+        cy.url().should('eq', 'https://openweathermap.org/cookies-settings');
+        cy.get('head title').should('include.text', 'Cookies settings');
+    });
             
     it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
         cy.visit('https://openweathermap.org/guide');
@@ -292,6 +301,14 @@ describe('Group jScript_group', () => {
         cy.get ('nav#nav-website a[href="/"]').click();
         cy.url().should ('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel button').should('be.visible');
+        cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
+        cy.get('#stick-footer-panel button').click();
+        
+        cy.get('#stick-footer-panel .stick-footer-panel').should('not.be.visible');
     });
 
     it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
