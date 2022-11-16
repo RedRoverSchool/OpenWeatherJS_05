@@ -208,7 +208,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/blog/category/weather');
     });
 
-    it.only('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click();
         cy.get('.headline').should('have.text', 'Ask a question');
