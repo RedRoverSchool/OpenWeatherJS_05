@@ -70,6 +70,12 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/weather-dashboard');
     });
 
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+        cy.get("#desktop-menu ul li a[href='/guide']").click();
+        cy.get("ol [href='/api#current']").click();
+        cy.url().should('include', '/api#current');
+    });
+
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
@@ -126,7 +132,7 @@ describe('Group jScript_group', () => {
     it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         cy.get('ul.day-list li').should('have.length', 8);
     });
-    
+
     it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', function () {
         cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click();
         cy.url().should('eq','https://openweathermap.org/price');
