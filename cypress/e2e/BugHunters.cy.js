@@ -1,5 +1,7 @@
 /// <reference types="cypress"/> 
 
+const { should } = require("chai")
+
 describe('groupBugHunters', () => {
 
   it('AT_006.001 | Main page > Sign in', function () {
@@ -94,5 +96,15 @@ describe('groupBugHunters', () => {
     cy.visit('https://openweathermap.org');
     cy.get('#desktop-menu a[href="/guide"]').click({force: true});
     cy.url().should('eq', 'https://openweathermap.org/guide');
+  })
+
+  it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
+    const marketplace = '#desktop-menu a[href*="marketplace"]'
+    const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
+
+    cy.visit('https://openweathermap.org/')
+    cy.get(marketplace).invoke('removeAttr', 'target').click()
+    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
+
   })
 })
