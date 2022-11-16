@@ -1,0 +1,6 @@
+/// <reference types="cypress"/>
+
+describe('Group jScript_group', () => {
+
+
+    });
