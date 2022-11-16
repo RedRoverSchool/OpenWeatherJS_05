@@ -82,7 +82,7 @@ describe('groupBugHunters', () => {
       .should('be.visible')
       .should('contain.text', cityName)
   })
-
+  
   it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
     cy.visit('https://openweathermap.org');
     cy.get('#desktop-menu a[href="/guide"]').click({force: true});
