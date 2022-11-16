@@ -162,6 +162,22 @@ it('AT_002.013 | Header > Verifying the Main page is open after clicking the log
   cy.get('.logo').click();
   cy.url().should('eq', 'https://openweathermap.org/');
 });
+
+
+it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', () => {
+  cy.visit('https://openweathermap.org');
+  cy.get('#support-dropdown').click()
+  cy.get('.dropdown-menu').contains('Ask a question').invoke('removeAttr', 'target').click()
+
+  cy.get('#question_form_email').type('user@gmail.com')
+  cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions')
+  cy.get('#question_form_message').type('some message')
+  cy.get('.btn-default').click()
+
+  cy.get('div[class="help-block"]').contains('reCAPTCHA verification failed, please try again.')
+});
+
+
 })
 
 
