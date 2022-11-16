@@ -183,5 +183,12 @@ describe('GroupReporters', () => {
         cy.url().should('include', '/city/')
         cy.get('div.current-container h2').should('contain', cityName)
     })
+
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        cy.get('.social a').each(($el, index) => {
+            expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
+
 });
 
