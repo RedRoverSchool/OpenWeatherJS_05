@@ -102,7 +102,7 @@ describe('groupBugHunters', () => {
     cy.get('.btn-default[value="Change Password"]').as('ChangePasswordButton').click()
 
     cy.get('div[class="panel panel-green"]').as('NoticeChangePassword')
-      .should('be.visible').and('include.text', 'Notice').and('include.text', 'Password was changed successfully')
+      .should('include.text', 'Password was changed successfully').and('include.text', 'Notice').and('be.visible')
   })
 
 })
