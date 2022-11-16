@@ -23,4 +23,14 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     })
 });
   
+  it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products...', function() {
+    cy.visit('https://openweathermap.org/')
+      .get('#desktop-menu').contains('Sign in').click()
+      .get('.input-group #user_email').type('kollapsa@gmail.com')
+      .get('.input-group #user_password').type('76543218')
+      .get('[value="Submit"]').click()
+      .url().should('include', 'home.openweathermap.org/')
+      .get('.active').should('contain.text', 'New Products')
+  })
+
 });
