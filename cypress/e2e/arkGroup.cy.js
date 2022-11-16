@@ -149,18 +149,12 @@ describe('group Ark', () => {
   })
    
 
-it('AT_033.010 Header > Navigation >  “API” ', () => {
+it('AT_033.010 |Header > Navigation > Verify text “Weather API”', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
-  cy.url().should('include', '/api');
+  cy.url().should('include', '/api')
+  cy.get('h1.breadcrumb-title').should('have.text', 'Weather API')
 })
-
-it('AT_002.013 | Header > Verifying the Main page is open after clicking the logo', () => {
-  cy.visit('https://openweathermap.org');
-  cy.get('.logo').click();
-  cy.url().should('eq', 'https://openweathermap.org/');
-});
-
 
 it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', () => {
   cy.visit('https://openweathermap.org');
@@ -175,7 +169,11 @@ it('AT_014.004 | Support > Ask a question > The captcha error message is display
   cy.get('div[class="help-block"]').contains('reCAPTCHA verification failed, please try again.')
 });
 
-
+it('AT_002.013 | Header > Verifying the Main page is open after clicking the logo', () => {
+  cy.visit('https://openweathermap.org');
+  cy.get('.logo').click();
+  cy.url().should('eq', 'https://openweathermap.org/');
+});
 })
 
 
