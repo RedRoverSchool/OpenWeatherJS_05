@@ -208,7 +208,6 @@ describe('Group jScript_group', () => {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
-
         cy.url().should('eq','https://openweathermap.org/appid');
     });
 
