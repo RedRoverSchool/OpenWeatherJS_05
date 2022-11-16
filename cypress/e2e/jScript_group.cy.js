@@ -228,7 +228,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
-
+    
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
@@ -262,15 +262,6 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/questions');
         cy.get('.headline').should('have.text', 'Ask a question');
     });
-        
-    it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
-        cy.get('#user-dropdown').should('not.exist');
-        cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
-        cy.get('.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
-        cy.get('.btn_like.btn-orange.owm-block-mainpage__btn').eq(0).contains('Try the Dashboard').invoke('removeAttr','target').click();
-        cy.url().should('include','/users/sign_in');
-        cy.get('.sign-form').should('exist');
-    });
 
     it('AT_044.001 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel .stick-footer-panel').should('be.visible');
@@ -285,5 +276,21 @@ describe('Group jScript_group', () => {
         cy.get('#cms a').should((a) => {
             expect(a).to.have.length(4)});
     });
-});
 
+    it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
+        cy.get('#user-dropdown').should('not.exist');
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
+        cy.get('.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
+        cy.get('.btn_like.btn-orange.owm-block-mainpage__btn').eq(0).contains('Try the Dashboard').invoke('removeAttr','target').click();
+        cy.url().should('include','/users/sign_in');
+        cy.get('.sign-form').should('exist');
+    });
+            
+    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        cy.visit('https://openweathermap.org/guide');
+        
+        cy.get ('nav#nav-website a[href="/"]').click();
+        cy.url().should ('eq', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
+});
