@@ -228,7 +228,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
-
+    
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
@@ -285,5 +285,12 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in');
         cy.get('.sign-form').should('exist');
     });
+            
+     it.only('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        cy.visit('https://openweathermap.org/guide');
+        
+        cy.get ('nav#nav-website a[href="/"]').click();
+        cy.url().should ('eq', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
 });
-
