@@ -9,16 +9,14 @@ describe('group Ark', () => {
     cy.url().should("eq", "https://openweathermap.org/guide");
   });
 
-
-  it('AT_010.004 | Marketplace > Verify all orange links on the page', () => {
+  it('AT_010.004 | Marketplace > Verify the color of all orange links', () => {
     cy.visit('https://openweathermap.org/')
-    cy.get('#desktop-menu [href*=market]').invoke('removeAttr', 'target').click()
-    cy.get('.market-place .product h5 a').each(el => {
-      cy.wrap(el).should('have.css', 'color', 'rgb(235, 110, 75)')
-      cy.request(el.prop('href')).should(resp => {
-        expect(resp.status).to.eq(200)
+    cy.get('#desktop-menu [href*=marketplace]').invoke('removeAttr', 'target').click()
+    
+    cy.get('.market-place .product h5 a')
+      .each(el => {
+        cy.wrap(el).should('have.css', 'color', 'rgb(235, 110, 75)')
       })
-    })
   });
 
   it('AT_030.001|Footer>Verify redirection to terms and conditions', function () {
@@ -156,5 +154,21 @@ it('AT_033.010 Header > Navigation >  “API” ', () => {
   cy.url().should('include', '/api')
   cy.get('h1.breadcrumb-title').should('have.text','Weather API')
 })
+
+
+it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', () => {
+  cy.visit('https://openweathermap.org');
+  cy.get('#support-dropdown').click()
+  cy.get('.dropdown-menu').contains('Ask a question').invoke('removeAttr', 'target').click()
+
+  cy.get('#question_form_email').type('user@gmail.com')
+  cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions')
+  cy.get('#question_form_message').type('some message')
+  cy.get('.btn-default').click()
+
+  cy.get('div[class="help-block"]').contains('reCAPTCHA verification failed, please try again.')
+});
+
+
 })
 

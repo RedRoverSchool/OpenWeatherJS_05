@@ -11,6 +11,7 @@ const diffWeathDataSourseDropArr = '.dropdown-selector svg.icon-down';
 const diffWeathDataSourseDropItem = 'div.menu-item span'; // should be used with method .contains('item text')
 const diffWeathAddInfo = '.owm_textarea';
 const diffWeathSendBtn = '.pop-up-footer .button-round';
+const metric = '#selected[style="left: 2pt;"]';
 
 
 describe('GroupReporters', () => {
@@ -171,6 +172,19 @@ describe('GroupReporters', () => {
         cy.get('div#desktop-menu a[href*="guide"]').click()
         cy.get('#first-level-nav > li.logo > a > img').click()
         cy.url().should('eq', 'https://openweathermap.org/')
+    })
+
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
+        const cityName = 'New York'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.url().should('include', '/city/')
+        cy.get('div.current-temp .owm-weather-icon').should('exist')
+        cy.get(metric).should('exist')
+        cy.get('div.current-temp .heading').should('contain','°C')
     })
 });
 
