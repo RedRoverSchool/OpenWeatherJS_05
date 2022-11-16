@@ -17,7 +17,7 @@ describe('groupBugHunters', () => {
 
   })
 
-  it('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function () {
+  it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.visit('https://openweathermap.org/')
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
@@ -85,14 +85,14 @@ describe('groupBugHunters', () => {
       .should('contain.text', cityName)
   })
 
-  it.only ('AT_032.002 | Header > Account Dropdown Menu > My Profile > Password Change> Verify successful notification', function() {
+  it ('AT_032.002 | Header > Account Dropdown Menu > My Profile > Password Change> Verify successful notification', function() {
 
     cy.visit('https://openweathermap.org')
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
     cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-
+     
     cy.get('.inner-user-container').as('AccountDropdownMenu').click()
     cy.get('.dropdown-visible li:nth-child(4)').as('MyProfileButton').click()
     cy.get('#password_form_password').as('PasswordChangeField').type('123456789')
