@@ -8,9 +8,11 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
     })
 
-    it('AT_013.001 | NavBar > After clicking the Blog menu User is redirected to the Blog page', function () {
+    it('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
-        cy.url().should('be.equal', 'https://openweather.co.uk/blog/category/weather');
+
+        cy.url().should('be.equal', this.data.blogPageLink);
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
     });
 
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
@@ -18,9 +20,10 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
     });
 
-    it('AT_013.002 | NavBar > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
+    it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
-        cy.get('.post-list .post').should('have.length', 10);
+
+        cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
     });
 
     it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
@@ -41,7 +44,11 @@ describe('Group jScript_group', () => {
     
     it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').click();
-        cy.get('a[href="http://drupal.org/project/olowm"]').invoke('removeAttr', 'target').click();
+
+        cy.get('a[href="http://drupal.org/project/olowm"]')
+          .invoke('removeAttr', 'target')
+          .click();
+
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     });
 
@@ -101,7 +108,11 @@ describe('Group jScript_group', () => {
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').click();
-        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]').invoke('removeAttr', 'target').click();
+
+        cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
+          .invoke('removeAttr', 'target')
+          .click();
+        
         cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
     });
 
@@ -160,15 +171,23 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
-        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]').invoke('removeAttr', 'target').click();
-        cy.get('h2.post__title').contains('The Road to a New Thinking in Transport Power').click();
+        cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
+          .invoke('removeAttr', 'target')
+          .click();
+
+        cy.get('h2.post__title')
+          .contains('The Road to a New Thinking in Transport Power')
+          .click();
+          
         cy.get('h1.post-page__title').should('have.text', 'The Road to a New Thinking in Transport Power');
     });     
     
-    it('AT_013.003 | Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
+    it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
-        cy.url().should('include', 'https://openweather.co.uk/blog/post/');
+
+        cy.url().should('include', this.data.blogPagePostLink);
+        cy.get('.post-page__img').should('be.visible');
     });
 
     it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
@@ -204,11 +223,36 @@ describe('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
-    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', () => {
+    it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
         cy.url().should('eq','https://openweathermap.org/appid');
+        cy.url().should('eq', 'https://openweathermap.org/appid');
+        cy.get('head title').should('include.text', 'How to start to work with Openweather API');
+    });
+
+    it('AT_033.014 | Header > Navigation > Support > "FAQ" menu link', function () {
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href="/faq"]').click();
+
+        cy.url().should('eq', 'https://openweathermap.org/faq');
+        cy.get('head title').should('include.text', 'Frequently Asked Questions');
+    });
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        cy.get('li.logo').click();
+    
+        cy.url().should('include', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
+
+    it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
+        cy.get('#cms a').should((a) => {
+            expect(a).to.have.length(4)});
     });
 
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {

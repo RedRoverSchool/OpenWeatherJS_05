@@ -3,6 +3,9 @@
 describe('group_javascript_for_qas', () => {
     
     beforeEach(function() {
+        cy.fixture('group_javascript_for_qas').then(data => {
+            this.data = data;
+        });
         cy.visit('https://openweathermap.org/');
     });
 
@@ -34,4 +37,17 @@ describe('group_javascript_for_qas', () => {
         cy.get('.section-content a[href="/faq"]').click();
         cy.url().should('contain','/faq');  
     });
+
+    it('AT_008.001 | Main menu > Guide > Verify URL and headers are displayed on the page', function () {
+        cy.get("div#desktop-menu a[href='/guide']").click();
+        cy.url().should('contain','/guide'); 
+        cy.get("div.col-sm-12 h1").should("have.text",this.data.headers1)
+        cy.get("main h2").each(($el, idx) => {
+            expect($el.text()).to.include(this.data.headers2[idx])
+        })
+        cy.get("h4 b").each(($el, idx) => {
+            expect($el.text()).to.include(this.data.headers4[idx])
+        })
+    });
+    
 });
