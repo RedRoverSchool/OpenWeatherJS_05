@@ -190,5 +190,10 @@ describe('GroupReporters', () => {
         });
     });
 
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+      cy.get('#support-dropdown').should('be.visible').click();
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
+  });
 });
 
