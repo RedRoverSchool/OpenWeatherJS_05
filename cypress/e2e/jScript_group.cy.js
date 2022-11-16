@@ -285,5 +285,14 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in');
         cy.get('.sign-form').should('exist');
     });
+
+    it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel a').should('be.visible');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+        cy.get('#stick-footer-panel a').click();
+        
+        cy.url().should('eq', 'https://openweathermap.org/cookies-settings');
+        cy.get('head title').should('include.text', 'Cookies settings');
+    });
 });
 
