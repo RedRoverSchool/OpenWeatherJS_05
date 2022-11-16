@@ -2,5 +2,9 @@
     "firstName": "Donald",
     "lastName": "Duck",
     "email": "testEmail.com",
-    "message": "My message to the world!"
+    "message": "My message to the world!",
+    "blogPageLink": "https://openweather.co.uk/blog/category/weather",
+    "blogPageWeatherFilter": "WEATHER",
+    "blogPagePostsQuantity": 10,
+    "blogPagePostLink": "https://openweather.co.uk/blog/post/"
   }

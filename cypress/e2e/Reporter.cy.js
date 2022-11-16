@@ -166,5 +166,34 @@ describe('GroupReporters', () => {
             cy.wrap($el).should('contain', cityName)
         })
     })
+
+    it('AT_002.005 | Guide > Verifying the website logo is clickable and redirects User to the Main page', () => {
+        cy.get('div#desktop-menu a[href*="guide"]').click()
+        cy.get('#first-level-nav > li.logo > a > img').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    })
+
+    it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', () => {
+        const cityName = 'Tampa'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.url().should('include', '/city/')
+        cy.get('div.current-container h2').should('contain', cityName)
+    })
+
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        cy.get('.social a').each(($el, index) => {
+            expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
+
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+      cy.get('#support-dropdown').should('be.visible').click();
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
+  });
 });
 
