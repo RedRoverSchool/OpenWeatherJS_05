@@ -239,5 +239,13 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
+
+    it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
+        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
+
+        cy.get('#cms a').should((a) => {
+            expect(a).to.have.length(4)});
+    });
 });
 
