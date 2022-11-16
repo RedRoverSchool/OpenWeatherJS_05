@@ -285,5 +285,13 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in');
         cy.get('.sign-form').should('exist');
     });
+
+    it('AT_038.001 | For business page', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+
+        cy.url().should('eq', 'https://openweather.co.uk/');
+        cy.get('h1 span.orange-text').should('have.text', 'OpenWeather')
+    });
+
 });
 
