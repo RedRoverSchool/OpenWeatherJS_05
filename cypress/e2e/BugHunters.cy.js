@@ -96,7 +96,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
 
-  it.only ('TC_056.001 | My API keys > Managing API keys> Verify creating API key', function() {
+  it.only ('TC_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
     cy.visit('https://openweathermap.org')
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
@@ -109,6 +109,8 @@ describe('groupBugHunters', () => {
     cy.get('#api_key_form_name').as('API_keyNameField')
       .type('testAPIkey').and('have.value', 'testAPIkey').and('be.visible')
     cy.get('.col-md-4 .button-round').as('GenerateButton').click()
+    cy.get('.material_table tr:nth-child(2)')
+      .should('be.visible').and('include.text', 'testAPIkey')
     
     
   })
