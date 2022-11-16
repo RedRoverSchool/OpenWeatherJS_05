@@ -190,5 +190,17 @@ describe('GroupReporters', () => {
         });
     });
 
+    it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
+        const email = 'test@email.com';
+        cy.get('#desktop-menu > ul > li.user-li > a').click()
+        cy.url().should('include', '/users/sign_in')
+        cy.get('.pwd-lost-q.show').should('be.visible')
+        cy.get('div.pwd-lost-q.show > a').click()
+        cy.get('.text-muted')
+            .should('have.text', 'Enter your email address and we will send you a link to reset your password.')
+        cy.get('.form-group.email.optional.user_email .form-control.string.email.optional#user_email')
+        .type(email).should('be.visible')
+        cy.get('[type = "submit"][value="Send"].btn.btn-default.btn-color').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/users/password/new')
+    });
 });
-
