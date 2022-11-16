@@ -208,7 +208,7 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_is_user_false').check();
         cy.get('#question_form_email').type(this.data.email);
         cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions');
-        cy.get('#question_form_message').type('My message to the world!');
+        cy.get('#question_form_message').type(this.data.message);
         cy.get('.btn').click();
 
         cy.get('.has-error').should('have.text', 'reCAPTCHA verification failed, please try again.');
@@ -246,11 +246,35 @@ describe('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
+    it('AT_033.015 | Header > Navigation > Support > "Ask a question" menu link', function () {
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href*="/questions"]').invoke('removeAttr', 'target').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/questions');
+        cy.get('.headline').should('have.text', 'Ask a question');
+    });
+        
+    it('AT_044.001 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel .stick-footer-panel').should('be.visible');
+        cy.get('#stick-footer-panel button').should('have.text', 'Allow all');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+    });
+    
     it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
         cy.get('#desktop-menu a[href="/examples"]').click();
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
         cy.get('#cms a').should((a) => {
             expect(a).to.have.length(4)});
+    });
+
+    it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
+        cy.get('#user-dropdown').should('not.exist');
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
+        cy.get('.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
+        cy.get('.btn_like.btn-orange.owm-block-mainpage__btn').eq(0).contains('Try the Dashboard').invoke('removeAttr','target').click();
+        cy.url().should('include','/users/sign_in');
+        cy.get('.sign-form').should('exist');
     });
 
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', () => {

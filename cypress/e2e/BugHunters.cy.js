@@ -14,7 +14,6 @@ describe('groupBugHunters', () => {
     cy.get('#user_remember_me').check().should('be.checked')
     cy.contains('Submit').click()
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
-
   })
 
   it('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function () {
@@ -37,7 +36,6 @@ describe('groupBugHunters', () => {
     cy.get('[for="Global Precipitation"]').click({ force: true });
     cy.get('.scale-details >div:first-child')
       .should('contain', 'Precipitation, mm/h');
-
   })
 
   it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
@@ -84,6 +82,25 @@ describe('groupBugHunters', () => {
       .should('be.visible')
       .should('contain.text', cityName)
   })
+  
+    it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
+      const marketplace = '#desktop-menu a[href*="marketplace"]'
+      cy.visit('https://openweathermap.org/')
+       cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+       cy.url().should('eq','https://home.openweathermap.org/marketplace')
+    })
 
+  it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
+    cy.visit('https://openweathermap.org');
+    cy.get('#desktop-menu a[href="/guide"]').click({force: true});
+    cy.url().should('eq', 'https://openweathermap.org/guide');
+  })
+
+  it('AT_008.010 | Main menu > Guide > The user is redirected to new url "/api#current" after clicking first button "Learn more"', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/guide"]').click()
+    cy.get('a[href="/api#current"][class="ow-btn round btn-orange"]').click()
+    cy.url().should('include', '/api#current')
+    cy.get('section[id="current"] h2').should('have.text','Current & Forecast weather data collection')
+  })
 })
-
