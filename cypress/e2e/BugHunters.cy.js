@@ -44,7 +44,7 @@ describe('groupBugHunters', () => {
       cy.url().should('eq', 'https://play.google.com/store/apps/details?id=uk.co.openweather')        
     })
 
-    it('AT_009.005 | Main menu > Marketplace', function () {
+    it('AT_009.006 | Main menu > Marketplace', function () {
       const marketplace = '#desktop-menu a[href*="marketplace"]'
       cy.visit('https://openweathermap.org/')
        cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
