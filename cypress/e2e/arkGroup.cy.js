@@ -154,7 +154,7 @@ it('AT_033.010 Header > Navigation >  “API” ', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api')
-  cy.get('h1.breadcrumb-title').should('have.text', 'Weather API')
+  cy.get('h1.breadcrumb-title').should('have.text','Weather API')
 })
 })
 
