@@ -108,7 +108,6 @@ describe('Group jScript_group', () => {
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').click();
-
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
           .invoke('removeAttr', 'target')
           .click();
@@ -174,7 +173,6 @@ describe('Group jScript_group', () => {
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
           .click();
-
         cy.get('h2.post__title')
           .contains('The Road to a New Thinking in Transport Power')
           .click();
