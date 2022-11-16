@@ -293,4 +293,12 @@ describe('Group jScript_group', () => {
         cy.url().should ('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel button').should('be.visible');
+        cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
+        cy.get('#stick-footer-panel button').click();
+        
+        cy.get('#stick-footer-panel .stick-footer-panel').should('not.be.visible');
+    });
 });
