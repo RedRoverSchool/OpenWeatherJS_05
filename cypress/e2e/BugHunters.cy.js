@@ -95,4 +95,12 @@ describe('groupBugHunters', () => {
     cy.get('#desktop-menu a[href="/guide"]').click({force: true});
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
+
+  it('AT_008.010 | Main menu > Guide > The user is redirected to new url "/api#current" after clicking first button "Learn more"', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/guide"]').click()
+    cy.get('a[href="/api#current"][class="ow-btn round btn-orange"]').click()
+    cy.url().should('include', '/api#current')
+    cy.get('section[id="current"] h2').should('have.text','Current & Forecast weather data collection')
+  })
 })
