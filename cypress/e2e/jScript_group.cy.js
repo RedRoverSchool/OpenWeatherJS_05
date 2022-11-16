@@ -208,7 +208,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/blog/category/weather');
     });
 
-    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it.only('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click();
         cy.get('.headline').should('have.text', 'Ask a question');
@@ -216,7 +216,7 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_is_user_false').check();
         cy.get('#question_form_email').type(this.data.email);
         cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions');
-        cy.get('#question_form_message').type('My message to the world!');
+        cy.get('#question_form_message').type(this.data.message);
         cy.get('.btn').click();
 
         cy.get('.has-error').should('have.text', 'reCAPTCHA verification failed, please try again.');
