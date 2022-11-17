@@ -335,4 +335,27 @@ describe('Group jScript_group', () => {
 
         cy.title().should('eq', 'Members');
     });
+
+    it('AT_048.002 | User page > Billing plans > Verify billing plans information', function () {
+        cy.get('#desktop-menu .user-li a').should('have.text', 'Sign in');
+        cy.get('#desktop-menu .user-li a').click();
+
+        cy.url().should('include', "/sign_in");
+        cy.get('.sign-form h3').should('be.visible').and('have.text', 'Sign In To Your Account');
+
+        cy.get('.input-group #user_email').type('3065606@gmail.com');
+        cy.get('.input-group #user_password').type('Qwerty1234');
+        cy.get('#new_user [value="Submit"]').click();
+
+        cy.get('.panel-body').should('have.text', 'Signed in successfully.');
+        cy.get('#user-dropdown .inner-user-container').click();
+        cy.get('#user-dropdown-menu a[href="/myservices"]').click();
+
+        cy.url().should('eq', "https://home.openweathermap.org/myservices");
+        cy.get('.row a[href="/subscriptions"]').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/subscriptions');
+        cy.get('.subscribe-title a').should('include.text', 'subscription plan'); 
+        cy.get('.container a[href*="/price#current"]').should('have.text', 'Professional collections');
+    });
 });
