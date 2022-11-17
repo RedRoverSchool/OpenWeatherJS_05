@@ -164,5 +164,5 @@ it.('AT_009.008 | <Menu> Marketplace > Verification than "Place order" button is
   cy.get(historyBulk).should('be.visible')
   cy.get(placeOrderButton).should('be.visible').click() 
   cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
-})
+  })
 })
