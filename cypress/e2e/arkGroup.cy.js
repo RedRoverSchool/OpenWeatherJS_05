@@ -181,4 +181,4 @@ it('AT_033.017 | Header>Navigation>API>Verify "sign up" link',() => {
   cy.get('#desktop-menu > :nth-child(2) > :nth-child(2)').click()
   cy.contains("sign up").click()
   cy.url().should('include','https://home.openweathermap.org/users/sign_up')
-})
+}) 
