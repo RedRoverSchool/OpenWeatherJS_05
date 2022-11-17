@@ -104,19 +104,18 @@ describe('GroupReporters', () => {
     });
 
     it('AT_006.003 | Sign in > Verifying successful sign in', () => {
-        const userName = 'JesSummers'
         const emailLogin = 'hoxixe2496@lance7.com'
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click({ force: true })
+            .click()
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
             .type(emailLogin)
         cy.get('.input-group > #user_password')
             .type(password)
         cy.get('#user_remember_me')
-            .click({ force: true })
+            .click()
         cy.contains('Submit')
             .click()
         cy.url().should('include', '/')
