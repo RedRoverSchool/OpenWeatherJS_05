@@ -228,7 +228,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
-
+    
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
@@ -254,6 +254,15 @@ describe('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
+    it('AT_033.015 | Header > Navigation > Support > "Ask a question" menu link', function () {
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href*="/questions"]').invoke('removeAttr', 'target').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/questions');
+        cy.get('.headline').should('have.text', 'Ask a question');
+    });
+
     it('AT_044.001 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel .stick-footer-panel').should('be.visible');
         cy.get('#stick-footer-panel button').should('have.text', 'Allow all');
@@ -276,5 +285,68 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in');
         cy.get('.sign-form').should('exist');
     });
-});
 
+    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+
+        cy.url().should('eq', 'https://openweather.co.uk/');
+        cy.get('h1').should('include.text','for business');
+    });
+
+    it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel a').should('be.visible');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+        cy.get('#stick-footer-panel a').click();
+        
+        cy.url().should('eq', 'https://openweathermap.org/cookies-settings');
+        cy.get('head title').should('include.text', 'Cookies settings');
+    });
+            
+    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        cy.visit('https://openweathermap.org/guide');
+        
+        cy.get ('nav#nav-website a[href="/"]').click();
+        cy.url().should ('eq', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel button').should('be.visible');
+        cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
+        cy.get('#stick-footer-panel button').click();
+        
+        cy.get('#stick-footer-panel .stick-footer-panel').should('not.be.visible');
+    });
+
+    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+        cy.get('div.section.where-to').should('exist');
+
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        
+        cy.url().should('include','/weather-dashboard');
+        cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
+    });
+
+    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+    });
+
+    it('AT_025.003 | Dashboard > Verify that "Contact Us" button redirects the user to "Ask a question" page', function () {
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        cy.title().should('eq','Weather dashboard - OpenWeatherMap');
+
+        cy.get('.below > .btn_like').invoke('removeAttr','target').click();
+        cy.url().should('include', "/questions");
+
+        cy.title().should('eq', 'Members');
+    });
+
+    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+        cy.get('.post-list .post').should('have.length', 10);
+    });
+});
