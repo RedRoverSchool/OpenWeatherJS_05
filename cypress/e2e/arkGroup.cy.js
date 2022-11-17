@@ -181,6 +181,19 @@ it('AT_029.003 | Footer > Download OpenWeather app, " Get it on Google play" but
   cy.get('h1 span').should('have.text', 'OpenWeather')
 });
 
+it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map', function () {
+  cy.visit('https://openweathermap.org/')
+  cy.get('#desktop-menu a[href="/weathermap"]').click({timeout: 10000})
+  cy.get('#map-wrap .global-map').should('be.visible')
+
+  cy.get('label[for="Global Precipitation"]')
+    .should('be.visible').and('include.text', 'Global Precipitation')
+    .click()
+  
+  cy.get('img[src*="sat.owm.io/"]').first()
+    .should('be.visible').and("have.attr", "src").and('match', /maps.*radar/)
+})
+
 })
 
 
