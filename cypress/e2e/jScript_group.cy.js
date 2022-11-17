@@ -335,4 +335,13 @@ describe('Group jScript_group', () => {
 
         cy.title().should('eq', 'Members');
     });
+
+    it('AT_010.002 | Marketplace > Verify the link "History Bulk” on the page', () => {
+        cy.get('div#desktop-menu a[href*="marketplace"]').invoke('removeAttr', 'target').click()
+        cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click();
+        cy.get('.product-container a[href="/history_bulks/new"]:not(.button-round)').click();
+        
+        cy.url().should('include', '/history_bulks/new');
+        cy.get('.page-content-bulk h4.heading').should('have.text', 'Create New History Bulk')
+    });
 });
