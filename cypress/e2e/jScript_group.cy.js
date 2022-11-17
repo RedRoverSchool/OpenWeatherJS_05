@@ -358,7 +358,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/#main_about');
         cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
     });
-    
+
     it('AT_038.003 | For business page > Our Products', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
     
