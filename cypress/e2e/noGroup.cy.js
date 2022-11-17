@@ -2,6 +2,12 @@
 /// <reference types="cypress" />
 
 describe('group noGroup', () => {
+  beforeEach(function() {
+    cy.fixture('noGroup').then(data => {
+        this.data = data
+    })
+    
+})
 
 it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.visit('https://openweathermap.org/')
@@ -32,4 +38,18 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.contains('OpenWeather')
   })
   
+  it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
+    const userName = 'nadiakoluzaeva@gmail.com';
+    const password = 'OpenWeatherJS_05';
+    
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(password).should('have.value', password)
+    cy.get('#new_user input[value="Submit"]').click()
+    cy.get('.clearfix #myTab li').should('have.length', 9)
+    cy.get('.clearfix #myTab li').each(($el, idx) => {
+      expect($el.text()).to.include(this.data.NavBar[idx])
+    })
+  }) 
 });
