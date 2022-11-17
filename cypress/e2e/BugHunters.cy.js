@@ -138,7 +138,7 @@ describe('groupBugHunters', () => {
     cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
   })
-
+  
   it('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
     cy.get('#desktop-menu').contains('Guide').click({ force: true });
     cy.get('.col-sm-12 h1').should('have.text', 'Weather data in a fast and easy-to-use way');
