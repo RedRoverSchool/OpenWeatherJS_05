@@ -230,4 +230,14 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/users/password')
         cy.get('div.container h3').should('have.text', 'Forgot your password?')
     });
+    it("AT_022.007 | Footer > Social media > Verify Telegram icon redirection", () => {
+        cy.get(".social a:nth-child(5)").should("be.visible");
+        cy.get(".social a:nth-child(5)")
+            .invoke("removeAttr", "target")
+            .click({ force: true });
+        cy.url().should(
+            "include",
+            "t.me/openweathermap"
+        );
+    });
 });
