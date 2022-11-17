@@ -96,7 +96,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
 
-  it.only ('TC_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
+  it ('TC_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
     cy.visit('https://openweathermap.org')
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
@@ -109,11 +109,20 @@ describe('groupBugHunters', () => {
     cy.get('#api_key_form_name').as('API_keyNameField')
       .type('testAPIkey').and('have.value', 'testAPIkey').and('be.visible')
     cy.get('.col-md-4 .button-round').as('GenerateButton').click()
-    cy.get('.material_table tr:nth-child(2)')
-      .should('be.visible').and('include.text', 'testAPIkey')
-    
-    
+    cy.get('.material_table tr:nth-child(2)').as('CreatedKey')
+      .should('exist')
+      .should('be.visible')
+    cy.get('.material_table tr:nth-child(2) td:nth-child(2)').as('NameCreatedKey')
+      .should('be.visible').and('have.text', 'testAPIkey')
+    cy.get('.col-md-6').as('NoticeCreateKey')
+    .should('include.text', 'API key was created successfully').and('include.text', 'Notice').and('be.visible')
+    cy.reload()
+    cy.get('@CreatedKey').should('be.visible')
+    cy.get('@NameCreatedKey').should('be.visible').and('have.text', 'testAPIkey')
+    cy.get('.api-keys tr:nth-child(2) .fa-remove').as('DeleteButton').click()
+    cy.get('.col-sm-offset-2').as('NoticeDeleteKey')
+      .should('include.text', 'API key was deleted successfully').and('include.text', 'Notice').and('be.visible')
+    cy.get('@CreatedKey').should('not.exist')    
   })
-
 
 })
