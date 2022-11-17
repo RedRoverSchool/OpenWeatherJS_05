@@ -290,7 +290,7 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
 
         cy.url().should('eq', 'https://openweather.co.uk/');
-        cy.get('h1 span.orange-text').should('have.text', 'OpenWeather')
+        cy.get('h1').should('include.text','for business');
     });
 
     it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
