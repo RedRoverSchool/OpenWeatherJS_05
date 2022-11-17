@@ -204,19 +204,11 @@ describe('GroupReporters', () => {
         });
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Telegram icon redirection", () => {
-        cy.get(".social a:nth-child(4)").should("be.visible");
-        cy.get(".social a").eq(4).click({ force: true });
-        cy.get(".social a:nth-child(4)").invoke("removeAttr", "target");
-        cy.url().should("include", "/openweathermap");
-    });
-
     it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
       cy.get('#support-dropdown').should('be.visible').click();
       cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
       cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
-    });
-
+  });
 });
 
 
