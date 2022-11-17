@@ -6,11 +6,8 @@ describe('group noGroup', () => {
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {
       this.data = data
-    })   
-})
-
-beforeEach(function() {
-  cy.visit('https://openweathermap.org/')
+    });
+    cy.visit('https://openweathermap.org/')
 })
 
 it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
