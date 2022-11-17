@@ -96,7 +96,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
 
-  it ('TC_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
+  it ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
     cy.visit('https://openweathermap.org')
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
