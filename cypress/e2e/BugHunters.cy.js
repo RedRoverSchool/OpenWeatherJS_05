@@ -1,8 +1,9 @@
 /// <reference types="cypress"/> 
 
+
 describe('groupBugHunters', () => {
 
-  it('AT_006.001 | Main page > Sign in', function () {
+   it('AT_006.001 | Main page > Sign in', function () {
     cy.visit('https://openweathermap.org/')
     cy.get('li.user-li').contains('Sign in').click({ force: true })
     cy.get('#user_email')
@@ -14,10 +15,9 @@ describe('groupBugHunters', () => {
     cy.get('#user_remember_me').check().should('be.checked')
     cy.contains('Submit').click()
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
-
   })
 
-  it('AT_029.001 | Two icons "Download on the App store" and "Get it on Google play" are visible', function () {
+  it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.visit('https://openweathermap.org/')
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
@@ -29,19 +29,8 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')
   })
 
-    it('AT_001.009 | Main page > Section with search > Search City', function () {
-      let cityName = 'Italy'
-      let searchCity = 'div.search-container'
-      let btnSubmit = '.button-round'
-
-      cy.visit('https://openweathermap.org/')
-      cy.get(searchCity).should('be.visible').click()
-      cy.get(searchCity).type(cityName).should('be.visible', cityName)
-      cy.get(btnSubmit).click()
-      cy.get('ul.search-dropdown-menu').should('be.visible')
-  })
     
-
+    
   it("AT_027.003 |Maps > Section with the scale", function () {
     cy.visit('https://openweathermap.org');
     cy.get('#desktop-menu [href="/weathermap"]').click({ force: true });
@@ -49,7 +38,6 @@ describe('groupBugHunters', () => {
     cy.get('[for="Global Precipitation"]').click({ force: true });
     cy.get('.scale-details >div:first-child')
       .should('contain', 'Precipitation, mm/h');
-
   })
 
   it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
@@ -78,6 +66,100 @@ describe('groupBugHunters', () => {
     cy.visit('https://openweathermap.org/')
     cy.get('#desktop-menu a[href="/guide"]').click()
     cy.url().should('include', '/guide')
-  });
+  })
+  
+  it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('eq', 'https://openweathermap.org/api')
+  })
 
+  it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
+    const cityName = 'New York'
+
+    cy.visit('https://openweathermap.org')
+    cy.get('.search input').type(cityName)
+    cy.get('button[type = "submit"]').click()
+    cy.get('ul.search-dropdown-menu')
+      .should('be.visible')
+      .should('contain.text', cityName)
+  })
+  
+   it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
+     const marketplace = '#desktop-menu a[href*="marketplace"]'
+     cy.visit('https://openweathermap.org/')
+     cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+     cy.url().should('eq','https://home.openweathermap.org/marketplace')
+   })
+
+    it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
+      const marketplace = '#desktop-menu a[href*="marketplace"]'
+      cy.visit('https://openweathermap.org/')
+       cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+       cy.url().should('eq','https://home.openweathermap.org/marketplace')
+    })
+
+  it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
+    cy.visit('https://openweathermap.org');
+    cy.get('#desktop-menu a[href="/guide"]').click({force: true});
+    cy.url().should('eq', 'https://openweathermap.org/guide');
+  })
+
+  it ('AT_032.002 | Header > Account Dropdown Menu > My Profile > Password Change> Verify successful notification', function() {
+    cy.visit('https://openweathermap.org')
+    cy.get('.user-li').as('SignInButton').click()
+    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
+    cy.get('#user_password').as('PasswordField').type('123456789')
+    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
+     
+    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
+    cy.get('.dropdown-visible li:nth-child(4)').as('MyProfileButton').click()
+    cy.get('#password_form_password').as('PasswordChangeField').type('123456789')
+    cy.get('#password_form_password_confirmation').as('ConfirmPasswordField').type('123456789')
+    cy.get('.btn-default[value="Change Password"]').as('ChangePasswordButton').click()
+
+    cy.get('div[class="panel panel-green"]').as('NoticeChangePassword')
+      .should('include.text', 'Password was changed successfully').and('include.text', 'Notice').and('be.visible')
+  })
+
+  it('AT_008.010 | Main menu > Guide > The user is redirected to new url "/api#current" after clicking first button "Learn more"', () => {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/guide"]').click()
+    cy.get('a[href="/api#current"][class="ow-btn round btn-orange"]').click()
+    cy.url().should('include', '/api#current')
+    cy.get('section[id="current"] h2').should('have.text','Current & Forecast weather data collection')
+  })
+
+
+  it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
+    const marketplace = '#desktop-menu a[href*="marketplace"]'
+    const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
+
+    cy.visit('https://openweathermap.org/')
+    cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
+  })
+  
+  it('AT_001.009 | Main page > Section with search > Search City', function () {
+    let cityName = 'Italy'
+    let searchCity = 'div.search-container'
+    let btnSubmit = '.button-round'
+
+    cy.visit('https://openweathermap.org/')
+    cy.get(searchCity).should('be.visible').click()
+    cy.get(searchCity).type(cityName).should('be.visible', cityName)
+    cy.get(btnSubmit).click()
+    cy.get('ul.search-dropdown-menu').should('be.visible')
+  })
+    it('AT_001.009 | Main page > Section with search > Search City', function () {
+    let cityName = 'Italy'
+    let searchCity = 'div.search-container'
+    let btnSubmit = '.button-round'
+
+    cy.visit('https://openweathermap.org/')
+    cy.get(searchCity).should('be.visible').click()
+    cy.get(searchCity).type(cityName).should('be.visible', cityName)
+    cy.get(btnSubmit).click()
+    cy.get('ul.search-dropdown-menu').should('be.visible')
+  })
 })

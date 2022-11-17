@@ -1,0 +1,21 @@
+{
+    "diffWeathIcons": [
+        "clear sky",
+        "few clouds",
+        "overcast clouds",
+        "drizzle",
+        "rain",
+        "shower rain",
+        "thunderstorm",
+        "snow",
+        "mist"
+    ],
+    "socialIcons": [
+        "https://www.facebook.com/groups/270748973021342",
+        "https://twitter.com/OpenWeatherMap",
+        "https://www.linkedin.com/company/9816754",
+        "https://medium.com/@openweathermap",
+        "https://t.me/openweathermap",
+        "https://github.com/search?q=openweathermap&ref=cmdform"
+    ]
+}
