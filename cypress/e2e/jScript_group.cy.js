@@ -98,14 +98,13 @@ describe('Group jScript_group', () => {
     });
 
     it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
-        cy.visit('https://openweathermap.org/examples');
-        cy.get('#cms a').should(($a) => {
-            expect($a).to.have.length(4);
-            expect($a.eq(0)).to.contain('See on the website');
-            expect($a.eq(1)).to.contain('View widget');
-            expect($a.eq(2)).to.contain('View plugin');
-            expect($a.eq(3)).to.contain('View plugin');
-        })
+        cy.get('#desktop-menu a[href="/examples"]').click();
+
+        const sectionsNames = ['See on the website', 'View widget', 'View plugin', 'View plugin'];
+
+        cy.get('#cms a').each(($el, i) => {
+            expect($el.text()).to.equal(sectionsNames[i]);
+        });
     });
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
