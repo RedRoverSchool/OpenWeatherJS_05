@@ -1,8 +1,9 @@
 /// <reference types="cypress"/> 
 
+
 describe('groupBugHunters', () => {
 
-  it('AT_006.001 | Main page > Sign in', function () {
+   it('AT_006.001 | Main page > Sign in', function () {
     cy.visit('https://openweathermap.org/')
     cy.get('li.user-li').contains('Sign in').click({ force: true })
     cy.get('#user_email')
@@ -89,6 +90,13 @@ describe('groupBugHunters', () => {
      cy.url().should('eq','https://home.openweathermap.org/marketplace')
    })
 
+    it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
+      const marketplace = '#desktop-menu a[href*="marketplace"]'
+      cy.visit('https://openweathermap.org/')
+       cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+       cy.url().should('eq','https://home.openweathermap.org/marketplace')
+    })
+
   it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
     cy.visit('https://openweathermap.org');
     cy.get('#desktop-menu a[href="/guide"]').click({force: true});
@@ -120,4 +128,13 @@ describe('groupBugHunters', () => {
     cy.get('section[id="current"] h2').should('have.text','Current & Forecast weather data collection')
   })
 
+
+  it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
+    const marketplace = '#desktop-menu a[href*="marketplace"]'
+    const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
+
+    cy.visit('https://openweathermap.org/')
+    cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
+    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
+  })
 })
