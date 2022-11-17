@@ -187,4 +187,12 @@ describe('Group lt_by_js', () => {
 
         cy.get('.has-error .help-block').should('have.text', 'reCAPTCHA verification failed, please try again.')
     })
+
+    it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
+        cy.get('#desktop-menu  a[href*="dashboard"]').click()
+        cy.get('li.logo').click()
+
+        cy.url().should('eq', 'https://openweathermap.org/')
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
+    })
 })
