@@ -261,5 +261,13 @@ describe('Group jScript_group', () => {
         cy.get('#cms a').should((a) => {
             expect(a).to.have.length(4)});
     });
+
+    it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
+        
+        cy.url().should('include','/users/sign_in')
+        });
+        
 });
 
