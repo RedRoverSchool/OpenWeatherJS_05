@@ -220,7 +220,7 @@ describe("GroupReporters", () => {
         );
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Telegram icon redirection", () => {
+    it("AT_022.007 | Footer > Social media > Verify Telegram icon redirection", () => {
         cy.get(".social a:nth-child(5)").should("be.visible");
         cy.get(".social a:nth-child(5)")
             .invoke("removeAttr", "target")
