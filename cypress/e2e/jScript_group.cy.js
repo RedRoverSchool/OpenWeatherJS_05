@@ -61,10 +61,12 @@ describe('Group jScript_group', () => {
     it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
         cy.get('li[class="user-li"] a[href$="sign_in"]').click();
         cy.get('#user_email').type('3065606@gmail.com');
-        cy.get('#user_password.form-control').type('Qwerty1234');
+        cy.get('#user_password.form-control').type('Qwerty1234');https://github.com/RedRoverSchool/OpenWeatherJS_05/pull/161/
         cy.get('[value="Submit"]').click({force: true});
+
         cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true});
         cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true});
+        
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
@@ -216,7 +218,7 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_is_user_false').check();
         cy.get('#question_form_email').type(this.data.email);
         cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions');
-        cy.get('#question_form_message').type('My message to the world!');
+        cy.get('#question_form_message').type(this.data.message);
         cy.get('.btn').click();
 
         cy.get('.has-error').should('have.text', 'reCAPTCHA verification failed, please try again.');
@@ -228,7 +230,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
-
+    
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
         cy.get('#support-dropdown').click();
         cy.get('#support-dropdown-menu').should('be.visible');
@@ -254,6 +256,21 @@ describe('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
+    it('AT_033.015 | Header > Navigation > Support > "Ask a question" menu link', function () {
+        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown-menu').should('be.visible');
+        cy.get('#support-dropdown-menu a[href*="/questions"]').invoke('removeAttr', 'target').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/questions');
+        cy.get('.headline').should('have.text', 'Ask a question');
+    });
+
+    it('AT_044.001 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel .stick-footer-panel').should('be.visible');
+        cy.get('#stick-footer-panel button').should('have.text', 'Allow all');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+    });
+    
     it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
         cy.get('#desktop-menu a[href="/examples"]').click();
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
@@ -271,3 +288,101 @@ describe('Group jScript_group', () => {
         
 });
 
+    it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
+        cy.get('#user-dropdown').should('not.exist');
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
+        cy.get('.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
+        cy.get('.btn_like.btn-orange.owm-block-mainpage__btn').eq(0).contains('Try the Dashboard').invoke('removeAttr','target').click();
+        cy.url().should('include','/users/sign_in');
+        cy.get('.sign-form').should('exist');
+    });
+
+    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+
+        cy.url().should('eq', 'https://openweather.co.uk/');
+        cy.get('h1').should('include.text','for business');
+    });
+
+    it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel a').should('be.visible');
+        cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
+        cy.get('#stick-footer-panel a').click();
+        
+        cy.url().should('eq', 'https://openweathermap.org/cookies-settings');
+        cy.get('head title').should('include.text', 'Cookies settings');
+    });
+            
+    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        cy.visit('https://openweathermap.org/guide');
+        
+        cy.get ('nav#nav-website a[href="/"]').click();
+        cy.url().should ('eq', 'https://openweathermap.org/');
+        cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
+    });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        cy.get('#stick-footer-panel button').should('be.visible');
+        cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
+        cy.get('#stick-footer-panel button').click();
+        
+        cy.get('#stick-footer-panel .stick-footer-panel').should('not.be.visible');
+    });
+
+    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+        cy.get('div.section.where-to').should('exist');
+
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        
+        cy.url().should('include','/weather-dashboard');
+        cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
+    });
+
+    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+    });
+
+    it('AT_025.003 | Dashboard > Verify that "Contact Us" button redirects the user to "Ask a question" page', function () {
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        cy.title().should('eq','Weather dashboard - OpenWeatherMap');
+
+        cy.get('.below > .btn_like').invoke('removeAttr','target').click();
+        cy.url().should('include', "/questions");
+
+        cy.title().should('eq', 'Members');
+    });
+
+    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+        cy.get('.post-list .post').should('have.length', 10);
+    });
+
+    it('AT_038.002 | For business page > About us', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+    
+        cy.get('a.btn_block[href="#main_about"]').click({force: true});
+    
+        cy.url().should('eq', 'https://openweather.co.uk/#main_about');
+        cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
+    });
+
+    it('AT_038.003 | For business page > Our Products', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+    
+        cy.get('[href="#main_products"]').invoke('removeAttr', 'target').click({force: true});
+        
+        cy.url().should('eq', 'https://openweather.co.uk/#main_products');
+        cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
+    });
+
+    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+        cy.get('#desktop-menu [href="/weathermap"]').click();
+        cy.get('[for="Pressure"]').click();
+
+        cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
+    });
+});
