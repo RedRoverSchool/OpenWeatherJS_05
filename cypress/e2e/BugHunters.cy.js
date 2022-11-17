@@ -1,6 +1,7 @@
 /// <reference types="cypress"/> 
 
 
+
 describe('groupBugHunters', () => {
 
   beforeEach(function () {
@@ -163,6 +164,17 @@ describe('groupBugHunters', () => {
   it('AT_033.016 | Header > Navigation', function() {
     cy.get('#desktop-menu a[href="/guide"]').click({force: true})
     cy.url().should('include', '/guide')
+  })
+
+  it('AT_009.008 | <Menu> Marketplace > Verification than "Place order" button is displayed and leads to URL', function () {
+    const marketplace = '#desktop-menu a[href*="marketplace"]'
+    const historyBulk = 'h5 a[href="/history_bulks/new"]'
+    const placeOrderButton = 'div.button-container a[href="/history_bulks/new"]'
+
+    cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
+    cy.get(historyBulk).should('be.visible')
+    cy.get(placeOrderButton).should('be.visible').click() 
+    cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
   })
 
 })

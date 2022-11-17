@@ -57,8 +57,8 @@ describe('Group lt_by_js', () => {
     it('AT_031.002 | Sign In > Account Dropdown Menu > Verify user is able to log out', function () {    
         cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
         cy.url().should('eq', 'https://home.openweathermap.org/users/sign_in')
-        cy.get('.input-group #user_email').click().type('catia.romankova@yandex.by')
-        cy.get('.input-group #user_password').click().type(this.data.password1)
+        cy.get('.input-group #user_email').type(this.data.email)
+        cy.get('.input-group #user_password').type(this.data.password1)
         cy.get('#new_user :nth-child(7)').click()
         cy.get('.panel-body').should('have.text', 'Signed in successfully.')
 
@@ -194,5 +194,12 @@ describe('Group lt_by_js', () => {
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
+    })
+
+    it('AT_025.008 | Main menu > Dashboard > After clicking "Dashboard" item on bar menu User is redirected to Dashboard page', function () {
+        cy.get('#desktop-menu a[href="/weather-dashboard"]').click()
+
+        cy.url().should('contain', '/weather-dashboard')
+        cy.get('.breadcrumb-title').should('have.text', 'Weather dashboard')
     })
 })
