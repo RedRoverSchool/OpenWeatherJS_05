@@ -177,4 +177,17 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
   })
 
+  it('AT_041.001 | Verify the registered user is redirected to the My API keys page', () => {
+    cy.get('li.user-li a[href*="sign_in"]').click()
+    cy.get('.new_user .email').type('redroverschool@yahoo.com')
+    cy.get('#user_password').type('123456789')
+    cy.get('input[value="Submit"]').click()
+
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href="/api_keys"]').click()
+    cy.url().should('include', '/api_keys')
+    cy.get('div.alert-info').should('contain','You can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.')
+      .and('be.visible')
+  })
+
 })
