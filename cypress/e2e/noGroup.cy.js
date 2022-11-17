@@ -22,5 +22,14 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
         cy.wrap($item).should('have.css','color','rgb(235, 110, 75)')
     })
 });
+
+  it('AT_051.002 | API > Testing Home button > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page of the site.', function () {
+    cy.visit('https://openweathermap.org/')
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('contain', '/api')
+    cy.get('.breadcrumb a[href="/"]').should('have.text', 'Home').click()
+    cy.url().should('contain', '/openweathermap.org')
+    cy.contains('OpenWeather')
+  })
   
 });
