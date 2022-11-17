@@ -367,4 +367,11 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/#main_products');
         cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
     });
+
+    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+        cy.get('#desktop-menu [href="/weathermap"]').click();
+        cy.get('[for="Pressure"]').click();
+
+        cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
+    });
 });
