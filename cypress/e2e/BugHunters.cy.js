@@ -98,13 +98,6 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
   })
 
-    it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
-      const marketplace = '#desktop-menu a[href*="marketplace"]'
-      cy.visit('https://openweathermap.org/')
-       cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
-       cy.url().should('eq','https://home.openweathermap.org/marketplace')
-    })
-
   it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
 
     cy.get('#desktop-menu a[href="/guide"]').click({ force: true });
