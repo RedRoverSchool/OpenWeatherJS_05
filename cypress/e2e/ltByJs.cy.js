@@ -195,4 +195,15 @@ describe('Group lt_by_js', () => {
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
     })
+
+    it('AT_009.005 | Main menu > Marketplace verification of displayed "Place order" button for History bulk', function () {
+        const marketplace = '#desktop-menu a[href*="marketplace"]'
+        const placeOrderbutton = 'div.button-container a[href="/history_bulks/new"].button-round'
+
+        cy.get(marketplace).invoke('removeAttr', 'target').click()
+        cy.get(placeOrderbutton).should('be.visible').click()
+
+        cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
+        cy.get('h4.heading').should('have.text', 'Create New History Bulk')
+    })
 })
