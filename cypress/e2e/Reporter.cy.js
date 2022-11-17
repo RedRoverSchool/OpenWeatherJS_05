@@ -204,6 +204,12 @@ describe('GroupReporters', () => {
         });
     });
 
+    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+        cy.get(".social a:nth-child(6)").should("be.visible");
+        cy.get(".social a:nth-child(6)").invoke('removeAttr', 'target').click({force: true})
+        cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
+    });
+
     it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
       cy.get('#support-dropdown').should('be.visible').click();
       cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
