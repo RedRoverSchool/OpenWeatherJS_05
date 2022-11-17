@@ -4,7 +4,7 @@
 describe('groupBugHunters', () => {
 
   beforeEach(function () {
-    
+
     cy.visit('https://openweathermap.org/');
 
   });
@@ -118,8 +118,18 @@ describe('groupBugHunters', () => {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
     const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
     
-    cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
-    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
+    cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
+    cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
+  })
+  
+  it('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
+    cy.get('#desktop-menu').contains('Guide').click({ force: true });
+    cy.get('.col-sm-12 h1').should('have.text', 'Weather data in a fast and easy-to-use way');
+    cy.get('.col-sm-12 > :nth-child(6)').should('have.text', 'OpenWeather products');
+    cy.get(':nth-child(13) > b').should('have.text', 'Professional collections:');
+    cy.get('ol > :nth-child(14)').should('have.text', 'Dedicated weather products ');
+    cy.get('ol > :nth-child(21)').should('have.text', 'Openweather NWP model');
+    cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
   it ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
