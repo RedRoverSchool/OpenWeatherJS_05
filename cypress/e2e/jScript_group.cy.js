@@ -61,7 +61,7 @@ describe('Group jScript_group', () => {
     it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
         cy.get('li[class="user-li"] a[href$="sign_in"]').click();
         cy.get('#user_email').type('3065606@gmail.com');
-        cy.get('#user_password.form-control').type('Qwerty1234');https://github.com/RedRoverSchool/OpenWeatherJS_05/pull/161/
+        cy.get('#user_password.form-control').type('Qwerty1234');
         cy.get('[value="Submit"]').click({force: true});
 
         cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true});
@@ -286,7 +286,6 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/users/sign_in')
         });
         
-});
 
     it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
         cy.get('#user-dropdown').should('not.exist');
