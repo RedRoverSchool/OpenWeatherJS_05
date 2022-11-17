@@ -284,9 +284,9 @@ describe('Group jScript_group', () => {
         cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
         
         cy.url().should('include','/users/sign_in')
-        });
+        cy.get('.new_user > :nth-child(3) > #user_email').type('If_you_see this_text _ode_runs_good!!!')
+    });
         
-
     it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
         cy.get('#user-dropdown').should('not.exist');
         cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
