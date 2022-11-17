@@ -319,4 +319,14 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/weather-dashboard');
         cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
     });
+
+    it('AT_025.003 | Dashboard > Verify that "Contact Us" button redirects the user to "Ask a question" page', function () {
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        cy.title().should('eq','Weather dashboard - OpenWeatherMap');
+
+        cy.get('.below > .btn_like').invoke('removeAttr','target').click();
+        cy.url().should('include', "/questions");
+
+        cy.title().should('eq', 'Members');
+    });
 });
