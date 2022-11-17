@@ -214,6 +214,20 @@ describe('GroupReporters', () => {
       cy.get('#support-dropdown').should('be.visible').click();
       cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
       cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
-  });
-});
+    });
+    
+    it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
+        const email = 'test@eail.cm'
 
+        cy.get('#desktop-menu > ul > li.user-li > a').click()
+        cy.url().should('include', '/users/sign_in')
+        cy.get('.pwd-lost-q.show').should('be.visible')
+        cy.get('div.pwd-lost-q.show > a').click()
+        cy.get('.text-muted')
+            .should('have.text', 'Enter your email address and we will send you a link to reset your password.')
+        cy.get('div.pwd-lost #user_email').type(email).should('be.visible')
+        cy.get('div.pwd-lost [type = "submit"]').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/users/password')
+        cy.get('div.container h3').should('have.text', 'Forgot your password?')
+    });
+});

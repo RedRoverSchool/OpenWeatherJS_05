@@ -63,8 +63,10 @@ describe('Group jScript_group', () => {
         cy.get('#user_email').type('3065606@gmail.com');
         cy.get('#user_password.form-control').type('Qwerty1234');
         cy.get('[value="Submit"]').click({force: true});
+
         cy.get('#desktop-menu #user-dropdown .inner-user-container').click({force: true});
         cy.get('.dropdown-menu [href*="/sign_out"]').click({force: true});
+        
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
@@ -286,6 +288,13 @@ describe('Group jScript_group', () => {
         cy.get('.sign-form').should('exist');
     });
 
+    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+
+        cy.url().should('eq', 'https://openweather.co.uk/');
+        cy.get('h1').should('include.text','for business');
+    });
+
     it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel a').should('be.visible');
         cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
@@ -336,6 +345,38 @@ describe('Group jScript_group', () => {
         cy.title().should('eq', 'Members');
     });
 
+    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+        cy.get('.post-list .post').should('have.length', 10);
+    });
+
+    it('AT_038.002 | For business page > About us', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+    
+        cy.get('a.btn_block[href="#main_about"]').click({force: true});
+    
+        cy.url().should('eq', 'https://openweather.co.uk/#main_about');
+        cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
+    });
+
+    it('AT_038.003 | For business page > Our Products', function () {
+        cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
+    
+        cy.get('[href="#main_products"]').invoke('removeAttr', 'target').click({force: true});
+        
+        cy.url().should('eq', 'https://openweather.co.uk/#main_products');
+        cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
+    });
+
+    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+        cy.get('#desktop-menu [href="/weathermap"]').click();
+        cy.get('[for="Pressure"]').click();
+
+        cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
+    });
+    
     it('AT_048.002 | User page > Billing plans > Verify billing plans information', function () {
         cy.get('#desktop-menu .user-li a').should('have.text', 'Sign in');
         cy.get('#desktop-menu .user-li a').click();
@@ -357,5 +398,5 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/subscriptions');
         cy.get('.subscribe-title a').should('include.text', 'subscription plan'); 
         cy.get('.container a[href*="/price#current"]').should('have.text', 'Professional collections');
-    });
+    });    
 });
