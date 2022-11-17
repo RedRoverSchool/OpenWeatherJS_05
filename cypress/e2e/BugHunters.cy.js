@@ -79,9 +79,9 @@ describe('groupBugHunters', () => {
       .should('be.visible')
       .should('contain.text', cityName)
   })
+  
   it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
-    cy.visit('https://openweathermap.org/')
     cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
     cy.url().should('eq','https://home.openweathermap.org/marketplace')
   })
@@ -113,7 +113,6 @@ describe('groupBugHunters', () => {
     cy.url().should('include', '/api#current')
     cy.get('section[id="current"] h2').should('have.text', 'Current & Forecast weather data collection')
   })
-
 
   it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
@@ -149,6 +148,11 @@ describe('groupBugHunters', () => {
     cy.get('.col-sm-offset-2').as('NoticeDeleteKey')
       .should('include.text', 'API key was deleted successfully').and('include.text', 'Notice').and('be.visible')
     cy.get('@CreatedKey').should('not.exist')    
+  })
+
+  it('AT_033.016 | Header > Navigation', function() {
+    cy.get('#desktop-menu a[href="/guide"]').click({force: true})
+    cy.url().should('include', '/guide')
   })
 
 })
