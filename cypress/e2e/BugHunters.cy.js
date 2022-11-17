@@ -155,7 +155,7 @@ describe('groupBugHunters', () => {
     cy.url().should('include', '/guide')
 });
 
-it.('AT_009.008 | <Menu> Marketplace > Verification than "Place order" button is displayed and leads to URL', function () {
+it('AT_009.008 | <Menu> Marketplace > Verification than "Place order" button is displayed and leads to URL', function () {
   const marketplace = '#desktop-menu a[href*="marketplace"]'
   const historyBulk = 'h5 a[href="/history_bulks/new"]'
   const placeOrderButton = 'div.button-container a[href="/history_bulks/new"]'
