@@ -293,7 +293,6 @@ describe('Group jScript_group', () => {
         cy.get('h1 span.orange-text').should('have.text', 'OpenWeather')
     });
 
-
     it('AT_044.002 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel a').should('be.visible');
         cy.get('#stick-footer-panel a').should('include.text', 'Manage cookies');
