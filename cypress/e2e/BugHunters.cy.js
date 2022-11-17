@@ -138,7 +138,7 @@ describe('groupBugHunters', () => {
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
   })
 
-  it('AT_033.016 | Header > Navigation', function() {
+  it('AT_033.016 | Headerr > Navigation', function() {
     cy.get('#desktop-menu a[href="/guide"]').click({force: true})
     cy.url().should('include', '/guide')
 });
