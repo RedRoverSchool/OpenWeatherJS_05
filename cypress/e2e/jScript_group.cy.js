@@ -320,6 +320,12 @@ describe('Group jScript_group', () => {
         cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
     });
 
+    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        
+        cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
+    });
+
     it('AT_025.003 | Dashboard > Verify that "Contact Us" button redirects the user to "Ask a question" page', function () {
         cy.get('#desktop-menu [href="/weather-dashboard"]').click();
         cy.title().should('eq','Weather dashboard - OpenWeatherMap');
