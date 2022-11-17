@@ -118,14 +118,12 @@ describe('groupBugHunters', () => {
   it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
     const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
-
-    cy.visit('https://openweathermap.org/')
+    
     cy.get(marketplace).invoke('removeAttr', 'target').click({force: true})
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click() 
   })
 
   it ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
-    cy.visit('https://openweathermap.org')
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
