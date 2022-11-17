@@ -2,5 +2,7 @@
     "firstName": "Donald",
     "lastName": "Duck",
     "email": "testEmail.com",
-    "message": "My message to the world!"
+    "message": "My message to the world!",
+    "cityName": "Paris",
+    "password1": "123456789"
   }

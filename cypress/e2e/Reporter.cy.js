@@ -11,6 +11,7 @@ const diffWeathDataSourseDropArr = '.dropdown-selector svg.icon-down';
 const diffWeathDataSourseDropItem = 'div.menu-item span'; // should be used with method .contains('item text')
 const diffWeathAddInfo = '.owm_textarea';
 const diffWeathSendBtn = '.pop-up-footer .button-round';
+const metric = '#selected[style="left: 2pt;"]';
 
 
 describe('GroupReporters', () => {
@@ -173,6 +174,19 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/')
     })
 
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
+        const cityName = 'New York'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.url().should('include', '/city/')
+        cy.get('div.current-temp .owm-weather-icon').should('exist')
+        cy.get(metric).should('exist')
+        cy.get('div.current-temp .heading').should('contain','°C')
+    })
+
     it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', () => {
         const cityName = 'Tampa'
 
@@ -190,6 +204,12 @@ describe('GroupReporters', () => {
         });
     });
 
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+      cy.get('#support-dropdown').should('be.visible').click();
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
+    });
+    
     it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
         const email = 'test@email.com';
         cy.get('#desktop-menu > ul > li.user-li > a').click()
