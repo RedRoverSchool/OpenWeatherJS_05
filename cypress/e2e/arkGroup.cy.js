@@ -35,19 +35,16 @@ describe('group Ark', () => {
     cy.url().should('eq', 'https://openweathermap.org/')
   })
 
-  it('AT_018.004 | Support > Drop down menu. Check visible link and verify URL', () => {
-    const $supportMenu = [['FAQ', '/faq'], ['How to start', '/appid'], ['Ask a question', '/questions']]
+  it('AT_018.004 | Support > Drop down menu > Verify menu section names', function () {
+    const NavBar_Suport = ['FAQ', 'How to start', 'Ask a question']
     cy.visit('https://openweathermap.org/')
-    cy.get('#desktop-menu #support-dropdown').parent()
-      .find('a').should('have.length', $supportMenu.length).each(($el, $i) => {
-        let $parentLi = $el.parent().parent().parent()
-        cy.wrap($parentLi).get('#support-dropdown').click().parent()
-          .contains($supportMenu[$i][0]).should('be.visible')
-          .invoke('removeAttr', 'target').click()
-        cy.url().should('include', $supportMenu[$i][1])
+    cy.get('#desktop-menu #support-dropdown').click()
+    
+    cy.get('#desktop-menu .dropdown-menu.dropdown-visible li')
+      .should('have.length', NavBar_Suport.length).each((el, i) => {
+        cy.wrap(el).should('be.visible').and('contain.text', NavBar_Suport[i])
       })
-  })
-
+  }) 
 
   it('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', () => {
     cy.visit('https://openweathermap.org/');
