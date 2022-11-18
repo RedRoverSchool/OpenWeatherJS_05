@@ -153,7 +153,7 @@ it('AT_033.010 |Header > Navigation > Verify text “Weather API”', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api')
-  cy.get('h1.breadcrumb-title').should('have.text', 'Weather API')
+  cy.get('h1.breadcrumb-title').should('have.text','Weather API')
 })
 
 it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', () => {
@@ -194,6 +194,20 @@ it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map
     .should('be.visible').and("have.attr", "src").and('match', /maps.*radar/)
 })
 
+it('AT_046.003 | Our initiatives > Our initiatives page is displayed', () => {
+  cy.visit('https://openweathermap.org/')
+  cy.get('a[href="/our-initiatives"]').contains('Our Initiatives').click()
+
+  cy.url().should('eq', 'https://openweathermap.org/our-initiatives')
+  cy.get('h1[class="breadcrumb-title"]').contains('Our Initiatives').should('be.visible')
 })
 
+})
 
+it('AT_033.017 | Header>Navigation>API>Verify "sign up" link',() => {
+  cy.visit("https://openweathermap.org/")
+  cy.get('#desktop-menu > :nth-child(2) > :nth-child(2)').click()
+  cy.contains("sign up").click()
+  cy.url().should('include','https://home.openweathermap.org/users/sign_up')
+  cy.get('h3.first-child').should('have.text','Create New Account')
+}) 
