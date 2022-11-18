@@ -403,4 +403,10 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/questions')
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
+
+    it('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
+        cy.get('[ href="/widgets-constructor"]').click();
+        
+        cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9, 'be.visible');
+    });
 });
