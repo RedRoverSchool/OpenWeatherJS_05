@@ -403,4 +403,8 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/questions')
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
+
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        cy.get('.day-list li').should('have.length', this.data.dayListLength);
+    });
 });
