@@ -390,12 +390,12 @@ describe('Group jScript_group', () => {
         cy.get('div[class="inner-user-container"]').click();
         cy.get('[href="/home"]').first().click();
 
-        cy.get('input[name="profile_form[username]"]').clear().type('BestTester');
-        cy.get('input[name="profile_form[full_name]"]').clear().type('Best Tester');
+        cy.get('input[name="profile_form[username]"]').clear().type(this.data.firstName);
+        cy.get('input[name="profile_form[full_name]"]').clear().type(this.data.firstName + " " + this.data.lastName);
         cy.get('input[value="Save"]').click();
         cy.get('div[class="panel-body"]').should('have.text', 'Profile was updated successfully');
     });
-    it ('AT_043.003 | NavBar > User > My profile > Verify that user able to enter password into the correct fields and save it', function () {
+    it('AT_043.003 | NavBar > User > My profile > Verify that user able to enter password into the correct fields and save it', function () {
         cy.get('li.user-li').contains('Sign in').click({force: true});
         cy.get('#user_email').type('itit7786@gmail.com');
         cy.get('#user_password.form-control').type('123456789A!');
