@@ -102,4 +102,13 @@ describe('asiaJS', () => {
       .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');    
   });
   
+  it('AT_005.003 | Main page > Verify the website name and description', () => {
+    cy.get('h1 .orange-text')
+    .should('be.visible')
+    .and('have.text', 'OpenWeather');
+    cy.get('h2 .white-text')
+    .should('be.visible')
+    .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
+  });
+
 });

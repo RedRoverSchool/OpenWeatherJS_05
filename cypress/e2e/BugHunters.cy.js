@@ -149,7 +149,7 @@ describe('groupBugHunters', () => {
       .should('exist')
       .should('be.visible')
     cy.get('.col-md-6').as('NoticeCreateKey')
-    .should('include.text', 'API key was created successfully').and('include.text', 'Notice').and('be.visible')
+      .should('include.text', 'API key was created successfully').and('include.text', 'Notice').and('be.visible')
     cy.reload()
     cy.get('@CreatedKey').should('be.visible')    
     cy.get('.api-keys tr:nth-child(2) .fa-remove').as('DeleteButton').click()
@@ -174,7 +174,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
   })
 
-  it('AT_041.001 | Verify the registered user is redirected to the My API keys page', () => {
+  it ('AT_041.001 | Header > User > My API keys > The registered user is redirected to the My API keys page', () => {
     cy.get('li.user-li a[href*="sign_in"]').click()
     cy.get('.new_user .email').type('redroverschool@yahoo.com')
     cy.get('#user_password').type('123456789')
@@ -187,7 +187,24 @@ describe('groupBugHunters', () => {
       .and('be.visible')
   })
 
-  it.only ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
+  it('AT_032.003 | Header > Account Dropdown Menu > My Profile > Password Change > Verify successful password change', () => {
+    cy.get('li.user-li a[href*="sign_in"]').click()
+    cy.get('.new_user .email').type('redroverschool@yahoo.com')
+    cy.get('#user_password').type('123456789')
+    cy.get('input[value="Submit"]').click()
+
+    cy.get('#user-dropdown').click()
+    cy.get('a[href*="/home"]').contains('My profile').click()
+    cy.url().should('include', '/home')
+    cy.get('ul.nav-tabs li:nth-child(8)').should('have.class','active')
+
+    cy.get('#password_form_password').type('123456789')
+    cy.get('#password_form_password_confirmation').type('123456789')
+    cy.get('input[value="Change Password"]').click()
+    cy.get('.panel-body').should('be.visible').and('have.text','Password was changed successfully')
+})
+
+  it ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
