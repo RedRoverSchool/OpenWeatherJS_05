@@ -151,7 +151,7 @@ describe('Group lt_by_js', () => {
         cy.get('.breadcrumb-title').should('have.text', 'Widgets constructor')     
     })
 
-    it('AT_033.006 | Header > Navigation>> Verify "Partners" menu link', function () {     
+    it('AT_033.006 | Header > Navigation > Verify "Partners" menu link', function () {     
         cy.get('#desktop-menu a[href="/examples"]').click()
 
         cy.url().should('eq', 'https://openweathermap.org/examples')
@@ -295,4 +295,13 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/questions')
         cy.get('.headline').should('have.text', 'Ask a question')
     }) 
+    
+    it('AT_033.004 | Header > Navigation > Verify "Marketplace" menu link', function () {     
+        cy.get('#desktop-menu a[href="https://home.openweathermap.org/marketplace"]')
+          .invoke('removeAttr', 'target')
+          .click()
+      
+        cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
+        cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
+    })
 })
