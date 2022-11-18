@@ -223,4 +223,10 @@ describe('group Ark', () => {
     cy.get('h3.first-child').should('have.text', 'Create New Account')
   })
 
+  it("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+    cy.get("#stick-footer-panel .stick-footer-panel__link").each(el => {
+        cy.wrap(el).focus().should('have.css', 'background-color', 'rgb(233, 110, 80)')
+      });
+  });
+
 })
