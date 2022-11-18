@@ -187,4 +187,18 @@ describe('groupBugHunters', () => {
       .and('be.visible')
   })
 
+  it.only ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
+    cy.get('.user-li').as('SignInButton').click()
+    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
+    cy.get('#user_password').as('PasswordField').type('123456789')
+    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
+    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
+    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+    cy.url().should('include', '/api_keys')
+
+    
+
+
+  })
+
 })
