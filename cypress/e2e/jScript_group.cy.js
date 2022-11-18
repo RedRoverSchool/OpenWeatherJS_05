@@ -101,13 +101,11 @@ describe('Group jScript_group', () => {
         cy.url().should('include','270748973021342');
     });
 
-    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
+    it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
         cy.get('#desktop-menu a[href="/examples"]').click();
 
-        const sectionsNames = ['See on the website', 'View widget', 'View plugin', 'View plugin'];
-
         cy.get('#cms a').each(($el, i) => {
-            expect($el.text()).to.equal(sectionsNames[i]);
+            expect($el.text()).to.equal(this.data.sectionsNames[i]);
         });
     });
 
