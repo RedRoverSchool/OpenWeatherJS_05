@@ -385,6 +385,6 @@ describe('Group jScript_group', () => {
 
         cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
             cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
-        })
-    })
+        });
+    });
 });
