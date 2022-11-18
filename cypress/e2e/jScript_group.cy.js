@@ -395,4 +395,12 @@ describe('Group jScript_group', () => {
             cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
         });
     });
+
+    it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', () => {
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.below > .btn_like').invoke('removeAttr','target').click()
+
+        cy.url().should('include','/questions')
+        cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
+    });
 });
