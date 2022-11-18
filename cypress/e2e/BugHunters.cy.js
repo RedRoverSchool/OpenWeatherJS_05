@@ -236,4 +236,11 @@ describe('groupBugHunters', () => {
     cy.get('@SaveButton').click()    
   })
 
+  it('AT_001.016 | Main page > Section with search > Search City', () => {
+    const city = 'Boston';
+    cy.get('div.search').should('be.visible').click({force: true}).type(city);
+    cy.get('.button-round').click();
+    cy.get(':nth-child(1) > [style="width: 140px;"]').click();
+    cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
+})
 })
