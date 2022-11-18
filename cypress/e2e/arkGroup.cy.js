@@ -35,19 +35,16 @@ describe('group Ark', () => {
     cy.url().should('eq', 'https://openweathermap.org/')
   })
 
-  it('AT_018.004 | Support > Drop down menu. Check visible link and verify URL', () => {
-    const $supportMenu = [['FAQ', '/faq'], ['How to start', '/appid'], ['Ask a question', '/questions']]
+  it('AT_018.004 | Support > Drop down menu > Verify menu section names', function () {
+    const NavBar_Suport = ['FAQ', 'How to start', 'Ask a question']
     cy.visit('https://openweathermap.org/')
-    cy.get('#desktop-menu #support-dropdown').parent()
-      .find('a').should('have.length', $supportMenu.length).each(($el, $i) => {
-        let $parentLi = $el.parent().parent().parent()
-        cy.wrap($parentLi).get('#support-dropdown').click().parent()
-          .contains($supportMenu[$i][0]).should('be.visible')
-          .invoke('removeAttr', 'target').click()
-        cy.url().should('include', $supportMenu[$i][1])
+    cy.get('#desktop-menu #support-dropdown').click()
+    
+    cy.get('#desktop-menu .dropdown-menu.dropdown-visible li')
+      .should('have.length', NavBar_Suport.length).each((el, i) => {
+        cy.wrap(el).should('be.visible').and('contain.text', NavBar_Suport[i])
       })
-  })
-
+  }) 
 
   it('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', () => {
     cy.visit('https://openweathermap.org/');
@@ -153,7 +150,7 @@ it('AT_033.010 |Header > Navigation > Verify text “Weather API”', () => {
   cy.visit('https://openweathermap.org/')
   cy.get('div#desktop-menu a[href*="/api"]').invoke('removeAttr', 'target').click()
   cy.url().should('include', '/api')
-  cy.get('h1.breadcrumb-title').should('have.text', 'Weather API')
+  cy.get('h1.breadcrumb-title').should('have.text','Weather API')
 })
 
 it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', () => {
@@ -204,4 +201,10 @@ it('AT_046.003 | Our initiatives > Our initiatives page is displayed', () => {
 
 })
 
-
+it('AT_033.017 | Header>Navigation>API>Verify "sign up" link',() => {
+  cy.visit("https://openweathermap.org/")
+  cy.get('#desktop-menu > :nth-child(2) > :nth-child(2)').click()
+  cy.contains("sign up").click()
+  cy.url().should('include','https://home.openweathermap.org/users/sign_up')
+  cy.get('h3.first-child').should('have.text','Create New Account')
+}) 

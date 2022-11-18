@@ -8,5 +8,7 @@
     "blogPageWeatherFilter": "WEATHER",
     "blogPagePostsQuantity": 10,
     "blogPagePostLink": "https://openweather.co.uk/blog/post/",
+    "examplesPageLink": "https://openweathermap.org/examples",
+    "mainPageText": "OpenWeather",
     "mapsPagePressureLabel": "Pressure"
   }
