@@ -64,7 +64,6 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     const userName = 'nadiakoluzaeva@gmail.com';
     const password = 'OpenWeatherJS_05';
     
-    cy.visit('https://openweathermap.org/')
     cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
     cy.get('#user_email').type(userName).should('have.value', userName)
     cy.get('#user_password').type(password).should('have.value', password)
@@ -76,4 +75,19 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
       expect($el.text()).to.include(this.data.textBlocs[idx])
     })
 })
+
+it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
+  const userName = 'nadiakoluzaeva@gmail.com';
+  const password = 'OpenWeatherJS_05';
+  
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(userName).should('have.value', userName)
+  cy.get('#user_password').type(password).should('have.value', password)
+  cy.get('#new_user input[value="Submit"]').click()
+    .url().should('include', 'home.openweathermap.org')
+  cy.get('.text-block .text-color ').should('have.length', 3)
+  cy.get('.text-block .text-color ').each(($el, idx) => {
+  cy.wrap($el).should('have.css', 'color', 'rgb(233, 110, 80)')
+    })
+  })
 })

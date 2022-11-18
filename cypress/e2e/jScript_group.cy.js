@@ -16,8 +16,12 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        cy.visit(this.data.examplesPageLink);
+
         cy.get('.logo').click();
+
         cy.url().should('eq', 'https://openweathermap.org/');
+        cy.get ('h1 .orange-text ').should('have.text', this.data.mainPageText);
     });
 
     it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
@@ -98,14 +102,13 @@ describe('Group jScript_group', () => {
     });
 
     it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
-        cy.visit('https://openweathermap.org/examples');
-        cy.get('#cms a').should(($a) => {
-            expect($a).to.have.length(4);
-            expect($a.eq(0)).to.contain('See on the website');
-            expect($a.eq(1)).to.contain('View widget');
-            expect($a.eq(2)).to.contain('View plugin');
-            expect($a.eq(3)).to.contain('View plugin');
-        })
+        cy.get('#desktop-menu a[href="/examples"]').click();
+
+        const sectionsNames = ['See on the website', 'View widget', 'View plugin', 'View plugin'];
+
+        cy.get('#cms a').each(($el, i) => {
+            expect($el.text()).to.equal(sectionsNames[i]);
+        });
     });
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
@@ -279,6 +282,14 @@ describe('Group jScript_group', () => {
             expect(a).to.have.length(4)});
     });
 
+    it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
+        
+        cy.url().should('include','/users/sign_in')
+        cy.get('.new_user > :nth-child(3) > #user_email').type('If_you_see this_text _ode_runs_good!!!')
+    });
+        
     it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
         cy.get('#user-dropdown').should('not.exist');
         cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
@@ -375,5 +386,13 @@ describe('Group jScript_group', () => {
         cy.get('[for="Pressure"]').click();
 
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
+    });
+
+    it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+        cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click();
+
+        cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
+            cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
+        });
     });
 });
