@@ -335,4 +335,9 @@ describe('Group jScript_group', () => {
 
         cy.title().should('eq', 'Members');
     });
+
+    it('TH/AT_021_003_Footer_Widgets_9Widgets', function () {
+        cy.get('[href="/widgets-constructor"]').click();
+        
+    })
 });
