@@ -396,7 +396,15 @@ describe('Group jScript_group', () => {
         });
     });
 
-    it('TC_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', () => {
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.below > .btn_like').invoke('removeAttr','target').click()
+
+        cy.url().should('include','/questions')
+        cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
+    });
+  
+   it('TC_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.visit('https://openweathermap.org/')
         cy.get('.user-li a').click()
         
@@ -409,4 +417,4 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/api_keys')
         cy.get('.alert-info').should('have.text', '\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n')
     });
-});
+ });
