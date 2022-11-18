@@ -404,7 +404,7 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
 
-    it('TC_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click();
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
