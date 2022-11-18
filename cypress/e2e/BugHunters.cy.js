@@ -243,4 +243,16 @@ describe('groupBugHunters', () => {
     cy.get(':nth-child(1) > [style="width: 140px;"]').click();
     cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
 })
+
+  it('AT_001.009 | Main page > Section with search > Search City search-dropdown', function () {
+    let cityName = 'Italy'
+    let searchCity = 'div.search-container'
+    let btnSubmit = '.button-round'
+  
+    cy.visit('https://openweathermap.org/')
+    cy.get(searchCity).should('be.visible').click()
+    cy.get(searchCity).type(cityName).should('be.visible', cityName)
+    cy.get(btnSubmit).click()
+    cy.get('ul.search-dropdown-menu').should('be.visible')
+   })
 })
