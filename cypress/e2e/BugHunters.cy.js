@@ -196,9 +196,23 @@ describe('groupBugHunters', () => {
     cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
     cy.url().should('include', '/api_keys')
 
-    
+    cy.get('.api-keys tbody td:nth-child(2)').as('APIkey').should('have.text', 'Default')
+    cy.get('.edit-key-btn').as('EditButton').click()
+    cy.get('#edit_key_form_name').as('EditNameField')
+      .clear()
+      .type('New_API_key')
+      .should('be.visible')
+    cy.get('.pop-up-footer .dark').as('SaveButton').click()
+    cy.get('@APIkey').should('have.text', 'New_API_key')
+    cy.get('.col-sm-offset-2 .panel').as('NoticeRenameKey')
+      .should('include.text', 'API key was edited successfully')
+      .and('include.text', 'Notice')
+      .and('be.visible')
 
-
+    //Return previous name of the key
+    cy.get('@EditButton').click()
+    cy.get('@EditNameField').clear().type('Default')     
+    cy.get('@SaveButton').click()    
   })
 
 })
