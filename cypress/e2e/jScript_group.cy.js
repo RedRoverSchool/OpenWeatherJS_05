@@ -416,17 +416,4 @@ describe('Group jScript_group', () => {
 
     });
 
-    it('AT_014.004 | Support > Ask a question> An error message of the reCAPCHA', () => {
-        cy.viewport(1280, 660)
-        cy.visit('https://home.openweathermap.org/questions')
-        cy.get('#question_form_is_user_false').check().should('be.checked')
-        cy.get('#question_form_email').type('ATforAll@gmail.com')
-        cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions')
-        cy.get('#question_form_message').type('Ask me a question')
-        cy.get('input[name="commit"]').click()
-        cy.get('.help-block')
-        .contains('reCAPTCHA verification failed, please try again.')
-        .should('be.visible')
-
-    });
-});
+   });
