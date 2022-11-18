@@ -16,8 +16,12 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        cy.visit(this.data.examplesPageLink);
+
         cy.get('.logo').click();
+
         cy.url().should('eq', 'https://openweathermap.org/');
+        cy.get ('h1 .orange-text ').should('have.text', this.data.mainPageText);
     });
 
     it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
