@@ -6,5 +6,7 @@
     "blogPageLink": "https://openweather.co.uk/blog/category/weather",
     "blogPageWeatherFilter": "WEATHER",
     "blogPagePostsQuantity": 10,
-    "blogPagePostLink": "https://openweather.co.uk/blog/post/"
+    "blogPagePostLink": "https://openweather.co.uk/blog/post/",
+    "examplesPageLink": "https://openweathermap.org/examples",
+    "mainPageText": "OpenWeather"
   }
