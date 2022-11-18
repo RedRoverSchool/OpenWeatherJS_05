@@ -396,7 +396,7 @@ describe('Group jScript_group', () => {
         });
     });
 
-    itç('TC_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it('TC_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.visit('https://openweathermap.org/')
         cy.get('.user-li a').click()
         
