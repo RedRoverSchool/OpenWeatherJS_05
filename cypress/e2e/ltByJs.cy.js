@@ -151,7 +151,7 @@ describe('Group lt_by_js', () => {
         cy.get('.breadcrumb-title').should('have.text', 'Widgets constructor')     
     })
 
-    it('AT_033.006 | Header > Navigation>> Verify "Partners" menu link', function () {     
+    it('AT_033.006 | Header > Navigation > Verify "Partners" menu link', function () {     
         cy.get('#desktop-menu a[href="/examples"]').click()
 
         cy.url().should('eq', 'https://openweathermap.org/examples')
@@ -273,15 +273,17 @@ describe('Group lt_by_js', () => {
         cy.get(text).should('have.text', 'You need to sign in or sign up before continuing.')
     })
 
-    it('AT_021.001 | Footer > Widgets>Invalid API',function ()  {
+    it('AT_021.001 | Footer > Widgets > Invalid API', function () {
         let widgetsPage = 'a[href="/widgets-constructor"]'
-        let aryField = '#api-key'
+        let apiField = '#api-key'
         let cityField = '#search-city'
         let errorMessage = '#error-key'
 
         cy.get(widgetsPage).click()
-        cy.get(aryField).type(this.data.invalidApi)
+
+        cy.get(apiField).type(this.data.invalidApi)
         cy.get(cityField).click()
+        
         cy.get(errorMessage).should('have.text', 'Validation error')
     })
     
@@ -293,4 +295,13 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/questions')
         cy.get('.headline').should('have.text', 'Ask a question')
     }) 
+    
+    it('AT_033.004 | Header > Navigation > Verify "Marketplace" menu link', function () {     
+        cy.get('#desktop-menu a[href="https://home.openweathermap.org/marketplace"]')
+          .invoke('removeAttr', 'target')
+          .click()
+      
+        cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
+        cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
+    })
 })
