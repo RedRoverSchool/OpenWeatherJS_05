@@ -57,8 +57,8 @@ describe('Group lt_by_js', () => {
     it('AT_031.002 | Sign In > Account Dropdown Menu > Verify user is able to log out', function () {    
         cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
         cy.url().should('eq', 'https://home.openweathermap.org/users/sign_in')
-        cy.get('.input-group #user_email').click().type('catia.romankova@yandex.by')
-        cy.get('.input-group #user_password').click().type(this.data.password1)
+        cy.get('.input-group #user_email').type(this.data.email)
+        cy.get('.input-group #user_password').type(this.data.password1)
         cy.get('#new_user :nth-child(7)').click()
         cy.get('.panel-body').should('have.text', 'Signed in successfully.')
 
@@ -194,5 +194,53 @@ describe('Group lt_by_js', () => {
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
+    })
+
+    it('AT_025.008 | Main menu > Dashboard > After clicking "Dashboard" item on bar menu User is redirected to Dashboard page', function () {
+        cy.get('#desktop-menu a[href="/weather-dashboard"]').click()
+
+        cy.url().should('contain', '/weather-dashboard')
+        cy.get('.breadcrumb-title').should('have.text', 'Weather dashboard')
+    })
+    
+    it('AT_009.005 | Main menu > Marketplace verification of displayed "Place order" button for History bulk', function () {
+        const marketplace = '#desktop-menu a[href*="marketplace"]'
+        const placeOrderbutton = 'div.button-container a[href="/history_bulks/new"].button-round'
+
+        cy.get(marketplace).invoke('removeAttr', 'target').click()
+        cy.get(placeOrderbutton).should('be.visible').click()
+
+        cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
+        cy.get('h4.heading').should('have.text', 'Create New History Bulk')
+   })
+
+   it('AT_025.009 | Main menu > Dashboard > Verify the first button "Try the Dashboard" is clickable and redirects User to the Sign in page', function () {
+        cy.get('#desktop-menu a[href="/weather-dashboard"]').click()
+
+        cy.get('.col-lg-6 .btn_like').invoke('removeAttr', 'target').click()
+
+        cy.url().should('include', '/users/sign_in')
+        cy.get('.first-child').should('have.text', 'Sign In To Your Account')
+    })
+
+    it('AT_006.002 | Sign in > Sign in to Your Account', function () {
+        let signinPage = '#desktop-menu a[href="https://openweathermap.org/home/sign_in"]'
+        let emailField = '.input-group #user_email'
+        let passowrField = '#user_password'
+        let remeberMe = '.user_remember_me'
+        let buttonSubmit = '#new_user :nth-child(7)'
+        let textSignIn = '.panel-body'
+        let userName = '.inner-user-container'
+        let logout = '.dropdown-menu .logout'
+      
+        cy.get(signinPage).click()
+        cy.get(emailField).type(this.data.email)
+        cy.get(passowrField).type(this.data.password1)
+        cy.get(remeberMe).click()
+        cy.get(buttonSubmit).click()
+
+        cy.get(textSignIn).should('have.text', 'Signed in successfully.')
+        cy.get(userName).click()
+        cy.get(logout).click()         
     })
 })
