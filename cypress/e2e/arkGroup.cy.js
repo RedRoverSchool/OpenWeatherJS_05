@@ -194,6 +194,14 @@ it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map
     .should('be.visible').and("have.attr", "src").and('match', /maps.*radar/)
 })
 
+it('AT_046.003 | Our initiatives > Our initiatives page is displayed', () => {
+  cy.visit('https://openweathermap.org/')
+  cy.get('a[href="/our-initiatives"]').contains('Our Initiatives').click()
+
+  cy.url().should('eq', 'https://openweathermap.org/our-initiatives')
+  cy.get('h1[class="breadcrumb-title"]').contains('Our Initiatives').should('be.visible')
+})
+
 })
 
 
