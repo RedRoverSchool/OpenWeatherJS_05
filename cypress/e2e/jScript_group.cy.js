@@ -403,4 +403,30 @@ describe('Group jScript_group', () => {
         cy.url().should('include','/questions')
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
+
+    it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
+        cy.viewport(1280, 660)
+        cy.visit('https://openweathermap.org/')
+        cy.get('#support-dropdown').contains('Support').click()
+        cy.get('#support-dropdown-menu a[href$="/questions"]')
+        .contains('Ask a question')
+        .invoke('removeAttr', 'target')
+        .click()
+        cy.url().should('include', '/questions')
+
+    });
+
+    it('AT_014.004 | Support > Ask a question> An error message of the reCAPCHA', () => {
+        cy.viewport(1280, 660)
+        cy.visit('https://home.openweathermap.org/questions')
+        cy.get('#question_form_is_user_false').check().should('be.checked')
+        cy.get('#question_form_email').type('ATforAll@gmail.com')
+        cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions')
+        cy.get('#question_form_message').type('Ask me a question')
+        cy.get('input[name="commit"]').click()
+        cy.get('.help-block')
+        .contains('reCAPTCHA verification failed, please try again.')
+        .should('be.visible')
+
+    });
 });
