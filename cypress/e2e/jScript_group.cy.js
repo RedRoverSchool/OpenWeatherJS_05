@@ -395,7 +395,7 @@ describe('Group jScript_group', () => {
         cy.get('input[value="Save"]').click();
         cy.get('div[class="panel-body"]').should('have.text', 'Profile was updated successfully');
     });
-    it.only('AT_043.003 | NavBar > User > My profile > Verify that user able to enter password into the correct fields and save it', function () {
+    it ('AT_043.003 | NavBar > User > My profile > Verify that user able to enter password into the correct fields and save it', function () {
         cy.get('li.user-li').contains('Sign in').click({force: true});
         cy.get('#user_email').type('itit7786@gmail.com');
         cy.get('#user_password.form-control').type('123456789A!');
