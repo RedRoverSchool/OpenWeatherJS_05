@@ -409,4 +409,8 @@ describe('Group jScript_group', () => {
         
         cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9, 'be.visible');
     });
+
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        cy.get('.day-list li').should('have.length', this.data.dayListLength);
+    });
 });
