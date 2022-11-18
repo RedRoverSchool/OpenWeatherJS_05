@@ -380,4 +380,33 @@ describe('Group jScript_group', () => {
 
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
     });
+
+    it('AT_043.001 | NavBar > User > My profile > Verify that user able to enter Username, email, and Full name into the correct fields and save it', function () {
+        cy.get('li.user-li').contains('Sign in').click({force: true});
+        cy.get('#user_email').type('itit7786@gmail.com');
+        cy.get('#user_password.form-control').type('123456789A!');
+        cy.get('input[value="Submit"]').click();
+
+        cy.get('div[class="inner-user-container"]').click();
+        cy.get('[href="/home"]').first().click();
+
+        cy.get('input[name="profile_form[username]"]').clear().type('BestTester');
+        cy.get('input[name="profile_form[full_name]"]').clear().type('Best Tester');
+        cy.get('input[value="Save"]').click();
+        cy.get('div[class="panel-body"]').should('have.text', 'Profile was updated successfully');
+    });
+    it.only('AT_043.003 | NavBar > User > My profile > Verify that user able to enter password into the correct fields and save it', function () {
+        cy.get('li.user-li').contains('Sign in').click({force: true});
+        cy.get('#user_email').type('itit7786@gmail.com');
+        cy.get('#user_password.form-control').type('123456789A!');
+        cy.get('input[value="Submit"]').click();
+
+        cy.get('div[class="inner-user-container"]').click();
+        cy.get('[href="/home"]').first().click();
+
+        cy.get('input[name="password_form[password]"]').type('123456789A!');
+        cy.get('input[name="password_form[password_confirmation]"]').type('123456789A!');
+        cy.get('input[value="Change Password"]').click();
+        cy.get('div[class="panel-body"]').should('have.text', 'Password was changed successfully');
+    })
 });
