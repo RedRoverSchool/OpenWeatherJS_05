@@ -404,6 +404,10 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
 
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        cy.get('.day-list li').should('have.length', this.data.dayListLength);
+    });
+
     it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click();
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
@@ -415,4 +419,5 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/api_keys');
         cy.get('.alert-info').should('have.text', '\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n');
     });
- });
+});
+

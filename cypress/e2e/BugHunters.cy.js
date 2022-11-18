@@ -133,7 +133,7 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
+  it.skip ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
@@ -208,7 +208,7 @@ describe('groupBugHunters', () => {
     cy.get('label[for="Wind speed"]'). click()
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
 })
-  it ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
+  it.skip ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
