@@ -379,4 +379,12 @@ describe('Group jScript_group', () => {
 
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
     });
+
+    it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+        cy.get('#desktop-menu [href*="marketplace"] ').invoke('removeAttr', 'target').click();
+
+        cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
+            cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
+        })
+    })
 });
