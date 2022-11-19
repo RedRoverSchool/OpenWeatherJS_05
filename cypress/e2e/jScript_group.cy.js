@@ -419,16 +419,14 @@ describe('Group jScript_group', () => {
         cy.get('.day-list li:first-child > span').should('have.text', todaysDate);
     });
 
-    it.only('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
-        cy.get(".section-content ul li a")
-          .contains("About us")
-          .click()
-        cy.get("a[href='https://home.openweathermap.org/questions']")
-          .contains("Contact us")
+    it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
+        cy.get('a[href="/about-us"]').click();
+        cy.get('.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
           .invoke('removeAttr','target')
-          .click()
+          .click();
 
-        cy.url().should('include', this.data.questionsPageEndPoint)
-        cy.get(".headline").should('have.text', this.data.questionsPageHeader)
-    })
+        cy.url().should('include', this.data.questionsPageEndPoint);
+        cy.get('.headline').should('have.text', this.data.questionsPageHeader);
+    });
 });
+
