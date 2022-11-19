@@ -223,4 +223,19 @@ describe('group Ark', () => {
     cy.get('h3.first-child').should('have.text', 'Create New Account')
   })
 
+  it('AT_054.002 | PersonalAccountName > Verify a successful Sign-out', () => {
+    cy.get('#desktop-menu .user-li a').click();
+    cy.get('.input-group #user_email').type('3065606@gmail.com');
+    cy.get('.input-group #user_password').type('Qwerty1234');
+    cy.get('#new_user [value="Submit"]').click();
+    cy.get('div[class="panel-body"]').contains('Signed in successfully.').should('be.visible');
+
+    cy.get('#user-dropdown').click();
+    cy.get('#user-dropdown-menu').should('be.visible');
+    cy.get('#user-dropdown-menu a.logout').click();
+
+    cy.get('div[class="panel panel-red"]').contains('Alert').should('be.visible');
+    cy.get('div[class="panel-body"]').contains('You need to sign in or sign up before continuing.').should('be.visible')
+})
+
 })
