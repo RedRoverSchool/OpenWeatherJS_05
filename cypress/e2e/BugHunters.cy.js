@@ -133,7 +133,7 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it.skip ('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
+  it('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function() {
     cy.get('.user-li').as('SignInButton').click()
     cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
     cy.get('#user_password').as('PasswordField').type('123456789')
@@ -174,7 +174,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
   })
 
-  it ('AT_041.001 | Header > User > My API keys > The registered user is redirected to the My API keys page', () => {
+  it('AT_041.001 | Header > User > My API keys > The registered user is redirected to the My API keys page', () => {
     cy.get('li.user-li a[href*="sign_in"]').click()
     cy.get('.new_user .email').type('redroverschool@yahoo.com')
     cy.get('#user_password').type('123456789')
@@ -203,15 +203,17 @@ describe('groupBugHunters', () => {
     cy.get('input[value="Change Password"]').click()
     cy.get('.panel-body').should('be.visible').and('have.text','Password was changed successfully')
 })
+
   it('AT_027.005 | Maps > Section with the scale > The scale names matches the label after selecting "Wind speed"', function() {
     cy.get('#desktop-menu a[href="/weathermap"]'). click()
     cy.get('label[for="Wind speed"]'). click()
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
 })
-  it.skip ('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
+
+  it('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function() {
     cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('123456789')
+    cy.get('.new_user .email').as('EnterEmailField').type('yurik@mailto.plus')
+    cy.get('#user_password').as('PasswordField').type('12345678')
     cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
     cy.get('.inner-user-container').as('AccountDropdownMenu').click()
     cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
