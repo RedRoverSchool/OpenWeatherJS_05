@@ -423,7 +423,7 @@ describe('Group jScript_group', () => {
         cy.get('.user-li a').click();
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
-        cy.get("[value='Submit']").click();
+        cy.get('[value="Submit"]').click();
         cy.get('.inner-user-container').click();
         cy.get('#user-dropdown-menu li:nth-child(2)').click();
 
