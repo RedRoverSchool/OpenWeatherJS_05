@@ -11,5 +11,7 @@
     "examplesPageLink": "https://openweathermap.org/examples",
     "mainPageText": "OpenWeather",
     "mapsPagePressureLabel": "Pressure",
-    "dayListLength": 8
+    "dayListLength": 8,
+    "loginUserEmail": "bob12345@example.com",
+    "loginUserPassword": "bob12345"
   }
