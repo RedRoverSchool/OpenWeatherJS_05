@@ -3,6 +3,9 @@
 
 describe('group noGroup', () => {
 
+const userName = 'nadiakoluzaeva@gmail.com';
+const password = 'OpenWeatherJS_05';
+  
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {
       this.data = data
@@ -37,9 +40,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   })
 
   it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
-    const userName = 'nadiakoluzaeva@gmail.com';
-    const password = 'OpenWeatherJS_05';
-    
+ 
     cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
     cy.get('#user_email').type(userName).should('have.value', userName)
     cy.get('#user_password').type(password).should('have.value', password)
@@ -61,9 +62,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   })
 
   it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
-    const userName = 'nadiakoluzaeva@gmail.com';
-    const password = 'OpenWeatherJS_05';
-    
+ 
     cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
     cy.get('#user_email').type(userName).should('have.value', userName)
     cy.get('#user_password').type(password).should('have.value', password)
@@ -77,9 +76,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
 })
 
 it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
-  const userName = 'nadiakoluzaeva@gmail.com';
-  const password = 'OpenWeatherJS_05';
-  
+ 
   cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
   cy.get('#user_email').type(userName).should('have.value', userName)
   cy.get('#user_password').type(password).should('have.value', password)
