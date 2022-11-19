@@ -265,4 +265,12 @@ describe('GroupReporters', () => {
             expect(text).to.eq('reCAPTCHA verification failed, please try again.')
         })
     })
+
+    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
+        cy.url().should('include', '/guide')
+
+        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    });
 });
