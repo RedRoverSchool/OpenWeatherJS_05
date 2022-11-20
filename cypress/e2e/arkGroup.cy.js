@@ -1,7 +1,8 @@
 /// <reference types="cypress" />
 
 const mainMenuDesk = {
-  "maps": "#desktop-menu > ul a[href='/weathermap']"
+  "marketplace": "#desktop-menu a[href*='/marketplace']",
+  "maps": "#desktop-menu a[href*='/weathermap']"
   }
 
 describe('group Ark', () => {
@@ -20,8 +21,8 @@ describe('group Ark', () => {
   });
 
   it('AT_010.004 | Marketplace > Verify the color of all orange links', function () {
-    cy.get('#desktop-menu [href*=marketplace]').invoke('removeAttr', 'target').click()
-
+    cy.get(mainMenuDesk.marketplace).invoke('removeAttr', 'target').click()
+  
     cy.get('.market-place .product h5 a')
       .each(el => {
         cy.wrap(el).should('have.css', 'color', 'rgb(235, 110, 75)')
