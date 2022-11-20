@@ -114,7 +114,7 @@ describe('asiaJS', () => {
     cy.get('.topic h1').should('have.text', 'Student initiative');
   });
 
-  it.only('AT_016.002 | Support > FAQ page > Verify the question "How to get an API key" is opened and visible by clicking on it', () => {
+  it('AT_016.002 | Support > FAQ page > Verify the question "How to get an API key" is opened and visible by clicking on it', () => {
     const faqLink = '#support-dropdown-menu [href="/faq"]';
     const howToGet = '#how-to-get-an-API-key';
 
