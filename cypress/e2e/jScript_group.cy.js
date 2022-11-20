@@ -404,12 +404,16 @@ describe('Group jScript_group', () => {
         });
     });
 
-    it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', () => {
-        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
-        cy.get('.below > .btn_like').invoke('removeAttr','target').click()
+    it.only('AT_025.006 | Header > Verify user will be redirected to new url "questions"', function ()  {
+        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a';
+        let contact_us_button = '.below > .btn_like';
+        let email_field = '#question_form_email';
 
-        cy.url().should('include','/questions')
-        cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
+        cy.get(dashboard_button).click();
+        cy.get(contact_us_button).invoke('removeAttr','target').click();
+
+        cy.url().should('include','/questions');
+        cy.get(email_field).type('Checking_that_the_page_is_not_empty.');
     });
 
     it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
