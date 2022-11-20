@@ -10,5 +10,11 @@
     "blogPagePostLink": "https://openweather.co.uk/blog/post/",
     "examplesPageLink": "https://openweathermap.org/examples",
     "mainPageText": "OpenWeather",
-    "mapsPagePressureLabel": "Pressure"
+    "mapsPagePressureLabel": "Pressure",
+    "dayListLength": 8,
+    "questionsPageHeader": "Ask a question", 
+    "questionsPageEndPoint": "questions",
+    "loginUserEmail": "bob12345@example.com",
+    "loginUserPassword": "bob12345",
+    "supportDropdown": ["FAQ", "How to start", "Ask a question"]
   }

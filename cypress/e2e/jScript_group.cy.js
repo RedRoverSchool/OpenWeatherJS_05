@@ -388,6 +388,14 @@ describe('Group jScript_group', () => {
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
     });
 
+    it('AT_010.002 | Marketplace > Verify the link "History Bulk” on the page', () => {
+        cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click();
+        cy.get('.product-container a[href="/history_bulks/new"]:not(.button-round)').click();
+        
+        cy.url().should('include', '/history_bulks/new');
+        cy.get('.page-content-bulk h4.heading').should('have.text', 'Create New History Bulk')
+    });
+
     it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
         cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click();
 
@@ -404,6 +412,60 @@ describe('Group jScript_group', () => {
         cy.get('#question_form_email').type('Checking_that_the_page_is_not_empty.')
     });
 
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        cy.get('.day-list li').should('have.length', this.data.dayListLength);
+    });
+
+    it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
+        const date = new Date().toUTCString().split(' ');
+        const correctDate = []; 
+        correctDate.push(date[0], date[2], date[1]);
+        const todaysDate = correctDate.join(' ');
+
+        cy.visit('https://openweathermap.org/');
+
+        cy.get('.day-list li:first-child > span').should('have.text', todaysDate);
+    });
+
+    it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
+        cy.get('a[href="/about-us"]').click();
+        cy.get('.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
+          .invoke('removeAttr','target')
+          .click();
+
+        cy.url().should('include', this.data.questionsPageEndPoint);
+        cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
+ });
+        
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+        cy.get('.user-li a').click();
+        cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
+        cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
+        cy.get('[value="Submit"]').click();
+        cy.get('.inner-user-container').click();
+        cy.get('#user-dropdown-menu li:nth-child(2)').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/api_keys');
+        cy.get('.alert-info').should('have.text', '\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n');
+    });
+    
+    it('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
+        cy.get('[href="/widgets-constructor"]').click();
+        
+        cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9)
+          .and('be.visible');
+    });
+
+    it('AT_018.009 | Support > Verify Drop Down menu', function() {
+        cy.get('#support-dropdown').as('Support').click();
+
+        cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
+        cy.get('@Support_Dropdown').should('have.length', 3);
+        cy.get('@Support_Dropdown').each(($el, idx) => {
+            expect($el.text()).to.be.equal(this.data.supportDropdown[idx]);
+        });
+    });
+ 
     it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
         cy.get('#support-dropdown').contains('Support').click();
         cy.get('#support-dropdown-menu a[href$="/questions"]')
@@ -413,6 +475,5 @@ describe('Group jScript_group', () => {
 
         cy.url().should('include', '/questions')
         cy.title().should('eq', 'Members');
-    });
-
-   });
+    });  
+});
