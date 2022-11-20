@@ -466,30 +466,26 @@ describe('Group jScript_group', () => {
         });
     });    
 
-    it.only('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
-        
+    it('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
         cy.get('#desktop-menu li:nth-child(11) a').click();
         cy.get('.sign-form > form').within(($form) => {
-            cy.get('#user_email').type('jScript.groupTest@gmail.com');
-            cy.get('#user_password').type('jScript2022');
+            cy.get('#user_email').type(this.data.loginUserEmail);
+            cy.get('#user_password').type(this.data.loginUserPassword);
             cy.root().submit();
         });
         cy.get('.inner-user-container').click();
         cy.get('.user-li li:nth-child(2) a').click();
         cy.get('td > pre').then(($myAPI) => {
             return $myAPI.text();
-        }).as('myAPI')
-
+        }).as('myAPI');
         cy.get('.footer-website ul > :nth-child(5) > a').click();
-        cy.get('@myAPI').then($api => {
-            cy.get('#api-key').type($api)
-        });
 
+        cy.get('@myAPI').then($api => {
+            cy.get('#api-key').type($api);
+        });
         cy.get('#widget-1-left-brown').click();
         cy.get('#popup-title').should('not.have.text', 'Important! You need to');
 
         cy.get('#popup-title').should('have.text', 'Get a code for posting a weather forecast widget on your site.');
-
-        
     })
 });
