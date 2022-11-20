@@ -114,4 +114,18 @@ describe('asiaJS', () => {
     cy.get('.topic h1').should('have.text', 'Student initiative');
   });
 
+  it.only('AT_016.002 | Support > FAQ page > Verify the question "How to get an API key" is opened and visible by clicking on it', () => {
+    const faqLink = '#support-dropdown-menu [href="/faq"]';
+    const howToGet = '#how-to-get-an-API-key';
+
+    cy.get('#support-dropdown').click();
+    cy.get(faqLink).click();
+
+    cy.get(`${howToGet} .question-heading`).click({force: true});
+    cy.get(`${howToGet} .question.visible`).should('be.visible');
+    cy.get(`${howToGet} .question-content`)
+      .contains('get an API key (APPID)')
+      .should('be.visible');
+  });
+
 });
