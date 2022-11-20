@@ -11,6 +11,7 @@ const diffWeathDataSourseDropArr = '.dropdown-selector svg.icon-down';
 const diffWeathDataSourseDropItem = 'div.menu-item span'; // should be used with method .contains('item text')
 const diffWeathAddInfo = '.owm_textarea';
 const diffWeathSendBtn = '.pop-up-footer .button-round';
+const metric = '#selected[style="left: 2pt;"]';
 
 
 describe('GroupReporters', () => {
@@ -103,19 +104,18 @@ describe('GroupReporters', () => {
     });
 
     it('AT_006.003 | Sign in > Verifying successful sign in', () => {
-        const userName = 'JesSummers'
         const emailLogin = 'hoxixe2496@lance7.com'
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click({ force: true })
+            .click()
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
             .type(emailLogin)
         cy.get('.input-group > #user_password')
             .type(password)
         cy.get('#user_remember_me')
-            .click({ force: true })
+            .click()
         cy.contains('Submit')
             .click()
         cy.url().should('include', '/')
@@ -173,6 +173,19 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/')
     })
 
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', () => {
+        const cityName = 'New York'
+
+        enterCityOrZipCode(cityName)
+        submit()
+        cy.get('ul.search-dropdown-menu').should('exist')
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.url().should('include', '/city/')
+        cy.get('div.current-temp .owm-weather-icon').should('exist')
+        cy.get(metric).should('exist')
+        cy.get('div.current-temp .heading').should('contain','°C')
+    })
+
     it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', () => {
         const cityName = 'Tampa'
 
@@ -190,5 +203,74 @@ describe('GroupReporters', () => {
         });
     });
 
-});
+    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+        cy.get(".social a:nth-child(6)").should("be.visible");
+        cy.get(".social a:nth-child(6)").invoke('removeAttr', 'target').click({force: true})
+        cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
+    });
 
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+      cy.get('#support-dropdown').should('be.visible').click();
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
+    });
+    
+    it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
+        const email = 'test@eail.cm'
+
+        cy.get('#desktop-menu > ul > li.user-li > a').click()
+        cy.url().should('include', '/users/sign_in')
+        cy.get('.pwd-lost-q.show').should('be.visible')
+        cy.get('div.pwd-lost-q.show > a').click()
+        cy.get('.text-muted')
+            .should('have.text', 'Enter your email address and we will send you a link to reset your password.')
+        cy.get('div.pwd-lost #user_email').type(email).should('be.visible')
+        cy.get('div.pwd-lost [type = "submit"]').click()
+        cy.url().should('eq', 'https://home.openweathermap.org/users/password')
+        cy.get('div.container h3').should('have.text', 'Forgot your password?')
+    });
+
+    it('Verify if user cantnot create an account without checking reCAPTCHA', () => {
+        cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
+            .click()
+        cy.url().should('include', 'users/sign_in')
+        cy.get('.sign-form a[href="/users/sign_up"]')
+            .click()
+        cy.url().should('include', 'users/sign_up')
+        cy.get('#user_username')
+            .type('JesSummers')
+        cy.get('#user_email')
+            .type('narec38376@sopulit.com')
+        cy.get('#user_password')
+            .type('1234rewQ')
+        cy.get('#user_password_confirmation')
+            .type('1234rewQ')
+        cy.get('#agreement_is_age_confirmed')
+            .check()
+        cy.get('#agreement_is_accepted')
+            .check()
+        cy.get('#mailing_system')
+            .check()
+        cy.get('#mailing_product')
+            .check()
+        cy.get('#mailing_news')
+            .check()
+        cy.get('.help-block')
+            .should('not.exist')
+        cy.get('[value="Create Account"]')
+            .click()
+        cy.get('.help-block')
+            .should('exist')
+        cy.get('.help-block').invoke('text').then( text => {
+            expect(text).to.eq('reCAPTCHA verification failed, please try again.')
+        })
+    })
+
+    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
+        cy.url().should('include', '/guide')
+
+        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    });
+});
