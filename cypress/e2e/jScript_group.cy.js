@@ -261,5 +261,14 @@ describe('Group jScript_group', () => {
         cy.get('#cms a').should((a) => {
             expect(a).to.have.length(4)});
     });
-});
 
+    it.only('AT_018.009 | Support > Verify Drop Down menu', function() {
+        cy.get('#support-dropdown').as('Support').click();
+
+        cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
+        cy.get('@Support_Dropdown').should('have.length', 3);
+        cy.get('@Support_Dropdown').each(($el, idx) => {
+            expect($el.text().to.be.equal(this.data.support_dropdown[idx]));
+        })
+    })
+});
