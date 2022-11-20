@@ -5,6 +5,14 @@ const mainMenuDesk = {
   "maps": "#desktop-menu a[href*='/weathermap']"
   }
 
+Cypress.Commands.add('login', (username, password) => {
+  cy.visit('https://openweathermap.org/home/sign_in')
+  cy.get('.sign-form > #new_user input#user_email').type(username)
+  cy.get('.sign-form > #new_user input#user_password').type(password)
+  cy.get('.sign-form > #new_user input[name="commit"]').click()
+  cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
+})
+
 describe('group Ark', () => {
 
   beforeEach(function () {
@@ -228,7 +236,7 @@ describe('group Ark', () => {
     cy.get('h3.first-child').should('have.text', 'Create New Account')
   })
  
-  it('AT_054.002 | PersonalAccountName > Verify a successful Sign-out', () => {
+  it('AT_054.002 | PersonalAccountName > Verify a successful Sign-out', function () {
     cy.get('#desktop-menu .user-li a').click();
     cy.get('.input-group #user_email').type('3065606@gmail.com');
     cy.get('.input-group #user_password').type('Qwerty1234');
@@ -261,12 +269,21 @@ describe('group Ark', () => {
       .and('match', /light_all\//)
   })
 
-
-  it('AT_010.010 | Marketplace > Verify the link "Historical Data Archives"', () => {
+  it('AT_010.010 | Marketplace > Verify the link "Historical Data Archives"', function () {
     cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click()
     cy.get('#custom_weather_products h1').should('have.text', "Custom Weather Products")
     cy.get('.category [href*="/zip_code_data/new"]').contains('Historical Weather Data by State for all ZIP codes, USA').click()
     
     cy.get('h4.heading').should('have.text', 'Historical Weather Data by State')
   });
+
+  it('AT_049.001 | User page > Blocked logs > The page is loading and displaying', function () {
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+
+    cy.get('#myTab a[href="/blocks"]').click()
+
+    cy.location('pathname').should('eq', '/blocks')
+    cy.get('.services-table th').contains('Blocked').should('have.text', 'Blocked at')
+  });
+
 })
