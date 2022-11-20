@@ -405,7 +405,6 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
-        cy.viewport(1280, 660)
         cy.visit('https://openweathermap.org/')
         cy.get('#support-dropdown').contains('Support').click()
         cy.get('#support-dropdown-menu a[href$="/questions"]')
