@@ -405,14 +405,14 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
-        cy.visit('https://openweathermap.org/')
-        cy.get('#support-dropdown').contains('Support').click()
+        cy.get('#support-dropdown').contains('Support').click();
         cy.get('#support-dropdown-menu a[href$="/questions"]')
         .contains('Ask a question')
         .invoke('removeAttr', 'target')
-        .click()
-        cy.url().should('include', '/questions')
+        .click();
 
+        cy.url().should('include', '/questions')
+        cy.title().should('eq', 'Members');
     });
 
    });
