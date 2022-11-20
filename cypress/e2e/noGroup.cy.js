@@ -3,8 +3,18 @@
 
 describe('group noGroup', () => {
 
-it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
+const userName = 'nadiakoluzaeva@gmail.com';
+const password = 'OpenWeatherJS_05';
+const wrongPassword = 'TestTest';
+
+beforeEach(function() {
+  cy.fixture('noGroup').then(data => {
+      this.data = data
+    });
     cy.visit('https://openweathermap.org/')
+})
+
+it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.get('#desktop-menu [href*=market]').invoke('removeAttr', 'target').click()
     cy.get('.market-place .product h5 a').each($el => {
       cy.wrap($el).should('have.css', 'color','rgb(235, 110, 75)')
@@ -15,12 +25,77 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   });
 
   it('AT_010.007 | Marketplace > Verify all links on the page have the same color', function() {
-    cy.visit('https://openweathermap.org/')
     cy.get('div#desktop-menu a[href="https://home.openweathermap.org/marketplace"]').invoke('removeAttr','target').click()
     cy.url().should('contain','/marketplace')
     cy.get('div.market-place h5 a').each($item => {
         cy.wrap($item).should('have.css','color','rgb(235, 110, 75)')
     })
 });
+
+  it('AT_051.002 | API > Testing Home button > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page of the site.', function () {
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('contain', '/api')
+    cy.get('.breadcrumb a[href="/"]').should('have.text', 'Home').click()
+    cy.url().should('contain', '/openweathermap.org')
+    cy.contains('OpenWeather')
+  })
+
+  it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
+ 
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(password).should('have.value', password)
+    cy.get('#new_user input[value="Submit"]').click()
+    cy.get('.clearfix #myTab li').should('have.length', 9)
+    cy.get('.clearfix #myTab li').each(($el, idx) => {
+      expect($el.text()).to.include(this.data.NavBar[idx])
+    })
+  })
   
-});
+  it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products...', function() {
+
+      cy.get('#desktop-menu').contains('Sign in').click()
+      cy.get('.input-group #user_email').type('kollapsa@gmail.com')
+      cy.get('.input-group #user_password').type('76543218')
+      cy.get('[value="Submit"]').click()
+      cy.url().should('include', 'home.openweathermap.org/')
+      cy.get('.active').should('contain.text', 'New Products')
+  })
+
+  it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
+ 
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(password).should('have.value', password)
+    cy.get('#new_user input[value="Submit"]').click()
+      .url().should('include', 'home.openweathermap.org')
+    cy.get('#myTab a[href="/"]').should('have.text', 'New Products').click()
+    cy.get('.container .text-block').should('have.length', 3)
+    cy.get('.container .text-block').each(($el, idx) => {
+      expect($el.text()).to.include(this.data.textBlocs[idx])
+    })
+})
+
+it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
+ 
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(userName).should('have.value', userName)
+  cy.get('#user_password').type(password).should('have.value', password)
+  cy.get('#new_user input[value="Submit"]').click()
+    .url().should('include', 'home.openweathermap.org')
+  cy.get('.text-block .text-color ').should('have.length', 3)
+  cy.get('.text-block .text-color ').each(($el, idx) => {
+  cy.wrap($el).should('have.css', 'color', 'rgb(233, 110, 80)')
+    })
+  })
+
+  it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
+ 
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(wrongPassword).should('have.value', wrongPassword)
+    cy.get('#new_user input[value="Submit"]').click()
+    cy.get('.panel.panel-red .panel-body').should('have.text', 'Invalid Email or password.')
+    })
+  })
+
