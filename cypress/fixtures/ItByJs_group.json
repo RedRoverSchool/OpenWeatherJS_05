@@ -4,5 +4,7 @@
     "email": "testra8ota@gmail.com",
     "message": "My message to the world!",
     "cityName": "Paris",
-    "password1": "123456789"
+    "password1": "123456789",
+    "accountmenu": ["My services", "My API keys", "My payments", "My profile" , "Logout"],
+    "invalidApi": "785347584375"
   }
