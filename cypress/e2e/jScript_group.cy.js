@@ -404,7 +404,7 @@ describe('Group jScript_group', () => {
         });
     });
 
-    it.only('AT_025.006 | Header > Verify user will be redirected to new url "questions"', function ()  {
+    it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', function ()  {
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a';
         let contact_us_button = '.below > .btn_like';
         let email_field = '#question_form_email';
