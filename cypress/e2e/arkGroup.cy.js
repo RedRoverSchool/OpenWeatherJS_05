@@ -1,5 +1,9 @@
 /// <reference types="cypress" />
 
+const mainMenuDesk = {
+  "maps": "#desktop-menu > ul a[href='/weathermap']"
+  }
+
 describe('group Ark', () => {
 
   beforeEach(function () {
@@ -191,7 +195,7 @@ describe('group Ark', () => {
   });
 
   it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map', function () {
-    cy.get('#desktop-menu a[href="/weathermap"]').click({ timeout: 10000 })
+    cy.get(mainMenuDesk.maps).click();
     cy.get('#map-wrap .global-map').should('be.visible')
 
     cy.get('label[for="Global Precipitation"]')
@@ -242,6 +246,18 @@ describe('group Ark', () => {
     cy.get("#stick-footer-panel .stick-footer-panel__link").each(el => {
         cy.wrap(el).focus().should('have.css', 'background-color', 'rgb(233, 110, 80)')
       });
-  });
+  })
+
+  it("AT_026.003 | Maps > Сheck that the «Zoom in» button works", function () {
+    cy.get(mainMenuDesk.maps).click();
+        
+    cy.get('a.leaflet-control-zoom-in').click()
+    cy.wait(3500)
+    
+    cy.get('img[src*="//cartodb-basemaps-c.global.ssl.fastly.net/light_all/"]')
+      .first()
+      .should("have.attr", "src")
+      .and('match', /light_all\//)
+  })
 
 })
