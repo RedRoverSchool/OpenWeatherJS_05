@@ -189,5 +189,8 @@ describe('groupBugHunters', () => {
     cy.get('div.alert-info').should('contain','You can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.')
       .and('be.visible')
   })
-
+  it('AT_005.006 | Verifying the website name describtion', () => {
+    cy.get('div.mobile-padding .orange-text').contains("OpenWeather").should('be.visible')
+    cy.get('.white-text').contains("Weather forecasts, nowcasts and history in a fast and elegant way").should('be.visible')
+  }); 
 })
