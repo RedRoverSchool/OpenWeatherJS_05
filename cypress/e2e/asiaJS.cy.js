@@ -2,8 +2,12 @@
 
 
 describe('asiaJS', () => {
-  beforeEach(() => {
-    cy.visit('https://openweathermap.org/')
+  beforeEach(function () {
+    cy.fixture('asiaJS').then((data)=> {
+      this.data = data
+  });
+
+    cy.visit('https://openweathermap.org/');
   });
 
   it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', () => {
@@ -126,6 +130,22 @@ describe('asiaJS', () => {
     cy.get(`${howToGet} .question-content`)
       .contains('get an API key (APPID)')
       .should('be.visible');
+  });
+
+  it.only('AT_042.005 | User page >My payments>Verify that text displays on the page',function (){
+    const buttonSignIn = '.user-li a';
+    const userEmail = '.input-group input#user_email';
+    const userPassword = '.input-group input#user_password';
+    const submitButton = 'input[value="Submit"]';
+
+    cy.get(buttonSignIn).click({force: true});
+    cy.get(userEmail).type(this.data.email);
+    cy.get(userPassword).type(this.data.password).should('be.visible');
+    cy.get(submitButton).click({force: true});
+    
+    cy.get('div.inner-user-container').should('contain.text', 'Asia Tester').click({force: true});
+    cy.get('.dropdown-menu a[href="/payments"]').click({force: true});
+    cy.url().should('include', '/payments');
   });
 
 });
