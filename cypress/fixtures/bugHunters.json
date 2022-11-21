@@ -1,0 +1,10 @@
+{
+    "userAccountMenu": [
+        "My services",
+        "My API keys",
+        "My payments",
+        "My profile",
+        "Logout"
+      ]
+
+}

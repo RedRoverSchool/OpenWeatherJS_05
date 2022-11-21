@@ -4,7 +4,9 @@
 describe('groupBugHunters', () => {
 
   beforeEach(function () {
-
+    cy.fixture('bugHunters').then(data => {
+      this.data = data;
+    })
     cy.visit('https://openweathermap.org/');
 
   });
@@ -245,7 +247,7 @@ describe('groupBugHunters', () => {
     cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
   })
 
-  it('TC_046.002|Click on the link “Learn more” should take user to the new page', function () {
+  it('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
     cy.get('#desktop-menu [href="/our-initiatives"]').click();
     cy.get('.col-sm-12 :nth-child(9) h2>span')
       .as('Education')
@@ -271,4 +273,22 @@ describe('groupBugHunters', () => {
       .and('contain', 'Date')
       .and('contain', 'Amount')
   })
+
+  it('AT_020.004 | Sign in>Dropdown menu>Verify dropdown menu is visible and exist', function () {
+    cy.get('li.user-li').contains('Sign in').click({ force: true })
+    cy.get('#user_email')
+      .should('have.attr', 'placeholder', 'Enter email')
+      .type('oforostinko@gmail.com')
+    cy.get('#user_password.form-control')
+      .should('have.attr', 'placeholder', 'Password')
+      .type('12341234')
+    cy.get('#user_remember_me').check().should('be.checked')
+    cy.contains('Submit').click()
+    cy.get('.panel-body').should('have.text', 'Signed in successfully.')
+    cy.get('#user-dropdown').click();
+    cy.get('#user-dropdown-menu').each(($el, index) => {
+      expect($el.text()).to.include(this.data.userAccountMenu[index])
+    })
+  })
+
 })
