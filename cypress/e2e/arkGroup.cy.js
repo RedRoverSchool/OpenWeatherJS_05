@@ -266,7 +266,7 @@ describe('group Ark', () => {
     cy.get('img[src*="//cartodb-basemaps-c.global.ssl.fastly.net/light_all/"]')
       .first()
       .should("have.attr", "src")
-      .and('match', /light_all\//)
+      .and('match', /light_all\/6/)
   })
 
   it('AT_010.010 | Marketplace > Verify the link "Historical Data Archives"', function () {
