@@ -517,4 +517,12 @@ describe('Group jScript_group', () => {
         .contains('reCAPTCHA verification failed, please try again.')
         .should('be.visible')
     });
+
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+
+        cy.get('#weather-widget  input[type="email"]').clear().type(this.data.email);
+        cy.get('#weather-widget  input[type="email"]').should('have.value',this.data.email);
+    });
 });
