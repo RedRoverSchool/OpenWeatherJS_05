@@ -2,8 +2,12 @@
 
 
 describe('asiaJS', () => {
-  beforeEach(() => {
-    cy.visit('https://openweathermap.org/')
+  beforeEach(function () {
+    cy.fixture('asiaJS').then((data)=> {
+      this.data = data
+  });
+
+    cy.visit('https://openweathermap.org/');
   });
 
   it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', () => {
@@ -128,4 +132,29 @@ describe('asiaJS', () => {
       .should('be.visible');
   });
 
+  it('AT_042.005 | User page >My payments>Verify that text displays on the page',function (){
+    const buttonSignIn = '.user-li a';
+    const userEmail = '.input-group input#user_email';
+    const userPassword = '.input-group input#user_password';
+    const submitButton = 'input[value="Submit"]';
+
+    cy.get(buttonSignIn).click({force: true});
+    cy.get(userEmail).type(this.data.email);
+    cy.get(userPassword).type(this.data.password).should('be.visible');
+    cy.get(submitButton).click({force: true});
+    
+    cy.get('div.inner-user-container').should('contain.text', 'Asia Tester').click({force: true});
+    cy.get('.dropdown-menu a[href="/payments"]').click({force: true});
+    cy.url().should('include', '/payments');
+  });
+
+  it.only('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function (){
+    cy.login_asiaJS(this.data.email, this.data.password);
+    cy.visit('https://home.openweathermap.org/myservices');
+
+    cy.get('[href="/subscriptions"]').click();
+    cy.url().should('include', '/subscriptions');
+    cy.get('#myTab li.active').should('have.text', '\nBilling plans\n');
+  
+  });
 });
