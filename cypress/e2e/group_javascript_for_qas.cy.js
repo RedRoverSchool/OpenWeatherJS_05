@@ -49,5 +49,13 @@ describe('group_javascript_for_qas', () => {
             expect($el.text()).to.include(this.data.headers4[idx])
         })
     });
-    
+
+    it('AT_005.004 | Verify the website’s name and description is correct and visible', function(){
+        cy.get('h1 .orange-text').should('be.visible').each(($el, idx) =>{
+           expect($el.text()).to.contain(this.data.title)
+        })
+        cy.get('h2 .white-text').should('be.visible').each(($el, idx) => {
+            expect($el.text()).to.contain(this.data.description)
+        })   
+    })   
 });
