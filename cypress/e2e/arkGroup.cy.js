@@ -261,7 +261,7 @@ describe('group Ark', () => {
     cy.get(mainMenuDesk.maps).click();
         
     cy.get('a.leaflet-control-zoom-in').click()
-    cy.wait(3500)
+    cy.wait(4000)
     
     cy.get('img[src*="//cartodb-basemaps-c.global.ssl.fastly.net/light_all/"]')
       .first()
