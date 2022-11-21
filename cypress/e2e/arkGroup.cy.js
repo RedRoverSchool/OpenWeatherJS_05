@@ -147,19 +147,18 @@ describe('group Ark', () => {
     cy.url().should('include', '/guide');
   })
 
-  it('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
-    cy.get('.daily-container ul.day-list li > span')
-      .then($elArr => {
-        expect($elArr).to.have.length(8)
-        const startDate = new Date().getTime()
-        const formatDate = { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' };
-        let itemDate
-        cy.wrap($elArr).each(($el, $i) => {
-          itemDate = startDate + 86400000 * $i
-          itemDate = new Date(itemDate).toLocaleDateString('en', formatDate)
 
-          cy.wrap($el).should('include.text', itemDate)
-        })
+  it.only('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
+    const startDate = new Date().getTime()
+    const formatDate = { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' };
+
+    cy.get('.daily-container ul.day-list li > span')
+      .should('have.length', 8)
+      .each(($el, i) => { 
+        let itemDate = startDate + 86400000 * i
+        itemDate = new Date(itemDate).toLocaleDateString('en', formatDate)
+        expect($el).to.be.visible
+        expect($el.text()).to.include(itemDate);
       })
   })
 
