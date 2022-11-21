@@ -15,17 +15,22 @@ describe('group_javascript_for_qas', () => {
     });
 
     it('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
-        cy.get('li.user-li a').should('have.text', 'Sign in');
+        const SIGN_IN_BARMENU_ITEM =  "li.user-li a";
+        const SUPPORT_BARMENU_ITEM = "li.with-dropdown div"
+        const ASK_QUESTION_SUB_SUPPORTMENU_ITEM ="ul#support-dropdown-menu a[href*='/questions']";
+        const YES_USER_AUTH_RADIO_BTN = "input#question_form_is_user_true";
+        const ALERT_ERROR_AUTH_MESSAGE ="div#prompt";
 
-        cy.get("li.with-dropdown div").click();
-        cy.get("ul#support-dropdown-menu a[href='https://home.openweathermap.org/questions']").invoke('removeAttr', 'target').click()
+        cy.get(SIGN_IN_BARMENU_ITEM).should('be.visible', 'Sign in');
+        cy.get(SUPPORT_BARMENU_ITEM).click();
+        cy.get(ASK_QUESTION_SUB_SUPPORTMENU_ITEM).invoke('removeAttr', 'target').click()
         cy.title().should('eq', 'Members');
 
-        cy.get('input#question_form_is_user_true').check().should('be.checked')
-        cy.get('div#prompt').should('be.visible');
-        cy.get('div#prompt').should('have.text', 'Please enter your account email in our system - it will help us process your request faster')
-        cy.get('div#prompt').should('have.class', 'alert-info');
-        cy.get('div#prompt').should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)')
+        cy.get(YES_USER_AUTH_RADIO_BTN).check().should('be.checked')
+        cy.get(ALERT_ERROR_AUTH_MESSAGE).should('be.visible')
+                                        .should('have.text', 'Please enter your account email in our system - it will help us process your request faster')
+                                        .should('have.class', 'alert-info')
+                                        .should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)')
     });
 
     it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
