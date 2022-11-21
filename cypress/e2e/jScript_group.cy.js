@@ -119,9 +119,10 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
+          .as('ViewWidget_Button')
           .invoke('removeAttr', 'target')
           .click();
         
