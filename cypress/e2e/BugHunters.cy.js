@@ -258,4 +258,17 @@ describe('groupBugHunters', () => {
     cy.get('h1.breadcrumb-title').should('have.text', 'Student initiative');
   })
 
+  it('AT_042.003 | User page > My payments > User is redirected to the "Payments" page', () => {
+    cy.get('li.user-li a[href*="sign_in"]').click()
+    cy.get('.new_user .email').type('redroverschool@yahoo.com')
+    cy.get('#user_password').type('123456789')
+    cy.get('input[value="Submit"]').click()
+
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href="/payments"]').click()
+    cy.url().should('include', '/payments')
+    cy.get('.table-striped').should('contain', 'Number #')
+      .and('contain', 'Date')
+      .and('contain', 'Amount')
+  })
 })
