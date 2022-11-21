@@ -43,14 +43,26 @@ describe('group_javascript_for_qas', () => {
         cy.url().should('contain', '/faq');
     });
 
-    it('AT_008.001 | Main menu > Guide > Verify URL and headers are displayed on the page', function () {
-        cy.get("div#desktop-menu a[href='/guide']").click();
+    it('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
+        const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
+        const MAINHEADER_H1_GUIDE_PAGE = "div.col-sm-12 h1";
+
+        cy.get(GUIDE_BARMENU_ITEM).click();
         cy.url().should('contain', '/guide');
-        cy.get("div.col-sm-12 h1").should("have.text", this.data.headers1)
-        cy.get("main h2").each(($el, idx) => {
+        cy.get(MAINHEADER_H1_GUIDE_PAGE).should("have.text", this.data.headers1)
+    });
+
+    it('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
+        const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
+        const SUBHEADERS_H2_GUIDE_PAGE = "main h2";
+        const SUBHEADERS_H4_GUIDE_PAGE = "h4 b";
+
+        cy.get(GUIDE_BARMENU_ITEM).click();
+
+        cy.get(SUBHEADERS_H2_GUIDE_PAGE).each(($el, idx) => {
             expect($el.text()).to.include(this.data.headers2[idx])
         })
-        cy.get("h4 b").each(($el, idx) => {
+        cy.get(SUBHEADERS_H4_GUIDE_PAGE).each(($el, idx) => {
             expect($el.text()).to.include(this.data.headers4[idx])
         })
     });
