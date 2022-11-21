@@ -63,5 +63,10 @@ describe('group jsTeachers', () => {
       .should('be.visible')
   })
 
+  it('1.TV.002.000| Header > Clicking the logo', () => { 
+    cy.visit('https://openweathermap.org/guide')
+    cy.get('li[class="logo"]').click()
+    cy.url().should('eq', 'https://openweathermap.org/')
 
+  })
 })

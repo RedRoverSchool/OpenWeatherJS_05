@@ -1,8 +1,25 @@
 {
-    "firstName": "Donald",
-    "lastName": "Duck",
-    "email": "testra8ota@gmail.com",
-    "message": "My message to the world!",
-    "cityName": "Paris",
-    "password1": "123456789"
-  }
+  "firstName": "Donald",
+  "lastName": "Duck",
+  "email": "testra8ota@gmail.com",
+  "realEmail": "ltbyjs.qa@gmail.com",
+  "message": "My message to the world!",
+  "cityName": "Paris",
+  "password1": "123456789",
+  "password": "12345678",
+  "accountmenu": [
+    "My services",
+    "My API keys",
+    "My payments",
+    "My profile",
+    "Logout"
+  ],
+  "invalidApi": "785347584375",
+  "paymentsTable": [
+    "Number #",
+    "Date",
+    "Amount",
+    ""
+  ],
+  "userName": "redandwhite"
+}
