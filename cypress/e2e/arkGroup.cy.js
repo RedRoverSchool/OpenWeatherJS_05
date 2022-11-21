@@ -286,4 +286,16 @@ describe('group Ark', () => {
     cy.get('.services-table th').contains('Blocked').should('have.text', 'Blocked at')
   });
 
+  it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
+    const accountDropdownOptions = ["My services", "My API keys", "My payments", "My profile", "Logout"]
+
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+    cy.get('#user-dropdown').click()
+
+    cy.get('#user-dropdown-menu li a').each(($el, i) => {
+      expect($el).to.be.visible
+      expect($el.text()).to.include(accountDropdownOptions[i]);
+    })
+  });
+
 })
