@@ -46,10 +46,11 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     }); 
     
-    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').click();
+    it.only('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
 
         cy.get('a[href="http://drupal.org/project/olowm"]')
+          .as('SeeOnTheWebsite_Button')
           .invoke('removeAttr', 'target')
           .click();
 
