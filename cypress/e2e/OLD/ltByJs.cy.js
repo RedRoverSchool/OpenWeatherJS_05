@@ -349,7 +349,7 @@ describe('Group lt_by_js', () => {
     cy.get(capchaMessage).should('be.visible').and('have.text', 'reCAPTCHA verification failed, please try again.')
   })
 
-  it('AT_004.004 | Main page > Section with search > Switching weather to Metric system', function () {
+  it.skip('AT_004.004 | Main page > Section with search > Switching weather to Metric system', function () {
     const imperial = '.switch-container :nth-child(3)'
     const metric = '.switch-container :nth-child(2)'
     const highlighting = '#selected'
