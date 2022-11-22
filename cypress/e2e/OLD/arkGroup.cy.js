@@ -257,7 +257,7 @@ describe('group Ark', () => {
       });
   })
 
-  it("AT_026.003 | Maps > Сheck that the «Zoom in» button works", function () {
+  it.skip("AT_026.003 | Maps > Сheck that the «Zoom in» button works", function () {
     cy.get(mainMenuDesk.maps).click();
         
     cy.get('a.leaflet-control-zoom-in').click()
