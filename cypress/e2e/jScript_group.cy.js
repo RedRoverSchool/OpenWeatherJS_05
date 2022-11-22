@@ -16,8 +16,12 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        cy.visit(this.data.examplesPageLink);
+
         cy.get('.logo').click();
+
         cy.url().should('eq', 'https://openweathermap.org/');
+        cy.get ('h1 .orange-text ').should('have.text', this.data.mainPageText);
     });
 
     it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
@@ -43,9 +47,10 @@ describe('Group jScript_group', () => {
     }); 
     
     it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
 
         cy.get('a[href="http://drupal.org/project/olowm"]')
+          .as('SeeOnTheWebsite_Button')
           .invoke('removeAttr', 'target')
           .click();
 
@@ -98,14 +103,13 @@ describe('Group jScript_group', () => {
     });
 
     it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
-        cy.visit('https://openweathermap.org/examples');
-        cy.get('#cms a').should(($a) => {
-            expect($a).to.have.length(4);
-            expect($a.eq(0)).to.contain('See on the website');
-            expect($a.eq(1)).to.contain('View widget');
-            expect($a.eq(2)).to.contain('View plugin');
-            expect($a.eq(3)).to.contain('View plugin');
-        })
+        cy.get('#desktop-menu a[href="/examples"]').click();
+
+        const sectionsNames = ['See on the website', 'View widget', 'View plugin', 'View plugin'];
+
+        cy.get('#cms a').each(($el, i) => {
+            expect($el.text()).to.equal(sectionsNames[i]);
+        });
     });
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
@@ -115,9 +119,10 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').click();
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
+          .as('ViewWidget_Button')
           .invoke('removeAttr', 'target')
           .click();
         
@@ -279,6 +284,14 @@ describe('Group jScript_group', () => {
             expect(a).to.have.length(4)});
     });
 
+    it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
+        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
+        
+        cy.url().should('include','/users/sign_in')
+        cy.get('.new_user > :nth-child(3) > #user_email').type('If_you_see this_text _ode_runs_good!!!')
+    });
+        
     it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
         cy.get('#user-dropdown').should('not.exist');
         cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
@@ -378,25 +391,153 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_048.002 | User page > Billing plans > Verify billing plans information', function () {
-        cy.get('#desktop-menu .user-li a').should('have.text', 'Sign in');
         cy.get('#desktop-menu .user-li a').click();
-
-        cy.url().should('include', "/sign_in");
-        cy.get('.sign-form h3').should('be.visible').and('have.text', 'Sign In To Your Account');
-
         cy.get('.input-group #user_email').type('3065606@gmail.com');
         cy.get('.input-group #user_password').type('Qwerty1234');
         cy.get('#new_user [value="Submit"]').click();
-
-        cy.get('.panel-body').should('have.text', 'Signed in successfully.');
         cy.get('#user-dropdown .inner-user-container').click();
         cy.get('#user-dropdown-menu a[href="/myservices"]').click();
-
-        cy.url().should('eq', "https://home.openweathermap.org/myservices");
         cy.get('.row a[href="/subscriptions"]').click();
 
         cy.url().should('eq', 'https://home.openweathermap.org/subscriptions');
         cy.get('.subscribe-title a').should('include.text', 'subscription plan'); 
         cy.get('.container a[href*="/price#current"]').should('have.text', 'Professional collections');
     });    
+
+    it('AT_010.002 | Marketplace > Verify the link "History Bulk” on the page', () => {
+        cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click();
+        cy.get('.product-container a[href="/history_bulks/new"]:not(.button-round)').click();
+        
+        cy.url().should('include', '/history_bulks/new');
+        cy.get('.page-content-bulk h4.heading').should('have.text', 'Create New History Bulk')
+    });
+
+    it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+        cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click();
+
+        cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
+            cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
+        });
+    });
+
+    it('AT_025.006 | Header > Verify user will be redirected to new url "questions"', function ()  {
+        let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a';
+        let contact_us_button = '.below > .btn_like';
+        let email_field = '#question_form_email';
+
+        cy.get(dashboard_button).click();
+        cy.get(contact_us_button).invoke('removeAttr','target').click();
+
+        cy.url().should('include','/questions');
+        cy.get(email_field).type('Checking_that_the_page_is_not_empty.');
+    });
+
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        cy.get('.day-list li').should('have.length', this.data.dayListLength);
+    });
+
+    it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
+        const date = new Date().toUTCString().split(' ');
+        const correctDate = []; 
+        correctDate.push(date[0], date[2], date[1]);
+        const todaysDate = correctDate.join(' ');
+
+        cy.visit('https://openweathermap.org/');
+
+        cy.get('.day-list li:first-child > span').should('have.text', todaysDate);
+    });
+
+    it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
+        cy.get('a[href="/about-us"]').click();
+        cy.get('.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
+          .invoke('removeAttr','target')
+          .click();
+
+        cy.url().should('include', this.data.questionsPageEndPoint);
+        cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
+ });
+        
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+        cy.get('.user-li a').click();
+        cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
+        cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
+        cy.get('[value="Submit"]').click();
+        cy.get('.inner-user-container').click();
+        cy.get('#user-dropdown-menu li:nth-child(2)').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/api_keys');
+        cy.get('.alert-info').should('have.text', '\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n');
+    });
+    
+    it('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
+        cy.get('[href="/widgets-constructor"]').click();
+        
+        cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9)
+          .and('be.visible');
+    });
+
+    it('AT_018.009 | Support > Verify Drop Down menu', function() {
+        cy.get('#support-dropdown').as('Support').click();
+
+        cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
+        cy.get('@Support_Dropdown').should('have.length', 3);
+        cy.get('@Support_Dropdown').each(($el, idx) => {
+            expect($el.text()).to.be.equal(this.data.supportDropdown[idx]);
+        });
+    });
+ 
+    it('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
+        cy.get('#desktop-menu li:nth-child(11) a').click();
+        cy.get('.sign-form > form').within(($form) => {
+            cy.get('#user_email').type(this.data.loginUserEmail);
+            cy.get('#user_password').type(this.data.loginUserPassword);
+            cy.root().submit();
+        });
+        cy.get('.inner-user-container').click();
+        cy.get('.user-li li:nth-child(2) a').click();
+        cy.get('td > pre').then(($myAPI) => {
+            return $myAPI.text();
+        }).as('myAPI');
+        cy.get('.footer-website ul > :nth-child(5) > a').click();
+
+        cy.get('@myAPI').then($api => {
+            cy.get('#api-key').type($api);
+        });
+        cy.get('#widget-1-left-brown').click();
+        cy.get('#popup-title').should('not.have.text', 'Important! You need to');
+
+        cy.get('#popup-title').should('have.text', 'Get a code for posting a weather forecast widget on your site.');
+    });
+
+    it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
+        cy.get('#support-dropdown').contains('Support').click();
+        cy.get('#support-dropdown-menu a[href$="/questions"]')
+        .contains('Ask a question')
+        .invoke('removeAttr', 'target')
+        .click();
+
+        cy.url().should('include', '/questions')
+        cy.title().should('eq', 'Members');
+    });  
+
+    it('AT_014.004 | Support > Ask a question> An error message of the reCAPCHA', () => {
+        cy.visit('https://home.openweathermap.org/questions')
+        cy.get('#question_form_is_user_false').check().should('be.checked')
+        cy.get('#question_form_email').type('ATforAll@gmail.com')
+        cy.get('#question_form_subject').select('I want to discuss a purchase of OpenWeather products/subscriptions')
+        cy.get('#question_form_message').type('Ask me a question')
+        cy.get('input[name="commit"]').click()
+
+        cy.get('.help-block')
+        .contains('reCAPTCHA verification failed, please try again.')
+        .should('be.visible')
+    });
+
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
+        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#dialogDesc div.more-options').click();
+
+        cy.get('#weather-widget  input[type="email"]').clear().type(this.data.email);
+        cy.get('#weather-widget  input[type="email"]').should('have.value',this.data.email);
+    });
 });

@@ -3,6 +3,10 @@
 
 describe('group noGroup', () => {
 
+const userName = 'nadiakoluzaeva@gmail.com';
+const password = 'OpenWeatherJS_05';
+const wrongPassword = 'TestTest';
+
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {
       this.data = data
@@ -37,9 +41,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   })
 
   it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
-    const userName = 'nadiakoluzaeva@gmail.com';
-    const password = 'OpenWeatherJS_05';
-    
+ 
     cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
     cy.get('#user_email').type(userName).should('have.value', userName)
     cy.get('#user_password').type(password).should('have.value', password)
@@ -61,10 +63,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   })
 
   it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
-    const userName = 'nadiakoluzaeva@gmail.com';
-    const password = 'OpenWeatherJS_05';
-    
-    cy.visit('https://openweathermap.org/')
+ 
     cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
     cy.get('#user_email').type(userName).should('have.value', userName)
     cy.get('#user_password').type(password).should('have.value', password)
@@ -76,4 +75,61 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
       expect($el.text()).to.include(this.data.textBlocs[idx])
     })
 })
+
+it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
+ 
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(userName).should('have.value', userName)
+  cy.get('#user_password').type(password).should('have.value', password)
+  cy.get('#new_user input[value="Submit"]').click()
+    .url().should('include', 'home.openweathermap.org')
+  cy.get('.text-block .text-color ').should('have.length', 3)
+  cy.get('.text-block .text-color ').each(($el, idx) => {
+  cy.wrap($el).should('have.css', 'color', 'rgb(233, 110, 80)')
+    })
+  })
+
+  it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
+ 
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(wrongPassword).should('have.value', wrongPassword)
+    cy.get('#new_user input[value="Submit"]').click()
+    cy.get('.panel.panel-red .panel-body').should('have.text', 'Invalid Email or password.')
+    })
+
+  it('AT_001.012 | Main page > Section with search > Search City> The displayed city name equals the city selected in "Search city" field', function() {
+      const cityForSearch = "Paris";
+      const cityForSelectList = "Paris, FR";
+
+      cy.get('.search input').type(cityForSearch)
+      cy.get('.search button').click()
+      cy.get('ul.search-dropdown-menu li').each(($el) => {
+          if(cy.wrap($el).contains(cityForSelectList)){
+              cy.wrap($el).click()
+          } 
+          return false;
+      })
+
+      cy.get('div.current-container')
+      .contains(cityForSelectList)
+      .should('be.visible')
+  })
+  
+  it('AT_048.004 | User page > Billing plans > Verify that after the user clicks on the link "One Call by Call" subscription plan" open a new page url', function() {
+ 
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(userName).should('have.value', userName)
+  cy.get('#user_password').type(password).should('have.value', password)
+  cy.get('#new_user input[value="Submit"]').click()
+    .url().should('include', 'home.openweathermap.org')
+  cy.get('[href="/subscriptions"]').click()
+  cy.get('h3.subscribe-title > a')
+    .as('linkOneCallByCall')
+    .should('be.visible')
+    .click()
+    .url().should('eq', 'https://openweathermap.org/price')
+  cy.get('h1.breadcrumb-title').should('have.text', 'Pricing')
+  })
 })
+

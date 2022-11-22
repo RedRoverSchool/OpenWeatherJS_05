@@ -151,7 +151,7 @@ describe('Group lt_by_js', () => {
         cy.get('.breadcrumb-title').should('have.text', 'Widgets constructor')     
     })
 
-    it('AT_033.006 | Header > Navigation>> Verify "Partners" menu link', function () {     
+    it('AT_033.006 | Header > Navigation > Verify "Partners" menu link', function () {     
         cy.get('#desktop-menu a[href="/examples"]').click()
 
         cy.url().should('eq', 'https://openweathermap.org/examples')
@@ -243,4 +243,132 @@ describe('Group lt_by_js', () => {
         cy.get(userName).click()
         cy.get(logout).click()         
     })
+
+    it('AT_020.002 | Sign in>Dropdown menu>Verify dropdown menu is visible and exist', function () {  
+        let signinPage = '#desktop-menu a[href="https://openweathermap.org/home/sign_in"]'
+        let emailField = '.input-group #user_email'
+        let passowrField = '#user_password'
+        let buttonSubmit = '#new_user :nth-child(7)'
+        let text = '.panel-body'
+        let userName = '.inner-user-container'
+        let logout = '.dropdown-menu .logout'
+        let seeDropDowmMenu = '#user-dropdown'
+        let existDropDownMenu = '#user-dropdown-menu'
+        let dropDownMenu = '#user-dropdown-menu li'
+ 
+        cy.get(signinPage).click()
+        cy.url().should('eq', 'https://home.openweathermap.org/users/sign_in')
+        cy.get(emailField).type(this.data.email)
+        cy.get(passowrField).type(this.data.password1)
+        cy.get(buttonSubmit).click()
+        cy.get(text).should('have.text', 'Signed in successfully.')
+        cy.get(userName).should('have.text', '\nredandwhite\n')
+
+        cy.get(seeDropDowmMenu).click()
+        cy.get(existDropDownMenu).should('exist').and('have.class', 'dropdown-menu dropdown-visible')    
+        cy.get(dropDownMenu).should('have.length', 5).each(($el, i) =>{
+            expect($el.text()).to.include(this.data.accountmenu[i])
+        })  
+        cy.get(logout).click()
+        cy.get(text).should('have.text', 'You need to sign in or sign up before continuing.')
+    })
+
+    it('AT_021.001 | Footer > Widgets > Invalid API', function () {
+        let widgetsPage = 'a[href="/widgets-constructor"]'
+        let apiField = '#api-key'
+        let cityField = '#search-city'
+        let errorMessage = '#error-key'
+
+        cy.get(widgetsPage).click()
+
+        cy.get(apiField).type(this.data.invalidApi)
+        cy.get(cityField).click()
+        
+        cy.get(errorMessage).should('have.text', 'Validation error')
+    })
+    
+    it('AT_025.010 | Main menu > Dashboard > Verify the first button "Contact us" is clickable and redirects User to the Questions page', function () {
+        cy.get('#desktop-menu a[href="/weather-dashboard"]').click()
+
+        cy.get('p.below .btn_like').invoke('removeAttr', 'target').click()
+
+        cy.url().should('include', '/questions')
+        cy.get('.headline').should('have.text', 'Ask a question')
+    }) 
+    
+    it('AT_033.004 | Header > Navigation > Verify "Marketplace" menu link', function () {     
+        cy.get('#desktop-menu a[href="https://home.openweathermap.org/marketplace"]')
+          .invoke('removeAttr', 'target')
+          .click()
+      
+        cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
+        cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
+    })
+
+    it('AT_042.004 | User page > My payments > text on the page', function () {
+    cy.get(".user-li a").click()
+    cy.get('.input-group #user_email').type(this.data.realEmail)
+    cy.get("#user_password").type(this.data.password)
+    cy.get('input[value="Submit"]').click()
+    cy.get(".panel-body").should("have.text", "Signed in successfully.")
+    cy.get(".inner-user-container").click()
+    cy.get('.dropdown-menu a[href="/payments"]').click()
+        
+    cy.url().should('contain', '/payments')
+    cy.get(".table.table-striped th").should("have.length", 4)
+    cy.get(".table.table-striped th").each(($el, idx) => {
+      expect($el.text()).to.include(this.data.paymentsTable[idx])
+    }); 
+    cy.get(".table.table-striped th").eq(0).should('contain', 'Number')
+  });
+
+  it('AT_007.002 |Create an account> Check message error', function () {
+    const signInPage = '#desktop-menu a[href="https://openweathermap.org/home/sign_in"]'
+    const signInToYourAccountext = '.first-child'
+    const createAccount = 'a[href="/users/sign_up"]'
+    const userNameField = '#user_username'
+    const emailField = '#user_email'
+    const passwordField = '#user_password'
+    const repeatPassword = '#user_password_confirmation'
+    const ageControl = '.chk-age-confirm'
+    const agreement = '.chk-accept'
+    const buttonCreatAccount = '.btn-submit'
+    const capchaMessage = '.help-block'
+
+    cy.get(signInPage).click()
+    cy.get(signInToYourAccountext).should('have.text', 'Sign In To Your Account')
+    cy.get(createAccount).click()
+    cy.get(userNameField).type(this.data.userName)
+    cy.get(emailField).type(this.data.email)
+    cy.get(passwordField).type(this.data.password1)
+    cy.get(repeatPassword).type(this.data.password1)
+    cy.get(ageControl).click()
+    cy.get(agreement).click()
+    cy.get(buttonCreatAccount).click() 
+
+    cy.get(capchaMessage).should('be.visible').and('have.text', 'reCAPTCHA verification failed, please try again.')
+  })
+
+  it('AT_004.004 | Main page > Section with search > Switching weather to Metric system', function () {
+    const imperial = '.switch-container :nth-child(3)'
+    const metric = '.switch-container :nth-child(2)'
+    const highlighting = '#selected'
+    const weather = '.current-temp span[data-v-3e6e9f12]'
+    const temp = '.heading'
+
+    cy.get(imperial).click()
+    cy.wait(4000)
+    cy.get(highlighting).should('have.attr', 'style', "left: 72pt;")  
+
+    cy.get(temp).then(($data) => {
+        let tempF = parseInt($data.text())
+    cy.get(metric).click().wait(4000).then(() =>{
+        let tempC = parseInt($data.text())
+        expect(tempC).to.eq(Math.round(5 / 9 * (tempF - 32)))                   
+        })
+    })
+
+    cy.get(weather).should('contain', '°C')
+    cy.get(highlighting).should('have.attr', 'style', "left: 2pt;")   
+  })
 })

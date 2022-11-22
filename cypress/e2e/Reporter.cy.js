@@ -104,19 +104,18 @@ describe('GroupReporters', () => {
     });
 
     it('AT_006.003 | Sign in > Verifying successful sign in', () => {
-        const userName = 'JesSummers'
         const emailLogin = 'hoxixe2496@lance7.com'
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click({ force: true })
+            .click()
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
             .type(emailLogin)
         cy.get('.input-group > #user_password')
             .type(password)
         cy.get('#user_remember_me')
-            .click({ force: true })
+            .click()
         cy.contains('Submit')
             .click()
         cy.url().should('include', '/')
@@ -230,4 +229,55 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/users/password')
         cy.get('div.container h3').should('have.text', 'Forgot your password?')
     });
+
+    it('Verify if user cantnot create an account without checking reCAPTCHA', () => {
+        cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
+            .click()
+        cy.url().should('include', 'users/sign_in')
+        cy.get('.sign-form a[href="/users/sign_up"]')
+            .click()
+        cy.url().should('include', 'users/sign_up')
+        cy.get('#user_username')
+            .type('JesSummers')
+        cy.get('#user_email')
+            .type('narec38376@sopulit.com')
+        cy.get('#user_password')
+            .type('1234rewQ')
+        cy.get('#user_password_confirmation')
+            .type('1234rewQ')
+        cy.get('#agreement_is_age_confirmed')
+            .check()
+        cy.get('#agreement_is_accepted')
+            .check()
+        cy.get('#mailing_system')
+            .check()
+        cy.get('#mailing_product')
+            .check()
+        cy.get('#mailing_news')
+            .check()
+        cy.get('.help-block')
+            .should('not.exist')
+        cy.get('[value="Create Account"]')
+            .click()
+        cy.get('.help-block')
+            .should('exist')
+        cy.get('.help-block').invoke('text').then( text => {
+            expect(text).to.eq('reCAPTCHA verification failed, please try again.')
+        })
+    })
+
+    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
+        cy.url().should('include', '/guide')
+
+        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    });
+
+    it('AT 051.004 | API > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page.', () => {
+        cy.get('#desktop-menu a[href="/api"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/api')
+        cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    })
 });
