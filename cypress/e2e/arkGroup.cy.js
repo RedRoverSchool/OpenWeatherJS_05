@@ -147,8 +147,7 @@ describe('group Ark', () => {
     cy.url().should('include', '/guide');
   })
 
-
-  it.only('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
+  it('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
     const startDate = new Date().getTime()
     const formatDate = { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' };
 
