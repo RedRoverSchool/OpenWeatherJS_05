@@ -1,11 +1,15 @@
 
 /// <reference types="cypress" />
 
-describe('group noGroup', () => {
+Cypress.Commands.add('login', (userName, password) => {
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(userName).should('have.value', userName)
+  cy.get('#user_password').type(password).should('have.value', password)
+  cy.get('#new_user input[value="Submit"]').click()
+  cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
+})
 
-const userName = 'nadiakoluzaeva@gmail.com';
-const password = 'OpenWeatherJS_05';
-const wrongPassword = 'TestTest';
+describe('group noGroup', () => {
 
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {
@@ -42,10 +46,8 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
 
   it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
  
-    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
-    cy.get('#user_email').type(userName).should('have.value', userName)
-    cy.get('#user_password').type(password).should('have.value', password)
-    cy.get('#new_user input[value="Submit"]').click()
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+
     cy.get('.clearfix #myTab li').should('have.length', 9)
     cy.get('.clearfix #myTab li').each(($el, idx) => {
       expect($el.text()).to.include(this.data.NavBar[idx])
@@ -54,21 +56,16 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
   
   it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products...', function() {
 
-      cy.get('#desktop-menu').contains('Sign in').click()
-      cy.get('.input-group #user_email').type('kollapsa@gmail.com')
-      cy.get('.input-group #user_password').type('76543218')
-      cy.get('[value="Submit"]').click()
-      cy.url().should('include', 'home.openweathermap.org/')
-      cy.get('.active').should('contain.text', 'New Products')
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+
+    cy.url().should('include', 'home.openweathermap.org/')
+    cy.get('.active').should('contain.text', 'New Products')
   })
 
   it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
-    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
-    cy.get('#user_email').type(userName).should('have.value', userName)
-    cy.get('#user_password').type(password).should('have.value', password)
-    cy.get('#new_user input[value="Submit"]').click()
-      .url().should('include', 'home.openweathermap.org')
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+
     cy.get('#myTab a[href="/"]').should('have.text', 'New Products').click()
     cy.get('.container .text-block').should('have.length', 3)
     cy.get('.container .text-block').each(($el, idx) => {
@@ -78,11 +75,8 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
 
 it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
  
-  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
-  cy.get('#user_email').type(userName).should('have.value', userName)
-  cy.get('#user_password').type(password).should('have.value', password)
-  cy.get('#new_user input[value="Submit"]').click()
-    .url().should('include', 'home.openweathermap.org')
+  cy.login(this.data.userProfile.email, this.data.userProfile.password)
+
   cy.get('.text-block .text-color ').should('have.length', 3)
   cy.get('.text-block .text-color ').each(($el, idx) => {
   cy.wrap($el).should('have.css', 'color', 'rgb(233, 110, 80)')
@@ -91,12 +85,13 @@ it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home 
 
   it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
  
-    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
-    cy.get('#user_email').type(userName).should('have.value', userName)
-    cy.get('#user_password').type(wrongPassword).should('have.value', wrongPassword)
-    cy.get('#new_user input[value="Submit"]').click()
-    cy.get('.panel.panel-red .panel-body').should('have.text', 'Invalid Email or password.')
-    })
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#user_email').type(this.data.userProfile.email)
+  cy.get('#user_password').type(this.data.userProfile.wrongPassword)
+  cy.get('#new_user input[value="Submit"]').click()
+
+  cy.get('.panel.panel-red .panel-body').should('have.text', 'Invalid Email or password.')
+  })
 
   it('AT_001.012 | Main page > Section with search > Search City> The displayed city name equals the city selected in "Search city" field', function() {
       const cityForSearch = "Paris";
@@ -118,11 +113,8 @@ it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home 
   
   it('AT_048.004 | User page > Billing plans > Verify that after the user clicks on the link "One Call by Call" subscription plan" open a new page url', function() {
  
-  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
-  cy.get('#user_email').type(userName).should('have.value', userName)
-  cy.get('#user_password').type(password).should('have.value', password)
-  cy.get('#new_user input[value="Submit"]').click()
-    .url().should('include', 'home.openweathermap.org')
+  cy.login(this.data.userProfile.email, this.data.userProfile.password)
+    
   cy.get('[href="/subscriptions"]').click()
   cy.get('h3.subscribe-title > a')
     .as('linkOneCallByCall')
