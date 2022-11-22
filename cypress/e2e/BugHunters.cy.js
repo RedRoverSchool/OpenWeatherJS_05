@@ -296,4 +296,19 @@ describe('groupBugHunters', () => {
     })
   })
 
+  it('AT_021.006 | Footer > Widgets> Verify there are 9 widgets on the page', function(){
+    cy.get('.user-li').as('SignInButton').click()
+    cy.get('.new_user .email').as('EnterEmailField').type('push@mailto.plus')
+    cy.get('#user_password').as('PasswordField').type('123456789')
+    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
+    cy.get('.inner-footer-container li:nth-child(5) a').as('WidgetsButton').click()
+
+    cy.get('.widget-left').as('Left_4_Witgets').each(($el) => {
+      cy.wrap($el).should('exist').and('be.visible')
+    })
+    cy.get('.widget-right').as('Right_5_Widgets').each(($el) => {
+      cy.wrap($el).should('exist').and('be.visible')
+    })
+  })
+
 })
