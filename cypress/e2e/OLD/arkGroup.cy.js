@@ -298,4 +298,14 @@ describe('group Ark', () => {
     })
   });
 
+  it.only('AT_028.003 | Footer > About us, Verify "Buy by Subscription" button', function () {
+    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+    cy.visit('https://openweathermap.org')
+
+    cy.get('a[href="/about-us"]').click()
+    cy.get('.btn_block[href*="subscriptions"]').click()
+
+    cy.url().should('eq', 'https://home.openweathermap.org/subscriptions')
+    cy.get('h3.subscribe-title [href]').should('have.text', '"One Call by Call" subscription plan')
+  });
 })
