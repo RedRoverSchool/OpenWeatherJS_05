@@ -148,7 +148,7 @@ describe('asiaJS', () => {
     cy.url().should('include', '/payments');
   });
 
-  it.only('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function (){
+  it('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function (){
     cy.login_asiaJS(this.data.email, this.data.password);
     cy.visit('https://home.openweathermap.org/myservices');
 
