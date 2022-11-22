@@ -8,7 +8,7 @@ describe('Group jScript_group', () => {
         cy.visit('https://openweathermap.org');
     })
 
-    it('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
+    it.skip('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
 
         cy.url().should('be.equal', this.data.blogPageLink);
