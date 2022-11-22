@@ -298,7 +298,7 @@ describe('group Ark', () => {
     })
   });
 
-  it.only('AT_028.003 | Footer > About us, Verify "Buy by Subscription" button', function () {
+  it('AT_028.003 | Footer > About us, Verify "Buy by Subscription" button', function () {
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
     cy.visit('https://openweathermap.org')
 
