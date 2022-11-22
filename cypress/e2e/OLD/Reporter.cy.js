@@ -17,7 +17,7 @@ const metric = '#selected[style="left: 2pt;"]';
 describe('GroupReporters', () => {
 
     beforeEach(function () {
-        cy.visit('https://openweathermap.org/')
+        cy.visit('/')
         cy.fixture('reporterFix').then((data) => {
             this.data = data
         })
@@ -53,7 +53,7 @@ describe('GroupReporters', () => {
             .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
     })
 
-    it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
+    it.skip('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
         const zipCode = '60604';
 
         enterCityOrZipCode(zipCode);
