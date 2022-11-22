@@ -9,7 +9,7 @@ describe('Group jScript_group', () => {
     })
 
     it.skip('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
-        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.url().should('be.equal', this.data.blogPageLink);
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
@@ -25,13 +25,13 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
-        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
     });
 
     it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
-        cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click();
+        cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','terms_and_conditions_of_use.pdf');
     });
 
@@ -42,12 +42,12 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_050.001 | Footer >Terms and conditions of sale', function () {
-        cy.get('#footer-website [href*="sale"]').invoke('removeAttr', 'target').click();
+        cy.get('#footer-website [href*="sale"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     }); 
     
     it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://drupal.org/project/olowm"]')
           .as('SeeOnTheWebsite_Button')
@@ -58,13 +58,13 @@ describe('Group jScript_group', () => {
     });
 
     it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
-        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('#desktop-menu a[href="/weathermap"]').click({force: true});
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
     it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
-        cy.get('li[class="user-li"] a[href$="sign_in"]').click();
+        cy.get('li[class="user-li"] a[href$="sign_in"]').click({force: true});
         cy.get('#user_email').type('3065606@gmail.com');
         cy.get('#user_password.form-control').type('Qwerty1234');
         cy.get('[value="Submit"]').click({force: true});
@@ -80,19 +80,19 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu link', function () {
-        cy.get('#desktop-menu [href$=-dashboard]').click();
+        cy.get('#desktop-menu [href$=-dashboard]').click({force: true});
         cy.url().should('include', '/weather-dashboard');
     });
     
     it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
-        cy.get("#desktop-menu ul li a[href='/guide']").click();
+        cy.get("#desktop-menu ul li a[href='/guide']").click({force: true});
         cy.get("ol [href='/api#current']").click();
         cy.url().should('include', '/api#current');
     });
 
     it('AT_025.004 | Header > Verify user will be redirected to new url "/weather-dashboard"', function () {
         let dashboard_button = '#desktop-menu > :nth-child(2) > :nth-child(3) > a'
-        cy.get(dashboard_button).click();
+        cy.get(dashboard_button).click({force: true});
         cy.url().should('include','weather-dashboard');
     });
 
@@ -103,7 +103,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
-        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
             expect($el.text()).to.equal(this.data.sectionsNames[i]);
@@ -111,13 +111,13 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
-        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#weather-widget span.owm-switch').click({force: true});
         cy.get('#dialogDesc div.more-options').click();
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com');
     });
     
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
-        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click();
+        cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
           .as('ViewWidget_Button')
@@ -128,26 +128,26 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
-        cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click();
+        cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     });
 
     it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
-        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
-        cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click();
+        cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
     });
 
     it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
-        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
         cy.url().should('eq', 'https://wordpress.org/plugins/wp-cloudy/');
     });
     
     it('AT_002.014 | Header > After clicking the logo user is redirected to the main page', function () {
-        cy.get('.logo').click();
+        cy.get('.logo').click({force: true});
         cy.url().should('eq', 'https://openweathermap.org/');
     });
     
@@ -156,7 +156,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_033.007 | Header > Navigation >> Verify "Pricing" menu link', function () {
-        cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click();
+        cy.get('#desktop-menu a[href="/price"]').should('have.text','Pricing').click({force: true});
         cy.url().should('eq','https://openweathermap.org/price');
     });
     
@@ -167,12 +167,12 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_033.008 | Header > Navigation > “Our Initiatives” menu link', function () {
-        cy.get('#desktop-menu a[href*="initiatives"]').click();
+        cy.get('#desktop-menu a[href*="initiatives"]').click({force: true});
         cy.url().should('eq', 'https://openweathermap.org/our-initiatives');
     });
 
     it("AT_002.012 | Header > Checking the website's logo is clickable and redirects User to the Main page", function () {
-        cy.get('#desktop-menu a[href="/weathermap"]').click();
+        cy.get('#desktop-menu a[href="/weathermap"]').click({force: true});
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');
     });
@@ -184,7 +184,7 @@ describe('Group jScript_group', () => {
     it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
-          .click();
+          .click({force: true});
 
         cy.get('h2.post__title')
           .contains('The Road to a New Thinking in Transport Power')
@@ -194,7 +194,7 @@ describe('Group jScript_group', () => {
     });     
     
     it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
-        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
 
         cy.url().should('include', this.data.blogPagePostLink);
@@ -202,20 +202,20 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
-        cy.get('div#footer-website a[href="/about-us"]').click();
+        cy.get('div#footer-website a[href="/about-us"]').click({force: true});
         cy.get('div.grid-container [href="/api"]').click();
         cy.url().should('include', 'https://openweathermap.org/api');
     });
 
     it('AT_028.005 | Footer > About us > Verify New and Updates button', function () {
-        cy.get('a[href="/about-us"]').click();
+        cy.get('a[href="/about-us"]').click({force: true});
         cy.get('a.round[href*="blog"]').invoke('removeAttr', 'target').click();
         cy.url().should('include', '/blog/category/weather');
     });
 
     it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
-        cy.get('#support-dropdown').click();
-        cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click();
+        cy.get('#support-dropdown').click({force: true});
+        cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click({force: true});
         cy.get('.headline').should('have.text', 'Ask a question');
 
         cy.get('#question_form_is_user_false').check();
@@ -228,14 +228,14 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_002.011 | Header > Clicking the logo> Verify the Main page is opened after clicking the logo.', function () {
-        cy.get('#first-level-nav .logo').invoke('removeAttr', 'target').click();
+        cy.get('#first-level-nav .logo').invoke('removeAttr', 'target').click({force: true});
 
         cy.url().should('eq', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
     
     it('AT_033.009 | Header > Navigation > Support > "How to start" menu link', function () {
-        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown').click({force: true});
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/appid"]').click();
 
@@ -244,7 +244,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_033.014 | Header > Navigation > Support > "FAQ" menu link', function () {
-        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown').click({force: true});
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href="/faq"]').click();
 
@@ -253,14 +253,14 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
-        cy.get('li.logo').click();
+        cy.get('li.logo').click({force: true});
     
         cy.url().should('include', 'https://openweathermap.org/');
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
     it('AT_033.015 | Header > Navigation > Support > "Ask a question" menu link', function () {
-        cy.get('#support-dropdown').click();
+        cy.get('#support-dropdown').click({force: true});
         cy.get('#support-dropdown-menu').should('be.visible');
         cy.get('#support-dropdown-menu a[href*="/questions"]').invoke('removeAttr', 'target').click();
 
@@ -275,7 +275,7 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_012.007 | Partners > CMS > Verification the number of Buttons', () => {
-        cy.get('#desktop-menu a[href="/examples"]').click();
+        cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions');
 
         cy.get('#cms a').should((a) => {
@@ -283,8 +283,8 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_025.005 | Header > Verify user will be redirected to new url "users/sign"', () => {
-        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click()
-        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click()
+        cy.get('#desktop-menu > :nth-child(2) > :nth-child(3) > a').click({force: true})
+        cy.get('.col-lg-6 > .row > p > .btn_like').invoke('removeAttr','target').click({force: true})
         
         cy.url().should('include','/users/sign_in')
         cy.get('.new_user > :nth-child(3) > #user_email').type('If_you_see this_text _ode_runs_good!!!')
@@ -341,13 +341,13 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
-        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
     });
 
     it('AT_025.003 | Dashboard > Verify that "Contact Us" button redirects the user to "Ask a question" page', function () {
-        cy.get('#desktop-menu [href="/weather-dashboard"]').click();
+        cy.get('#desktop-menu [href="/weather-dashboard"]').click({force: true});
         cy.title().should('eq','Weather dashboard - OpenWeatherMap');
 
         cy.get('.below > .btn_like').invoke('removeAttr','target').click();
@@ -357,7 +357,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
-        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
         cy.get('.post-list .post').should('have.length', 10);
@@ -382,14 +382,14 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
-        cy.get('#desktop-menu [href="/weathermap"]').click();
+        cy.get('#desktop-menu [href="/weathermap"]').click({force: true});
         cy.get('[for="Pressure"]').click();
 
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
     });
     
     it('AT_048.002 | User page > Billing plans > Verify billing plans information', function () {
-        cy.get('#desktop-menu .user-li a').click();
+        cy.get('#desktop-menu .user-li a').click({force: true});
         cy.get('.input-group #user_email').type('3065606@gmail.com');
         cy.get('.input-group #user_password').type('Qwerty1234');
         cy.get('#new_user [value="Submit"]').click();
@@ -403,7 +403,7 @@ describe('Group jScript_group', () => {
     });    
 
     it('AT_010.002 | Marketplace > Verify the link "History Bulk” on the page', () => {
-        cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click({force: true});
         cy.get('.product-container a[href="/history_bulks/new"]:not(.button-round)').click();
         
         cy.url().should('include', '/history_bulks/new');
@@ -411,7 +411,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
-        cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click();
+        cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
             cy.wrap($el).should('have.css', 'color', 'rgb(235, 110, 75)');
@@ -423,7 +423,7 @@ describe('Group jScript_group', () => {
         let contact_us_button = '.below > .btn_like';
         let email_field = '#question_form_email';
 
-        cy.get(dashboard_button).click();
+        cy.get(dashboard_button).click({force: true});
         cy.get(contact_us_button).invoke('removeAttr','target').click();
 
         cy.url().should('include','/questions');
@@ -446,7 +446,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
-        cy.get('a[href="/about-us"]').click();
+        cy.get('a[href="/about-us"]').click({force: true});
         cy.get('.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
           .invoke('removeAttr','target')
           .click();
@@ -456,7 +456,7 @@ describe('Group jScript_group', () => {
  });
         
     it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
-        cy.get('.user-li a').click();
+        cy.get('.user-li a').click({force: true});
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
         cy.get('[value="Submit"]').click();
@@ -468,14 +468,14 @@ describe('Group jScript_group', () => {
     });
     
     it('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
-        cy.get('[href="/widgets-constructor"]').click();
+        cy.get('[href="/widgets-constructor"]').click({force: true});
         
         cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9)
           .and('be.visible');
     });
 
     it('AT_018.009 | Support > Verify Drop Down menu', function() {
-        cy.get('#support-dropdown').as('Support').click();
+        cy.get('#support-dropdown').as('Support').click({force: true});
 
         cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
         cy.get('@Support_Dropdown').should('have.length', 3);
@@ -485,7 +485,7 @@ describe('Group jScript_group', () => {
     });
  
     it('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
-        cy.get('#desktop-menu li:nth-child(11) a').click();
+        cy.get('#desktop-menu li:nth-child(11) a').click({force: true});
         cy.get('.sign-form > form').within(($form) => {
             cy.get('#user_email').type(this.data.loginUserEmail);
             cy.get('#user_password').type(this.data.loginUserPassword);
@@ -508,7 +508,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', () => {
-        cy.get('#support-dropdown').contains('Support').click();
+        cy.get('#support-dropdown').contains('Support').click({force: true});
         cy.get('#support-dropdown-menu a[href$="/questions"]')
         .contains('Ask a question')
         .invoke('removeAttr', 'target')
@@ -532,7 +532,7 @@ describe('Group jScript_group', () => {
     });
 
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
-        cy.get('#weather-widget span.owm-switch').click();
+        cy.get('#weather-widget span.owm-switch').click({force: true});
         cy.get('#dialogDesc div.more-options').click();
 
         cy.get('#weather-widget  input[type="email"]').clear().type(this.data.email);
