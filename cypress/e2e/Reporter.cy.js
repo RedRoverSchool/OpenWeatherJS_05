@@ -273,4 +273,11 @@ describe('GroupReporters', () => {
         cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
         cy.url().should('eq', 'https://openweathermap.org/')
     });
+
+    it('AT 051.004 | API > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page.', () => {
+        cy.get('#desktop-menu a[href="/api"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/api')
+        cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    })
 });

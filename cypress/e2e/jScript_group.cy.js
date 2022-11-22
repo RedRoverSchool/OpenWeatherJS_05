@@ -102,13 +102,11 @@ describe('Group jScript_group', () => {
         cy.url().should('include','270748973021342');
     });
 
-    it ('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
+    it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
         cy.get('#desktop-menu a[href="/examples"]').click();
 
-        const sectionsNames = ['See on the website', 'View widget', 'View plugin', 'View plugin'];
-
         cy.get('#cms a').each(($el, i) => {
-            expect($el.text()).to.equal(sectionsNames[i]);
+            expect($el.text()).to.equal(this.data.sectionsNames[i]);
         });
     });
 
@@ -389,6 +387,20 @@ describe('Group jScript_group', () => {
 
         cy.get('.scale-details > :first-child').should('contain.text', this.data.mapsPagePressureLabel);
     });
+    
+    it('AT_048.002 | User page > Billing plans > Verify billing plans information', function () {
+        cy.get('#desktop-menu .user-li a').click();
+        cy.get('.input-group #user_email').type('3065606@gmail.com');
+        cy.get('.input-group #user_password').type('Qwerty1234');
+        cy.get('#new_user [value="Submit"]').click();
+        cy.get('#user-dropdown .inner-user-container').click();
+        cy.get('#user-dropdown-menu a[href="/myservices"]').click();
+        cy.get('.row a[href="/subscriptions"]').click();
+
+        cy.url().should('eq', 'https://home.openweathermap.org/subscriptions');
+        cy.get('.subscribe-title a').should('include.text', 'subscription plan'); 
+        cy.get('.container a[href*="/price#current"]').should('have.text', 'Professional collections');
+    });    
 
     it('AT_010.002 | Marketplace > Verify the link "History Bulk” on the page', () => {
         cy.get('#desktop-menu [href$="marketplace"]').invoke('removeAttr', 'target').click();

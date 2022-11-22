@@ -15,17 +15,22 @@ describe('group_javascript_for_qas', () => {
     });
 
     it('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
-        cy.get('li.user-li a').should('have.text', 'Sign in');
+        const SIGN_IN_BARMENU_ITEM =  "li.user-li a";
+        const SUPPORT_BARMENU_ITEM = "li.with-dropdown div"
+        const ASK_QUESTION_SUB_SUPPORTMENU_ITEM ="ul#support-dropdown-menu a[href*='/questions']";
+        const YES_USER_AUTH_RADIO_BTN = "input#question_form_is_user_true";
+        const ALERT_ERROR_AUTH_MESSAGE ="div#prompt";
 
-        cy.get("li.with-dropdown div").click();
-        cy.get("ul#support-dropdown-menu a[href='https://home.openweathermap.org/questions']").invoke('removeAttr', 'target').click()
+        cy.get(SIGN_IN_BARMENU_ITEM).should('be.visible', 'Sign in');
+        cy.get(SUPPORT_BARMENU_ITEM).click();
+        cy.get(ASK_QUESTION_SUB_SUPPORTMENU_ITEM).invoke('removeAttr', 'target').click()
         cy.title().should('eq', 'Members');
 
-        cy.get('input#question_form_is_user_true').check().should('be.checked')
-        cy.get('div#prompt').should('be.visible');
-        cy.get('div#prompt').should('have.text', 'Please enter your account email in our system - it will help us process your request faster')
-        cy.get('div#prompt').should('have.class', 'alert-info');
-        cy.get('div#prompt').should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)')
+        cy.get(YES_USER_AUTH_RADIO_BTN).check().should('be.checked')
+        cy.get(ALERT_ERROR_AUTH_MESSAGE).should('be.visible')
+                                        .should('have.text', 'Please enter your account email in our system - it will help us process your request faster')
+                                        .should('have.class', 'alert-info')
+                                        .should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)')
     });
 
     it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
@@ -38,14 +43,26 @@ describe('group_javascript_for_qas', () => {
         cy.url().should('contain', '/faq');
     });
 
-    it('AT_008.001 | Main menu > Guide > Verify URL and headers are displayed on the page', function () {
-        cy.get("div#desktop-menu a[href='/guide']").click();
+    it('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
+        const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
+        const MAINHEADER_H1_GUIDE_PAGE = "div.col-sm-12 h1";
+
+        cy.get(GUIDE_BARMENU_ITEM).click();
         cy.url().should('contain', '/guide');
-        cy.get("div.col-sm-12 h1").should("have.text", this.data.headers1)
-        cy.get("main h2").each(($el, idx) => {
+        cy.get(MAINHEADER_H1_GUIDE_PAGE).should("have.text", this.data.headers1)
+    });
+
+    it('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
+        const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
+        const SUBHEADERS_H2_GUIDE_PAGE = "main h2";
+        const SUBHEADERS_H4_GUIDE_PAGE = "h4 b";
+
+        cy.get(GUIDE_BARMENU_ITEM).click();
+
+        cy.get(SUBHEADERS_H2_GUIDE_PAGE).each(($el, idx) => {
             expect($el.text()).to.include(this.data.headers2[idx])
         })
-        cy.get("h4 b").each(($el, idx) => {
+        cy.get(SUBHEADERS_H4_GUIDE_PAGE).each(($el, idx) => {
             expect($el.text()).to.include(this.data.headers4[idx])
         })
     });
