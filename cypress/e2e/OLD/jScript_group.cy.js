@@ -5,7 +5,7 @@ describe('Group jScript_group', () => {
         cy.fixture('jScript_group').then(data => {
             this.data = data;
         });
-        cy.visit('https://openweathermap.org');
+        cy.visit('/');
     })
 
     it.skip('AT_013.001 | Blog > Weather > After clicking the Blog menu User is redirected to the Blog page', function () {
@@ -316,7 +316,7 @@ describe('Group jScript_group', () => {
     });
             
     it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
-        cy.visit('https://openweathermap.org/guide');
+        cy.visit('/guide');
         
         cy.get ('nav#nav-website a[href="/"]').click();
         cy.url().should ('eq', 'https://openweathermap.org/');
@@ -440,7 +440,7 @@ describe('Group jScript_group', () => {
         correctDate.push(date[0], date[2], date[1]);
         const todaysDate = correctDate.join(' ');
 
-        cy.visit('https://openweathermap.org/');
+        cy.visit('/');
 
         cy.get('.day-list li:first-child > span').should('have.text', todaysDate);
     });
