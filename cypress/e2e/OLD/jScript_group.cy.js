@@ -24,7 +24,7 @@ describe('Group jScript_group', () => {
         cy.get ('h1 .orange-text ').should('have.text', this.data.mainPageText);
     });
 
-    it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
+    it.skip('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click();
 
         cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
