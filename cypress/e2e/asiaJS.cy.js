@@ -155,7 +155,6 @@ describe('asiaJS', () => {
     cy.get('[href="/subscriptions"]').click();
     cy.url().should('include', '/subscriptions');
     cy.get('#myTab li.active').should('have.text', '\nBilling plans\n');
-
   });
 
 });
