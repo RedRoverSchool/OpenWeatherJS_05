@@ -296,4 +296,13 @@ describe('groupBugHunters', () => {
     })
   })
 
+  it('AT_026.004 | Maps > Click on any city on the map and see the data', function (){
+    cy.get('button.stick-footer-panel__link').wait(6000).click();
+    cy.get('a.map-info-block').invoke('removeAttr', 'target').click();
+    cy.get('.city-data > .city-main-info > .city-name').wait(3000).contains('Amsterdam').click();
+    cy.get('.expanded > :nth-child(1) > .city-data > .city-full-info > table > tbody').each(($el, i) => {
+        expect($el.text()).to.include(this.data.cityData[i]);
+    })
+})
+
 })

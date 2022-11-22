@@ -5,6 +5,16 @@
         "My payments",
         "My profile",
         "Logout"
-      ]
+      ],
 
+      "cityData" : [
+        "country",
+        "temp",
+        "clouds",
+        "humidity",
+        "pressure",
+        "wind direction",
+        "wind speed"
+      ]
+      
 }
