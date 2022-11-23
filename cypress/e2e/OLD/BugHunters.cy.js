@@ -26,7 +26,7 @@ describe('groupBugHunters', () => {
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
   })
 
-  it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
+  it.skip ('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
   })
@@ -392,6 +392,21 @@ it('AT_033.018 | Header > Navigation > API', () => {
       .each(($el) => {
         cy.wrap($el).should('be.visible')
       })
+  })
+
+  it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
+    cy.get('#desktop-menu > ul').each(($el, ind) => {
+        expect($el.text()).to.include(this.data.mainMenu[ind])
+    })
+    
+    cy.get('#support-dropdown').click()
+    cy.get('#support-dropdown-menu').each(($el, ind) => {
+        expect($el.text()).to.include(this.data.supportDropdownMenu[ind])
+    })
+
+    cy.get('#support-dropdown-menu a[href="/faq"]').click()
+    cy.url().should('include', '/faq')
+    cy.get('h1.breadcrumb-title').should('have.text', 'Frequently Asked Questions')
   })
 
 })

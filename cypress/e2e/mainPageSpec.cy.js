@@ -25,4 +25,15 @@ describe('mainPageSpec', () => {
     it('AT_005.002 | Main page > Verify the website\'s description', function () {
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
     });
+
+    it('AT_051.002 | API > Testing Home button > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page of the site.', function () {
+        mainPage.clickApiLink()
+        mainPage.elements
+                .getHomePageButton()
+                .should('have.text', 'Home')
+        mainPage.clickHomePageButton()
+
+        mainPage.elements.getMainPageContent()
+                .should('have.text', 'OpenWeather')
+    });
 });
