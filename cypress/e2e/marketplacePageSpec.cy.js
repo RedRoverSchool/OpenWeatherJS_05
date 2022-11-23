@@ -23,7 +23,7 @@ describe('Marketplace page test suite', () => {
       })
 
       it('AT_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
-        header.clickMarketplaceMenu();
+        header.clickMarketplaceMenuLink();
         
         marketplacePage.elements.getAllProductTitles().each(($el) => {
             cy.wrap($el).should('have.css', 'color', this.data.productTitleColor);
