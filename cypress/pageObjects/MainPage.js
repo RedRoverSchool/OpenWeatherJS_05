@@ -1,7 +1,8 @@
 class MainPage {
     elements = {
         getSearchInput: () => cy.get('input[placeholder = "Search city"]'),
-        getSearchBtn: () => cy.get('.search-block button')
+        getSearchBtn: () => cy.get('.search-block button'),
+        getPageDescriptionWhiteText: () => cy.get('span.white-text')
     }
 
     clickSearchBtn() {
