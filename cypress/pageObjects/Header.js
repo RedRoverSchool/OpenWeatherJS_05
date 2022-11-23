@@ -7,5 +7,9 @@ class Header {
     clickBlogMenuLink() {
         this.elements.getBlogMenuLink().invoke('removeAttr', 'target').click({force: true})
     }
+
+    clickPartnersMenuLink() {
+        this.elements.getPartnersMenuLink().click({force: true});
+    }
 }
 export default Header;
