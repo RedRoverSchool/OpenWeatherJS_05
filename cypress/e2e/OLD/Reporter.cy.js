@@ -17,7 +17,7 @@ const metric = '#selected[style="left: 2pt;"]';
 describe('GroupReporters', () => {
 
     beforeEach(function () {
-        cy.visit('https://openweathermap.org/')
+        cy.visit('/')
         cy.fixture('reporterFix').then((data) => {
             this.data = data
         })
@@ -53,7 +53,7 @@ describe('GroupReporters', () => {
             .should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way')
     })
 
-    it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
+    it.skip('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', () => {
         const zipCode = '60604';
 
         enterCityOrZipCode(zipCode);
@@ -264,5 +264,20 @@ describe('GroupReporters', () => {
         cy.get('.help-block').invoke('text').then( text => {
             expect(text).to.eq('reCAPTCHA verification failed, please try again.')
         })
+    })
+
+    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
+        cy.url().should('include', '/guide')
+
+        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
+    });
+
+    it('AT 051.004 | API > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page.', () => {
+        cy.get('#desktop-menu a[href="/api"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/api')
+        cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click()
+        cy.url().should('eq', 'https://openweathermap.org/')
     })
 });

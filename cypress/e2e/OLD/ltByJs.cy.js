@@ -304,4 +304,71 @@ describe('Group lt_by_js', () => {
         cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
         cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
     })
+
+    it('AT_042.004 | User page > My payments > text on the page', function () {
+    cy.get(".user-li a").click()
+    cy.get('.input-group #user_email').type(this.data.realEmail)
+    cy.get("#user_password").type(this.data.password)
+    cy.get('input[value="Submit"]').click()
+    cy.get(".panel-body").should("have.text", "Signed in successfully.")
+    cy.get(".inner-user-container").click()
+    cy.get('.dropdown-menu a[href="/payments"]').click()
+        
+    cy.url().should('contain', '/payments')
+    cy.get(".table.table-striped th").should("have.length", 4)
+    cy.get(".table.table-striped th").each(($el, idx) => {
+      expect($el.text()).to.include(this.data.paymentsTable[idx])
+    }); 
+    cy.get(".table.table-striped th").eq(0).should('contain', 'Number')
+  });
+
+  it('AT_007.002 |Create an account> Check message error', function () {
+    const signInPage = '#desktop-menu a[href="https://openweathermap.org/home/sign_in"]'
+    const signInToYourAccountext = '.first-child'
+    const createAccount = 'a[href="/users/sign_up"]'
+    const userNameField = '#user_username'
+    const emailField = '#user_email'
+    const passwordField = '#user_password'
+    const repeatPassword = '#user_password_confirmation'
+    const ageControl = '.chk-age-confirm'
+    const agreement = '.chk-accept'
+    const buttonCreatAccount = '.btn-submit'
+    const capchaMessage = '.help-block'
+
+    cy.get(signInPage).click()
+    cy.get(signInToYourAccountext).should('have.text', 'Sign In To Your Account')
+    cy.get(createAccount).click()
+    cy.get(userNameField).type(this.data.userName)
+    cy.get(emailField).type(this.data.email)
+    cy.get(passwordField).type(this.data.password1)
+    cy.get(repeatPassword).type(this.data.password1)
+    cy.get(ageControl).click()
+    cy.get(agreement).click()
+    cy.get(buttonCreatAccount).click() 
+
+    cy.get(capchaMessage).should('be.visible').and('have.text', 'reCAPTCHA verification failed, please try again.')
+  })
+
+  it.skip('AT_004.004 | Main page > Section with search > Switching weather to Metric system', function () {
+    const imperial = '.switch-container :nth-child(3)'
+    const metric = '.switch-container :nth-child(2)'
+    const highlighting = '#selected'
+    const weather = '.current-temp span[data-v-3e6e9f12]'
+    const temp = '.heading'
+
+    cy.get(imperial).click()
+    cy.wait(4000)
+    cy.get(highlighting).should('have.attr', 'style', "left: 72pt;")  
+
+    cy.get(temp).then(($data) => {
+        let tempF = parseInt($data.text())
+    cy.get(metric).click().wait(4000).then(() =>{
+        let tempC = parseInt($data.text())
+        expect(tempC).to.eq(Math.round(5 / 9 * (tempF - 32)))                   
+        })
+    })
+
+    cy.get(weather).should('contain', '°C')
+    cy.get(highlighting).should('have.attr', 'style', "left: 2pt;")   
+  })
 })

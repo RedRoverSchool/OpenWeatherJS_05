@@ -1,12 +1,17 @@
 /// <reference types="cypress" />
 
+const mainMenuDesk = {
+  "marketplace": "#desktop-menu a[href*='/marketplace']",
+  "maps": "#desktop-menu a[href*='/weathermap']"
+  }
+
 describe('group Ark', () => {
 
   beforeEach(function () {
     cy.fixture('arkGroup.json').then(data => {
       this.data = data;
     });
-    cy.visit('https://openweathermap.org');
+    cy.visit('/');
    })
 
   it(`AT_008.005 | Main menu > Verify the user be redirected to new URL by clicking "Guide"`, function () {
@@ -16,8 +21,8 @@ describe('group Ark', () => {
   });
 
   it('AT_010.004 | Marketplace > Verify the color of all orange links', function () {
-    cy.get('#desktop-menu [href*=marketplace]').invoke('removeAttr', 'target').click()
-
+    cy.get(mainMenuDesk.marketplace).invoke('removeAttr', 'target').click()
+  
     cy.get('.market-place .product h5 a')
       .each(el => {
         cy.wrap(el).should('have.css', 'color', 'rgb(235, 110, 75)')
@@ -33,7 +38,7 @@ describe('group Ark', () => {
   })
 
   it(`AT_002.002 | Header > Verifying the website's logo is clickable and it redirects a User to the Main page`, function () {
-    cy.visit('https://openweathermap.org/guide');
+    cy.visit('/guide');
     cy.get('li[class="logo"]').click();
 
     cy.url().should('eq', 'https://openweathermap.org/')
@@ -134,7 +139,7 @@ describe('group Ark', () => {
     cy.url().should('include', '/guide');
   })
 
-  it('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
+  it.skip('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
     cy.get('.daily-container ul.day-list li > span')
       .then($elArr => {
         expect($elArr).to.have.length(8)
@@ -173,7 +178,7 @@ describe('group Ark', () => {
     cy.get('#question_form_subject')
       .select('I want to discuss a purchase of OpenWeather products/subscriptions')
     cy.get('#question_form_message').type('some message')
-    cy.get('.btn-default').click()
+    cy.get('.btn-default').click({force: true})
 
     cy.get('div[class="help-block"]').contains('reCAPTCHA verification failed, please try again.')
   });
@@ -191,7 +196,7 @@ describe('group Ark', () => {
   });
 
   it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map', function () {
-    cy.get('#desktop-menu a[href="/weathermap"]').click({ timeout: 10000 })
+    cy.get(mainMenuDesk.maps).click();
     cy.get('#map-wrap .global-map').should('be.visible')
 
     cy.get('label[for="Global Precipitation"]')
@@ -222,6 +227,68 @@ describe('group Ark', () => {
     cy.url().should('include', 'https://home.openweathermap.org/users/sign_up')
     cy.get('h3.first-child').should('have.text', 'Create New Account')
   })
+ 
+  it('AT_054.002 | PersonalAccountName > Verify a successful Sign-out', function () {
+    cy.get('#desktop-menu .user-li a').click();
+    cy.get('.input-group #user_email').type('3065606@gmail.com', {force: true});
+    cy.get('.input-group #user_password').type('Qwerty1234', {force: true});
+    cy.get('#new_user [value="Submit"]').click({force: true});
+    cy.get('div[class="panel-body"]').contains('Signed in successfully.').should('be.visible');
+
+    cy.get('#user-dropdown').click();
+    cy.get('#user-dropdown-menu').should('be.visible');
+    cy.get('#user-dropdown-menu a.logout').click();
+
+    cy.get('div[class="panel panel-red"]').contains('Alert').should('be.visible');
+    cy.get('div[class="panel-body"]').contains('You need to sign in or sign up before continuing.').should('be.visible')
+  })
+
+  it.skip("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+    cy.get("#stick-footer-panel .stick-footer-panel__link").each(el => {
+        cy.wrap(el).focus().should('have.css', 'background-color', 'rgb(233, 110, 80)')
+      });
+  })
+
+  it.skip("AT_026.003 | Maps > Сheck that the «Zoom in» button works", function () {
+    cy.get(mainMenuDesk.maps).click();
+        
+    cy.get('a.leaflet-control-zoom-in').click()
+    cy.wait(4000)
+    
+    cy.get('img[src*="//cartodb-basemaps-c.global.ssl.fastly.net/light_all/"]')
+      .first()
+      .should("have.attr", "src")
+      .and('match', /light_all\/6/)
+  })
+
+  it('AT_010.010 | Marketplace > Verify the link "Historical Data Archives"', function () {
+    cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click()
+    cy.get('#custom_weather_products h1').should('have.text', "Custom Weather Products")
+    cy.get('.category [href*="/zip_code_data/new"]').contains('Historical Weather Data by State for all ZIP codes, USA').click()
+    
+    cy.get('h4.heading').should('have.text', 'Historical Weather Data by State')
+  });
+
+  it('AT_049.001 | User page > Blocked logs > The page is loading and displaying', function () {
+    cy.login_asiaJS(this.data.userProfile.email, this.data.userProfile.password)
+
+    cy.get('#myTab a[href="/blocks"]').click()
+
+    cy.location('pathname').should('eq', '/blocks')
+    cy.get('.services-table th').contains('Blocked').should('have.text', 'Blocked at')
+  });
+
+  it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
+    const accountDropdownOptions = ["My services", "My API keys", "My payments", "My profile", "Logout"]
+
+    cy.login_asiaJS(this.data.userProfile.email, this.data.userProfile.password)
+    cy.get('#user-dropdown').click()
+
+    cy.get('#user-dropdown-menu li a').each(($el, i) => {
+      expect($el).to.be.visible
+      expect($el.text()).to.include(accountDropdownOptions[i]);
+    })
+  });
 
   it('AT_028.007 | < Footer > About us, verify the “Where-to” text', function () {
     cy.get('.not-foldable > .section-content > ul > :nth-child(1) > a').click()
@@ -231,4 +298,3 @@ describe('group Ark', () => {
   })
 
 })
- 
