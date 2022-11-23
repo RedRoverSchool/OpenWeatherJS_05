@@ -7,7 +7,6 @@ class MainPage {
         getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
         getMainPageContent: () => cy.get('h1 span.orange-text'),
         getForecastDays: () => cy.get('.day-list li')
-
     }
 
     clickSearchBtn() {
