@@ -1,0 +1,12 @@
+{
+    "NavBar": ["New Products", "Services", "API keys", "Billing plans", "Payments", "Block logs",  "My orders", "My profile", "Ask a question"],
+    "textBlocs": ["Historical weather for any location", "Weather Dashboard", "Agricultural Dashboard and Agro API"],
+
+    "userProfile": {
+        
+        "userName": "noGroup",
+        "email": "test.openweathermap.05@gmail.com",
+        "password": "Test@123",
+        "wrongPassword": "TestTest"
+        }
+}

@@ -1,10 +1,21 @@
 {
     "firstName": "Donald",
     "lastName": "Duck",
-    "email": "testEmail.com",
+    "email": "testEmail@gmail.com",
+    "invalidEmail": "badEmai.com",
     "message": "My message to the world!",
     "blogPageLink": "https://openweather.co.uk/blog/category/weather",
     "blogPageWeatherFilter": "WEATHER",
     "blogPagePostsQuantity": 10,
-    "blogPagePostLink": "https://openweather.co.uk/blog/post/"
-  }
+    "blogPagePostLink": "https://openweather.co.uk/blog/post/",
+    "examplesPageLink": "https://openweathermap.org/examples",
+    "mainPageText": "OpenWeather",
+    "mapsPagePressureLabel": "Pressure",
+    "sectionsNames": ["See on the website", "View widget", "View plugin", "View plugin"],
+    "dayListLength": 8,
+    "questionsPageHeader": "Ask a question", 
+    "questionsPageEndPoint": "questions",
+    "loginUserEmail": "bob12345@example.com",
+    "loginUserPassword": "bob12345",
+    "supportDropdown": ["FAQ", "How to start", "Ask a question"]
+}

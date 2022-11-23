@@ -1,0 +1,6 @@
+{
+    "url": "https://openweather.co.uk/blog/category/weather",
+    "weatherFilter": "WEATHER",
+    "postsQuantity": 10,
+    "postsLink": "https://openweather.co.uk/blog/post/"
+}
