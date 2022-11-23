@@ -15,6 +15,27 @@
         "pressure",
         "wind direction",
         "wind speed"
+      ],
+
+      "mainMenu": [
+        "Guide",
+        "API",
+        "Dashboard",
+        "Marketplace",
+        "Pricing",
+        "Maps",
+        "Our initiatives",
+        "Partners",
+        "Blog",
+        "For Business",
+        "Sign in",
+        "Support"
+      ],
+
+      "supportDropdownMenu": [
+        "FAQ",
+        "How to start",
+        "Ask a question"
       ]
       
 }
