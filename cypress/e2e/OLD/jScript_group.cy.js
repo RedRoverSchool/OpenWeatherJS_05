@@ -381,7 +381,7 @@ describe('Group jScript_group', () => {
         cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
     });
 
-    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+    it.skip('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
         cy.get('#desktop-menu [href="/weathermap"]').click({force: true});
         cy.get('[for="Pressure"]').click();
 
@@ -430,11 +430,11 @@ describe('Group jScript_group', () => {
         cy.get(email_field).type('Checking_that_the_page_is_not_empty.');
     });
 
-    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+    it.skip('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
         cy.get('.day-list li').should('have.length', this.data.dayListLength);
     });
 
-    it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
+    it.skip('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
         const date = new Date().toUTCString().split(' ');
         const correctDate = []; 
         correctDate.push(date[0], date[2], date[1]);
