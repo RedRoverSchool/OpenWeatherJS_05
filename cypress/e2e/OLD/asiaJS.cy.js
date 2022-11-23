@@ -3,9 +3,9 @@
 
 describe('asiaJS', () => {
   beforeEach(function () {
-    cy.fixture('asiaJS').then((data)=> {
+    cy.fixture('asiaJS').then((data) => {
       this.data = data
-  });
+    });
 
     cy.visit('https://openweathermap.org/');
   });
@@ -93,7 +93,7 @@ describe('asiaJS', () => {
       .should('be.visible')
       .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
   });
-  
+
   it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
     let current_date = String();
 
@@ -114,7 +114,7 @@ describe('asiaJS', () => {
   it('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', () => {
     cy.get('#desktop-menu a[href="/our-initiatives"]').click();
     cy.get('.ow-btn').click();
-    cy.url().should('include','/student-initiative');
+    cy.url().should('include', '/student-initiative');
     cy.get('.topic h1').should('have.text', 'Student initiative');
   });
 
@@ -125,30 +125,30 @@ describe('asiaJS', () => {
     cy.get('#support-dropdown').click();
     cy.get(faqLink).click();
 
-    cy.get(`${howToGet} .question-heading`).click({force: true});
+    cy.get(`${howToGet} .question-heading`).click({ force: true });
     cy.get(`${howToGet} .question.visible`).should('be.visible');
     cy.get(`${howToGet} .question-content`)
       .contains('get an API key (APPID)')
       .should('be.visible');
   });
 
-  it('AT_042.005 | User page >My payments>Verify that text displays on the page',function (){
+  it('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
     const buttonSignIn = '.user-li a';
     const userEmail = '.input-group input#user_email';
     const userPassword = '.input-group input#user_password';
     const submitButton = 'input[value="Submit"]';
 
-    cy.get(buttonSignIn).click({force: true});
+    cy.get(buttonSignIn).click({ force: true });
     cy.get(userEmail).type(this.data.email);
     cy.get(userPassword).type(this.data.password).should('be.visible');
-    cy.get(submitButton).click({force: true});
-    
-    cy.get('div.inner-user-container').should('contain.text', 'Asia Tester').click({force: true});
-    cy.get('.dropdown-menu a[href="/payments"]').click({force: true});
+    cy.get(submitButton).click({ force: true });
+
+    cy.get('div.inner-user-container').should('contain.text', 'Asia Tester').click({ force: true });
+    cy.get('.dropdown-menu a[href="/payments"]').click({ force: true });
     cy.url().should('include', '/payments');
   });
 
-  it('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function (){
+  it('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function () {
     cy.login_asiaJS(this.data.email, this.data.password);
     cy.visit('https://home.openweathermap.org/myservices');
 
@@ -156,5 +156,46 @@ describe('asiaJS', () => {
     cy.url().should('include', '/subscriptions');
     cy.get('#myTab li.active').should('have.text', '\nBilling plans\n');
   });
-  
+
+  it('AT_013.008 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', () => {
+    cy.get('#desktop-menu [href*="/blog/category/weather"]').invoke('removeAttr', 'target').click();
+    cy.get('.post-list .post').should('have.length', 10);
+  });
+
+  it('AT_013.009 | Blog > Weather > All posts links are clickable and redirect a user to the posts in a new page', () => {
+    cy.get('#desktop-menu [href*="/blog/category/weather"]').invoke('removeAttr', 'target').click();
+
+    cy.get('.post-list .post').each((el, i) => {
+      cy.get('.post-list .post .post__title-link')
+        .eq(i)
+        .invoke('attr', 'href').then((endpoint) => {
+          cy.request(endpoint).then((response) => {
+
+            expect(response.status).to.eql(200);
+          });
+        });
+    });
+  });
+
+  it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+    let detailed_weather_information = Array();
+
+    cy.get('[fill="#48484A"]').each((el, i) => {
+      cy.get('[fill="#48484A"]')
+        .eq(i)
+        .click({ force: true });
+      cy.get('.scrolling-container').should('be.visible');
+      cy.get('.daily-detail-container tr')
+        .eq(0)
+        .find('th')
+        .each(($item, index) => {
+          if ($item.text().length) detailed_weather_information.push($item.text());
+        }).then(() => {
+
+          expect(detailed_weather_information).to.deep.eql(this.data.weather_details);
+          detailed_weather_information = [];
+        });
+    });
+  });
+
 });

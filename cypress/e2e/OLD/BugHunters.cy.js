@@ -12,7 +12,9 @@ describe('groupBugHunters', () => {
   });
 
   it('AT_006.001 | Main page > Sign in', function () {
-    cy.get('li.user-li').contains('Sign in').click({ force: true })
+    cy.get('li.user-li').contains('Sign in').click({
+      force: true
+    })
     cy.get('#user_email')
       .should('have.attr', 'placeholder', 'Enter email')
       .type('oforostinko@gmail.com')
@@ -24,7 +26,7 @@ describe('groupBugHunters', () => {
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
   })
 
-  it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
+  it.skip ('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
   })
@@ -35,15 +37,21 @@ describe('groupBugHunters', () => {
   })
 
   it("AT_027.003 |Maps > Section with the scale", function () {
-    cy.get('#desktop-menu [href="/weathermap"]').click({ force: true });
+    cy.get('#desktop-menu [href="/weathermap"]').click({
+      force: true
+    });
     cy.url().should('include', '/weathermap');
-    cy.get('[for="Global Precipitation"]').click({ force: true });
+    cy.get('[for="Global Precipitation"]').click({
+      force: true
+    });
     cy.get('.scale-details >div:first-child')
       .should('contain', 'Precipitation, mm/h');
   })
 
   it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
-    cy.get('#desktop-menu').contains('Guide').click({ force: true });
+    cy.get('#desktop-menu').contains('Guide').click({
+      force: true
+    });
     cy.get('center a[href="/price"]').click();
     cy.url().should('contain', '/price');
   })
@@ -84,12 +92,16 @@ describe('groupBugHunters', () => {
 
   it('AT_009.006 | Main menu > Marketplace > verify that user will be redirected to new URL "Marketplace', function () {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
-    cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
+    cy.get(marketplace).invoke('removeAttr', 'target').click({
+      force: true
+    })
     cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
   })
 
   it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
-    cy.get('#desktop-menu a[href="/guide"]').click({ force: true });
+    cy.get('#desktop-menu a[href="/guide"]').click({
+      force: true
+    });
     cy.url().should('eq', 'https://openweathermap.org/guide');
   })
 
@@ -120,12 +132,16 @@ describe('groupBugHunters', () => {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
     const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
 
-    cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
+    cy.get(marketplace).invoke('removeAttr', 'target').click({
+      force: true
+    })
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
   })
 
   it('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
-    cy.get('#desktop-menu').contains('Guide').click({ force: true });
+    cy.get('#desktop-menu').contains('Guide').click({
+      force: true
+    });
     cy.get('.col-sm-12 h1').should('have.text', 'Weather data in a fast and easy-to-use way');
     cy.get('.col-sm-12 > :nth-child(6)').should('have.text', 'OpenWeather products');
     cy.get(':nth-child(13) > b').should('have.text', 'Professional collections:');
@@ -160,7 +176,9 @@ describe('groupBugHunters', () => {
   })
 
   it('AT_033.016 | Header > Navigation', function () {
-    cy.get('#desktop-menu a[href="/guide"]').click({ force: true })
+    cy.get('#desktop-menu a[href="/guide"]').click({
+      force: true
+    })
     cy.url().should('include', '/guide')
   })
 
@@ -169,7 +187,9 @@ describe('groupBugHunters', () => {
     const historyBulk = 'h5 a[href="/history_bulks/new"]'
     const placeOrderButton = 'div.button-container a[href="/history_bulks/new"]'
 
-    cy.get(marketplace).invoke('removeAttr', 'target').click({ force: true })
+    cy.get(marketplace).invoke('removeAttr', 'target').click({
+      force: true
+    })
     cy.get(historyBulk).should('be.visible')
     cy.get(placeOrderButton).should('be.visible').click()
     cy.url().should('eq', 'https://home.openweathermap.org/history_bulks/new')
@@ -187,11 +207,11 @@ describe('groupBugHunters', () => {
     cy.get('div.alert-info').should('contain', 'You can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.')
       .and('be.visible')
   })
-  
+
   it('AT_005.006 | Verifying the website name describtion', () => {
     cy.get('div.mobile-padding .orange-text').contains("OpenWeather").should('be.visible')
     cy.get('.white-text').contains("Weather forecasts, nowcasts and history in a fast and elegant way").should('be.visible')
-  }); 
+  });
 
   it('AT_032.003 | Header > Account Dropdown Menu > My Profile > Password Change > Verify successful password change', () => {
     cy.get('li.user-li a[href*="sign_in"]').click()
@@ -246,7 +266,9 @@ describe('groupBugHunters', () => {
 
   it('AT_001.016 | Main page > Section with search > Search City', () => {
     const city = 'Boston';
-    cy.get('div.search').should('be.visible').click({ force: true }).type(city);
+    cy.get('div.search').should('be.visible').click({
+      force: true
+    }).type(city);
     cy.get('.button-round').click();
     cy.get(':nth-child(1) > [style="width: 140px;"]').click();
     cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
@@ -280,7 +302,9 @@ describe('groupBugHunters', () => {
   })
 
   it('AT_020.004 | Sign in>Dropdown menu>Verify dropdown menu is visible and exist', function () {
-    cy.get('li.user-li').contains('Sign in').click({ force: true })
+    cy.get('li.user-li').contains('Sign in').click({
+      force: true
+    })
     cy.get('#user_email')
       .should('have.attr', 'placeholder', 'Enter email')
       .type('oforostinko@gmail.com')
@@ -296,13 +320,59 @@ describe('groupBugHunters', () => {
     })
   })
 
-  it('AT_026.004 | Maps > Click on any city on the map and see the data', function (){
+  it('AT_026.004 | Maps > Click on any city on the map and see the data', function () {
     cy.get('button.stick-footer-panel__link').wait(6000).click();
     cy.get('a.map-info-block').invoke('removeAttr', 'target').click();
     cy.get('.city-data > .city-main-info > .city-name').wait(3000).contains('Amsterdam').click();
     cy.get('.expanded > :nth-child(1) > .city-data > .city-full-info > table > tbody').each(($el, i) => {
-        expect($el.text()).to.include(this.data.cityData[i]);
+      expect($el.text()).to.include(this.data.cityData[i]);
+
     })
-})
+  })
+  
+  it('AT_041.003 | Header > User > My API keys >', () => {
+    cy.get('li.user-li').contains('Sign in').click({
+      force: true
+    })
+
+    cy.get('#user_email')
+      .type('redroverschool@yahoo.com')
+    cy.get('#user_password.form-control')
+      .type('123456789')
+    cy.get('#user_remember_me').check().should('be.checked')
+    cy.contains('Submit').click()
+    cy.get('.panel-body')
+    cy.get('.inner-user-container').click({
+      force: true
+    })
+    cy.get('.dropdown-menu a[href="/api_keys"]')
+      .click({
+        force: true
+      })
+    cy.get('.alert').contains('You can generate as many API keys as needed for your subscription.').should('be.visible')
+  });
+
+it('AT_033.018 | Header > Navigation > API', () => {
+  cy.visit('https://openweathermap.org')
+  cy.get('#desktop-menu a[href="/api"]').click({
+    force: true
+  })
+  cy.url().should('include', '/api')
+});
+
+  it('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('push@mailto.plus')
+    cy.get('#user_password').type('123456789')
+    cy.get('.btn-color[value="Submit"]').click()
+
+    cy.get('.inner-footer-container a[href*=widgets]')
+      .should('include.text', 'Widgets')
+      .click()
+
+    cy.url().should('include', '/widgets-constructor')
+    cy.get('.breadcrumb-title')
+      .should('have.text', 'Widgets constructor')
+  })
 
 })
