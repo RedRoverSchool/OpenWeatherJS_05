@@ -7,7 +7,7 @@ describe('groupBugHunters', () => {
     cy.fixture('bugHunters').then(data => {
       this.data = data;
     })
-    cy.visit('https://openweathermap.org/');
+    cy.visit('/');
 
   });
 
@@ -77,7 +77,7 @@ describe('groupBugHunters', () => {
 
   it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
     cy.get('#desktop-menu a[href="/api"]').click()
-    cy.url().should('eq', 'https://openweathermap.org/api')
+    cy.url().should('eq', '/api')
   })
 
   it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
@@ -102,7 +102,7 @@ describe('groupBugHunters', () => {
     cy.get('#desktop-menu a[href="/guide"]').click({
       force: true
     });
-    cy.url().should('eq', 'https://openweathermap.org/guide');
+    cy.url().should('eq', '/guide');
   })
 
   it('AT_032.002 | Header > Account Dropdown Menu > My Profile > Password Change> Verify successful notification', function () {
@@ -130,7 +130,7 @@ describe('groupBugHunters', () => {
 
   it('009.007 | Main menu > Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
     const marketplace = '#desktop-menu a[href*="marketplace"]'
-    const documentationButton = '.product a[href="https://openweathermap.org/history-bulk"]'
+    const documentationButton = '.product a[href="/history-bulk"]'
 
     cy.get(marketplace).invoke('removeAttr', 'target').click({
       force: true
@@ -376,7 +376,7 @@ describe('groupBugHunters', () => {
   });
 
 it('AT_033.018 | Header > Navigation > API', () => {
-  cy.visit('https://openweathermap.org')
+  cy.visit('/')
   cy.get('#desktop-menu a[href="/api"]').click({
     force: true
   })
