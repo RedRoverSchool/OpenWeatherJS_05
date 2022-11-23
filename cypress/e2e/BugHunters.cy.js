@@ -4,9 +4,7 @@
 describe('groupBugHunters', () => {
 
   beforeEach(function () {
-    cy.fixture('bugHunters').then(data => {
-      this.data = data;
-    })
+
     cy.visit('https://openweathermap.org/');
 
   });
@@ -188,112 +186,18 @@ describe('groupBugHunters', () => {
       .and('be.visible')
   })
   
-  it('AT_005.006 | Verifying the website name describtion', () => {
-    cy.get('div.mobile-padding .orange-text').contains("OpenWeather").should('be.visible')
-    cy.get('.white-text').contains("Weather forecasts, nowcasts and history in a fast and elegant way").should('be.visible')
-  }); 
-
-  it('AT_032.003 | Header > Account Dropdown Menu > My Profile > Password Change > Verify successful password change', () => {
-    cy.get('li.user-li a[href*="sign_in"]').click()
-    cy.get('.new_user .email').type('redroverschool@yahoo.com')
-    cy.get('#user_password').type('123456789')
-    cy.get('input[value="Submit"]').click()
-
-    cy.get('#user-dropdown').click()
-    cy.get('a[href*="/home"]').contains('My profile').click()
-    cy.url().should('include', '/home')
-    cy.get('ul.nav-tabs li:nth-child(8)').should('have.class', 'active')
-
-    cy.get('#password_form_password').type('123456789')
-    cy.get('#password_form_password_confirmation').type('123456789')
-    cy.get('input[value="Change Password"]').click()
-    cy.get('.panel-body').should('be.visible').and('have.text', 'Password was changed successfully')
-  })
-
-  it('AT_027.005 | Maps > Section with the scale > The scale names matches the label after selecting "Wind speed"', function () {
-    cy.get('#desktop-menu a[href="/weathermap"]').click()
-    cy.get('label[for="Wind speed"]').click()
-    cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
-  })
-
-  it('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function () {
-    cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('yurik@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('12345678')
-    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
-    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
-    cy.url().should('include', '/api_keys')
-
-    cy.get('.api-keys tbody td:nth-child(2)').as('APIkey').should('have.text', 'Default')
-    cy.get('.edit-key-btn').as('EditButton').click()
-    cy.get('#edit_key_form_name').as('EditNameField')
-      .clear()
-      .type('New_API_key')
-      .should('be.visible')
-    cy.get('.pop-up-footer .dark').as('SaveButton').click()
-    cy.get('@APIkey').should('have.text', 'New_API_key')
-    cy.get('.col-sm-offset-2 .panel').as('NoticeRenameKey')
-      .should('include.text', 'API key was edited successfully')
-      .and('include.text', 'Notice')
-      .and('be.visible')
-
-    //Return previous name of the key
-    cy.get('@EditButton').click()
-    cy.get('@EditNameField').clear().type('Default')
-    cy.get('@SaveButton').click()
-  })
-
-  it('AT_001.016 | Main page > Section with search > Search City', () => {
-    const city = 'Boston';
-    cy.get('div.search').should('be.visible').click({ force: true }).type(city);
-    cy.get('.button-round').click();
-    cy.get(':nth-child(1) > [style="width: 140px;"]').click();
-    cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
-  })
-
-  it('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
-    cy.get('#desktop-menu [href="/our-initiatives"]').click();
-    cy.get('.col-sm-12 :nth-child(9) h2>span')
-      .as('Education')
-      .should('have.text', 'Education');
-    cy.get('center a')
-      .as('LearnMore')
-      .should('have.text', 'Learn more');
-    cy.get('@LearnMore').click();
-    cy.url().should('include', '/student-initiative');
-    cy.get('h1.breadcrumb-title').should('have.text', 'Student initiative');
-  })
-
-  it('AT_042.003 | User page > My payments > User is redirected to the "Payments" page', () => {
-    cy.get('li.user-li a[href*="sign_in"]').click()
-    cy.get('.new_user .email').type('redroverschool@yahoo.com')
-    cy.get('#user_password').type('123456789')
-    cy.get('input[value="Submit"]').click()
-
-    cy.get('#user-dropdown').click()
-    cy.get('#user-dropdown-menu a[href="/payments"]').click()
-    cy.url().should('include', '/payments')
-    cy.get('.table-striped').should('contain', 'Number #')
-      .and('contain', 'Date')
-      .and('contain', 'Amount')
-  })
-
-  it('AT_020.004 | Sign in>Dropdown menu>Verify dropdown menu is visible and exist', function () {
+  it('AT_041.003 | Header > User > My API keys >', () => {
     cy.get('li.user-li').contains('Sign in').click({ force: true })
-    cy.get('#user_email')
-      .should('have.attr', 'placeholder', 'Enter email')
-      .type('oforostinko@gmail.com')
-    cy.get('#user_password.form-control')
-      .should('have.attr', 'placeholder', 'Password')
-      .type('12341234')
-    cy.get('#user_remember_me').check().should('be.checked')
-    cy.contains('Submit').click()
-    cy.get('.panel-body').should('have.text', 'Signed in successfully.')
-    cy.get('#user-dropdown').click();
-    cy.get('#user-dropdown-menu').each(($el, index) => {
-      expect($el.text()).to.include(this.data.userAccountMenu[index])
-    })
-  })
-
+      cy.get('#user_email')
+        .type('wiesvictoriaqa@gmail.com')
+      cy.get('#user_password.form-control')
+        .type('12345678')
+      cy.get('#user_remember_me').check().should('be.checked')
+      cy.contains('Submit').click()
+      cy.get('.panel-body')
+    cy.get('.inner-user-container').click({force: true})
+    cy.get('.dropdown-menu a[href="/api_keys"]')
+  .click({force: true})
+  cy.get('.alert').contains('You can generate as many API keys as needed for your subscription.').should('be.visible')
+  });
 })
