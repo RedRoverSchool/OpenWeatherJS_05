@@ -139,7 +139,7 @@ describe('group Ark', () => {
     cy.url().should('include', '/guide');
   })
 
-  it('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
+  it.skip('AT_045.005 | Main page > Section with 8-day forecast. Check display of eight days from current date', function () {
     cy.get('.daily-container ul.day-list li > span')
       .then($elArr => {
         expect($elArr).to.have.length(8)
@@ -270,7 +270,7 @@ describe('group Ark', () => {
   });
 
   it('AT_049.001 | User page > Blocked logs > The page is loading and displaying', function () {
-    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+    cy.login_asiaJS(this.data.userProfile.email, this.data.userProfile.password)
 
     cy.get('#myTab a[href="/blocks"]').click()
 
@@ -281,7 +281,7 @@ describe('group Ark', () => {
   it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
     const accountDropdownOptions = ["My services", "My API keys", "My payments", "My profile", "Logout"]
 
-    cy.login(this.data.userProfile.email, this.data.userProfile.password)
+    cy.login_asiaJS(this.data.userProfile.email, this.data.userProfile.password)
     cy.get('#user-dropdown').click()
 
     cy.get('#user-dropdown-menu li a').each(($el, i) => {

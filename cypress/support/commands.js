@@ -35,11 +35,3 @@ Cypress.Commands.add('login_asiaJS', (email, password) => {
     cy.get(userPassword).type(password).should('be.visible');
     cy.get(submitButton).click({force: true});
 });
-
-Cypress.Commands.add('login_arkGroup', (username, password) => {
-    cy.visit('/home/sign_in')
-    cy.get('.sign-form > #new_user input#user_email').type(username, {force: true})
-    cy.get('.sign-form > #new_user input#user_password').type(password, {force: true})
-    cy.get('.sign-form > #new_user input[name="commit"]').click({force: true})
-    cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
-})
