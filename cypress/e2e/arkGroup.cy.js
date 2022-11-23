@@ -223,4 +223,12 @@ describe('group Ark', () => {
     cy.get('h3.first-child').should('have.text', 'Create New Account')
   })
 
+  it('AT_028.007 | About us, verify “News and Updates” button', function () {
+    cy.get('.not-foldable > .section-content > ul > :nth-child(1) > a').click()
+
+    cy.url().should('eq','https://openweathermap.org/about-us')
+    cy.get('h2.orange-text').should('have.text','Where-to')
+  })
+
 })
+ 
