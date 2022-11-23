@@ -7,21 +7,21 @@ class Header {
     }
 
     clickSupport() {
-        this.elements.getSupportDropDownMenu().click({force: true});
+        this.elements.getSupportDropDownMenu().click({ force: true });
     };
-    
-    clickAskAquestion() {
+
+    clickAskAquestionMenuLink() {
         this.elements.getAskAquestionMenuLink()
-        .invoke('removeAttr', 'target')
-        .click({force: true});
-    }
-     
+            .invoke('removeAttr', 'target')
+            .click({ force: true });
+    };
+
     clickBlogMenuLink() {
-        this.elements.getBlogMenuLink().invoke('removeAttr', 'target').click({force: true})
-    }
+        this.elements.getBlogMenuLink().invoke('removeAttr', 'target').click({ force: true });
+    };
 
     clickPartnersMenuLink() {
-        this.elements.getPartnersMenuLink().click({force: true});
-    }
+        this.elements.getPartnersMenuLink().click({ force: true });
+    };
 }
 export default Header;
