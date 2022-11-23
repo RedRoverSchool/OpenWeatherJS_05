@@ -123,5 +123,13 @@ it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home 
     .url().should('include', '/price')
   cy.get('h1.breadcrumb-title').should('have.text', 'Pricing')
   })
+
+  it('AT_028.009 | Footer > About us > Verify the button "Buy in the Marketplace" redirects to the expected page', function() {
+    cy.get('a[href="/about-us"]').click()
+    cy.get('a[class="btn_block orange round"][href="https://home.openweathermap.org/marketplace"]').click()
+    cy.get('#custom_weather_products').should('include.text', 'Custom Weather Products')
+    .should('be.visible')
+    
+  });
 })
 
