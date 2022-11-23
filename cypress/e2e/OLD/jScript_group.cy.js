@@ -381,7 +381,7 @@ describe('Group jScript_group', () => {
         cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
     });
 
-    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+    it.skip('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
         cy.get('#desktop-menu [href="/weathermap"]').click({force: true});
         cy.get('[for="Pressure"]').click();
 
