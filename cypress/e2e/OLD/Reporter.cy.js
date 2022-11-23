@@ -81,7 +81,7 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
 
-    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
+    it.skip('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
         const cityName = 'Washington DC';
 
         enterCityOrZipCode(cityName);
