@@ -18,4 +18,9 @@ describe('Footer test suite', () => {
         
         cy.url().should('be.equal',this.data.websiteTermsUrl);
     });
+
+    it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function() {
+        footer.elements.getAppStoreLink().should('be.visible')
+        footer.elements.getGooglePlayLink().should('be.visible')
+    })
 });

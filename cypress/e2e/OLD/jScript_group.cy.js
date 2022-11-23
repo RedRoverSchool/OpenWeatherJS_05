@@ -102,7 +102,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include','270748973021342');
     });
 
-    it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
+    it.skip('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
@@ -177,7 +177,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
-    it('AT_005.002 | Main page > Verify the website\'s description', function () {
+    it.skip('AT_005.002 | Main page > Verify the website\'s description', function () {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
@@ -193,7 +193,7 @@ describe('Group jScript_group', () => {
         cy.get('h1.post-page__title').should('have.text', 'The Road to a New Thinking in Transport Power');
     });     
     
-    it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
+    it.skip('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
 
@@ -213,7 +213,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/blog/category/weather');
     });
 
-    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it.skip('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
         cy.get('#support-dropdown').click({force: true});
         cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click({force: true});
         cy.get('.headline').should('have.text', 'Ask a question');
