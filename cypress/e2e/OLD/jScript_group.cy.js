@@ -410,7 +410,7 @@ describe('Group jScript_group', () => {
         cy.get('.page-content-bulk h4.heading').should('have.text', 'Create New History Bulk')
     });
 
-    it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+    it.skip('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
         cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
