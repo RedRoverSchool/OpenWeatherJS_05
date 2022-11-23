@@ -23,3 +23,15 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login_asiaJS', (email, password) => { 
+    const buttonSignIn = '.user-li a';
+    const userEmail = '.input-group input#user_email';
+    const userPassword = '.input-group input#user_password';
+    const submitButton = 'input[value="Submit"]';
+
+    cy.get(buttonSignIn).click({force: true});
+    cy.get(userEmail).type(email);
+    cy.get(userPassword).type(password).should('be.visible');
+    cy.get(submitButton).click({force: true});
+});
