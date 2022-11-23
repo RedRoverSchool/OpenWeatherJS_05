@@ -157,4 +157,9 @@ describe('asiaJS', () => {
     cy.get('#myTab li.active').should('have.text', '\nBilling plans\n');
   });
   
+  it('AT_013.008 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', () => {
+    cy.get('#desktop-menu [href*="/blog/category/weather"]').invoke('removeAttr', 'target').click();
+    cy.get('.post-list .post').should('have.length', 10);
+  });
+  
 });

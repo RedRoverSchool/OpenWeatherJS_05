@@ -213,7 +213,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/blog/category/weather');
     });
 
-    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it.skip('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
         cy.get('#support-dropdown').click({force: true});
         cy.get('#support-dropdown+ul > li:nth-child(3) > a').invoke('removeAttr', 'target').click({force: true});
         cy.get('.headline').should('have.text', 'Ask a question');
