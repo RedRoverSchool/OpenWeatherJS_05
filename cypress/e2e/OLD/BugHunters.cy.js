@@ -375,4 +375,18 @@ it('AT_033.018 | Header > Navigation > API', () => {
       .should('have.text', 'Widgets constructor')
   })
 
+  it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
+    cy.get('#desktop-menu > ul').each(($el, ind) => {
+        expect($el.text()).to.include(this.data.mainMenu[ind])
+    })
+    
+    cy.get('#support-dropdown').click()
+    cy.get('#support-dropdown-menu').each(($el, ind) => {
+        expect($el.text()).to.include(this.data.supportDropdownMenu[ind])
+    })
+
+    cy.get('#support-dropdown-menu a[href="/faq"]').click()
+    cy.url().should('include', '/faq')
+    cy.get('h1.breadcrumb-title').should('have.text', 'Frequently Asked Questions')
+  })
 })
