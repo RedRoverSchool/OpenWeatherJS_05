@@ -177,7 +177,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
-    it('AT_005.002 | Main page > Verify the website\'s description', function () {
+    it.skip('AT_005.002 | Main page > Verify the website\'s description', function () {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
@@ -193,7 +193,7 @@ describe('Group jScript_group', () => {
         cy.get('h1.post-page__title').should('have.text', 'The Road to a New Thinking in Transport Power');
     });     
     
-    it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
+    it.skip('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         cy.get('.post-list .post:nth-child(1) .post__title-link').click();
 
