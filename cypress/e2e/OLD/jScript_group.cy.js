@@ -24,13 +24,13 @@ describe('Group jScript_group', () => {
         cy.get ('h1 .orange-text ').should('have.text', this.data.mainPageText);
     });
 
-    it('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
+    it.skip('AT_013.002 | Blog > Weather > After redirecting to the Blog page 10 posts are displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
     });
 
-    it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
+    it.skip('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
         cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','terms_and_conditions_of_use.pdf');
     });
