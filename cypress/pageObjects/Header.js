@@ -2,16 +2,16 @@ class Header {
     elements = {
         getBlogMenuLink: () => cy.get('#desktop-menu [href*="blog"]'),
         getPartnersMenuLink: () => cy.get('#desktop-menu a[href="/examples"]'),
-        getSupportDropDown: () => cy.get('#support-dropdown'),
-        getAskAquestion: () => cy.get('#support-dropdown+ul [href$="/questions"]')
+        getSupportDropDownMenu: () => cy.get('#support-dropdown'),
+        getAskAquestionMenu: () => cy.get('#support-dropdown+ul [href$="/questions"]')
     }
 
     clickSupport() {
-        cy.get('#support-dropdown').click({force: true});
+        this.elements.getSupportDropDownMenugetSupportDropDownMenu().click({force: true});
     };
     
     clickAskAquestion() {
-        cy.get('#support-dropdown+ul [href$="/questions"]')
+        this.elements.getAskAquestionMenu
         .invoke('removeAttr', 'target')
         .click({force: true});
     }
