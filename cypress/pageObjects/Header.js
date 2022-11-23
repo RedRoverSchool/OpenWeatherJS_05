@@ -1,6 +1,7 @@
 class Header {
     elements = {
         getBlogMenuLink: () => cy.get('#desktop-menu [href*="blog"]'),
+        getPartnersMenuLink: () => cy.get('#desktop-menu a[href="/examples"]'),
         getSupportDropDown: () => cy.get('#support-dropdown'),
         getAskAquestion: () => cy.get('#support-dropdown+ul [href$="/questions"]')
     }

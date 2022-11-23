@@ -2,10 +2,10 @@
 /// <reference types="cypress" />
 
 Cypress.Commands.add('login', (userName, password) => {
-  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
+  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
   cy.get('#user_email').type(userName).should('have.value', userName)
   cy.get('#user_password').type(password).should('have.value', password)
-  cy.get('#new_user input[value="Submit"]').click()
+  cy.get('#new_user input[value="Submit"]').click({force: true})
   cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
 })
 
@@ -15,7 +15,7 @@ beforeEach(function() {
   cy.fixture('noGroup').then(data => {
       this.data = data
     });
-    cy.visit('https://openweathermap.org/')
+    cy.visit('/')
 })
 
 it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
@@ -120,7 +120,7 @@ it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home 
     .as('linkOneCallByCall')
     .should('be.visible')
     .click()
-    .url().should('eq', 'https://openweathermap.org/price')
+    .url().should('include', '/price')
   cy.get('h1.breadcrumb-title').should('have.text', 'Pricing')
   })
 })

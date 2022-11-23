@@ -102,7 +102,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include','270748973021342');
     });
 
-    it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
+    it.skip('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
