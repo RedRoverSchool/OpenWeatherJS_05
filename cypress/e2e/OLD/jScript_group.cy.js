@@ -177,7 +177,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
-    it('AT_005.002 | Main page > Verify the website\'s description', function () {
+    it.skip('AT_005.002 | Main page > Verify the website\'s description', function () {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 

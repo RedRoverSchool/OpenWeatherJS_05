@@ -21,4 +21,8 @@ describe('mainPageSpec', () => {
             .invoke('val')
             .should('eq', this.data.zipCode);
     });
+
+    it.only('AT_005.002 | Main page > Verify the website\'s description', function () {
+        mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
+    });
 });
