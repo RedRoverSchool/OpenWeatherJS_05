@@ -177,4 +177,25 @@ describe('asiaJS', () => {
     });
   });
 
+  it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+    let detailed_weather_information = Array();
+
+    cy.get('[fill="#48484A"]').each((el, i) => {
+      cy.get('[fill="#48484A"]')
+        .eq(i)
+        .click({ force: true });
+      cy.get('.scrolling-container').should('be.visible');
+      cy.get('.daily-detail-container tr')
+        .eq(0)
+        .find('th')
+        .each(($item, index) => {
+          if ($item.text().length) detailed_weather_information.push($item.text());
+        }).then(() => {
+
+          expect(detailed_weather_information).to.deep.eql(this.data.weather_details);
+          detailed_weather_information = [];
+        });
+    });
+  });
+
 });
