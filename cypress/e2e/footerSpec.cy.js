@@ -1,9 +1,7 @@
 /// <reference types="cypress" />
  
-import Header from "../pageObjects/Header.js"
 import Footer from "../pageObjects/Footer.js"
  
-const header = new Header();
 const footer = new Footer();
  
 describe('Footer test suite', () => {
