@@ -455,7 +455,7 @@ describe('Group jScript_group', () => {
         cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
  });
         
-    it.skip('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click({force: true});
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
