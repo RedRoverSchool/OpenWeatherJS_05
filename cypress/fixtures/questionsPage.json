@@ -1,0 +1,6 @@
+{
+    "email": "testEmail@gmail.com",
+    "message": "My message to the world!",
+    "headLineText": "Ask a question",
+    "reCaptchaError": "reCAPTCHA verification failed, please try again."
+}
