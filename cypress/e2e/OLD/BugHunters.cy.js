@@ -26,7 +26,7 @@ describe('groupBugHunters', () => {
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
   })
 
-  it('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
+  it.skip ('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
   })
