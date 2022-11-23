@@ -326,13 +326,15 @@ describe('groupBugHunters', () => {
     cy.get('.city-data > .city-main-info > .city-name').wait(3000).contains('Amsterdam').click();
     cy.get('.expanded > :nth-child(1) > .city-data > .city-full-info > table > tbody').each(($el, i) => {
       expect($el.text()).to.include(this.data.cityData[i]);
+
     })
   })
-
+  
   it('AT_041.003 | Header > User > My API keys >', () => {
     cy.get('li.user-li').contains('Sign in').click({
       force: true
     })
+
     cy.get('#user_email')
       .type('redroverschool@yahoo.com')
     cy.get('#user_password.form-control')
