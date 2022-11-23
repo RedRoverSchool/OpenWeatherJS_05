@@ -434,7 +434,7 @@ describe('Group jScript_group', () => {
         cy.get('.day-list li').should('have.length', this.data.dayListLength);
     });
 
-    it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
+    it.skip('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
         const date = new Date().toUTCString().split(' ');
         const correctDate = []; 
         correctDate.push(date[0], date[2], date[1]);
