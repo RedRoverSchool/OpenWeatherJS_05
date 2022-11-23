@@ -27,4 +27,12 @@ describe('Blog page test suite', () => {
 
         blogPage.elements.getAllPosts().should('have.length', this.data.postsQuantity);
     });
+
+    it('AT_013.003 | Blog > Weather > Verifying the first post\'s link is clickable and redirects User to the post on a new page', function () {
+        header.clickBlogMenuLink();
+        blogPage.clickFirstPostsLink();
+
+        cy.url().should('include', this.data.postsLink);
+        blogPage.elements.getPostsImage().should('be.visible');
+    });
 });
