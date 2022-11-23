@@ -18,7 +18,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('eq', 'https://openweathermap.org/guide')
     })
 
-    it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
+    it.skip('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
         cy.get('#desktop-menu a[href="/our-initiatives"]').click()
         cy.get('.logo').click()
 
