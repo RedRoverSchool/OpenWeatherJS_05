@@ -3,15 +3,15 @@ class Header {
         getBlogMenuLink: () => cy.get('#desktop-menu [href*="blog"]'),
         getPartnersMenuLink: () => cy.get('#desktop-menu a[href="/examples"]'),
         getSupportDropDownMenu: () => cy.get('#support-dropdown'),
-        getAskAquestionMenu: () => cy.get('#support-dropdown+ul [href$="/questions"]')
+        getAskAquestionMenuLink: () => cy.get('#support-dropdown+ul [href$="/questions"]')
     }
 
     clickSupport() {
-        this.elements.getSupportDropDownMenugetSupportDropDownMenu().click({force: true});
+        this.elements.getSupportDropDownMenu().click({force: true});
     };
     
     clickAskAquestion() {
-        this.elements.getAskAquestionMenu
+        this.elements.getAskAquestionMenuLink()
         .invoke('removeAttr', 'target')
         .click({force: true});
     }

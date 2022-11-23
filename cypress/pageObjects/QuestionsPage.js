@@ -10,24 +10,24 @@ class QuestionsPage {
     }
 
     selectNotAuser () {
-        cy.get('#question_form_is_user_false').check();
+        this.elements.getQuestionFormIsUser.check();
     };
 
     enterEmail (email) {
-        cy.get('#question_form_email').type(email);
+        this.elements.getEmailInputField.type(email);
     };
 
     selectFirstSubject () {
-        cy.get('#question_form_subject')
+        this.elements.getSubjectInputField
         .select('I want to discuss a purchase of OpenWeather products/subscriptions');
     };
 
     enterMessage (message) {
-        cy.get('#question_form_message').type(message);
+        this.elements.getMessageInputField.type(message);
     };
 
     clickSubmitBtn () {
-        cy.get('.btn').click();
+        this.elements.getSubmitBtn.click();
     };
 
 }
