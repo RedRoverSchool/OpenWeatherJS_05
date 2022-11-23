@@ -30,7 +30,7 @@ describe('Group jScript_group', () => {
         cy.get('.post-list .post').should('have.length', this.data.blogPagePostsQuantity);
     });
 
-    it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
+    it.skip('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
         cy.get('[href*="use.pdf"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','terms_and_conditions_of_use.pdf');
     });
