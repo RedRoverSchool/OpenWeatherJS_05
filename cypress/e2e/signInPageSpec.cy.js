@@ -14,7 +14,7 @@ describe("Sign In Page Test Suit", () => {
     cy.visit("/")
   })
 
-  it.only('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
+  it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
     header.clickSignInMenuLink();
     signInPage.enterEmail(this.data.userEmail)
     signInPage.enterPassword(this.data.userPassword)
