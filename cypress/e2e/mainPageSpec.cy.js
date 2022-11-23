@@ -36,4 +36,8 @@ describe('mainPageSpec', () => {
         mainPage.elements.getMainPageContent()
                 .should('have.text', 'OpenWeather')
     });
+
+    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+        mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
+    });
 });

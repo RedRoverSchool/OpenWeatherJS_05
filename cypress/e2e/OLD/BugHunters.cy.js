@@ -318,7 +318,30 @@ describe('groupBugHunters', () => {
     cy.get('#user-dropdown-menu').each(($el, index) => {
       expect($el.text()).to.include(this.data.userAccountMenu[index])
     })
+
+  it('AT_028.008 | Footer > About us > Verify the button "Buy by Subscription"', function() {
+    let aboutUs = 'a[href="/about-us"]'
+    let buyBySubscription = 'a[href="https://home.openweathermap.org/subscriptions"]'
+
+    cy.get('li.user-li').contains('Sign in').click({ force: true })
+    cy.get('#user_email')
+      .should('have.attr', 'placeholder', 'Enter email')
+      .type('oforostinko@gmail.com')
+    cy.get('#user_password.form-control')
+      .should('have.attr', 'placeholder', 'Password')
+      .type('12341234')
+    cy.get('#user_remember_me').check().should('be.checked')
+    cy.contains('Submit').click()
+    cy.get('.panel-body').should('have.text', 'Signed in successfully.')
+    
+    cy.get(aboutUs).click()
+    cy.get(buyBySubscription).click()
+
+    cy.url().should('include', '/subscriptions')   
+  });
+
   })
+ 
 
   it('AT_026.004 | Maps > Click on any city on the map and see the data', function () {
     cy.get('button.stick-footer-panel__link').wait(6000).click();
