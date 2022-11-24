@@ -1,5 +1,6 @@
 {
     "API": "https://openweathermap.org/api",
     "partnerPageLink": "https://openweathermap.org/examples",
-    "mainPageLink": "https://openweathermap.org/"
+    "mainPageLink": "https://openweathermap.org/", 
+    "HistoryBulk": "https://openweathermap.org/history-bulk"
 }
