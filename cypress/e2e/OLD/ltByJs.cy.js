@@ -5,7 +5,7 @@ describe('Group lt_by_js', () => {
         cy.fixture('ItByJs_group').then(data => {
             this.data = data
         })
-        cy.visit('https://openweathermap.org')
+        cy.visit('/')
     })
 
    it('AT_033.001 | Header > Navigation > Verify "Dashboard" menu item', function () {     
@@ -296,8 +296,8 @@ describe('Group lt_by_js', () => {
         cy.get('.headline').should('have.text', 'Ask a question')
     }) 
     
-    it('AT_033.004 | Header > Navigation > Verify "Marketplace" menu link', function () {     
-        cy.get('#desktop-menu a[href="https://home.openweathermap.org/marketplace"]')
+    it.skip('AT_033.004 | Header > Navigation > Verify "Marketplace" menu link', function () {     
+        cy.get('#desktop-menu a[href*="marketplace"]')
           .invoke('removeAttr', 'target')
           .click()
       
