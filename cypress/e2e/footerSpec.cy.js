@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
  
 import Footer from "../pageObjects/Footer.js"
-import PartnersPage from "../pageObjects/PartnersPage.js"; 
 
 const footer = new Footer();
-const partnersPage = new PartnersPage();
  
 describe('Footer test suite', () => {
 
@@ -34,7 +32,6 @@ describe('Footer test suite', () => {
 
     it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
         footer.clickAppStoreLink()
-        cy.url().should('eq', this.data.DownloadAppURL.AppStoreURL);
-        partnersPage.elements.getAppStoreName().should('include.text', 'OpenWeather');
+        cy.url().should('eq', this.data.DownloadAppURL.AppStoreURL);        
     });
 });

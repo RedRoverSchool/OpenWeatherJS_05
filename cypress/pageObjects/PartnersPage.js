@@ -1,7 +1,6 @@
 class PartnersPage {
     elements = {
-        getSectionsNames: () => cy.get('#cms a'),
-        getAppStoreName: () => cy.get('.app-header__title')
+        getSectionsNames: () => cy.get('#cms a')
     }
 }
 export default PartnersPage;
