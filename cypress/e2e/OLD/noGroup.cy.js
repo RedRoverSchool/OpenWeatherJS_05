@@ -54,7 +54,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     })
   })
   
-  it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products...', function() {
+  it.skip('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products...', function() {
 
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
 
