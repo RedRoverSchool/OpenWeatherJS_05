@@ -73,7 +73,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     })
 })
 
-it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
+it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
  
   cy.login(this.data.userProfile.email, this.data.userProfile.password)
 

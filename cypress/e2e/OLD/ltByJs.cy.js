@@ -159,7 +159,7 @@ describe('Group lt_by_js', () => {
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions')     
     })
 
-    it('AT_009.003 | Main menu > Marketplace verification of displayed "Documentation" button for History bulk', function () {
+    it.skip('AT_009.003 | Main menu > Marketplace verification of displayed "Documentation" button for History bulk', function () {
         const marketplace = '#desktop-menu a[href*="marketplace"]'
         const documentationButton = 'div.button-container > a[href="https://openweathermap.org/history-bulk"]'
 
