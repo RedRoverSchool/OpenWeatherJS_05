@@ -15,7 +15,7 @@ describe('Group jScript_group', () => {
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
     });
 
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+    it.skip('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
         cy.visit(this.data.examplesPageLink);
 
         cy.get('.logo').click();
@@ -467,7 +467,7 @@ describe('Group jScript_group', () => {
         cy.get('.alert-info').should('have.text', '\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n');
     });
     
-    it('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
+    it.skip('AT_021.003 | Footer > Widgets > Verify there are 9 widgets on the page', function () {
         cy.get('[href="/widgets-constructor"]').click({force: true});
         
         cy.get('[id*="container-openweathermap-widget"]').should('have.length', 9)
