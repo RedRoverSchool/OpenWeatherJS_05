@@ -4,11 +4,14 @@ class Header {
         getPartnersMenuLink: () => cy.get('#desktop-menu a[href="/examples"]'),
         getSupportDropDownMenu: () => cy.get('#support-dropdown'),
         getAskAquestionMenuLink: () => cy.get('#support-dropdown+ul [href$="/questions"]'),
+        getFAQMenuLink: () => cy.get('ul#support-dropdown-menu a[href="/faq"]'),
+        getMapsMenuLink: () => cy.get('#desktop-menu [href="/weathermap"]'),
+        getMarketplaceMenuLink: () => cy.get('#desktop-menu a[href*="marketplace"]')
         getMapsMenuLink: () => cy.get('#desktop-menu [href="/weathermap"]')
-
         getInitiativesPage: () => cy.get('#desktop-menu a[href="/our-initiatives"]'),
         getLogoLink: () => cy.get('li.logo a')
-     };
+    };
+
 
     clickSupport() {
         this.elements.getSupportDropDownMenu().click({ force: true });
@@ -32,11 +35,23 @@ class Header {
         this.elements.getMapsMenuLink().click({ force: true });
     };
 
- clickInitiativesLink(){
+    clickMarketplaceMenuLink() {
+        this.elements.getMarketplaceMenuLink().invoke('removeAttr', 'target').click({ force: true });
+    };
+
+    clickSupportDropDownMenu() {
+        this.elements.getSupportDropDownMenu().click({force: true})
+    };
+
+    clickFAQMenuLink() {
+        this.elements.getFAQMenuLink().click({force: true})
+    };
+     clickInitiativesLink(){
         this.elements.getInitiativesPage().click({ force: true });
     };
     clickLogoLink(){
         this.elements.getLogoLink().click({ force: true });
     }
-}
+};
+
 export default Header;
