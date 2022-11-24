@@ -68,9 +68,10 @@ describe('Group lt_by_js', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.')       
     })
 
-    it('AT_033.003 | Header > Navigation> Verify "API" menu link', function () {
+    it.skip('AT_033.003 | Header > Navigation> Verify "API" menu link', function () {
         cy.get('#desktop-menu a[href="/api"]').click()
         cy.url().should('eq', 'https://openweathermap.org/api')
+        cy.get('.breadcrumb-title').should('have.text', 'Weather API')
     })
 
     it('AT_001.007 | Main page > Section with search > Verify entered a City name into the Search city field', function () {    

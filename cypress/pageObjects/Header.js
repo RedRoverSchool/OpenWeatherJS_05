@@ -6,8 +6,7 @@ class Header {
         getAskAquestionMenuLink: () => cy.get('#support-dropdown+ul [href$="/questions"]'),
         getFAQMenuLink: () => cy.get('ul#support-dropdown-menu a[href="/faq"]'),
         getMapsMenuLink: () => cy.get('#desktop-menu [href="/weathermap"]'),
-        getMarketplaceMenuLink: () => cy.get('#desktop-menu a[href*="marketplace"]'),
-        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a')
+        getMarketplaceMenuLink: () => cy.get('#desktop-menu a[href*="marketplace"]')
     };
 
     clickSupport() {
@@ -42,12 +41,6 @@ class Header {
 
     clickFAQMenuLink() {
         this.elements.getFAQMenuLink().click({force: true})
-    };
-
-    clickBusinessMenuLink() {
-        this.elements.getBusinessMenuLink()
-        .invoke('removeAttr', 'target')
-        .click({force: true})
     };
 };
 export default Header;

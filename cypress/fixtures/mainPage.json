@@ -4,5 +4,11 @@
         "cityName": "Washington DC"
     },
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
+<<<<<<< HEAD
     "forecastDaysLength": 8
     }
+=======
+    "forecastDaysLength": 8, 
+    "mainText": "OpenWeather"
+}
+>>>>>>> 8e4cdd11fe4e0ab7c33ce304e753ce2796d8b201
