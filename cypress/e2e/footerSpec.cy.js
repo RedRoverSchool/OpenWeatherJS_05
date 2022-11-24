@@ -14,7 +14,7 @@ describe('Footer test suite', () => {
     });
 
     it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
-        footer.clickWebsiteTermsAndConditions();
+        footer.clickWebsiteTermsAndConditionsLink();
         
         cy.url().should('be.equal',this.data.websiteTermsUrl);
     });
