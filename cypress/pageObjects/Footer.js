@@ -6,12 +6,12 @@ class Footer {
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]')
     };
 
-    clickOnTermsAndConditionsOfSaleLink() {
-        this.elements.getTermsAndConditionsOfSaleLink().invoke('removeAttr', 'target').click({force: true});
+        clickOnTermsAndConditionsOfSaleLink() {
+            this.elements.getTermsAndConditionsOfSaleLink().invoke('removeAttr', 'target').click({force: true});
     };
     
-    clickWebsiteTermsAndConditionsLink() {
-        this.elements.getWebsiteTermsAndConditionsLink().invoke('removeAttr', 'target').click();
+        clickWebsiteTermsAndConditionsLink() {
+            this.elements.getWebsiteTermsAndConditionsLink().invoke('removeAttr', 'target').click();
     };  
 };
 
