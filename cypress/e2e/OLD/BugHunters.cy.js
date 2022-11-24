@@ -447,4 +447,13 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.get('.current-container > :nth-child(1)').should('contain.text', cityName)
     cy.get(dataTime ).should('contain', 'Nov')
   })
+
+  it ('AT_051.001 API > Testing Home button>Verify Home link is visible on the right upper side of the page', () => {
+    let hrefHome='.breadcrumb > :nth-child(1) > a'
+    cy.visit('/')
+
+    cy.get('#desktop-menu a[href="/api"]').click()
+    cy.url().should('include', '/api');
+    cy.get(hrefHome).should('be.visible')
+  })
 })
