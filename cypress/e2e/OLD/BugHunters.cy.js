@@ -412,4 +412,20 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.url().should('include', '/faq')
     cy.get('h1.breadcrumb-title').should('have.text', 'Frequently Asked Questions')
   })
+
+  it ('AT_001.011 Main page > Section with search >Selected city wheather info is displayed', () => {
+    let cityName = 'Italy'
+    let searchCity = '.search-container > input'
+    let btnSubmit = '.button-round'
+    let dataTime ='.current-container > :nth-child(1)'
+
+    cy.visit('https://openweathermap.org')
+    cy.get(searchCity).click().type(cityName)
+    cy.get(btnSubmit).click()
+    cy.get('.search-dropdown-menu')
+      .should('be.visible')
+    cy.get(':nth-child(1) > [style="width: 140px;"]').click()
+    cy.get('.current-container > :nth-child(1)').should('contain.text', cityName)
+    cy.get(dataTime ).should('contain', 'Nov')
+  })
 })
