@@ -9,7 +9,8 @@ class Header {
         getMarketplaceMenuLink: () => cy.get('#desktop-menu a[href*="marketplace"]'),
         getLogoLink: () => cy.get('li.logo a'),
         getInitiativesPage: () => cy.get('#desktop-menu a[href="/our-initiatives"]'),
-        getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]')
+        getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]'),
+        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a')
     };
 
     clickSupport() {
@@ -56,6 +57,12 @@ class Header {
 
     clickApiMenuLink() {
         this.elements.getApiMenuLink().click({force : true})
+    }
+
+    clickBusinessMenuLink(){
+        this.elements.getBusinessMenuLink()
+        .invoke('removeAttr', 'target')
+        .click({ force: true });
     }
 };
 export default Header;

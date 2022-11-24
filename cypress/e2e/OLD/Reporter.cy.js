@@ -76,7 +76,7 @@ describe('GroupReporters', () => {
         cy.get(differentWeatherPopup).should('not.exist')
     })
 
-    it('AT_034.001 | <Header > verify "For Business" button', () => {
+    it.skip('AT_034.001 | <Header > verify "For Business" button', () => {
         cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
