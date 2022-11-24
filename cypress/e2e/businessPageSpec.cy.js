@@ -21,3 +21,4 @@ describe('BusinessPageSpec', () => {
         businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
     });
 });
+
