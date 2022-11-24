@@ -236,33 +236,44 @@ describe('groupBugHunters', () => {
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
   })
 
-  it('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function () {
-    cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('yurik@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('12345678')
-    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
-    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+  it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('yurik@mailto.plus')
+    cy.get('#user_password').type('12345678')
+    cy.get('.btn-color[value="Submit"]').click()
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href*=api_keys]').click()
     cy.url().should('include', '/api_keys')
+    cy.get('#api_key_form_name').type('testAPIkey')
+    cy.get('.button-round[value="Generate"]').click()
 
-    cy.get('.api-keys tbody td:nth-child(2)').as('APIkey').should('have.text', 'Default')
-    cy.get('.edit-key-btn').as('EditButton').click()
-    cy.get('#edit_key_form_name').as('EditNameField')
+    cy.get('.api-keys tbody tr').as('APIkeys').each(($el) => {
+      if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
+        cy.wrap($el).find('.fa-edit').click()        
+      }
+    })
+
+    cy.get('#edit_key_form_name')
       .clear()
-      .type('New_API_key')
-      .should('be.visible')
-    cy.get('.pop-up-footer .dark').as('SaveButton').click()
-    cy.get('@APIkey').should('have.text', 'New_API_key')
-    cy.get('.col-sm-offset-2 .panel').as('NoticeRenameKey')
+      .type('NEW_KEY_NAME')
+    cy.get('button.dark[onclick*=submit]').click()
+
+    cy.get('@APIkeys')
+      .should('have.length', 2)
+      .and('include.text', 'NEW_KEY_NAME')
+
+    cy.get('.col-md-6')
       .should('include.text', 'API key was edited successfully')
       .and('include.text', 'Notice')
       .and('be.visible')
 
-    //Return previous name of the key
-    cy.get('@EditButton').click()
-    cy.get('@EditNameField').clear().type('Default')
-    cy.get('@SaveButton').click()
-  })
+    //delete renamed API key 
+    cy.get('@APIkeys').each(($el) => {
+      if($el.find('td:nth-child(2)').text() == 'NEW_KEY_NAME') {
+          cy.wrap($el).find('.fa-remove').click()
+      }
+    })
+  })  
 
   it('AT_001.016 | Main page > Section with search > Search City', () => {
     const city = 'Boston';
