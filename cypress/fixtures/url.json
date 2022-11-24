@@ -1,3 +1,4 @@
 {
-    "API": "https://openweathermap.org/api"
+    "API": "https://openweathermap.org/api", 
+    "HistoryBulk": "https://openweathermap.org/history-bulk"
 }
