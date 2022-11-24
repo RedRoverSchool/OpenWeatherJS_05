@@ -23,4 +23,10 @@ describe('Footer test suite', () => {
         footer.elements.getAppStoreLink().should('be.visible')
         footer.elements.getGooglePlayLink().should('be.visible')
     })
+
+    it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
+        footer.clickOnTermsAndConditionsOfSaleLink();
+        
+        cy.url().should('eq',this.data.termsAndConditionsOfSaleUrl);
+    });
 });

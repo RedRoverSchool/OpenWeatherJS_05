@@ -398,6 +398,25 @@ it('AT_033.018 | Header > Navigation > API', () => {
       .should('have.text', 'Widgets constructor')
   })
 
+  it('AT_021.006 | Footer > Widgets> Verify there are 9 widgets on the page', function(){
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('push@mailto.plus')
+    cy.get('#user_password').type('123456789')
+    cy.get('.btn-color[value="Submit"]').click()
+    cy.get('.inner-footer-container a[href*=widgets]').click()
+
+    cy.get('.widget-left')
+      .should('have.length', 4)
+      .each(($el) => {
+        cy.wrap($el).should('be.visible')
+      })
+    cy.get('.widget-right')
+      .should('have.length', 5)
+      .each(($el) => {
+        cy.wrap($el).should('be.visible')
+      })
+  })
+
   it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
     cy.get('#desktop-menu > ul').each(($el, ind) => {
         expect($el.text()).to.include(this.data.mainMenu[ind])
