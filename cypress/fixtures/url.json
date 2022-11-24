@@ -1,3 +1,5 @@
 {
-    "API": "https://openweathermap.org/api"
+    "API": "https://openweathermap.org/api",
+    "partnerPageLink": "https://openweathermap.org/examples",
+    "mainPageLink": "https://openweathermap.org/"
 }

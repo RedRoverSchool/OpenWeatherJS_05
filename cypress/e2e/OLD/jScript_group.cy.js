@@ -15,7 +15,7 @@ describe('Group jScript_group', () => {
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
     });
 
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+    it.skip('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
         cy.visit(this.data.examplesPageLink);
 
         cy.get('.logo').click();
