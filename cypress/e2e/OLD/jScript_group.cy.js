@@ -201,7 +201,7 @@ describe('Group jScript_group', () => {
         cy.get('.post-page__img').should('be.visible');
     });
 
-    it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
+    it.skip('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
         cy.get('div#footer-website a[href="/about-us"]').click({force: true});
         cy.get('div.grid-container [href="/api"]').click();
         cy.url().should('include', 'https://openweathermap.org/api');
