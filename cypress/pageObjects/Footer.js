@@ -5,5 +5,9 @@ class Footer {
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]')
     }
-}
+
+        clcikOnTermsAndCondritionsOfSalesLink() {
+            this.elements.getTermsAndConditionsOfSaleLink().invoke('removeAttr', 'target').click({force: true});
+    }
+};
 export default Footer;

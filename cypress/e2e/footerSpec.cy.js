@@ -25,8 +25,7 @@ describe('Footer test suite', () => {
     })
 
     it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
-        footer.elements.getTermsAndConditionsOfSaleLink().invoke('removeAttr', 'target').click({force: true});
-
+        footer.clcikOnTermsAndCondritionsOfSalesLink();
         cy.url().should('eq',this.data.termsAndConditionsOfSaleUrl);
     });
 });
