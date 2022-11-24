@@ -3,7 +3,8 @@ class Footer {
         getWebsiteTermsAndConditionsLink: () => cy.get('[href$="use.pdf"]'),
         getAppStoreLink: () => cy.get('.my-5 a[href*=apple]'),
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
-        getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]')
+        getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]'),
+        getWidgetsLink: () => cy.get('[href="/widgets-constructor"]')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -13,6 +14,10 @@ class Footer {
         clickWebsiteTermsAndConditionsLink() {
             this.elements.getWebsiteTermsAndConditionsLink().invoke('removeAttr', 'target').click();
     };  
+
+        clickWidgetsLink() {
+            this.elements.getWidgetsLink().click({force: true});
+        }
 };
 
 export default Footer;
