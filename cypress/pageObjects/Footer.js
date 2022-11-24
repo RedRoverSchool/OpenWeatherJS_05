@@ -6,7 +6,7 @@ class Footer {
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]')
     }
 
-        clcikOnTermsAndCondritionsOfSalesLink() {
+        clcikOnTermsAndConditionsOfSaleLink() {
             this.elements.getTermsAndConditionsOfSaleLink().invoke('removeAttr', 'target').click({force: true});
     }
 };
