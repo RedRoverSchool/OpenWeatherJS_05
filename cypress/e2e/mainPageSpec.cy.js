@@ -60,13 +60,13 @@ describe('mainPageSpec', () => {
     });
 
     it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
-        mainPage.setSearchInputText(this.data.cityName);
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
                 .getSearchResultsDropdown()
                 .should('exist')
                 .each($el => {
-                    cy.wrap($el).should('contain', this.data.cityName)
+                    cy.wrap($el).should('contain', this.data.searchInputText.cityName)
                 })
     });
 });

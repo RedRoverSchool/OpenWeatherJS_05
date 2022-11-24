@@ -4,6 +4,5 @@
         "cityName": "Washington DC"
     },
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
-    "forecastDaysLength": 8,
-    "cityName": "Rome"
+    "forecastDaysLength": 8
 }
