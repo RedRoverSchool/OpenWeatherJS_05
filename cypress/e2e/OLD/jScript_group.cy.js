@@ -127,7 +127,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://wordpress.org/plugins/awesome-weather/');
     });
 
-    it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
+    it.skip('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
         cy.get('[href*="conditions_of_sale"]').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     });
@@ -201,7 +201,7 @@ describe('Group jScript_group', () => {
         cy.get('.post-page__img').should('be.visible');
     });
 
-    it('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
+    it.skip('AT_028.006 | Footer > About us > Verify "Products Documentation" button redirects to the expected URL', function () {
         cy.get('div#footer-website a[href="/about-us"]').click({force: true});
         cy.get('div.grid-container [href="/api"]').click();
         cy.url().should('include', 'https://openweathermap.org/api');
@@ -381,7 +381,7 @@ describe('Group jScript_group', () => {
         cy.get('#main_products .section h2').should('include.text', 'OUR PRODUCTS')
     });
 
-    it('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
+    it.skip('AT_027.004 | Maps > Section with the scale > The scale\'s name matches the label\'s name after selecting "Pressure"', function () {
         cy.get('#desktop-menu [href="/weathermap"]').click({force: true});
         cy.get('[for="Pressure"]').click();
 
@@ -410,7 +410,7 @@ describe('Group jScript_group', () => {
         cy.get('.page-content-bulk h4.heading').should('have.text', 'Create New History Bulk')
     });
 
-    it('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+    it.skip('AC_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
         cy.get('#desktop-menu [href*="marketplace"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('.market-place a[href]:not(.button-round)').each(($el) => {
@@ -430,11 +430,11 @@ describe('Group jScript_group', () => {
         cy.get(email_field).type('Checking_that_the_page_is_not_empty.');
     });
 
-    it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
+    it.skip('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
         cy.get('.day-list li').should('have.length', this.data.dayListLength);
     });
 
-    it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
+    it.skip('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
         const date = new Date().toUTCString().split(' ');
         const correctDate = []; 
         correctDate.push(date[0], date[2], date[1]);

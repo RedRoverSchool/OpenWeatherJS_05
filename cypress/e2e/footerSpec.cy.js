@@ -16,7 +16,7 @@ describe('Footer test suite', () => {
     });
 
     it('AT_030.001 | Footer > After clicking on the "Website terms and conditions" in the footer the expected page is opened', function () {
-        footer.elements.getWebsiteTermsAndConditions().invoke('removeAttr', 'target').click();
+        footer.clickWebsiteTermsAndConditionsLink();
         
         cy.url().should('be.equal',this.data.websiteTermsUrl);
     });
@@ -25,6 +25,12 @@ describe('Footer test suite', () => {
         footer.elements.getAppStoreLink().should('be.visible')
         footer.elements.getGooglePlayLink().should('be.visible')
     })
+
+    it('AT_050.002 | Footer > Verify that user can be redirected to the "Terms and conditions of sale" page', function () {
+        footer.clickOnTermsAndConditionsOfSaleLink();
+        
+        cy.url().should('eq',this.data.termsAndConditionsOfSaleUrl);
+    });
 
     it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
         footer.clickAppStoreLink()
