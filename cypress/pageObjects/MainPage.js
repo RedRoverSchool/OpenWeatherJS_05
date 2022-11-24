@@ -7,7 +7,8 @@ class MainPage {
         getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
         getMainPageContent: () => cy.get('h1 span.orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
-        getForecastFirstDay: () => cy.get('.day-list li:first-child > span')
+        getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
+        getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li')
     }
 
     clickSearchBtn() {

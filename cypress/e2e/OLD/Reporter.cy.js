@@ -156,7 +156,7 @@ describe('GroupReporters', () => {
             })
         });
 
-    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
+    it.skip('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
         const cityName = 'Moscow'
 
         enterCityOrZipCode(cityName)

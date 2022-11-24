@@ -1,7 +1,7 @@
 {
     "searchInputText": {
         "zipCode": "60604",
-        "cityName": "Washington DC"
+        "cityName": "Washington"
     },
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
     "forecastDaysLength": 8, 

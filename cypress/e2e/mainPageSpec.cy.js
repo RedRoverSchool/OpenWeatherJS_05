@@ -64,12 +64,23 @@ describe('mainPageSpec', () => {
         mainPage.elements.getForecastFirstDay().should('have.text', todaysDate);
     });
 
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
-        cy.visit(this.url.partnerPageLink);
+    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+                .getSearchResultsDropdown()
+                .should('exist')
+                .each($el => {
+                    cy.wrap($el).should('contain', this.data.searchInputText.cityName)
+                })
+     });
+                
+     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+            cy.visit(this.url.partnerPageLink);
 
-        header.clickLogoLink();
+            header.clickLogoLink();
 
-        cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
-    });
+            cy.url().should('eq', this.url.mainPageLink);
+            mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
+      });
 });
