@@ -50,7 +50,7 @@ describe('mainPageSpec', () => {
         mainPage.elements.getForecastFirstDay().should('have.text', todaysDate);
     });
 
-    it.only('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
+    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
         mainPage.setSearchInputText(this.data.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
