@@ -150,29 +150,37 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function () {
-    cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('123456789')
-    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
-    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+  it('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('redrover@mailto.plus')
+    cy.get('#user_password').type('123456789')
+    cy.get('.btn-color[value="Submit"]').click()
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href*=api_keys]').click()
     cy.url().should('include', '/api_keys')
 
-    cy.get('#api_key_form_name').as('API_keyNameField')
-      .type('testAPIkey').and('have.value', 'testAPIkey').and('be.visible')
-    cy.get('.col-md-4 .button-round').as('GenerateButton').click()
-    cy.get('.material_table tr:nth-child(2)').as('CreatedKey')
-      .should('exist')
-      .should('be.visible')
-    cy.get('.col-md-6').as('NoticeCreateKey')
-      .should('include.text', 'API key was created successfully').and('include.text', 'Notice').and('be.visible')
-    cy.reload()
-    cy.get('@CreatedKey').should('be.visible')
-    cy.get('.api-keys tr:nth-child(2) .fa-remove').as('DeleteButton').click()
-    cy.get('.col-sm-offset-2').as('NoticeDeleteKey')
-      .should('include.text', 'API key was deleted successfully').and('include.text', 'Notice').and('be.visible')
-    cy.get('@CreatedKey').should('not.exist')
+    cy.get('.api-keys tbody tr').as('APIkeys')
+      .should('have.length', 1)
+      .get('td:nth-child(2)')
+      .should('have.text', 'Default')
+
+    cy.get('#api_key_form_name').type('testAPIkey')
+    cy.get('.button-round[value="Generate"]').click()
+    cy.get('.col-md-6')
+      .should('include.text', 'API key was created successfully')
+      .and('include.text', 'Notice')
+      .and('be.visible')
+
+    cy.get('@APIkeys')
+      .should('have.length', 2)
+      .should('include.text', 'testAPIkey')
+    
+    //delete created API key
+    cy.get('@APIkeys').each(($el) => {
+      if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
+        cy.wrap($el).find('.fa-remove').click()
+      }
+    })
   })
 
   it('AT_033.016 | Header > Navigation', function () {
