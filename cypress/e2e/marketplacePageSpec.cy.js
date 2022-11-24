@@ -22,4 +22,12 @@ describe('Marketplace page test suite', () => {
             marketplacePage.elements.getH1CustomWeatherProducts().should('have.text', this.data.h1CustomProducts)
       })
 
+      it('AT_010.011 |  Marketplace > Verify that all links on the page have the same color', function () {
+        header.clickMarketplaceMenuLink();
+        
+        marketplacePage.elements.getAllProductTitles().each(($el) => {
+            cy.wrap($el).should('have.css', 'color', this.data.productTitleColor);
+        });
+    });
+
 })

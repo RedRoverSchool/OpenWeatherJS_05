@@ -7,7 +7,7 @@ class MainPage {
         getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
         getMainPageContent: () => cy.get('h1 span.orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
-        getForBusinessButton: () => cy.get('#desktop-menu :nth-child(10) > a'),
+        getForecastFirstDay: () => cy.get('.day-list li:first-child > span')
     }
 
     clickSearchBtn() {
@@ -27,15 +27,6 @@ class MainPage {
 
     clickHomePageButton() {
         this.elements.getHomePageButton().click({force: true});
-    }
-
-    clickForBusinessBtn() {
-        this.elements.getForBusinessButton()
-        .invoke(removeAttr, target)
-        .click()
-    }
-    checkUrlForBusiness() {
-        cy.url().should('eq', 'https://openweather.co.uk/')
     }
 }
 export default MainPage;
