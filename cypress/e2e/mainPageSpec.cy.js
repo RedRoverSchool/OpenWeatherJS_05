@@ -14,12 +14,21 @@ describe('mainPageSpec', () => {
     })
 
     it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', function () {
-        mainPage.setSearchInputText(this.data.zipCode);
+        mainPage.setSearchInputText(this.data.searchInputText.zipCode);
         mainPage.clickSearchBtn();
         mainPage.elements
             .getSearchInput()
             .invoke('val')
-            .should('eq', this.data.zipCode);
+            .should('eq', this.data.searchInputText.zipCode);
+    });
+
+    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+            .getSearchInput()
+            .invoke('val')
+            .should('eq', this.data.searchInputText.cityName);
     });
 
     it('AT_005.002 | Main page > Verify the website\'s description', function () {
