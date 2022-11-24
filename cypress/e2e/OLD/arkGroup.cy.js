@@ -290,4 +290,11 @@ describe('group Ark', () => {
     })
   });
 
+  it('AT_028.007 | < Footer > About us, verify the “Where-to” text', function () {
+    cy.get('.not-foldable > .section-content > ul > :nth-child(1) > a').click()
+
+    cy.url().should('eq','https://openweathermap.org/about-us')
+    cy.get('h2.orange-text').should('have.text','Where-to')
+  })
+
 })
