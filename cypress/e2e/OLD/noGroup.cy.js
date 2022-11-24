@@ -111,7 +111,7 @@ it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home 
       .should('be.visible')
   })
   
-  it('AT_048.004 | User page > Billing plans > Verify that after the user clicks on the link "One Call by Call" subscription plan" open a new page url', function() {
+  it.skip('AT_048.004 | User page > Billing plans > Verify that after the user clicks on the link "One Call by Call" subscription plan" open a new page url', function() {
  
   cy.login(this.data.userProfile.email, this.data.userProfile.password)
     

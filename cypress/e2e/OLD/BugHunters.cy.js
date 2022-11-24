@@ -7,7 +7,7 @@ describe('groupBugHunters', () => {
     cy.fixture('bugHunters').then(data => {
       this.data = data;
     })
-    cy.visit('https://openweathermap.org/');
+    cy.visit('/');
 
   });
 
@@ -376,7 +376,7 @@ describe('groupBugHunters', () => {
   });
 
 it('AT_033.018 | Header > Navigation > API', () => {
-  cy.visit('https://openweathermap.org')
+  cy.visit('/')
   cy.get('#desktop-menu a[href="/api"]').click({
     force: true
   })

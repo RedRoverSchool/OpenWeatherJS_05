@@ -35,3 +35,11 @@ Cypress.Commands.add('login_asiaJS', (email, password) => {
     cy.get(userPassword).type(password).should('be.visible');
     cy.get(submitButton).click({force: true});
 });
+
+Cypress.Commands.add('loginNoGroup', (userName, password) => {
+    cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
+    cy.get('#user_email').type(userName).should('have.value', userName)
+    cy.get('#user_password').type(password).should('have.value', password)
+    cy.get('#new_user input[value="Submit"]').click({force: true})
+    cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
+  })
