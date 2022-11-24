@@ -1,5 +1,7 @@
 {
     "zipCode": "60604",
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
-    "forecastDaysLength": 8
-}
+    "forecastDaysLength": 8,
+    "target": "target",
+    "removeAttr": "removeAttr"
+    }
