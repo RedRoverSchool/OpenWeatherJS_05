@@ -10,6 +10,9 @@ describe('Footer test suite', () => {
         cy.fixture('footer').then(data => {
             this.data = data;
         });
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
         cy.visit('/');
     });
 
@@ -38,5 +41,10 @@ describe('Footer test suite', () => {
     it("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function() {
         footer.clickGooglePlayLink();
         cy.url().should('eq', this.data.DownloadAppURL.GooglePlayURL);
+
+    it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', function() {  
+        footer.clickWebsiteTermsAndConditionsLink();
+
+        cy.url().should('eq', this.url.WebsiteTermsAndConditions);
     });
 });

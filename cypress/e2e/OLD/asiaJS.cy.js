@@ -7,7 +7,7 @@ describe('asiaJS', () => {
       this.data = data
     });
 
-    cy.visit('https://openweathermap.org/');
+    cy.visit('/');
   });
 
   it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', () => {
@@ -37,7 +37,7 @@ describe('asiaJS', () => {
     cy.url().should('include', '/zip_code_data/new');
   });
 
-  it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', () => {
+  it.skip('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', () => {
     cy.get('[href$="website_terms_and_conditions_of_use.pdf"]')
       .invoke('removeAttr', 'target')
       .click();
