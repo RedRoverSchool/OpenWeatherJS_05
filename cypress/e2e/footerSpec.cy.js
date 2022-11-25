@@ -34,4 +34,9 @@ describe('Footer test suite', () => {
         footer.clickAppStoreLink()
         cy.url().should('eq', this.data.DownloadAppURL.AppStoreURL);        
     });
+
+    it("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function() {
+        footer.clickGooglePlayLink();
+        cy.url().should('eq', this.data.DownloadAppURL.GooglePlayURL);
+    });
 });
