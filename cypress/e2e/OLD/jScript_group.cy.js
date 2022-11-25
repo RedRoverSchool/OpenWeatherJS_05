@@ -151,7 +151,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
     });
     
-    it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
+    it.skip('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         cy.get('ul.day-list li').should('have.length', 8);
     });
 

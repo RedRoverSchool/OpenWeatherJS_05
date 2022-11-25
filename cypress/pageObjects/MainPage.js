@@ -8,7 +8,7 @@ class MainPage {
         getMainPageContent: () => cy.get('h1 span.orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
-        getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li')
+        getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
     }
 
     clickSearchBtn() {
