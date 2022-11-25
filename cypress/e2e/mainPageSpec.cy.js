@@ -88,17 +88,9 @@ describe('mainPageSpec', () => {
       });
 
      it('AT_001.014 | Main page > Section with search > Search City > Verify that entered city is displayed into the dropdown', function () {
-
-
-            // cy.get('div.search-container').type('Cambridge');
-             cy.get('button[type="submit"]').click();
-             cy.get('ul span[style="width: 140px;"]')
-                 .contains('Cambridge, GB')
-                 .click();
         mainPage.elements.getSearchInput().type(this.data.city);
         mainPage.clickSearchBtn();
-        mainPage.elements.getSearchResultsDropdown().contains(this.data.searchResult);
 
-
-     } )
+        mainPage.elements.getSearchResultsDropdown().contains(this.data.searchResult).click();
+     });
 });
