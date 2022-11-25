@@ -63,7 +63,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
-    it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
+    it.skip('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
         cy.get('li[class="user-li"] a[href$="sign_in"]').click({force: true});
         cy.get('#user_email').type('3065606@gmail.com');
         cy.get('#user_password.form-control').type('Qwerty1234');

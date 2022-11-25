@@ -10,7 +10,11 @@ class Header {
         getLogoLink: () => cy.get('li.logo a'),
         getInitiativesPage: () => cy.get('#desktop-menu a[href="/our-initiatives"]'),
         getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]'),
-        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a')
+        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a'),
+        getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
+        getUserDropDownMenu: () => cy.get('.inner-user-container'),
+        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
+
     };
 
     clickSupport() {
@@ -57,12 +61,24 @@ class Header {
 
     clickApiMenuLink() {
         this.elements.getApiMenuLink().click({force : true})
-    }
+    };
 
-    clickBusinessMenuLink(){
+    clickBusinessMenuLink() {
         this.elements.getBusinessMenuLink()
         .invoke('removeAttr', 'target')
         .click({ force: true });
-    }
+    };
+
+    clickSignInMenuLink() {
+        this.elements.getSignInMenuLink().click({force : true})
+    };
+
+    clickUserDropDownMenu() {
+        this.elements.getUserDropDownMenu().click({force : true})
+    };
+
+    clickUserLogoutLink() {
+        this.elements.getUserLogoutLink().click({force : true})
+    };
 };
 export default Header;
