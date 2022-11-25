@@ -69,8 +69,7 @@ class Header {
         .click({ force: true });
     };
 
-    }
-    clickGuideMenuLink(){
+    clickGuideMenuLink() {
         this.elements.getGuideMenuLink().click({ force: true });
     }
     clickSignInMenuLink() {
