@@ -10,7 +10,8 @@ class Header {
         getLogoLink: () => cy.get('li.logo a'),
         getInitiativesPage: () => cy.get('#desktop-menu a[href="/our-initiatives"]'),
         getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]'),
-        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a')
+        getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a'),
+        getGuideMenuLink: () => cy.get('#desktop-menu a[href="/guide"]'),
     };
 
     clickSupport() {
@@ -63,6 +64,9 @@ class Header {
         this.elements.getBusinessMenuLink()
         .invoke('removeAttr', 'target')
         .click({ force: true });
+    }
+    clickGuideMenuLink(){
+        this.elements.getGuideMenuLink().click({ force: true });
     }
 };
 export default Header;
