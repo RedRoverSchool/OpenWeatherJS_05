@@ -10,8 +10,8 @@ describe('Footer test suite', () => {
         cy.fixture('footer').then(data => {
             this.data = data;
         });
-        cy.fixture('url').then((url) => {
-            this.url = url
+        cy.fixture('url').then(url => {
+            this.url = url;
         });
         cy.visit('/');
     });
