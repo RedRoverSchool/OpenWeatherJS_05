@@ -38,6 +38,11 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.data.DownloadAppURL.AppStoreURL);        
     });
 
+    it("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function() {
+        footer.clickGooglePlayLink();
+        cy.url().should('eq', this.data.DownloadAppURL.GooglePlayURL);
+    });
+    
     it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', function() {  
         footer.clickWebsiteTermsAndConditionsLink();
 
