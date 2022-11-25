@@ -43,3 +43,10 @@ Cypress.Commands.add('loginNoGroup', (userName, password) => {
     cy.get('#new_user input[value="Submit"]').click({force: true})
     cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
   })
+
+  Cypress.Commands.add('login', (email, password) => {
+    cy.get('#desktop-menu .user-li a').click()
+    cy.get('.input-group #user_email').type(email)
+    cy.get('.input-group #user_password').type(password)
+    cy.get('input[value="Submit"]').click()
+  })

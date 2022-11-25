@@ -150,29 +150,37 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it('AT_056.001 | My API keys > Managing API keys> Verify creation and deletion of an API key', function () {
-    cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('redrover@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('123456789')
-    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
-    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+  it('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('redrover@mailto.plus')
+    cy.get('#user_password').type('123456789')
+    cy.get('.btn-color[value="Submit"]').click()
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href*=api_keys]').click()
     cy.url().should('include', '/api_keys')
 
-    cy.get('#api_key_form_name').as('API_keyNameField')
-      .type('testAPIkey').and('have.value', 'testAPIkey').and('be.visible')
-    cy.get('.col-md-4 .button-round').as('GenerateButton').click()
-    cy.get('.material_table tr:nth-child(2)').as('CreatedKey')
-      .should('exist')
-      .should('be.visible')
-    cy.get('.col-md-6').as('NoticeCreateKey')
-      .should('include.text', 'API key was created successfully').and('include.text', 'Notice').and('be.visible')
-    cy.reload()
-    cy.get('@CreatedKey').should('be.visible')
-    cy.get('.api-keys tr:nth-child(2) .fa-remove').as('DeleteButton').click()
-    cy.get('.col-sm-offset-2').as('NoticeDeleteKey')
-      .should('include.text', 'API key was deleted successfully').and('include.text', 'Notice').and('be.visible')
-    cy.get('@CreatedKey').should('not.exist')
+    cy.get('.api-keys tbody tr').as('APIkeys')
+      .should('have.length', 1)
+      .get('td:nth-child(2)')
+      .should('have.text', 'Default')
+
+    cy.get('#api_key_form_name').type('testAPIkey')
+    cy.get('.button-round[value="Generate"]').click()
+    cy.get('.col-md-6')
+      .should('include.text', 'API key was created successfully')
+      .and('include.text', 'Notice')
+      .and('be.visible')
+
+    cy.get('@APIkeys')
+      .should('have.length', 2)
+      .should('include.text', 'testAPIkey')
+    
+    //delete created API key
+    cy.get('@APIkeys').each(($el) => {
+      if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
+        cy.wrap($el).find('.fa-remove').click()
+      }
+    })
   })
 
   it('AT_033.016 | Header > Navigation', function () {
@@ -236,33 +244,44 @@ describe('groupBugHunters', () => {
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
   })
 
-  it('AT_056.002 | My API keys > Managing API keys> Verify rename an API key', function () {
-    cy.get('.user-li').as('SignInButton').click()
-    cy.get('.new_user .email').as('EnterEmailField').type('yurik@mailto.plus')
-    cy.get('#user_password').as('PasswordField').type('12345678')
-    cy.get('.btn-color[value="Submit"]').as('SummitButton').click()
-    cy.get('.inner-user-container').as('AccountDropdownMenu').click()
-    cy.get('.dropdown-visible li:nth-child(2)').as('MyProfileButton').click()
+  it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
+    cy.get('.user-li a[href*=sign_in]').click()
+    cy.get('.input-group #user_email').type('yurik@mailto.plus')
+    cy.get('#user_password').type('12345678')
+    cy.get('.btn-color[value="Submit"]').click()
+    cy.get('#user-dropdown').click()
+    cy.get('#user-dropdown-menu a[href*=api_keys]').click()
     cy.url().should('include', '/api_keys')
+    cy.get('#api_key_form_name').type('testAPIkey')
+    cy.get('.button-round[value="Generate"]').click()
 
-    cy.get('.api-keys tbody td:nth-child(2)').as('APIkey').should('have.text', 'Default')
-    cy.get('.edit-key-btn').as('EditButton').click()
-    cy.get('#edit_key_form_name').as('EditNameField')
+    cy.get('.api-keys tbody tr').as('APIkeys').each(($el) => {
+      if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
+        cy.wrap($el).find('.fa-edit').click()        
+      }
+    })
+
+    cy.get('#edit_key_form_name')
       .clear()
-      .type('New_API_key')
-      .should('be.visible')
-    cy.get('.pop-up-footer .dark').as('SaveButton').click()
-    cy.get('@APIkey').should('have.text', 'New_API_key')
-    cy.get('.col-sm-offset-2 .panel').as('NoticeRenameKey')
+      .type('NEW_KEY_NAME')
+    cy.get('button.dark[onclick*=submit]').click()
+
+    cy.get('@APIkeys')
+      .should('have.length', 2)
+      .and('include.text', 'NEW_KEY_NAME')
+
+    cy.get('.col-md-6')
       .should('include.text', 'API key was edited successfully')
       .and('include.text', 'Notice')
       .and('be.visible')
 
-    //Return previous name of the key
-    cy.get('@EditButton').click()
-    cy.get('@EditNameField').clear().type('Default')
-    cy.get('@SaveButton').click()
-  })
+    //delete renamed API key 
+    cy.get('@APIkeys').each(($el) => {
+      if($el.find('td:nth-child(2)').text() == 'NEW_KEY_NAME') {
+          cy.wrap($el).find('.fa-remove').click()
+      }
+    })
+  })  
 
   it('AT_001.016 | Main page > Section with search > Search City', () => {
     const city = 'Boston';
@@ -456,4 +475,10 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.url().should('include', '/api');
     cy.get(hrefHome).should('be.visible')
   })
+
+  it('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
+    cy.get('#support-dropdown-menu a[href="/appid"]').click({force: true})
+    cy.get('p a[href="/technology"] ').click()
+    cy.get('.breadcrumb-title').should('have.text', 'Technology')
+  });
 })

@@ -25,4 +25,18 @@ describe('User Home Page suite', () => {
               })
 
     })
+
+    it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
+ 
+        cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+    
+        userHomePage.clickNewProductsLink()
+    
+        userHomePage.elements.getNavBarBlocks()
+            .should('have.length', 3)
+        userHomePage.elements.getNavBarBlocks()
+            .each(($el, idx) => {
+            expect($el.text()).to.include(this.data.textBlocs[idx])
+            })
+        }) 
 })
