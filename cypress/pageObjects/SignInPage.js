@@ -18,9 +18,9 @@ class SignInPage {
     this.elements.getSubmitButton().click()
   }
 
-  signIn() {
-    this.typeEnterEmail()
-    this.typeEnterPassword()
+  signIn(email, password) {
+    this.typeEnterEmail(email)
+    this.typeEnterPassword(password)
     this.clickSubmitButton()
   }
 

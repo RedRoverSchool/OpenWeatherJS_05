@@ -12,6 +12,7 @@ class Header {
         getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]'),
         getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a'),
         getGuideMenuLink: () => cy.get('#desktop-menu a[href="/guide"]'),
+        getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
         getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
         getUserDropDownMenu: () => cy.get('.inner-user-container'),
         getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
@@ -71,6 +72,11 @@ class Header {
 
     clickGuideMenuLink() {
         this.elements.getGuideMenuLink().click({ force: true });
+    }
+
+
+    clickDashboardMenu() {
+        this.elements.getDashboardMenuLink().invoke('removeAttr', 'target').click({force: true});
     }
     clickSignInMenuLink() {
         this.elements.getSignInMenuLink().click({force : true})

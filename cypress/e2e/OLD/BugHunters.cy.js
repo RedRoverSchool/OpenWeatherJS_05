@@ -150,7 +150,7 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
+  it.skip('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('redrover@mailto.plus')
     cy.get('#user_password').type('123456789')
