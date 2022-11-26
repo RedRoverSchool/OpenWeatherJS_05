@@ -44,7 +44,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.contains('OpenWeather')
   })
 
-  it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
+  it.skip('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
  
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
 
@@ -62,7 +62,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.get('.active').should('contain.text', 'New Products')
   })
 
-  it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
+  it.skip('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
 

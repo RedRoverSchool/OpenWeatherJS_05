@@ -15,6 +15,10 @@ class Footer {
         clickAppStoreLink() {
             this.elements.getAppStoreLink().invoke('removeAttr', 'target').click({force: true})
     };
+
+        clickGooglePlayLink() {
+        this.elements.getGooglePlayLink().invoke('removeAttr', 'target').click({force: true})
+    };
     
         clickWebsiteTermsAndConditionsLink() {
             this.elements.getWebsiteTermsAndConditionsLink().invoke('removeAttr', 'target').click();

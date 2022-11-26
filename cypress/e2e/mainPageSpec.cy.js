@@ -83,4 +83,8 @@ describe('mainPageSpec', () => {
             cy.url().should('eq', this.url.mainPageLink);
             mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
       });
+
+      it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
+        mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
+    });
 });

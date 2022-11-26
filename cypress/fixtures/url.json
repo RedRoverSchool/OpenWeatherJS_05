@@ -3,5 +3,6 @@
     "partnerPageLink": "https://openweathermap.org/examples",
     "mainPageLink": "https://openweathermap.org/", 
     "HistoryBulk": "https://openweathermap.org/history-bulk",
-    "NewProducts": "https://home.openweathermap.org/"
+    "NewProducts": "https://home.openweathermap.org/",
+    "WebsiteTermsAndConditions": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf"
 }
