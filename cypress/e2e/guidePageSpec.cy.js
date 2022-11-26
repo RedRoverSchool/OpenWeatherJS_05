@@ -34,7 +34,7 @@ describe('Guide page test suite', () => {
         guidePage.elements.getTitleGuide().should('have.text', this.data.menuLink.guide.text)
       })
 
-    it.only('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
+    it('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
         header.clickGuideMenuLink();
 
         cy.url().should('be.equal', this.url.guidePage);
