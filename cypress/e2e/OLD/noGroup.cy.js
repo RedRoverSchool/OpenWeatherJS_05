@@ -133,7 +133,7 @@ it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the 
     cy.get(btnBuyMarketplace).click()
 
     cy.get(pageTitle).should('include.text', 'Custom Weather Products')
-      .should('be.visible')
+      .and('be.visible')
   });
 })
 
