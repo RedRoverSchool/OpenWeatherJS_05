@@ -10,5 +10,11 @@
         "wrongPassword": "TestTest"
         }, 
 
-    "color" : "rgb(233, 110, 80)"
+    "loginData": {
+            "email": "group.no.group@gmail.com",
+            "password": "98765432"
+    },
+        
+    "color" : "rgb(233, 110, 80)",
+    "newProductsHeading": "New Products"
 }
