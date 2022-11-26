@@ -124,7 +124,7 @@ it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the 
   cy.get('h1.breadcrumb-title').should('have.text', 'Pricing')
   })
 
-  it('AT_028.009 | Footer > About us > Verify the button "Buy in the Marketplace" redirects to the expected page', function () {
+  it.skip('AT_028.009 | Footer > About us > Verify the button "Buy in the Marketplace" redirects to the expected page', function () {
     const aboutAs = 'a[href="/about-us"]'
     const btnBuyMarketplace = 'div.grid-container a[href$="/marketplace"]'
     const pageTitle = '#custom_weather_products'
