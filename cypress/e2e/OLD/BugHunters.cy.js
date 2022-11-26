@@ -99,7 +99,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
   })
 
-  it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
+  it.skip('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
     cy.get('#desktop-menu a[href="/guide"]').click({
       force: true
     });
