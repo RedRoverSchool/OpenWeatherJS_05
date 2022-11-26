@@ -195,7 +195,7 @@ describe('group Ark', () => {
     cy.get('h1 span').should('have.text', 'OpenWeather')
   });
 
-  it('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map', function () {
+  it.skip('AT_026.001 | Maps > Check that Global Precipitation is visualized on the map', function () {
     cy.get(mainMenuDesk.maps).click();
     cy.get('#map-wrap .global-map').should('be.visible')
 
