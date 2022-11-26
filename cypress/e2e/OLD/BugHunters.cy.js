@@ -70,9 +70,10 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://play.google.com/store/apps/details?id=uk.co.openweather')
   })
 
-  it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', () => {
+  it.skip('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', () => {
     cy.get('#desktop-menu a[href="/guide"]').click()
-    cy.url().should('include', '/guide')
+    cy.url().should('be.equal', 'https://openweathermap.org/guide')
+    cy.get('h1.breadcrumb-title').should('have.text','Guide')
   })
 
   it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {

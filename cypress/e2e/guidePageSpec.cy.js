@@ -11,6 +11,9 @@ describe('Guide page test suite', () => {
         cy.fixture('asiaJS').then(data => {
             this.data = data
         });
+        cy.fixture('url').then(url => {
+            this.url = url
+        });
         cy.visit('/');
     });
 
@@ -22,6 +25,11 @@ describe('Guide page test suite', () => {
         guidePage.elements.getTitleGuide().should('be.visible');
     });
 
+    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
+        header.clickGuideMenuLink();
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('have.text', this.data.menuLink.guide.text)
+      })
 });
 
 
