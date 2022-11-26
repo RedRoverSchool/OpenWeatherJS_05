@@ -20,7 +20,7 @@ describe('group Ark', () => {
     cy.url().should("eq", "https://openweathermap.org/guide");
   });
 
-  it('AT_010.004 | Marketplace > Verify the color of all orange links', function () {
+  it.skip('AT_010.004 | Marketplace > Verify the color of all orange links', function () {
     cy.get(mainMenuDesk.marketplace).invoke('removeAttr', 'target').click()
   
     cy.get('.market-place .product h5 a')
