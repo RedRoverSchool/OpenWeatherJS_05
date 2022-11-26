@@ -28,8 +28,6 @@ jobs:
 
     - name: Npx run
       run: npx cypress run --headless --browser chrome
-      env:
-        CHROME_OPTIONS: --disable-gpu;--window-size=1920,1080
 
     - name: Create test summary
       uses: test-summary/action@v1.0
