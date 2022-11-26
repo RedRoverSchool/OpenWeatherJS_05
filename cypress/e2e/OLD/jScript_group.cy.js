@@ -299,7 +299,7 @@ describe('Group jScript_group', () => {
         cy.get('.sign-form').should('exist');
     });
 
-    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+    it.skip('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
 
         cy.url().should('eq', 'https://openweather.co.uk/');
@@ -363,7 +363,7 @@ describe('Group jScript_group', () => {
         cy.get('.post-list .post').should('have.length', 10);
     });
 
-    it('AT_038.002 | For business page > About us', function () {
+    it.skip('AT_038.002 | For business page > About us', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
     
         cy.get('a.btn_block[href="#main_about"]').click({force: true});
