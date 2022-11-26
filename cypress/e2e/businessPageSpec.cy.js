@@ -2,7 +2,6 @@
 
 import Header from "../pageObjects/Header.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
-import AboutUs from "../pageObjects/AboutUsPage.js";
 
 const header = new Header();
 const businessPage = new BusinessPage();
