@@ -9,6 +9,9 @@ describe('User Home Page suite', () => {
             cy.fixture('userHomePage').then(data => {
                   this.data = data;
             });
+            cy.fixture('url').then(url  => {
+                this.url = url;
+            });
             cy.visit('/');
     });
 
@@ -48,5 +51,13 @@ describe('User Home Page suite', () => {
         userHomePage.elements.getNavBarLink().each(($el, idx) => {
             expect($el.text()).to.include(this.data.NavBar[idx])
           })
+    })
+
+    it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products page after logged in', function () {
+        
+        cy.login(this.data.loginData.email, this.data.loginData.password)
+
+        cy.url().should('include', this.url.NewProducts)
+        userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
     })
 })
