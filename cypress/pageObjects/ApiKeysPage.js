@@ -6,16 +6,11 @@ class ApiKeys {
         getNamesAPIkeys: () => cy.get('td:nth-child(2)'),    
         getCreateKeyField: () => cy.get('#api_key_form_name'),
         getGenerateButton: () => cy.get('.button-round[value="Generate"]'),
-        getNotification: () => cy.get('.col-md-6'),
-        getRemoveKeyButton: () => cy.get('.fa-remove')
+        getNotification: () => cy.get('.col-md-6'),        
     }
 
     clickGenerateButton() {
         this.elements.getGenerateButton().click()
-    }
-
-    clickRemoveKeyButton() {
-        this.elements.getRemoveKeyButton().click()
     }
 
 }

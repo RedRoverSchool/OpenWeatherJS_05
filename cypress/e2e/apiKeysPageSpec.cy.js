@@ -38,7 +38,7 @@ describe('API keys', () => {
 
         //delete created API key
         let nameKeys = 'td:nth-child(2)'
-        let deleteKeyButton = '.fa-remove'
+        let deleteKeyButton = 'td a i.fa-remove'
         apiKeys.elements.getAPIkyes().each(($el) => {
             if ($el.find(nameKeys).text() == this.data.keyNames.newNameKey) {
                 cy.wrap($el).find(deleteKeyButton).click()
