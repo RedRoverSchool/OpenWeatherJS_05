@@ -15,10 +15,8 @@ class Header {
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
         getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
         getUserDropDownMenu: () => cy.get('.inner-user-container'),
-        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
-=========
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
->>>>>>>>> Temporary merge branch 2
+        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
     };
 
     clickSupport() {
