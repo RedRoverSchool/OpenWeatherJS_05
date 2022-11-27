@@ -48,4 +48,13 @@ describe('Footer test suite', () => {
 
         cy.url().should('eq', this.url.WebsiteTermsAndConditions);
     });
+
+    it('AT_022.004 | Footer > Check Medium icon is clickable', function () {
+        footer.elements.getMediumIcon().should('be.visible')
+        footer.clickMediumIcon()
+
+        cy.url().should('eq', this.url.mediumUrl)
+        footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
+            
+    });
 });

@@ -87,4 +87,11 @@ describe('mainPageSpec', () => {
       it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
+
+    it('AT_001.014 | Main page > Section with search > Search City > Verify that entered city is displayed into the dropdown', function () {
+        mainPage.elements.getSearchInput().type(this.data.searchInputText1.city);
+        mainPage.clickSearchBtn();
+
+        mainPage.elements.getSearchResultsDropdown().contains(this.data.searchInputText1.searchResult).click();
+    });
 });

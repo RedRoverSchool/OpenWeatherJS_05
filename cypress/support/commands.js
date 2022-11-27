@@ -45,8 +45,8 @@ Cypress.Commands.add('loginNoGroup', (userName, password) => {
   })
 
   Cypress.Commands.add('login', (email, password) => {
-    cy.get('#desktop-menu .user-li a').click()
+    cy.get('.user-li a[href*=sign_in]').click({force: true})
     cy.get('.input-group #user_email').type(email)
     cy.get('.input-group #user_password').type(password)
-    cy.get('input[value="Submit"]').click()
+    cy.get('input[value="Submit"]').click({force: true})
   })

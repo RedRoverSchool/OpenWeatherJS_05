@@ -22,7 +22,7 @@ describe('Guide page test suite', () => {
 
     it('AT_008.003 | Main menu > Guide | Verifying the link on the page "Guide"', function () {
         header.elements.getGuideMenuLink().should('contain.text', this.data.menuLink.guide.text);
-        header.clickGuideMenuLink();
+        header.clickGuideMenuLink(); 
 
         cy.url().should('include', this.data.menuLink.guide.endPoint);
         guidePage.elements.getTitleGuide().should('be.visible');
@@ -38,8 +38,15 @@ describe('Guide page test suite', () => {
         header.clickGuideMenuLink();
 
         cy.url().should('be.equal', this.url.guidePage);
-        guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText)
+        guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText);
     })
 });
 
+    it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
+        header.clickGuideMenuLink();
+        cy.url().should('be.equal', this.url.guidePage);
 
+        guidePage.clickHomeMenuLink();
+        cy.url().should('be.equal', this.url.mainPageLink);
+    });
+});

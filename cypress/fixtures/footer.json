@@ -5,5 +5,8 @@
     "DownloadAppURL": {
         "AppStoreURL": "https://apps.apple.com/gb/app/openweather/id1535923697",
         "GooglePlayURL": "https://play.google.com/store/apps/details?id=uk.co.openweather"
-    }
+    },
+    "mainPageText": "OpenWeather",
+
+    "nameWidgetsLink": "Widgets"
 }

@@ -266,7 +266,7 @@ describe('GroupReporters', () => {
         })
     })
 
-    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+    it.skip('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
         cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
         cy.url().should('include', '/guide')
 

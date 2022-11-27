@@ -170,7 +170,7 @@ describe('Group lt_by_js', () => {
         cy.get('h1[class="breadcrumb-title"]').should('have.text', 'History Bulk') 
     })
 
-    it('AT_022.004 | Footer > Check Medium icon is clickable', function () {     
+    it.skip('AT_022.004 | Footer > Check Medium icon is clickable', function () {     
         cy.get('a[href="https://medium.com/@openweathermap"]').should('be.visible')
         cy.get('a[href="https://medium.com/@openweathermap"]').invoke('removeAttr', 'target').click()
 
