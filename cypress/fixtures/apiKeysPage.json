@@ -14,10 +14,5 @@
     "CreatedKeyNotice": {
         "shortNotice": "Notice",
         "longNotice": "API key was created successfully"
-    },
-
-    "locators": {
-        "nameKeys": "td:nth-child(2)",
-        "deleteKeysButton": "td a i.fa-remove"
     }
 }
