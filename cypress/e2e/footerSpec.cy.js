@@ -57,4 +57,13 @@ describe('Footer test suite', () => {
         footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
             
     });
+
+    it("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+        footer.elements.getCookiesControlElements().each(el => {
+            cy.wrap(el).focus({timeout: 7000})
+              .should('have.css', 'background-color', this.data.cookiesControlElementsHoverBackground)
+              .and('be.visible')
+        });
+    })
+
 });

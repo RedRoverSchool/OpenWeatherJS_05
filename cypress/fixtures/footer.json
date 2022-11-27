@@ -8,5 +8,6 @@
     },
     "mainPageText": "OpenWeather",
 
-    "nameWidgetsLink": "Widgets"
+    "nameWidgetsLink": "Widgets",
+    "cookiesControlElementsHoverBackground": "rgb(233, 110, 80)"
 }
