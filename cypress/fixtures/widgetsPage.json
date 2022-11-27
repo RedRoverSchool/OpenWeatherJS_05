@@ -1,3 +1,14 @@
 {
-    "widgetsQuantity": 9
+    "widgetsQuantity": 9,
+
+    "userData1": {
+        "login": "push@mailto.plus",
+        "password": "123456789"
+    },
+
+    "urn": "/widgets-constructor",
+
+    "pageTitle": "Widgets constructor"
+
+    
 }

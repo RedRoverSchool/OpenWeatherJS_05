@@ -403,7 +403,7 @@ it('AT_033.018 | Header > Navigation > API', () => {
   cy.url().should('include', '/api')
 });
 
-  it('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
+  it.skip('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('push@mailto.plus')
     cy.get('#user_password').type('123456789')
