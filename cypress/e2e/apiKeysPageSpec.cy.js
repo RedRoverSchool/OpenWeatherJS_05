@@ -36,12 +36,10 @@ describe('API keys', () => {
             .should('have.length', 2)
             .should('include.text', this.data.keyNames.newNameKey)
 
-        //delete created API key
-        let nameKeys = 'td:nth-child(2)'
-        let deleteKeyButton = 'td a i.fa-remove'
+        //delete created API key       
         apiKeys.elements.getAPIkyes().each(($el) => {
-            if ($el.find(nameKeys).text() == this.data.keyNames.newNameKey) {
-                cy.wrap($el).find(deleteKeyButton).click()
+            if ($el.find(this.data.locators.nameKeys).text() == this.data.keyNames.newNameKey) {
+                cy.wrap($el).find(this.data.locators.deleteKeysButton).click()
               }
             })
     })
