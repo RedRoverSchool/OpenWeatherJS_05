@@ -1,5 +1,7 @@
 {
     "zipCode": "60604",
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
-    "forecastDaysLength": 8
+    "forecastDaysLength": 8,
+    "RGB": "rgb(235, 110, 75)",
+    "SolarRadiationURL": "https://openweathermap.org/api/solar-radiation"
 }
