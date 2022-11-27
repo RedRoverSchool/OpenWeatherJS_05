@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
  
 import Footer from "../pageObjects/Footer.js"
+import Header from "../pageObjects/Header.js";
 
+const header = new Header;
 const footer = new Footer();
  
 describe('Footer test suite', () => {
@@ -58,9 +60,11 @@ describe('Footer test suite', () => {
             
     });
 
-    it("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+    it.only("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+        header.clickGuideMenuLink();
+
         footer.elements.getCookiesControlElements().each(el => {
-            cy.wrap(el).focus({timeout: 7000})
+            cy.wrap(el).focus()
               .should('have.css', 'background-color', this.data.cookiesControlElementsHoverBackground)
               .and('be.visible')
         });
