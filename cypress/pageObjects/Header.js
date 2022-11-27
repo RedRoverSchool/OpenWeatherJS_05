@@ -17,6 +17,7 @@ class Header {
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
         getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
+        getUserMyServicesLink: () => cy.get('#user-dropdown-menu > :nth-child(1) > a'),
         getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
     };
 
@@ -89,7 +90,11 @@ class Header {
         this.elements.getUserLogoutLink().click({force : true})
     };
 
+    clickUserMyServicesLink() {
+        this.elements.getUserMyServicesLink().click({force : true})
 
+    };
+    
     clickUserDropDownMenu() {
         this.elements.getUserDropDownMenu().click()
     }
