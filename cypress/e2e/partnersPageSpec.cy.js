@@ -18,8 +18,8 @@ describe('Partners page test suite', () => {
     it('AT_012.001 | Partners > CMS > Verifying 4 buttons exist in the section', function () {
         header.clickPartnersMenuLink();
 
-        partnersPage.elements.getSectionsNames().each(($el, i) => {
-            expect($el.text()).to.equal(this.data.sectionsNames[i]);
+        partnersPage.elements.getCMSNameButtons().each(($el, i) => {
+            expect($el.text()).to.equal(this.data.CMSNameButtons[i]);
         });
     });
 

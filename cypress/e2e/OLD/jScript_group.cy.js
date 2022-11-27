@@ -106,7 +106,7 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
-            expect($el.text()).to.equal(this.data.sectionsNames[i]);
+            expect($el.text()).to.equal(this.data.CMSNameButtons[i]);
         });
     });
 
