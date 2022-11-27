@@ -14,6 +14,9 @@ describe('Guide page test suite', () => {
         cy.fixture('url').then(url => {
             this.url = url
         });
+        cy.fixture('guidePage').then(text => {
+            this.text = text
+        })
         cy.visit('/');
     });
 
@@ -30,6 +33,14 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.guidePage);
         guidePage.elements.getTitleGuide().should('have.text', this.data.menuLink.guide.text)
       })
+
+    it('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
+        header.clickGuideMenuLink();
+
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText);
+    })
+
 
     it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
         header.clickGuideMenuLink();
