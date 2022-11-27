@@ -49,8 +49,8 @@ describe('mainPageSpec', () => {
                 .should('have.css', 'color', this.data.RGB)
         mainPage.clickSolarRadiationLink()
 
-       mainPage.checkOurNewProductPageIsOpen()
-       cy.url().should('eq', this.data.SolarRadiationURL);
+        mainPage.checkOurNewProductPageIsOpen()
+        cy.url().should('eq', this.data.SolarRadiationURL);
 
     });
 });
