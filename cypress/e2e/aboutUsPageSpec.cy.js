@@ -3,10 +3,12 @@
 import Footer from "../pageObjects/Footer";
 import AboutUs from "../pageObjects/AboutUsPage";
 import ApiPage from "../pageObjects/ApiPage";
+import MarketplacePage from "../pageObjects/MarketplacePage";
 
 const footer = new Footer();
 const aboutUs = new AboutUs();
 const apiPage = new ApiPage();
+const marketplacePage = new MarketplacePage();
 
 describe('About Us', () => {
 
@@ -23,6 +25,14 @@ describe('About Us', () => {
 
         cy.url().should('include', this.url.API);
         apiPage.elements.getWeatherApiTitle().should('be.visible');
+    });
+    
+    it('AT_028.009 | About us > Verify the button "Buy in the Marketplace" redirects to the Marketplace page', function() {
+        footer.clickAboutUsLink();
+        aboutUs.clickBuyMarketplaceButton();
+
+        cy.url().should('include', this.url.MarketPage);
+        marketplacePage.elements.getMarketplacePageTitle().should('be.visible')
     });
 
 });

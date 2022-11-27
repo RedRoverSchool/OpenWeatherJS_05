@@ -1,0 +1,18 @@
+{
+    "userData1": {
+        "login": "redrover@mailto.plus",
+        "password": "123456789"
+    },
+
+    "urn": "/api_keys",
+
+    "keyNames": {
+        "defaultNameKey": "Default",
+        "newNameKey": "testAPIkey"
+    },
+
+    "CreatedKeyNotice": {
+        "shortNotice": "Notice",
+        "longNotice": "API key was created successfully"
+    }
+}

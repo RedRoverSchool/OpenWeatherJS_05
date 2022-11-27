@@ -11,13 +11,14 @@ class Header {
         getInitiativesPage: () => cy.get('#desktop-menu a[href="/our-initiatives"]'),
         getApiMenuLink: () => cy.get('#desktop-menu a[href="/api"]'),
         getBusinessMenuLink: () => cy.get('#desktop-menu :nth-child(10) > a'),
+        getUserDropDownMenu: () => cy.get('#user-dropdown'),
+        getMyApiKeysLink: () => cy.get('#user-dropdown-menu a[href*=api_keys]'),
         getGuideMenuLink: () => cy.get('#desktop-menu a[href="/guide"]'),
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
         getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
-        getUserDropDownMenu: () => cy.get('.inner-user-container'),
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
-        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]'),
-        getUserMyServicesLink: () => cy.get('#user-dropdown-menu > :nth-child(1) > a')
+        getUserMyServicesLink: () => cy.get('#user-dropdown-menu > :nth-child(1) > a'),
+        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
     };
 
     clickSupportDropDownMenu() {
@@ -79,20 +80,28 @@ class Header {
     clickDashboardMenu() {
         this.elements.getDashboardMenuLink().invoke('removeAttr', 'target').click({force: true});
     }
+
     clickSignInMenuLink() {
         this.elements.getSignInMenuLink().click({force : true})
     };
 
-    clickUserDropDownMenu() {
-        this.elements.getUserDropDownMenu().click({force : true})
-    };
-
+    
     clickUserLogoutLink() {
         this.elements.getUserLogoutLink().click({force : true})
     };
 
     clickUserMyServicesLink() {
         this.elements.getUserMyServicesLink().click({force : true})
+
+    };
+    
+    clickUserDropDownMenu() {
+        this.elements.getUserDropDownMenu().click()
     }
+
+    clickMyApiKyesLink() {
+        this.elements.getMyApiKeysLink().click()
+    }
+
 };
 export default Header;
