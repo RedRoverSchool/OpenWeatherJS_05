@@ -48,5 +48,4 @@ describe('Guide page test suite', () => {
 
         guidePage.clickHomeMenuLink();
         cy.url().should('be.equal', this.url.mainPageLink);
-    });
 });
