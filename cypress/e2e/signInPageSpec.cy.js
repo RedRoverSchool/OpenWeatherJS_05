@@ -26,4 +26,17 @@ describe('SignIn test suit', () => {
 
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
+
+  it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.signInUrlUsers)
+    signInPage.elements.getTextClickHereToRecover().should('be.visible')
+    signInPage.clickHereToRecover() 
+    signInPage.elements.getOpenTextResetPassword().should('have.text', this.resetYourPassord)
+    signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.userNegativeEmail)
+    signInPage.clickBtnSendEmailResetPassword()
+
+    cy.url().should('eq', this.urlUsersPassword)
+    signInPage.elements.getForgotYourPassword().should('have.text', this.textForgotYourPassword)
+  });
 });
