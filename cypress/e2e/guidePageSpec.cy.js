@@ -40,7 +40,7 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.guidePage);
         guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText);
     })
-});
+
 
     it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
         header.clickGuideMenuLink();
@@ -48,4 +48,5 @@ describe('Guide page test suite', () => {
 
         guidePage.clickHomeMenuLink();
         cy.url().should('be.equal', this.url.mainPageLink);
+    });
 });
