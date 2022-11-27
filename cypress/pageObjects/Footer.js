@@ -7,7 +7,7 @@ class Footer {
         getAboutUsLink: () => cy.get('div#footer-website a[href="/about-us"]'),
         getWidgetsLink: () => cy.get('.inner-footer-container a[href*=widgets]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
-        getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),
+        getNameOfPageMedium: () =>  cy.get('.bm.gp.gq')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
