@@ -62,7 +62,7 @@ describe('User Home Page suite', () => {
         
         cy.login(this.data.loginData.email, this.data.loginData.password)
 
-        cy.url().should('include', this.url.NewProducts)
+        cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
     })
 
@@ -74,7 +74,7 @@ describe('User Home Page suite', () => {
         header.clickUserMyServicesLink()
         userServicesPage.clickNewProductsLink()
 
-        cy.url().should('include', this.url.NewProducts)
+        cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
     })
 })
