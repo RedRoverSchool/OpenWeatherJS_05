@@ -63,7 +63,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', 'https://openweathermap.org/');
     });
 
-    it('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
+    it.skip('AT_031.001 | Sign in > Account Dropdown Menu > After cliking the "logout" button the message appears', function () {
         cy.get('li[class="user-li"] a[href$="sign_in"]').click({force: true});
         cy.get('#user_email').type('3065606@gmail.com');
         cy.get('#user_password.form-control').type('Qwerty1234');
@@ -151,7 +151,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweathermap.org/');
     });
     
-    it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
+    it.skip('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         cy.get('ul.day-list li').should('have.length', 8);
     });
 
@@ -299,7 +299,7 @@ describe('Group jScript_group', () => {
         cy.get('.sign-form').should('exist');
     });
 
-    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+    it.skip('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
 
         cy.url().should('eq', 'https://openweather.co.uk/');
@@ -363,7 +363,7 @@ describe('Group jScript_group', () => {
         cy.get('.post-list .post').should('have.length', 10);
     });
 
-    it('AT_038.002 | For business page > About us', function () {
+    it.skip('AT_038.002 | For business page > About us', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
     
         cy.get('a.btn_block[href="#main_about"]').click({force: true});

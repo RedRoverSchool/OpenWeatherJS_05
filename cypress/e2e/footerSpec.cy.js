@@ -10,6 +10,9 @@ describe('Footer test suite', () => {
         cy.fixture('footer').then(data => {
             this.data = data;
         });
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
         cy.visit('/');
     });
 
@@ -33,5 +36,25 @@ describe('Footer test suite', () => {
     it("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function() {
         footer.clickAppStoreLink()
         cy.url().should('eq', this.data.DownloadAppURL.AppStoreURL);        
+    });
+
+    it("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function() {
+        footer.clickGooglePlayLink();
+        cy.url().should('eq', this.data.DownloadAppURL.GooglePlayURL);
+    });
+    
+    it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', function() {  
+        footer.clickWebsiteTermsAndConditionsLink();
+
+        cy.url().should('eq', this.url.WebsiteTermsAndConditions);
+    });
+
+    it('AT_022.004 | Footer > Check Medium icon is clickable', function () {
+        footer.elements.getMediumIcon().should('be.visible')
+        footer.clickMediumIcon()
+
+        cy.url().should('eq', this.url.mediumUrl)
+        footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
+            
     });
 });

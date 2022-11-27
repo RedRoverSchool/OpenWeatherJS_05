@@ -46,4 +46,13 @@ describe('Marketplace page test suite', () => {
            cy.url().should('eq', this.urls.HistoryBulk)
            historyBulk.elements.getHistoryBulkTitle().should('have.text', this.historyBulkPageData.HistoryBulkTitle)  
       })
+
+      it('AT_010.004 | Marketplace > Verify the color of all orange links', function () {
+            header.clickMarketplaceMenuLink()
+          
+            marketplacePage.elements.getAllProductTitles().each(el => {
+                  cy.wrap(el).should('have.css', 'color', this.marketPlacePageData.productTitleColor)
+            })
+      });
+
 })

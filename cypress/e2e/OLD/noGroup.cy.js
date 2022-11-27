@@ -44,7 +44,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.contains('OpenWeather')
   })
 
-  it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
+  it.skip('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
  
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
 
@@ -62,7 +62,7 @@ it('AT_010.006 | Marketplace > Verify all orange links on the page', () => {
     cy.get('.active').should('contain.text', 'New Products')
   })
 
-  it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
+  it.skip('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
     cy.login(this.data.userProfile.email, this.data.userProfile.password)
 
@@ -124,12 +124,16 @@ it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the 
   cy.get('h1.breadcrumb-title').should('have.text', 'Pricing')
   })
 
-  it('AT_028.009 | Footer > About us > Verify the button "Buy in the Marketplace" redirects to the expected page', function() {
-    cy.get('a[href="/about-us"]').click()
-    cy.get('a[class="btn_block orange round"][href="https://home.openweathermap.org/marketplace"]').click()
-    cy.get('#custom_weather_products').should('include.text', 'Custom Weather Products')
-    .should('be.visible')
-    
+  it.skip('AT_028.009 | Footer > About us > Verify the button "Buy in the Marketplace" redirects to the expected page', function () {
+    const aboutAs = 'a[href="/about-us"]'
+    const btnBuyMarketplace = 'div.grid-container a[href$="/marketplace"]'
+    const pageTitle = '#custom_weather_products'
+
+    cy.get(aboutAs).click()
+    cy.get(btnBuyMarketplace).click()
+
+    cy.get(pageTitle).should('include.text', 'Custom Weather Products')
+      .and('be.visible')
   });
 })
 

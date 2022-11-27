@@ -65,14 +65,15 @@ describe('groupBugHunters', () => {
     cy.url().should('contain', '/faq')
   })
 
-  it("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function () {
+  it.skip ("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function () {
     cy.get('.my-5 a[href*=google]').invoke('removeAttr', 'target').click()
     cy.url().should('eq', 'https://play.google.com/store/apps/details?id=uk.co.openweather')
   })
 
-  it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', () => {
+  it.skip('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', () => {
     cy.get('#desktop-menu a[href="/guide"]').click()
-    cy.url().should('include', '/guide')
+    cy.url().should('be.equal', 'https://openweathermap.org/guide')
+    cy.get('h1.breadcrumb-title').should('have.text','Guide')
   })
 
   it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
@@ -150,7 +151,7 @@ describe('groupBugHunters', () => {
     cy.get('ol > :nth-child(24)').should('have.text', 'How to start using Weather API');
   })
 
-  it.skip ('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
+  it.skip('AT_056.001 | My API keys > Managing API keys> Create new API key', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('redrover@mailto.plus')
     cy.get('#user_password').type('123456789')
@@ -475,4 +476,10 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.url().should('include', '/api');
     cy.get(hrefHome).should('be.visible')
   })
+
+  it('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
+    cy.get('#support-dropdown-menu a[href="/appid"]').click({force: true})
+    cy.get('p a[href="/technology"] ').click()
+    cy.get('.breadcrumb-title').should('have.text', 'Technology')
+  });
 })

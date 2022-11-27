@@ -5,7 +5,9 @@ class Footer {
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]'),
         getAboutUsLink: () => cy.get('div#footer-website a[href="/about-us"]'),
-        getWidgetsLink: () => cy.get('[href="/widgets-constructor"]')
+        getWidgetsLink: () => cy.get('[href="/widgets-constructor"]'),
+        getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
+        getNameOfPageMedium: () =>  cy.get('.bm.gp.gq')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -14,6 +16,10 @@ class Footer {
      
         clickAppStoreLink() {
             this.elements.getAppStoreLink().invoke('removeAttr', 'target').click({force: true})
+    };
+
+        clickGooglePlayLink() {
+        this.elements.getGooglePlayLink().invoke('removeAttr', 'target').click({force: true})
     };
     
         clickWebsiteTermsAndConditionsLink() {
@@ -25,6 +31,10 @@ class Footer {
         clickWidgetsLink() {
             this.elements.getWidgetsLink().click({force: true});
     };
+
+        clickMediumIcon(){
+            this.elements.getMediumIcon().invoke('removeAttr', 'target').click()
+    }
 };
 
 export default Footer;
