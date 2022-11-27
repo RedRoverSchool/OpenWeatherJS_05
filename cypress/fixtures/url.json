@@ -4,12 +4,6 @@
     "mainPageLink": "https://openweathermap.org/", 
     "HistoryBulk": "https://openweathermap.org/history-bulk",
     "NewProducts": "https://home.openweathermap.org/",
-<<<<<<< HEAD
-    "WebsiteTermsAndConditions": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
-    "guidePage": "https://openweathermap.org/guide",
-    "mediumUrl": "https://openweathermap.medium.com/"
-=======
     "WebsiteTermsAndConditions": "https://openweather.co.uk",
     "MainAbout": "https://openweather.co.uk/#main_about"
->>>>>>> 0cc731a447eabfa7b19094a31694e84ba2c4603c
 }
