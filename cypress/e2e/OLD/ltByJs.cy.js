@@ -68,9 +68,10 @@ describe('Group lt_by_js', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.')       
     })
 
-    it('AT_033.003 | Header > Navigation> Verify "API" menu link', function () {
+    it.skip('AT_033.003 | Header > Navigation> Verify "API" menu link', function () {
         cy.get('#desktop-menu a[href="/api"]').click()
         cy.url().should('eq', 'https://openweathermap.org/api')
+        cy.get('.breadcrumb-title').should('have.text', 'Weather API')
     })
 
     it('AT_001.007 | Main page > Section with search > Verify entered a City name into the Search city field', function () {    
@@ -158,7 +159,7 @@ describe('Group lt_by_js', () => {
         cy.get('.breadcrumb-title').should('have.text', 'Partners and solutions')     
     })
 
-    it('AT_009.003 | Main menu > Marketplace verification of displayed "Documentation" button for History bulk', function () {
+    it.skip('AT_009.003 | Main menu > Marketplace verification of displayed "Documentation" button for History bulk', function () {
         const marketplace = '#desktop-menu a[href*="marketplace"]'
         const documentationButton = 'div.button-container > a[href="https://openweathermap.org/history-bulk"]'
 
@@ -169,7 +170,7 @@ describe('Group lt_by_js', () => {
         cy.get('h1[class="breadcrumb-title"]').should('have.text', 'History Bulk') 
     })
 
-    it('AT_022.004 | Footer > Check Medium icon is clickable', function () {     
+    it.skip('AT_022.004 | Footer > Check Medium icon is clickable', function () {     
         cy.get('a[href="https://medium.com/@openweathermap"]').should('be.visible')
         cy.get('a[href="https://medium.com/@openweathermap"]').invoke('removeAttr', 'target').click()
 

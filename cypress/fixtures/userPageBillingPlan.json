@@ -1,0 +1,12 @@
+{
+"userProfile": {
+        
+    "userName": "noGroup",
+    "email": "test.openweathermap.05@gmail.com",
+    "password": "Test@123",
+    "wrongPassword": "TestTest"
+    },
+
+"titleText": "Pricing"
+
+}

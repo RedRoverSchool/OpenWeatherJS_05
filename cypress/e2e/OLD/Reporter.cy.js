@@ -76,12 +76,12 @@ describe('GroupReporters', () => {
         cy.get(differentWeatherPopup).should('not.exist')
     })
 
-    it('AT_034.001 | <Header > verify "For Business" button', () => {
+    it.skip('AT_034.001 | <Header > verify "For Business" button', () => {
         cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
 
-    it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
+    it.skip('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', () => {
         const cityName = 'Washington DC';
 
         enterCityOrZipCode(cityName);
@@ -156,7 +156,7 @@ describe('GroupReporters', () => {
             })
         });
 
-    it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
+    it.skip('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', () => {
         const cityName = 'Moscow'
 
         enterCityOrZipCode(cityName)
@@ -209,7 +209,7 @@ describe('GroupReporters', () => {
         cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
     });
 
-    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
+    it.skip('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
       cy.get('#support-dropdown').should('be.visible').click();
       cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
       cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
@@ -266,7 +266,7 @@ describe('GroupReporters', () => {
         })
     })
 
-    it('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
+    it.skip('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
         cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
         cy.url().should('include', '/guide')
 

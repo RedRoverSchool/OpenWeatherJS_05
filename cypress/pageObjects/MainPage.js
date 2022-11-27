@@ -9,10 +9,10 @@ class MainPage {
         getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
         getMainPageContent: () => cy.get('h1 span.orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
-        getOurNewProductTitle: () => cy.get('.no-mobile-padding h2 span.orange-text'),
-        getOurNewProductTitleWordNew: () => cy.get ('.no-mobile-padding h2 span'),
-        getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation"]'),
-        getSolarRadiationPageTitle: () => cy.get ('.breadcrumb-title')
+        getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
+        getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
+        getOurNewProductSubHeaderTitle: () => cy.get ('.no-mobile-padding h2 span'),
+        getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation')
     }
 
 
@@ -41,9 +41,6 @@ class MainPage {
 
     clickSolarRadiationLink() {
         this.elements.getSolarRadiationLink().click({force: true});
-    }
-    checkOurNewProductPageIsOpen() {
-        this.elements.getSolarRadiationPageTitle().should('have.text', "Solar Radiation API")
     }
 }
 export default MainPage;

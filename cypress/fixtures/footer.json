@@ -1,4 +1,10 @@
 {
     "websiteTermsUrl": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
-    "websiteTerms": "Website terms and conditions of use"
+    "termsAndConditionsOfSaleUrl": "https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf",
+
+    "DownloadAppURL": {
+        "AppStoreURL": "https://apps.apple.com/gb/app/openweather/id1535923697",
+        "GooglePlayURL": "https://play.google.com/store/apps/details?id=uk.co.openweather"
+    },
+    "mainPageText": "OpenWeather"
 }
