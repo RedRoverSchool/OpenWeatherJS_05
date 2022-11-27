@@ -3,6 +3,7 @@ class ApiKeys {
     locators = {
         NameKeys: "td:nth-child(2)",
         DeleteKeysButton: "td a i.fa-remove",
+        EditKeyButton: ".fa-edit"
     }
 
     elements = {              
@@ -11,12 +12,19 @@ class ApiKeys {
         getCreateKeyField: () => cy.get('#api_key_form_name'),
         getGenerateButton: () => cy.get('.button-round[value="Generate"]'),
         getNotification: () => cy.get('.col-md-6'),  
+        getEditAPIkeyField: () => cy.get('#edit_key_form_name'),
+        getSaveEditKeyButton: () => cy.get('button.dark[onclick*=submit]')
               
     }
 
     clickGenerateButton() {
         this.elements.getGenerateButton().click()
     }
+
+    clickSaveEditKeyButton() {
+        this.elements.getSaveEditKeyButton().click()
+    }
+
 
 }
 

@@ -44,4 +44,40 @@ describe('API keys', () => {
             })
     })
 
+    it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function() {
+        cy.login(this.data.userDataRenameKey.login, this.data.userDataRenameKey.password)
+        header.clickUserDropDownMenu()
+        header.clickMyApiKyesLink()
+        cy.url().should('include', this.data.urn)
+        apiKeys.elements.getCreateKeyField().type(this.data.keyNames.newNameKey)
+        apiKeys.clickGenerateButton()
+
+        apiKeys.elements.getAPIkyes().each(($el) => {
+            if ($el.find(apiKeys.locators.NameKeys).text() == this.data.keyNames.newNameKey) {
+              cy.wrap($el).find(apiKeys.locators.EditKeyButton).click()        
+            }
+          })
+
+        apiKeys.elements.getEditAPIkeyField()
+            .clear()
+            .type(this.data.keyNames.renameKey)
+        apiKeys.clickSaveEditKeyButton()
+
+        apiKeys.elements.getAPIkyes()
+            .should('have.length', 2)
+            .and('include.text', this.data.keyNames.renameKey)
+
+        apiKeys.elements.getNotification()
+            .should('include.text', this.data.EditedKeyNotice.longNotice)
+            .and('include.text', this.data.EditedKeyNotice.shortNotice)
+            .and('be.visible')
+
+        //delete renamed API key 
+        apiKeys.elements.getAPIkyes().each(($el) => {
+            if($el.find(apiKeys.locators.NameKeys).text() == this.data.keyNames.renameKey) {
+                cy.wrap($el).find(apiKeys.locators.DeleteKeysButton).click()
+            }
+        })
+    })
+
 })
