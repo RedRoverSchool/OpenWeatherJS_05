@@ -1,10 +1,11 @@
 class ApiKeys {
 
-    elements = {
+    locators = {
+        NameKeys: "td:nth-child(2)",
+        DeleteKeysButton: "td a i.fa-remove",
+    }
 
-        locatorNameKeys: "td:nth-child(2)",
-        locatorDeleteKeysButton: "td a i.fa-remove",
-        
+    elements = {              
         getAPIkyes: () => cy.get('.api-keys tbody tr'),
         getNamesAPIkeys: () => cy.get('td:nth-child(2)'),    
         getCreateKeyField: () => cy.get('#api_key_form_name'),

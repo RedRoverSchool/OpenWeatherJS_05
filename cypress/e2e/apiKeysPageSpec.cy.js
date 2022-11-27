@@ -38,10 +38,9 @@ describe('API keys', () => {
 
         //delete created API key       
         apiKeys.elements.getAPIkyes().each(($el) => {
-            if ($el.find(apiKeys.elements.locatorNameKeys).text() == this.data.keyNames.newNameKey) {
-                cy.wrap($el).find(apiKeys.elements.locatorDeleteKeysButton).click()
+            if ($el.find(apiKeys.locators.NameKeys).text() == this.data.keyNames.newNameKey) {
+                cy.wrap($el).find(apiKeys.locators.DeleteKeysButton).click()
               }
-
             })
     })
 
