@@ -2,9 +2,11 @@
  
 import Footer from "../pageObjects/Footer.js"
 import Header from "../pageObjects/Header.js";
+import CookiesPanel from "../pageObjects/CookiesPanel.js";
 
 const header = new Header;
 const footer = new Footer();
+const cookiesPanel = new CookiesPanel();
  
 describe('Footer test suite', () => {
 
@@ -15,6 +17,9 @@ describe('Footer test suite', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
+        cy.fixture('cookiesPanel').then(cookiesPanel => {
+            this.cookiesPanel = cookiesPanel;
+      });
         cy.visit('/');
     });
 
@@ -60,13 +65,15 @@ describe('Footer test suite', () => {
             
     });
 
-    it("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+    it.only("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
         header.clickGuideMenuLink();
 
-        footer.elements.getCookiesControlElements().each(el => {
-            cy.wrap(el).focus()
-              .should('have.css', 'background-color', this.data.cookiesControlElementsHoverBackground)
-              .and('be.visible')
+        cookiesPanel.elements.getCookiesControlElements().each(el => {
+            cy.wrap(el)
+                .should('be.visible')
+                .and('have.css', 'background-color', this.cookiesPanel.cookiesControlElementsBackground)
+                .focus()
+                .should('have.css', 'background-color', this.cookiesPanel.cookiesControlElementsBackgroundHover)
         });
     })
 

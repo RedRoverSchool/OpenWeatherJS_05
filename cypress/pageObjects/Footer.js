@@ -8,7 +8,6 @@ class Footer {
         getWidgetsLink: () => cy.get('.inner-footer-container a[href*=widgets]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
         getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),
-        getCookiesControlElements: () => cy.get("#stick-footer-panel .stick-footer-panel__link")
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
