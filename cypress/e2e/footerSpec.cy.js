@@ -65,7 +65,7 @@ describe('Footer test suite', () => {
             
     });
 
-    it.only("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
+    it("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
         header.clickGuideMenuLink();
 
         cookiesPanel.elements.getCookiesControlElements().each(el => {
