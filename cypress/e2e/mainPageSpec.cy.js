@@ -41,7 +41,7 @@ describe('mainPageSpec', () => {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
 
-    it.only('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
+    it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
         mainPage.clickOurNewProductTitle()
         mainPage.elements.getOurNewProductTitleWordNew()
                 .should('have.text', "new")
