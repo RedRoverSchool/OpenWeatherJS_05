@@ -1,6 +1,7 @@
 class AboutUs {
     elements = {
-        getProductsDocumentationButton: () => cy.get('div.grid-container [href="/api"]')
+        getProductsDocumentationButton: () => cy.get('div.grid-container [href="/api"]'),
+        getTitleOpenWhetherProducs: () => cy.get('h2[style="margin-top: 0;"]')
     }
 
     clickProductsDocumentationButton() {

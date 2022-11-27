@@ -12,6 +12,9 @@ describe('businessPageSpec', () => {
         cy.fixture('businessPage').then(data => {
             this.data = data;
         });
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
         cy.visit('/');
     })
         

@@ -43,7 +43,7 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.data.DownloadAppURL.GooglePlayURL);
     });
     
-    it('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', function() {  
+    it.skip('AT_030.003 | Footer > Website terms and conditions > Verify redirecting to new url', function() {  
         footer.clickWebsiteTermsAndConditionsLink();
 
         cy.url().should('eq', this.url.WebsiteTermsAndConditions);
