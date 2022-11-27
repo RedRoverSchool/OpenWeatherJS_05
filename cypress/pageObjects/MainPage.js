@@ -11,10 +11,9 @@ class MainPage {
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
-        getOurNewProductSubHeaderTitle: () => cy.get ('.no-mobile-padding h2 span'),
+        getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
         getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation')
     }
-
 
     clickSearchBtn() {
         this.elements.getSearchBtn().click({force: true});
@@ -33,10 +32,6 @@ class MainPage {
 
     clickHomePageButton() {
         this.elements.getHomePageButton().click({force: true});
-    }
-
-    clickOurNewProductTitle() {
-        this.elements.getOurNewProductTitle().click({force: true});
     }
 
     clickSolarRadiationLink() {

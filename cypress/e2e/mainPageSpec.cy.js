@@ -96,10 +96,10 @@ describe('mainPageSpec', () => {
 
     it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
         mainPage.elements.getOurNewProductSubHeaderTitle()
-                .should('have.text', "new").and('have.css', 'color', this.data.RGB)
-        mainPage.clickSolarRadiationLink()
+                .should('have.text', "new").and('have.css', 'color', this.data.RGB);
+        mainPage.clickSolarRadiationLink();
         
         cy.url().should('eq', this.url.SolarRadiationURL);
-        solarRadiationPage.elements.getSolarRadiationPageTitle().should('have.text', this.solarRadiationPage.solareRadiationPageTitle)
+        solarRadiationPage.elements.getSolarRadiationPageTitle().should('have.text', this.solarRadiationPage.solareRadiationPageTitle);
     });
 });
