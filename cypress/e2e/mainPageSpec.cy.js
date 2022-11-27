@@ -40,4 +40,14 @@ describe('mainPageSpec', () => {
     it('AT_045.006 | Main page > Section with 8-day forecast > Verifying the weather forecast for 8 days is displayed in the section', function () {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
+
+    it.only('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
+        cy.get('.no-mobile-padding h2 span.orange-text').click({force: true});
+        cy.get ('.no-mobile-padding h2 span').should('have.text', "new");
+        cy.get ('.no-mobile-padding h2 span').should('have.css', 'color', 'rgb(235, 110, 75)');
+        
+        cy.get('a[href="/api/solar-radiation"]').click({force: true});
+        cy.url().should('eq', 'https://openweathermap.org/api/solar-radiation');
+        cy.get ('.breadcrumb-title').should('have.text', "Solar Radiation API");
+    });
 });
