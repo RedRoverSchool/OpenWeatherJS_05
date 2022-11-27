@@ -54,7 +54,7 @@ describe('group Ark', () => {
       })
   })
 
-  it('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', function () {
+  it.skip('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', function () {
     cy.get('a[href="/guide"]').contains("Guide").click();
 
     cy.get('.wrapper').should('be.visible')
