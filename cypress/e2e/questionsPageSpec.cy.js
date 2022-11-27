@@ -17,7 +17,7 @@ describe('Questions page test suite', () => {
     });
 
     it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
-        header.clickSupport();
+        header.clickSupportDropDownMenu();
         header.clickAskAquestionMenuLink();
         questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
 

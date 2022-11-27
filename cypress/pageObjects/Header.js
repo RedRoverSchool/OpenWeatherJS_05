@@ -19,7 +19,7 @@ class Header {
         getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
     };
 
-    clickSupport() {
+    clickSupportDropDownMenu() {
         this.elements.getSupportDropDownMenu().click({ force: true });
     };
 
