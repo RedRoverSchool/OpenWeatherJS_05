@@ -69,7 +69,7 @@ describe('asiaJS', () => {
       });
   });
 
-  it('AT_001.014 | Main page > Search section > Verify that entered city is displayed into the dropdown', () => {
+  it.skip('AT_001.014 | Main page > Search section > Verify that entered city is displayed into the dropdown', () => {
     cy.get('div.search-container').type('Cambridge');
     cy.get('button[type="submit"]').click();
     cy.get('ul span[style="width: 140px;"]')
