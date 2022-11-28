@@ -105,7 +105,7 @@ class Header {
     }
 
 
-    clickUserDropDownMyApiLink() {
+    clickUserDropDownMyApiKeysLink() {
         this.elements.getUserDropDownMyApiLink().click({force : true})
     };
 };

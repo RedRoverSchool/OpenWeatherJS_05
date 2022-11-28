@@ -50,7 +50,7 @@ describe('Widgets page test suite', () => {
         header.clickSignInMenuLink();
         singInPage.signIn(this.signIn.userEmail, this.signIn.userPassword);
         header.clickUserDropDownMenu();
-        header.clickUserDropDownMyApiLink();
+        header.clickUserDropDownMyApiKeysLink();
         cy.copyData("myApiKey", apiKeysPage.elements.getFirstApiKey());
         footer.clickWidgetsLink();
 
