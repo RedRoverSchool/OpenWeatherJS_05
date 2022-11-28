@@ -65,6 +65,6 @@ describe('Footer test suite', () => {
     })
 
     it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
-        footer.elements.getSocialMediaIconLinks.should('have.length', 6).and('be.visible');
+        footer.elements.getSocialMediaIconLinks().should('have.length', 6).and('be.visible');
     });
 });
