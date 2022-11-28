@@ -75,7 +75,7 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
-    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+    it.skip('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         cy.get('.social a').should('have.length', 6).and('be.visible');
     });
     
