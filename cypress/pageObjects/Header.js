@@ -19,7 +19,8 @@ class Header {
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
         getUserMyServicesLink: () => cy.get('#user-dropdown-menu > :nth-child(1) > a'),
         getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]'),
-        getUserDropDownMyApiLink: () => cy.get('#user-dropdown-menu [href$="/api_keys"]')
+        getUserDropDownMyApiLink: () => cy.get('#user-dropdown-menu [href$="/api_keys"]'),
+        getPaymentMenuLink: () => cy.get('.dropdown-menu a[href="/payments"]')
     };
 
     clickSupportDropDownMenu() {
@@ -107,6 +108,9 @@ class Header {
 
     clickUserDropDownMyApiKeysLink() {
         this.elements.getUserDropDownMyApiLink().click({force : true})
+    };
+    clickPaymentMenuLink() {
+        this.elements.getPaymentMenuLink().click({force : true})
     };
 };
 export default Header;
