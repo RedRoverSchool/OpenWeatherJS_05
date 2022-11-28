@@ -26,6 +26,14 @@ class ApiKeys {
         this.elements.getSaveEditKeyButton().click()
     }
 
+    actionWithKey(nameKey, actionLocator) {
+        this.elements.getAPIkyes().each(($el) => {
+            if($el.find(this.locators.NameKeys).text() == nameKey) {
+                cy.wrap($el).find(actionLocator).click()
+            }
+        })
+    }
+
 }
 
 export default ApiKeys
