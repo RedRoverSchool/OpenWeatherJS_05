@@ -55,7 +55,7 @@ describe('Widgets page test suite', () => {
         footer.clickWidgetsLink();
 
         cy.pasteDataInInputField("@myApiKey", widgetsPage.elements.getApiKeyInputField());
-        widgetsPage.clickCodeWidget1Btn();
+        widgetsPage.clickCodeWidgetFirstBtn();
         widgetsPage.elements.getPopupWindowTitle().should('not.have.text', this.data.popupWindowTitle.invalidTitle);
 
         widgetsPage.elements.getPopupWindowTitle().should('have.text', this.data.popupWindowTitle.validTitle);
