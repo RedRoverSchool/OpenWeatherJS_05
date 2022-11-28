@@ -2,9 +2,11 @@
  
 import Header from "../pageObjects/Header.js"
 import PartnersPage from "../pageObjects/PartnersPage.js"
+import PluginsWaypointPage from "../pageObjects/PluginsWaypointPage.js";
  
 const header = new Header();
 const partnersPage = new PartnersPage();
+const pluginsWaypointPage = new PluginsWaypointPage();
  
 describe('Partners page test suite', () => {
 
@@ -12,6 +14,11 @@ describe('Partners page test suite', () => {
         cy.fixture('partnersPage').then(data => {
             this.data = data;
         });
+
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
+
         cy.visit('/');
     });
 
@@ -23,6 +30,13 @@ describe('Partners page test suite', () => {
         });
     });
 
+    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
+       header.clickPartnersMenuLink();
+       partnersPage.clickWaypointPluginButton();
+       
+       cy.url().should('eq', this.url.widgetWaypointPlugin);
+       pluginsWaypointPage.elements.getPluginsWaypointTitle().should('be.visible'); 
+    });
 });
 
 
