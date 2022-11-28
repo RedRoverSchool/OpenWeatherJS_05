@@ -1,6 +1,11 @@
 class PartnersPage {
     elements = {
-        getSectionsNames: () => cy.get('#cms a')
+        getCMSNameButtons: () => cy.get('#cms a'),
+        getCmsSeeOnTheWebsiteButton: () => cy.get('#cms a[href="http://drupal.org/project/olowm"]')
+    }
+
+    clickCmsSeeOnTheWebsiteButton() {
+        this.elements.getCmsSeeOnTheWebsiteButton().invoke('removeAttr', 'target').click();
     }
 }
 export default PartnersPage;

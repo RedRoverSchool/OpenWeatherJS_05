@@ -14,7 +14,7 @@ class ApiKeys {
         getNotification: () => cy.get('.col-md-6'),  
         getEditAPIkeyField: () => cy.get('#edit_key_form_name'),
         getSaveEditKeyButton: () => cy.get('button.dark[onclick*=submit]')
-              
+        getFirstApiKey: () => cy.get('tbody tr:first-child td pre')
     }
 
     clickGenerateButton() {
@@ -24,7 +24,6 @@ class ApiKeys {
     clickSaveEditKeyButton() {
         this.elements.getSaveEditKeyButton().click()
     }
-
 
 }
 

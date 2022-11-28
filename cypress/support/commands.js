@@ -50,3 +50,16 @@ Cypress.Commands.add('loginNoGroup', (userName, password) => {
     cy.get('.input-group #user_password').type(password)
     cy.get('input[value="Submit"]').click({force: true})
   })
+
+  Cypress.Commands.add('copyData', (cyVariable, locator) => {
+    locator.then(($el) => {
+        let info = $el.text();
+        return cy.wrap(info).as(cyVariable);
+    });
+  });
+
+  Cypress.Commands.add('pasteDataInInputField', (cyVariable, locator) => {
+    cy.get(cyVariable).then($el => {
+      locator.type($el);
+    });
+  });

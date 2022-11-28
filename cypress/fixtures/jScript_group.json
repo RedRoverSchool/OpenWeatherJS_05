@@ -11,7 +11,7 @@
     "examplesPageLink": "https://openweathermap.org/examples",
     "mainPageText": "OpenWeather",
     "mapsPagePressureLabel": "Pressure",
-    "sectionsNames": ["See on the website", "View widget", "View plugin", "View plugin"],
+    "CMSNameButtons": ["See on the website", "View widget", "View plugin", "View plugin"],
     "dayListLength": 8,
     "questionsPageHeader": "Ask a question", 
     "questionsPageEndPoint": "questions",
