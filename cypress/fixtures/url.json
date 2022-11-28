@@ -9,5 +9,6 @@
     "mediumUrl": "https://openweathermap.medium.com/",
     "MarketPage": "https://home.openweathermap.org/marketplace",
     "drupalWebsite": "https://www.drupal.org/project/olowm",
-    "widgetWaypointPlugin": "https://wordpress.org/plugins/waypoint-hd-weather-widget/"
+    "widgetWaypointPlugin": "https://wordpress.org/plugins/waypoint-hd-weather-widget/",
+    "urlPayment": "https://home.openweathermap.org/payments"
 }
