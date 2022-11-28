@@ -18,6 +18,9 @@ describe('Widgets page test suite', () => {
         cy.fixture('widgetsPage').then(data => {
             this.data = data;
         });
+        cy.fixture('footer').then(footer => {
+            this.footer = footer;
+        });
 
         cy.fixture('signInPage').then(signIn => {
             this.signIn = signIn;
@@ -31,6 +34,17 @@ describe('Widgets page test suite', () => {
         widgetsPage.elements.getWidgets().should('have.length', this.data.widgetsQuantity)
                           .and('be.visible')
     });
+
+    it('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
+        cy.login(this.data.userData1.login, this.data.userData1.password)
+
+        footer.elements.getWidgetsLink().should('include.text', this.footer.nameWidgetsLink)
+        footer.clickWidgetsLink()
+
+        cy.url().should('include', this.data.urn)
+        widgetsPage.elements.getPageTitle().should('have.text', this.data.pageTitle)
+
+    })
 
     it('AT_021.004 | Widgets > The widget code is visible', function () {
         header.clickSignInMenuLink();

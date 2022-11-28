@@ -1,7 +1,12 @@
 /// <reference types="cypress" />
 
 import UserHomePage from "../pageObjects/UserHomePage";
-const userHomePage = new UserHomePage()
+import Header from "../pageObjects/Header";
+import UserServicesPage from "../pageObjects/UserServicesPage";
+
+const userHomePage = new UserHomePage();
+const header = new Header();
+const userServicesPage = new UserServicesPage();
 
 describe('User Home Page suite', () => {
 
@@ -57,7 +62,19 @@ describe('User Home Page suite', () => {
         
         cy.login(this.data.loginData.email, this.data.loginData.password)
 
-        cy.url().should('include', this.url.NewProducts)
+        cy.url().should('include', this.url.userHomePage)
+        userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
+    })
+
+    it('AT_047.002 | User page > Check that authorized user can get to the New Products page', function () {
+        cy.login(this.data.loginData.email, this.data.loginData.password)
+        header.clickLogoLink();
+
+        header.clickUserDropDownMenu()
+        header.clickUserMyServicesLink()
+        userServicesPage.clickNewProductsLink()
+
+        cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
     })
 })

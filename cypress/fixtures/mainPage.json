@@ -5,5 +5,9 @@
     },
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
     "forecastDaysLength": 8, 
-    "mainText": "OpenWeather"
+    "mainText": "OpenWeather",
+    "searchInputText1": {
+        "city": "Cambridge",
+        "searchResult": "Cambridge, GB"
+    }
 }
