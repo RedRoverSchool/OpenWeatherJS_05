@@ -46,7 +46,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     }); 
     
-    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
+    it.skip('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://drupal.org/project/olowm"]')
@@ -106,7 +106,7 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
-            expect($el.text()).to.equal(this.data.sectionsNames[i]);
+            expect($el.text()).to.equal(this.data.CMSNameButtons[i]);
         });
     });
 

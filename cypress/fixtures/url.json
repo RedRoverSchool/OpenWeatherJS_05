@@ -7,5 +7,6 @@
     "WebsiteTermsAndConditions": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
     "guidePage": "https://openweathermap.org/guide",
     "mediumUrl": "https://openweathermap.medium.com/",
-    "MarketPage": "https://home.openweathermap.org/marketplace"
+    "MarketPage": "https://home.openweathermap.org/marketplace",
+    "drupalWebsite": "https://www.drupal.org/project/olowm"
 }
