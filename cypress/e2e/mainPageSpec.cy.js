@@ -15,6 +15,9 @@ describe('mainPageSpec', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
+        cy.fixture('titles').then(titles => {
+            this.titles = titles;
+        });
         cy.visit('/');
     })
 
@@ -100,4 +103,11 @@ describe('mainPageSpec', () => {
         mainPage.elements.getCopyrightMapLink().should('include.text', this.data.copyright);
         mainPage.elements.getCopyrightMapLink().parents(getRightTopLocation);
     });
+
+    it('AT_037.002 | Main page [maps] > Verify clicking on the copyright sign', function () {
+        mainPage.clickCopyrightMapLink();
+        cy.url().should('eq', this.url.urlOpenStreetMap);
+        cy.title().should('eq', this.titles.copyrightTitle);
+    });
+
 });

@@ -32,7 +32,7 @@ class MainPage {
     }
 
     clickCopyrightMapLink () {
-        this.elements.getCopyrightMapLink().click({force: true});
+        this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({force: true});
     }
 }
 export default MainPage;
