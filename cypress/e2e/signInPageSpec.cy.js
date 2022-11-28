@@ -6,8 +6,6 @@ import SignInPage from "../pageObjects/SignInPage";
 const header = new Header();
 const signInPage = new SignInPage();
 
-
-
 describe('SignIn test suit', () => {
 
   beforeEach(function() {
@@ -27,16 +25,16 @@ describe('SignIn test suit', () => {
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
 
-  it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
+  it.only('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
     header.clickSignInMenuLink();
-    cy.url().should('eq', this.signInUrlUsers)
+    cy.url().should('eq', this.data.signInUrlUsers)
     signInPage.elements.getTextClickHereToRecover().should('be.visible')
     signInPage.clickHereToRecover() 
-    signInPage.elements.getOpenTextResetPassword().should('have.text', this.resetYourPassord)
-    signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.userNegativeEmail)
+    signInPage.elements.getOpenTextResetPassword().should('have.text', this.data.resetYourPassord)
+    signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.data.userNegativeEmail)
     signInPage.clickBtnSendEmailResetPassword()
 
-    cy.url().should('eq', this.urlUsersPassword)
-    signInPage.elements.getForgotYourPassword().should('have.text', this.textForgotYourPassword)
+    cy.url().should('eq', this.data.urlUsersPassword)
+    signInPage.elements.getForgotYourPassword().should('have.text', this.data.textForgotYourPassword)
   });
 });
