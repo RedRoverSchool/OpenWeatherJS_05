@@ -9,6 +9,7 @@ class MainPage {
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
+        getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
     }
 
     clickSearchBtn() {
@@ -28,6 +29,10 @@ class MainPage {
 
     clickHomePageButton() {
         this.elements.getHomePageButton().click({force: true});
+    }
+
+    clickCopyrightMapLink () {
+        this.elements.getCopyrightMapLink().click({force: true});
     }
 }
 export default MainPage;

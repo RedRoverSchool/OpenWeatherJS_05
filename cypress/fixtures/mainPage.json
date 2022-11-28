@@ -9,5 +9,6 @@
     "searchInputText1": {
         "city": "Cambridge",
         "searchResult": "Cambridge, GB"
-    }
+    },
+    "copyright": "©"
 }
