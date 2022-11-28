@@ -25,7 +25,7 @@ describe('SignIn test suit', () => {
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
 
-  it.only('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
+  it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
     signInPage.elements.getTextClickHereToRecover().should('be.visible')
