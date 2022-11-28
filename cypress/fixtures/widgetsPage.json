@@ -1,3 +1,7 @@
 {
-    "widgetsQuantity": 9
+    "widgetsQuantity": 9,
+    "popupWindowTitle": {
+        "validTitle": "Get a code for posting a weather forecast widget on your site.",
+        "invalidTitle": "Important! You need to"
+    }
 }

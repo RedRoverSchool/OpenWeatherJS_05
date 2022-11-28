@@ -484,7 +484,7 @@ describe('Group jScript_group', () => {
         });
     });
  
-    it('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
+    it.skip('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
         cy.get('#desktop-menu li:nth-child(11) a').click({force: true});
         cy.get('.sign-form > form').within(($form) => {
             cy.get('#user_email').type(this.data.loginUserEmail);

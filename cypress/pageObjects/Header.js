@@ -16,7 +16,8 @@ class Header {
         getSignInMenuLink: () => cy.get('li[class="user-li"] a[href$="sign_in"]'),
         getUserDropDownMenu: () => cy.get('.inner-user-container'),
         getDashboardMenuLink: () => cy.get('#desktop-menu [href$=-dashboard]'),
-        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]')
+        getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]'),
+        getUserDropDownMyApiLink: () => cy.get('#user-dropdown-menu [href$="/api_keys"]')
     };
 
     clickSupport() {
@@ -88,6 +89,10 @@ class Header {
 
     clickUserLogoutLink() {
         this.elements.getUserLogoutLink().click({force : true})
+    };
+
+    clickUserDropDownMyApiLink() {
+        this.elements.getUserDropDownMyApiLink().click({force : true})
     };
 };
 export default Header;
