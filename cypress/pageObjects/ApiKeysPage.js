@@ -11,7 +11,7 @@ class ApiKeys {
         getCreateKeyField: () => cy.get('#api_key_form_name'),
         getGenerateButton: () => cy.get('.button-round[value="Generate"]'),
         getNotification: () => cy.get('.col-md-6'),  
-              
+        getFirstApiKey: () => cy.get('tbody tr:first-child td pre')
     }
 
     clickGenerateButton() {

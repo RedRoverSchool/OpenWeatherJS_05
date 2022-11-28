@@ -29,7 +29,7 @@ describe('group Ark', () => {
       })
   });
 
-  it('AT_030.001|Footer>Verify redirection to terms and conditions', function () {
+  it.skip('AT_030.002|Footer>Verify redirection to terms and conditions', function () {
     cy.get('div.footer-section a[href*="Openweather_website_terms_and_conditions"]')
       .invoke("removeAttr", "target")
       .click()
