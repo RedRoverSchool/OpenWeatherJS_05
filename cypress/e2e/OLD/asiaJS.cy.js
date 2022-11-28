@@ -132,7 +132,7 @@ describe('asiaJS', () => {
       .should('be.visible');
   });
 
-  it('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
+  it.skip('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
     const buttonSignIn = '.user-li a';
     const userEmail = '.input-group input#user_email';
     const userPassword = '.input-group input#user_password';
