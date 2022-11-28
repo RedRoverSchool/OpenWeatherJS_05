@@ -139,7 +139,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
     });
 
-    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
+    it.skip('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
