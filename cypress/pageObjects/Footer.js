@@ -5,7 +5,7 @@ class Footer {
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]'),
         getAboutUsLink: () => cy.get('div#footer-website a[href="/about-us"]'),
-        getWidgetsLink: () => cy.get('.inner-footer-container a[href*=widgets]'),
+        getWidgetsLink: () => cy.get('[href$="/widgets-constructor"]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
         getNameOfPageMedium: () =>  cy.get('.bm.gp.gq')
     };
@@ -27,7 +27,7 @@ class Footer {
     };  
         clickAboutUsLink() {
             this.elements.getAboutUsLink().click({force: true});
-};
+    };
         clickWidgetsLink() {
             this.elements.getWidgetsLink().click({force: true});
     };
@@ -36,5 +36,4 @@ class Footer {
             this.elements.getMediumIcon().invoke('removeAttr', 'target').click()
     }
 };
-
 export default Footer;
