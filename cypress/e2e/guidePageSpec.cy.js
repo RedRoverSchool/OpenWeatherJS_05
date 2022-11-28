@@ -2,9 +2,11 @@
 
 import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
+import PricingPage from "../pageObjects/PricingPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
+const pricingPage = new PricingPage();
 
 describe('Guide page test suite', () => {
     beforeEach(function () {
@@ -17,6 +19,9 @@ describe('Guide page test suite', () => {
         cy.fixture('guidePage').then(text => {
             this.text = text
         })
+        cy.fixture('pricingPage').then(pricingPage => {
+            this.pricing = pricingPage
+        });
         cy.visit('/');
     });
 
@@ -56,4 +61,13 @@ describe('Guide page test suite', () => {
     
         guidePage.elements.getPageDescription().contains(this.text.pageDescriptionText).should('be.visible')
       })
+
+      it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', function () {
+        header.clickGuideMenuLink();
+        guidePage.clickSubscribeButton();
+
+        cy.url().should('be.equal', this.url.pricingPage);
+        pricingPage.elements.getPricingTitle().should('have.text', this.pricing.pageDescriptionTitle);
+    });   
+    
 });

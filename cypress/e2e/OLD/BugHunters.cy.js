@@ -48,7 +48,7 @@ describe('groupBugHunters', () => {
       .should('contain', 'Precipitation, mm/h');
   })
 
-  it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
+  it.skip('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
     cy.get('#desktop-menu').contains('Guide').click({
       force: true
     });
