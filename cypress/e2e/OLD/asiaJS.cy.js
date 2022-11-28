@@ -69,7 +69,7 @@ describe('asiaJS', () => {
       });
   });
 
-  it('AT_001.014 | Main page > Search section > Verify that entered city is displayed into the dropdown', () => {
+  it.skip('AT_001.014 | Main page > Search section > Verify that entered city is displayed into the dropdown', () => {
     cy.get('div.search-container').type('Cambridge');
     cy.get('button[type="submit"]').click();
     cy.get('ul span[style="width: 140px;"]')
@@ -118,7 +118,7 @@ describe('asiaJS', () => {
     cy.get('.topic h1').should('have.text', 'Student initiative');
   });
 
-  it('AT_016.002 | Support > FAQ page > Verify the question "How to get an API key" is opened and visible by clicking on it', () => {
+  it.skip('AT_016.002 | Support > FAQ page > Verify the question "How to get an API key" is opened and visible by clicking on it', () => {
     const faqLink = '#support-dropdown-menu [href="/faq"]';
     const howToGet = '#how-to-get-an-API-key';
 
@@ -132,7 +132,7 @@ describe('asiaJS', () => {
       .should('be.visible');
   });
 
-  it('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
+  it.skip('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
     const buttonSignIn = '.user-li a';
     const userEmail = '.input-group input#user_email';
     const userPassword = '.input-group input#user_password';

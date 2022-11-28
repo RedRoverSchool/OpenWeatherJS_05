@@ -46,7 +46,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     }); 
     
-    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
+    it.skip('AT_012.002 | Partners > CMS > Verify "See on the website" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://drupal.org/project/olowm"]')
@@ -75,7 +75,7 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
-    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+    it.skip('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         cy.get('.social a').should('have.length', 6).and('be.visible');
     });
     
@@ -106,7 +106,7 @@ describe('Group jScript_group', () => {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
 
         cy.get('#cms a').each(($el, i) => {
-            expect($el.text()).to.equal(this.data.sectionsNames[i]);
+            expect($el.text()).to.equal(this.data.CMSNameButtons[i]);
         });
     });
 
@@ -139,7 +139,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
     });
 
-    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
+    it.skip('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
@@ -484,7 +484,7 @@ describe('Group jScript_group', () => {
         });
     });
  
-    it('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
+    it.skip('AC_021.004 | Footer > Widgets > The widget code is visible', function () {
         cy.get('#desktop-menu li:nth-child(11) a').click({force: true});
         cy.get('.sign-form > form').within(($form) => {
             cy.get('#user_email').type(this.data.loginUserEmail);

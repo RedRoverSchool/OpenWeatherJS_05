@@ -17,6 +17,10 @@ describe('mainPageSpec', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
+        cy.fixture('titles').then(titles => {
+            this.titles = titles;
+        });
+
         cy.fixture('solarRadiationPage').then(solarRadiationPage => {
             this.solarRadiationPage = solarRadiationPage;
         });
@@ -93,6 +97,26 @@ describe('mainPageSpec', () => {
       it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
+
+    it('AT_001.014 | Main page > Section with search > Search City > Verify that entered city is displayed into the dropdown', function () {
+        mainPage.elements.getSearchInput().type(this.data.searchInputText1.city);
+        mainPage.clickSearchBtn();
+
+        mainPage.elements.getSearchResultsDropdown().contains(this.data.searchInputText1.searchResult).click();
+    });
+
+    it('AT_037.001 | Main page [maps] > Verify " OpenStreetMap"(c) link', function (){
+        let getRightTopLocation = '[class="leaflet-top leaflet-right"]'
+        mainPage.elements.getCopyrightMapLink().should('include.text', this.data.copyright);
+        mainPage.elements.getCopyrightMapLink().parents(getRightTopLocation);
+    });
+
+    it('AT_037.002 | Main page [maps] > Verify clicking on the copyright sign', function () {
+        mainPage.clickCopyrightMapLink();
+        cy.url().should('eq', this.url.urlOpenStreetMap);
+        cy.title().should('eq', this.titles.copyrightTitle);
+    });
+
 
     it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
         mainPage.elements.getOurNewProductSubHeaderTitle()

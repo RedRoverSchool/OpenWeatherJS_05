@@ -45,8 +45,21 @@ Cypress.Commands.add('loginNoGroup', (userName, password) => {
   })
 
   Cypress.Commands.add('login', (email, password) => {
-    cy.get('#desktop-menu .user-li a').click()
+    cy.get('.user-li a[href*=sign_in]').click({force: true})
     cy.get('.input-group #user_email').type(email)
     cy.get('.input-group #user_password').type(password)
-    cy.get('input[value="Submit"]').click()
+    cy.get('input[value="Submit"]').click({force: true})
   })
+
+  Cypress.Commands.add('copyData', (cyVariable, locator) => {
+    locator.then(($el) => {
+        let info = $el.text();
+        return cy.wrap(info).as(cyVariable);
+    });
+  });
+
+  Cypress.Commands.add('pasteDataInInputField', (cyVariable, locator) => {
+    cy.get(cyVariable).then($el => {
+      locator.type($el);
+    });
+  });

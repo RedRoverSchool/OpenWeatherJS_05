@@ -99,7 +99,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://home.openweathermap.org/marketplace')
   })
 
-  it('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
+  it.skip('AT_008.008 | Main menu > Guide > Verify the user redirected to new url', () => {
     cy.get('#desktop-menu a[href="/guide"]').click({
       force: true
     });
@@ -245,7 +245,7 @@ describe('groupBugHunters', () => {
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
   })
 
-  it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
+  it.skip('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('yurik@mailto.plus')
     cy.get('#user_password').type('12345678')
@@ -403,7 +403,7 @@ it('AT_033.018 | Header > Navigation > API', () => {
   cy.url().should('include', '/api')
 });
 
-  it('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
+  it.skip('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('push@mailto.plus')
     cy.get('#user_password').type('123456789')

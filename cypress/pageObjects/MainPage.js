@@ -11,6 +11,7 @@ class MainPage {
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
+        getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
         getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
         getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation')
     }
@@ -33,9 +34,14 @@ class MainPage {
     clickHomePageButton() {
         this.elements.getHomePageButton().click({force: true});
     }
+    
+    clickCopyrightMapLink () {
+        this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({force: true});
+    }
 
     clickSolarRadiationLink() {
         this.elements.getSolarRadiationLink().click({force: true});
     }
 }
+
 export default MainPage;

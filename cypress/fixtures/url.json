@@ -3,10 +3,14 @@
     "partnerPageLink": "https://openweathermap.org/examples",
     "mainPageLink": "https://openweathermap.org/", 
     "HistoryBulk": "https://openweathermap.org/history-bulk",
-    "NewProducts": "https://home.openweathermap.org/",
+    "userHomePage": "https://home.openweathermap.org/",
     "WebsiteTermsAndConditions": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
     "guidePage": "https://openweathermap.org/guide",
     "mediumUrl": "https://openweathermap.medium.com/",
     "MarketPage": "https://home.openweathermap.org/marketplace",
+    "drupalWebsite": "https://www.drupal.org/project/olowm",
+    "widgetWaypointPlugin": "https://wordpress.org/plugins/waypoint-hd-weather-widget/",
+    "urlPayment": "https://home.openweathermap.org/payments",
+    "urlOpenStreetMap": "https://www.openstreetmap.org/copyright",
     "SolarRadiationURL": "https://openweathermap.org/api/solar-radiation"
 }
