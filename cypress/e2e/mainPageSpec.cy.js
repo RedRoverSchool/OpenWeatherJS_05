@@ -96,6 +96,8 @@ describe('mainPageSpec', () => {
     });
 
     it('AT_037.001 | Main page [maps] > Verify " OpenStreetMap"(c) link', function (){
-        mainPage.elements.getCopyrightMapLink().should('include.text', this.data.copyright)
+        let getRightTopLocation = '[class="leaflet-top leaflet-right"]'
+        mainPage.elements.getCopyrightMapLink().should('include.text', this.data.copyright);
+        mainPage.elements.getCopyrightMapLink().parents(getRightTopLocation);
     });
 });
