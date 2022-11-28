@@ -26,7 +26,6 @@ class ApiKeys {
         this.elements.getSaveEditKeyButton().click()
     }
 
-
 }
 
 export default ApiKeys
