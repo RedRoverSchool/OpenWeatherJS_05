@@ -8,5 +8,6 @@
     "guidePage": "https://openweathermap.org/guide",
     "mediumUrl": "https://openweathermap.medium.com/",
     "MarketPage": "https://home.openweathermap.org/marketplace",
-    "drupalWebsite": "https://www.drupal.org/project/olowm"
+    "drupalWebsite": "https://www.drupal.org/project/olowm",
+    "wordpressWebsite": "https://wordpress.org/plugins/awesome-weather/"
 }
