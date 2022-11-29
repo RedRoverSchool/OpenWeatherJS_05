@@ -25,7 +25,7 @@ describe('SignIn test suit', () => {
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
 
-  it.only('AT_007.006 | Sign in > Create an account > Verify Negative Email', function ()  {
+  it('AT_007.006 | Sign in > Create an account > Verify Negative Email', function ()  {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
     signInPage.elements.getTextClickHereToRecover().should('be.visible')
