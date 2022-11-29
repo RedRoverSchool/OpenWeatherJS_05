@@ -2,9 +2,11 @@
 
 import Header from "../pageObjects/Header.js";
 import MainPage from "../pageObjects/MainPage.js";
+import SolarRadiationPage from "../pageObjects/SolarRadiationPage.js";
 
 const mainPage = new MainPage();
 const header = new Header;
+const solarRadiationPage = new SolarRadiationPage();
 
 describe('mainPageSpec', () => {
     
@@ -15,6 +17,14 @@ describe('mainPageSpec', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
+        cy.fixture('titles').then(titles => {
+            this.titles = titles;
+        });
+
+        cy.fixture('solarRadiationPage').then(solarRadiationPage => {
+            this.solarRadiationPage = solarRadiationPage;
+        });
+
         cy.visit('/');
     })
 
@@ -93,5 +103,27 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchBtn();
 
         mainPage.elements.getSearchResultsDropdown().contains(this.data.searchInputText1.searchResult).click();
+    });
+
+    it('AT_037.001 | Main page [maps] > Verify " OpenStreetMap"(c) link', function (){
+        let getRightTopLocation = '[class="leaflet-top leaflet-right"]'
+        mainPage.elements.getCopyrightMapLink().should('include.text', this.data.copyright);
+        mainPage.elements.getCopyrightMapLink().parents(getRightTopLocation);
+    });
+
+    it('AT_037.002 | Main page [maps] > Verify clicking on the copyright sign', function () {
+        mainPage.clickCopyrightMapLink();
+        cy.url().should('eq', this.url.urlOpenStreetMap);
+        cy.title().should('eq', this.titles.copyrightTitle);
+    });
+
+
+    it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
+        mainPage.elements.getOurNewProductSubHeaderTitle()
+                .should('have.text', "new").and('have.css', 'color', this.data.RGB);
+        mainPage.clickSolarRadiationLink();
+        
+        cy.url().should('eq', this.url.SolarRadiationURL);
+        solarRadiationPage.elements.getSolarRadiationPageTitle().should('have.text', this.solarRadiationPage.solareRadiationPageTitle);
     });
 });

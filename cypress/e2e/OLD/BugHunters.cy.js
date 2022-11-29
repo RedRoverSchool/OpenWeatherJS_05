@@ -245,7 +245,7 @@ describe('groupBugHunters', () => {
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
   })
 
-  it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
+  it.skip('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('yurik@mailto.plus')
     cy.get('#user_password').type('12345678')

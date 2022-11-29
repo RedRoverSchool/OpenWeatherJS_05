@@ -1,13 +1,15 @@
 /// <reference types="cypress" />
  
-import Header from "../pageObjects/Header.js";
+import Header from "../pageObjects/Header.js";;
 import PartnersPage from "../pageObjects/PartnersPage.js";
 import DrupalPage from "../pageObjects/DrupalPage.js";
-import WordpressPage from "../pageObjects/WordpressPage.js"
+import PluginsWaypointPage from "../pageObjects/PluginsWaypointPage.js";
+import WordpressPage from "../pageObjects/WordpressPage.js";
  
 const header = new Header();
 const partnersPage = new PartnersPage();
 const drupalPage = new DrupalPage();
+const pluginsWaypointPage = new PluginsWaypointPage();
 const wordpressPage = new WordpressPage();
  
 describe('Partners page test suite', () => {
@@ -17,12 +19,12 @@ describe('Partners page test suite', () => {
             this.data = data;
         });
 
-        cy.fixture('url').then(url => {
-            this.url = url;
-        });
-
         cy.fixture('drupalPage').then(valueTitle => {
             this.drupalPageTitle = valueTitle;
+        });
+        
+        cy.fixture('url').then(url => {
+            this.url = url;
         });
 
         cy.fixture('wordpressPage').then(textLink => {
@@ -40,12 +42,19 @@ describe('Partners page test suite', () => {
         });
     });
 
-    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function() {
+    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function() {        
         partnersPage.clickCmsSeeOnTheWebsiteButton();
 
         cy.url().should('eq', this.url.drupalWebsite);
         drupalPage.elements.getHeaderLocator().should('have.attr', 'title', this.drupalPageTitle.headerTitle);        
     })
+    
+    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {       
+       partnersPage.clickWaypointPluginButton();
+       
+       cy.url().should('eq', this.url.widgetWaypointPlugin);
+       pluginsWaypointPage.elements.getPluginsWaypointTitle().should('be.visible'); 
+    });
 
     it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         partnersPage.clickCmsViewWidgetButton();
