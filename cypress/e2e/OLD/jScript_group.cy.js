@@ -96,7 +96,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include','weather-dashboard');
     });
 
-    it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
+    it.skip('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','270748973021342');
