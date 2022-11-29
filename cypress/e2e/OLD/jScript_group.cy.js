@@ -75,7 +75,7 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
-    it.skip('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         cy.get('.social a').should('have.length', 6).and('be.visible');
     });
     
@@ -139,7 +139,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://wordpress.org/plugins/waypoint-hd-weather-widget/');
     });
 
-    it.skip('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
+    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="https://wordpress.org/plugins/wp-cloudy/"]').invoke('removeAttr', 'target').click();
@@ -455,7 +455,7 @@ describe('Group jScript_group', () => {
         cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
  });
         
-    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it.skip('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click({force: true});
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
