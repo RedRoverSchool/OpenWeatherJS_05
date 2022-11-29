@@ -33,7 +33,7 @@ describe('group_javascript_for_qas', () => {
                                         .should('have.css', 'background-color', 'rgba(120, 203, 191, 0.08)')
     });
 
-    it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
+    it.skip('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
         cy.get('.switch-container > div:nth-of-type(3)').should('contain', 'Imperial: °F, mph');
         cy.get('.switch-container > div:nth-of-type(2)').should('contain', 'Metric: °C, m/s').click();
     });
@@ -80,7 +80,7 @@ describe('group_javascript_for_qas', () => {
         cy.get("h3.subscribe-title a").should("contain", "One Call by Call");
     });
     
-    it('AT_005.004 | Verify the website’s name and description is correct and visible', function () {
+    it.skip('AT_005.004 | Verify the website’s name and description is correct and visible', function () {
         cy.get('h1 .orange-text').should('be.visible').each(($el, idx) => {
             expect($el.text()).to.contain(this.data.title)
         })

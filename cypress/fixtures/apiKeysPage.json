@@ -25,5 +25,7 @@
     "EditedKeyNotice": {
         "shortNotice": "Notice",
         "longNotice": "API key was edited successfully"
-    }
+    },
+
+    "alertInfoText": "\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n"
 }

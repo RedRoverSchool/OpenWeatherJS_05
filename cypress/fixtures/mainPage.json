@@ -10,5 +10,8 @@
         "city": "Cambridge",
         "searchResult": "Cambridge, GB"
     },
-    "copyright": "©"
+    "copyright": "©",
+    "RGB": "rgb(235, 110, 75)",
+    "tempretureScaleDefault": "Imperial: °F, mph",
+    "tempretureScale": "Metric: °C, m/s"
 }

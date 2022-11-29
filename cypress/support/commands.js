@@ -44,13 +44,6 @@ Cypress.Commands.add('loginNoGroup', (userName, password) => {
     cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
   })
 
-  Cypress.Commands.add('login', (email, password) => {
-    cy.get('.user-li a[href*=sign_in]').click({force: true})
-    cy.get('.input-group #user_email').type(email)
-    cy.get('.input-group #user_password').type(password)
-    cy.get('input[value="Submit"]').click({force: true})
-  })
-
   Cypress.Commands.add('copyData', (cyVariable, locator) => {
     locator.then(($el) => {
         let info = $el.text();

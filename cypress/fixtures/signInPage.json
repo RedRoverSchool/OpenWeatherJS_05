@@ -5,6 +5,22 @@
   "userNegativeEmail": "testNegative@email.com",
   "signInUrlUsers": "https://home.openweathermap.org/users/sign_in",
   "resetYourPassord": "Enter your email address and we will send you a link to reset your password.",
-  "urlUsersPassword": "https://home.openweathermap.org/users/password",
-  "textForgotYourPassword": "Forgot your password?"
+  "textEmailNotFound": "Email not found",
+
+  "userProfile": {
+        
+    "userName": "noGroup",
+    "email": "test.openweathermap.05@gmail.com",
+    "password": "Test@123",
+    "wrongPassword": "TestTest"
+    },
+
+  "allerInvalidEmail": "Invalid Email or password.",
+
+  "userProfileLtByJS": {
+    "userName": "LtByJS",
+    "realEmail": "ltbyjs.qa@gmail.com",
+    "password": "12345678"
+    }
+    
 }

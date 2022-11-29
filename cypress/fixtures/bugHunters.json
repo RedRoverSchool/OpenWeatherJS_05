@@ -24,7 +24,7 @@
         "Marketplace",
         "Pricing",
         "Maps",
-        "Our initiatives",
+        "Our Initiatives",
         "Partners",
         "Blog",
         "For Business",
@@ -36,6 +36,12 @@
         "FAQ",
         "How to start",
         "Ask a question"
-      ]
-      
+      ],
+
+      "titleOurInitiative": "Our initiatives",
+      "titleEducation": "Education",
+      "learnMoreLink": "Learn more",
+      "urlOur": "https://openweathermap.org/our-initiatives",
+      "urlStudent": "https://openweathermap.org/our-initiatives/student-initiative",
+      "titleStudentInitiative":"Student initiative"      
 }

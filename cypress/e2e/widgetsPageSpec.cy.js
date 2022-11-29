@@ -36,7 +36,8 @@ describe('Widgets page test suite', () => {
     });
 
     it('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
-        cy.login(this.data.userData1.login, this.data.userData1.password)
+        header.clickSignInMenuLink()
+        singInPage.signIn(this.data.userData1.login, this.data.userData1.password)
 
         footer.elements.getWidgetsLink().should('include.text', this.footer.nameWidgetsLink)
         footer.clickWidgetsLink()

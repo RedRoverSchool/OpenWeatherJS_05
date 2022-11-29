@@ -116,7 +116,7 @@ describe('Group jScript_group', () => {
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com');
     });
     
-    it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
+    it.skip('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
@@ -132,7 +132,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     });
 
-    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
+    it.skip('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click({force: true});
@@ -356,7 +356,7 @@ describe('Group jScript_group', () => {
         cy.title().should('eq', 'Members');
     });
 
-    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+    it.skip('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
@@ -455,7 +455,7 @@ describe('Group jScript_group', () => {
         cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
  });
         
-    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it.skip('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click({force: true});
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
