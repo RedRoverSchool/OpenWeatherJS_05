@@ -117,7 +117,6 @@ describe('mainPageSpec', () => {
         cy.title().should('eq', this.titles.copyrightTitle);
     });
 
-
     it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
         mainPage.elements.getOurNewProductSubHeaderTitle()
             .should('have.text', "new").and('have.css', 'color', this.data.RGB);
@@ -130,5 +129,11 @@ describe('mainPageSpec', () => {
     it('AT_005.004 | Main Page > Verify the website name and description', function () {
         mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
+    });
+    
+    it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
+        mainPage.elements.getToggleTempretureDefault().should('contain', this.data.tempretureScaleDefault);
+        mainPage.elements.getToggleTempreture().should('contain', this.data.tempretureScale);
+        mainPage.clickTempretureToggle;
     });
 });

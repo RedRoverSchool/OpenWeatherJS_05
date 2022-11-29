@@ -139,7 +139,7 @@ describe('groupBugHunters', () => {
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
   })
 
-  it('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
+  it.skip('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
     cy.get('#desktop-menu').contains('Guide').click({
       force: true
     });
