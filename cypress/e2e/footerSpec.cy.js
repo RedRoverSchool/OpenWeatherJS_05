@@ -57,5 +57,4 @@ describe('Footer test suite', () => {
         footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
             
     });
-
 });
