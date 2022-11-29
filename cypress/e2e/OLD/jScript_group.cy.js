@@ -75,7 +75,7 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
-    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+    it.skip('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         cy.get('.social a').should('have.length', 6).and('be.visible');
     });
     
@@ -116,7 +116,7 @@ describe('Group jScript_group', () => {
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com');
     });
     
-    it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
+    it.skip('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')

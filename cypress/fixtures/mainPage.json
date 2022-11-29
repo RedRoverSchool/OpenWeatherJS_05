@@ -9,5 +9,7 @@
     "searchInputText1": {
         "city": "Cambridge",
         "searchResult": "Cambridge, GB"
-    }
+    },
+    "copyright": "©",
+    "RGB": "rgb(235, 110, 75)"
 }

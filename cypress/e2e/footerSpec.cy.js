@@ -63,4 +63,8 @@ describe('Footer test suite', () => {
     
         cy.url().should('include', this.data.websiteTermsUrl)
     })
+
+    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+        footer.elements.getSocialMediaIconLinks().should('have.length', 6).and('be.visible');
+    });
 });

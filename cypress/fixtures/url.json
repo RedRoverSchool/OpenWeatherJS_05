@@ -10,5 +10,9 @@
     "MarketPage": "https://home.openweathermap.org/marketplace",
     "drupalWebsite": "https://www.drupal.org/project/olowm",
     "widgetWaypointPlugin": "https://wordpress.org/plugins/waypoint-hd-weather-widget/",
-    "pricingPage": "https://openweathermap.org/price"
+    "pricingPage": "https://openweathermap.org/price",
+    "urlPayment": "https://home.openweathermap.org/payments",
+    "urlOpenStreetMap": "https://www.openstreetmap.org/copyright",
+    "SolarRadiationURL": "https://openweathermap.org/api/solar-radiation",
+    "wordpressWebsite": "https://wordpress.org/plugins/awesome-weather/"
 }
