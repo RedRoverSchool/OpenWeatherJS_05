@@ -21,4 +21,12 @@ describe('Maps page test suite', () => {
 
         mapsPage.elements.getScaleName().should('contain.text', this.data.pressureScaleName);
     });
+
+    it('AT_027.003 |Maps > Section "weather control" > scale-details changes when switching data to Pressure', function () {
+        header.clickMapsMenuLink()
+        cy.url().should("include", "https://openweathermap.org/weathermap?")
+        mapsPage.clickPressureLabel()
+    
+        cy.get('div.leaflet-control-color-scale-line').should('contain', 'Pressure, hPa')
+    })
 });

@@ -153,7 +153,7 @@ describe('group Ark', () => {
       })
   })
 
-  it('AT_027.003 |Maps > Section "weather control" > scale-details changes when switching data to Pressure', function () {
+  it.skip('AT_027.003 |Maps > Section "weather control" > scale-details changes when switching data to Pressure', function () {
     cy.get('a[href="/weathermap"]').contains("Maps").click()
     cy.url().should("include", "https://openweathermap.org/weathermap?")
     cy.get('div.weather-layer-container input[id ="Pressure"]').click({ force: true })
