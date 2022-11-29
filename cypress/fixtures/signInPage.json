@@ -16,6 +16,12 @@
     "wrongPassword": "TestTest"
     },
 
-  "allerInvalidEmail": "Invalid Email or password."
+  "allerInvalidEmail": "Invalid Email or password.",
+
+  "userProfileLtByJS": {
+    "userName": "LtByJS",
+    "realEmail": "ltbyjs.qa@gmail.com",
+    "password": "12345678"
+    }
     
 }

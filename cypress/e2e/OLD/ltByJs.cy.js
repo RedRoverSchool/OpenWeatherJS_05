@@ -306,7 +306,7 @@ describe('Group lt_by_js', () => {
         cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
     })
 
-    it('AT_042.004 | User page > My payments > text on the page', function () {
+    it.skip('AT_042.004 | User page > My payments > text on the page', function () {
     cy.get(".user-li a").click()
     cy.get('.input-group #user_email').type(this.data.realEmail)
     cy.get("#user_password").type(this.data.password)
