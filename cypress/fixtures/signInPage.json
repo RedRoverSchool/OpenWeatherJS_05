@@ -5,8 +5,7 @@
   "userNegativeEmail": "testNegative@email.com",
   "signInUrlUsers": "https://home.openweathermap.org/users/sign_in",
   "resetYourPassord": "Enter your email address and we will send you a link to reset your password.",
-  "urlUsersPassword": "https://home.openweathermap.org/users/password",
-  "textForgotYourPassword": "Forgot your password?",
+  "textEmailNotFound": "Email not found",
 
   "userProfile": {
         
