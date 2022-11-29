@@ -20,7 +20,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
         cy.get('#desktop-menu a[href="/our-initiatives"]').click()
-        cy.get('.logo').click()
+        cy.get('.logo').click({ force: true })
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')       
@@ -31,7 +31,7 @@ describe('Group lt_by_js', () => {
        
         cy.get(pricing).click()
         cy.url().should('eq', 'https://openweathermap.org/price')
-        cy.get('.logo > a').click()
+        cy.get('.logo > a').click({ force: true })
 
         cy.url().should('eq', 'https://openweathermap.org/')
     })
@@ -146,7 +146,7 @@ describe('Group lt_by_js', () => {
     })
 
     it('AT_021.002 | Footer >Verify Widgets is clickable and redirects User to the Widgets page', function () {    
-        cy.get('a[href="/widgets-constructor"]').click()
+        cy.get('a[href="/widgets-constructor"]').click({ force: true })
 
         cy.url().should('eq', 'https://openweathermap.org/widgets-constructor')
         cy.get('.breadcrumb-title').should('have.text', 'Widgets constructor')     
@@ -191,7 +191,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
         cy.get('#desktop-menu  a[href*="dashboard"]').click()
-        cy.get('li.logo').click()
+        cy.get('li.logo').click({ force: true })
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
@@ -280,10 +280,10 @@ describe('Group lt_by_js', () => {
         let cityField = '#search-city'
         let errorMessage = '#error-key'
 
-        cy.get(widgetsPage).click()
+        cy.get(widgetsPage).click({ force: true })
 
         cy.get(apiField).type(this.data.invalidApi)
-        cy.get(cityField).click()
+        cy.get(cityField).click({ force: true })
         
         cy.get(errorMessage).should('have.text', 'Validation error')
     })
@@ -357,13 +357,13 @@ describe('Group lt_by_js', () => {
     const weather = '.current-temp span[data-v-3e6e9f12]'
     const temp = '.heading'
 
-    cy.get(imperial).click()
+    cy.get(imperial).click({ force: true })
     cy.wait(4000)
     cy.get(highlighting).should('have.attr', 'style', "left: 72pt;")  
 
     cy.get(temp).then(($data) => {
         let tempF = parseInt($data.text())
-    cy.get(metric).click().wait(4000).then(() =>{
+    cy.get(metric).click({ force: true }).wait(4000).then(() =>{
         let tempC = parseInt($data.text())
         expect(tempC).to.eq(Math.round(5 / 9 * (tempF - 32)))                   
         })
