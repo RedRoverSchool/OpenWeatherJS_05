@@ -18,7 +18,7 @@ describe('API keys', () => {
     })
 
     it('AT_056.001 | My API keys > Managing API keys> Create new API key', function() {
-        header.clickSignInMenuLink();
+        header.clickSignInMenuLink()
         signInPage.signIn(this.data.userData1.login, this.data.userData1.password)
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
@@ -44,7 +44,7 @@ describe('API keys', () => {
     })
 
     it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function() {
-        header.clickSignInMenuLink();
+        header.clickSignInMenuLink()
         signInPage.signIn(this.data.userDataRenameKey.login, this.data.userDataRenameKey.password)
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()

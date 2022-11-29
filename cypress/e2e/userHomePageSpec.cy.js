@@ -52,7 +52,7 @@ describe('User Home Page suite', () => {
 
     it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
  
-        header.clickSignInMenuLink();
+        header.clickSignInMenuLink()
         signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
 
         userHomePage.elements.getNavBarLink().should('have.length', 9)
@@ -62,7 +62,7 @@ describe('User Home Page suite', () => {
     })
 
     it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products page after logged in', function () {
-        header.clickSignInMenuLink();
+        header.clickSignInMenuLink()
         signInPage.signIn(this.data.loginData.email, this.data.loginData.password);
 
         cy.url().should('include', this.url.userHomePage)
@@ -70,9 +70,9 @@ describe('User Home Page suite', () => {
     })
 
     it('AT_047.002 | User page > Check that authorized user can get to the New Products page', function () {
-        header.clickSignInMenuLink();
-        signInPage.signIn(this.data.loginData.email, this.data.loginData.password);
-        header.clickLogoLink();
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.loginData.email, this.data.loginData.password)
+        header.clickLogoLink()
 
         header.clickUserDropDownMenu()
         header.clickUserMyServicesLink()
