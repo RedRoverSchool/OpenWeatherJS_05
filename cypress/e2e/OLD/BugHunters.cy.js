@@ -48,7 +48,7 @@ describe('groupBugHunters', () => {
       .should('contain', 'Precipitation, mm/h');
   })
 
-  it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
+  it.skip('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
     cy.get('#desktop-menu').contains('Guide').click({
       force: true
     });
@@ -294,7 +294,7 @@ describe('groupBugHunters', () => {
     cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
   })
 
-  it('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
+  it.skip('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
     cy.get('#desktop-menu [href="/our-initiatives"]').click();
     cy.get('.col-sm-12 :nth-child(9) h2>span')
       .as('Education')

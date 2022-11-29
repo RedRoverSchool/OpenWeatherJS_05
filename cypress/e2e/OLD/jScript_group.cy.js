@@ -116,7 +116,7 @@ describe('Group jScript_group', () => {
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com');
     });
     
-    it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
+    it.skip('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
