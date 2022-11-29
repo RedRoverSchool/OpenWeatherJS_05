@@ -10,6 +10,8 @@ class MainPage {
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
         getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
+        getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'),
+        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'),
     }
 
     clickSearchBtn() {
@@ -33,6 +35,11 @@ class MainPage {
     
     clickCopyrightMapLink () {
         this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({force: true});
+    }
+
+    clickTempretureToggle() {
+        this.elements.getTempreture()
+            .click({ force: true });
     }
 }
 

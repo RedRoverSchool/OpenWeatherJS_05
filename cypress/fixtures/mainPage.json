@@ -10,5 +10,7 @@
         "city": "Cambridge",
         "searchResult": "Cambridge, GB"
     },
-    "copyright": "©"
+    "copyright": "©",
+    "tempretureScaleDefault": "Imperial: °F, mph",
+    "tempretureScale": "Metric: °C, m/s"
 }
