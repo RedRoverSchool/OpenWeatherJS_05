@@ -10,9 +10,6 @@ const header = new Header();
 describe('Header test suit', () => {
 
     beforeEach(function () {
-        cy.fixture('asiaJS').then(data => {
-            this.data = data
-        });
         cy.fixture('url').then(url => {
             this.url = url
         });
