@@ -12,6 +12,9 @@ describe('Maps page test suite', () => {
         cy.fixture('mapsPage').then(data => {
             this.data = data;
         });
+        cy.fixture('url').then(url => {
+            this.url = url
+        });
         cy.visit('/');
     });
  
@@ -24,9 +27,9 @@ describe('Maps page test suite', () => {
 
     it('AT_027.003 |Maps > Section "weather control" > scale-details changes when switching data to Pressure', function () {
         header.clickMapsMenuLink()
-        cy.url().should("include", "https://openweathermap.org/weathermap?")
+        cy.url().should("include", this.url.mapsPage)
         mapsPage.clickPressureLabel()
     
-        cy.get('div.leaflet-control-color-scale-line').should('contain', 'Pressure, hPa')
+        mapsPage.elements.getScaleName().should('contain', this.data.pressureScaleNameFull)
     })
 });
