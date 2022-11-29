@@ -35,4 +35,10 @@ describe('Blog page test suite', () => {
         cy.url().should('include', this.data.postsLink);
         blogPage.elements.getPostsImage().should('be.visible');
     });
+
+    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+        header.clickBlogMenuLink();
+
+        blogPage.elements.getAllPosts().should('have.length', this.data.postsQuantity);
+    });
 });

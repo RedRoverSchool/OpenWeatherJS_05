@@ -356,7 +356,7 @@ describe('Group jScript_group', () => {
         cy.title().should('eq', 'Members');
     });
 
-    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+    it.skip('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
