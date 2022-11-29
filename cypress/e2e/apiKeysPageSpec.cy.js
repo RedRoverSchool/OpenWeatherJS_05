@@ -72,4 +72,14 @@ describe('API keys', () => {
         apiKeys.actionWithKey(this.data.keyNames.renameKey, apiKeys.locators.DeleteKeysButton)
     })
 
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.data.userData1.login, this.data.userData1.password);
+        header.clickUserDropDownMenu()
+        header.clickMyApiKyesLink()
+
+        apiKeys.elements.getAlertInfoMessage()
+            .should('be.visible')
+            .and('have.text', this.data.alertInfoText)
+  });
 })
