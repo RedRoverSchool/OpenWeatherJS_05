@@ -50,10 +50,4 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.mainPageLink);
     });
 
-    it('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-    
-        guidePage.elements.getPageDescription().contains(this.text.pageDescriptionText).should('be.visible')
-      })
 });
