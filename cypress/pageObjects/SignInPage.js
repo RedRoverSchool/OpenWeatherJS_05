@@ -9,7 +9,7 @@ class SignInPage {
   getOpenTextResetPassword: () => cy.get('.text-muted'),
   getFieldForEmailPasswordReset: () => cy.get('div.pwd-lost #user_email'),
   getBtnSendEmailResetPassword: () => cy.get('div.pwd-lost [type = "submit"]'),
-  getForgotYourPassword: () =>  cy.get('div.container h3'),
+  getForgotYourPassword: () =>  cy.get('div.panel-body > span'),
   getAllert : () => cy.get('.panel.panel-red .panel-body')
   };
 

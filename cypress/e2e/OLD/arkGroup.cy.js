@@ -243,7 +243,9 @@ describe('group Ark', () => {
 
   it.skip("AT_044.004 | Footer > PopUps > Manage cookies > Verify the background color of a button and link when the element is in mouse focus", function () {
     cy.get("#stick-footer-panel .stick-footer-panel__link").each(el => {
-        cy.wrap(el).focus().should('have.css', 'background-color', 'rgb(233, 110, 80)')
+        cy.wrap(el).focus({timeout: 7000})
+          .should('have.css', 'background-color', 'rgb(233, 110, 80)')
+          .and('be.visible')
       });
   })
 
@@ -294,5 +296,15 @@ describe('group Ark', () => {
     cy.url().should('eq','https://openweathermap.org/about-us')
     cy.get('h2.orange-text').should('have.text','Where-to')
   })
+
+  it('AT_001.006 | Main page > Section with search > Verify that the city of is displayed', () => {
+     const city ='Copenhagen'
+    cy.get('div.search-container').should('be.visible')
+      .click({force: true})
+      .type(city)
+    cy.get('div button.button-round ').click()
+    cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+    cy.get('.current-container > :nth-child(1) > h2').should('have.text','Copenhagen, DK')
+})
 
 })

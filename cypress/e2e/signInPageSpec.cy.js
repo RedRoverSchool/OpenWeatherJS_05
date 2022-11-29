@@ -25,7 +25,7 @@ describe('SignIn test suit', () => {
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
 
-  it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
+  it('AT_007.006 | Sign in > Create an account > Verify Negative Email', function ()  {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
     signInPage.elements.getTextClickHereToRecover().should('be.visible')
@@ -34,8 +34,7 @@ describe('SignIn test suit', () => {
     signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.data.userNegativeEmail)
     signInPage.clickBtnSendEmailResetPassword()
 
-    cy.url().should('eq', this.data.urlUsersPassword)
-    signInPage.elements.getForgotYourPassword().should('have.text', this.data.textForgotYourPassword)
+    signInPage.elements.getForgotYourPassword().should('have.text', this.data.textEmailNotFound)
   });
 
   it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
