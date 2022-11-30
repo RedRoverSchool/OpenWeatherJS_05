@@ -28,6 +28,9 @@ describe('Header test suit', () => {
         cy.fixture('howToStartPage').then(pageText => {
             this.pageText = pageText
         });
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
         cy.fixture('businessPage').then(data => {
             this.data = data;
         })
@@ -69,5 +72,13 @@ describe('Header test suit', () => {
 
         cy.url().should('eq', this.url.openWetherForBusiness)
         businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
+    });
+
+    it('AT_034.001 | <Header > verify "For Business" button', function () {
+        header.clickBusinessMenuLink()
+        cy.url().should('eq', this.data.url)
+
+        businessPage.elements.getH1Title()
+        .should('have.text', this.data.h1Title)
     });
 })
