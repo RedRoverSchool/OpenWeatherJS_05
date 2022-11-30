@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Group lt_by_js', () => {
+describe.skip('Group lt_by_js', () => {
     beforeEach(function() {
         cy.fixture('ItByJs_group').then(data => {
             this.data = data
@@ -20,7 +20,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
         cy.get('#desktop-menu a[href="/our-initiatives"]').click()
-        cy.get('.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')       
@@ -191,7 +191,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
         cy.get('#desktop-menu  a[href*="dashboard"]').click()
-        cy.get('li.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
@@ -306,7 +306,7 @@ describe('Group lt_by_js', () => {
         cy.get('div #custom_weather_products h1').should('have.text', 'Custom Weather Products')     
     })
 
-    it('AT_042.004 | User page > My payments > text on the page', function () {
+    it.skip('AT_042.004 | User page > My payments > text on the page', function () {
     cy.get(".user-li a").click()
     cy.get('.input-group #user_email').type(this.data.realEmail)
     cy.get("#user_password").type(this.data.password)

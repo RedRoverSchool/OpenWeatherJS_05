@@ -32,13 +32,7 @@ describe('Guide page test suite', () => {
         cy.url().should('include', this.data.menuLink.guide.endPoint);
         guidePage.elements.getTitleGuide().should('be.visible');
     });
-
-    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-        guidePage.elements.getTitleGuide().should('have.text', this.data.menuLink.guide.text)
-      })
-
+    
     it('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
         header.clickGuideMenuLink();
 
@@ -54,13 +48,7 @@ describe('Guide page test suite', () => {
         guidePage.clickHomeMenuLink();
         cy.url().should('be.equal', this.url.mainPageLink);
     });
-
-    it('AT_008.006 | Main menu > Guide > Verify The text "Weather data in a fast and easy-to-use way" is displayed.', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
     
-        guidePage.elements.getPageDescription().contains(this.text.pageDescriptionText).should('be.visible')
-      })
 
     it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', function () {
         header.clickGuideMenuLink();
@@ -80,5 +68,4 @@ describe('Guide page test suite', () => {
         guidePage.elements.getOpenWeatherNwnText().should('have.text', this.text.openWeatherNwnText);
         guidePage.elements.getHowToStartText().should('have.text', this.text.howToStartText)
     })
-
 });

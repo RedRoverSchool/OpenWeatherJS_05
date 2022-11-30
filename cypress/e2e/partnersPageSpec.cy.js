@@ -5,12 +5,14 @@ import PartnersPage from "../pageObjects/PartnersPage.js";
 import DrupalPage from "../pageObjects/DrupalPage.js";
 import PluginsWaypointPage from "../pageObjects/PluginsWaypointPage.js";
 import WordpressPage from "../pageObjects/WordpressPage.js";
+import PluginsWPCloudyPage from "../pageObjects/PluginsWPCloudyPage.js";
  
 const header = new Header();
 const partnersPage = new PartnersPage();
 const drupalPage = new DrupalPage();
 const pluginsWaypointPage = new PluginsWaypointPage();
 const wordpressPage = new WordpressPage();
+const pluginsWPCloudyPage = new PluginsWPCloudyPage();
  
 describe('Partners page test suite', () => {
 
@@ -62,4 +64,11 @@ describe('Partners page test suite', () => {
         cy.url().should('eq', this.url.wordpressWebsite);
         wordpressPage.elements.getHeaderGetWordPressBtn().should('contains.text', this.textLink.headerGetWordPressLink);
     })
+
+    it('AT_012.006 | Partners > CMS > Verify “View plugin” button for WordPress WPCloudy Plugin', function() {
+        partnersPage.clickWPCloudyPluginButton();
+
+        cy.url().should('eq', this.url.widgetWPCloudyPlugin);
+        pluginsWPCloudyPage.elements.getPluginsWPCloudyTitle().should('be.visible');
+    });
 });

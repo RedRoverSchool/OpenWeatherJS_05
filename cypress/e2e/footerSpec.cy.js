@@ -67,4 +67,11 @@ describe('Footer test suite', () => {
     it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         footer.elements.getSocialMediaIconLinks().should('have.length', 6).and('be.visible');
     });
+
+    it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
+        footer.elements.getFacebookLink().should('be.visible');
+        footer.clickFacebookLink();
+        cy.url().should('include',this.url.facebookUrl);
+        cy.title().should('eq', this.data.facebookTitleText);
+    });
 });

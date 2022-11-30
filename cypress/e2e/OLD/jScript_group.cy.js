@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Group jScript_group', () => {
+describe.skip('Group jScript_group', () => {
     beforeEach(function() {
         cy.fixture('jScript_group').then(data => {
             this.data = data;
@@ -96,7 +96,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include','weather-dashboard');
     });
 
-    it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
+    it.skip('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','270748973021342');
@@ -132,7 +132,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     });
 
-    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
+    it.skip('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click({force: true});
