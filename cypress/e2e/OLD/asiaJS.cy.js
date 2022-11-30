@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('asiaJS', () => {
+describe.skip('asiaJS', () => {
   beforeEach(function () {
     cy.fixture('asiaJS').then((data) => {
       this.data = data
@@ -94,7 +94,7 @@ describe('asiaJS', () => {
       .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
   });
 
-  it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+  it.skip('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
     let current_date = String();
 
     cy.get('.day-list li').should('have.length', 8);

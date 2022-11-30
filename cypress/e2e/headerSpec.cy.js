@@ -44,6 +44,13 @@ describe('Header test suit', () => {
         faqPage.elements.getTitle().should('have.text', this.faqData.h1Title);
     });
 
+    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
+        header.clickGuideMenuLink();
+        
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
+      });
+
     it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();

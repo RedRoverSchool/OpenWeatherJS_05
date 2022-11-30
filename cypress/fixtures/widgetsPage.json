@@ -9,5 +9,7 @@
     "popupWindowTitle": {
         "validTitle": "Get a code for posting a weather forecast widget on your site.",
         "invalidTitle": "Important! You need to"
-    }
+    },
+
+    "copyInBufferBtn": " Copy in buffer"
 }

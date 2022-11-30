@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('group_javascript_for_qas', () => {
+describe.skip('group_javascript_for_qas', () => {
 
     beforeEach(function () {
         cy.fixture('group_javascript_for_qas').then(data => {

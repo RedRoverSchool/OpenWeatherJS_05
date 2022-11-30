@@ -43,5 +43,9 @@
       "learnMoreLink": "Learn more",
       "urlOur": "https://openweathermap.org/our-initiatives",
       "urlStudent": "https://openweathermap.org/our-initiatives/student-initiative",
-      "titleStudentInitiative":"Student initiative"      
+      "titleStudentInitiative":"Student initiative",
+
+      "searchInputText": {
+      "cityName": "New York"
+      }
 }

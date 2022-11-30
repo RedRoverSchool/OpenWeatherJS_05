@@ -1,15 +1,15 @@
 
 /// <reference types="cypress" />
 
-Cypress.Commands.add('login', (userName, password) => {
-  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
-  cy.get('#user_email').type(userName).should('have.value', userName)
-  cy.get('#user_password').type(password).should('have.value', password)
-  cy.get('#new_user input[value="Submit"]').click({force: true})
-  cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
-})
+// Cypress.Commands.add('login', (userName, password) => {
+//   cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
+//   cy.get('#user_email').type(userName).should('have.value', userName)
+//   cy.get('#user_password').type(password).should('have.value', password)
+//   cy.get('#new_user input[value="Submit"]').click({force: true})
+//   cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
+// })
 
-describe('group noGroup', () => {
+describe.skip('group noGroup', () => {
 
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {

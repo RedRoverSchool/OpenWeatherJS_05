@@ -15,7 +15,8 @@ class MainPage {
         getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
         getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation'),
         getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'),
-        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)')
+        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'),
+        getCurrentDate: () => cy.get('.current-container .orange-text'),
     }
 
     clickSearchBtn() {
@@ -49,6 +50,15 @@ class MainPage {
         this.elements.getTempreture()
             .click({ force: true });
     }
+
+    assertDropdownContains(name) {
+        this.elements.getSearchResultsDropdown()
+        .should('be.visible')
+        .each($el => {
+            cy.wrap($el).should('contain', name)
+        })
+    }
+
 }
 
 export default MainPage;
