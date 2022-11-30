@@ -132,7 +132,7 @@ describe('mainPageSpec', () => {
         mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
     });
-    
+
     it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
         mainPage.elements.getToggleTempretureDefault().should('contain', this.data.tempretureScaleDefault);
         mainPage.elements.getToggleTempreture().should('contain', this.data.tempretureScale);
@@ -143,11 +143,23 @@ describe('mainPageSpec', () => {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
-        mainPage.elements.getCurrentDate().invoke('text').then(function(date){
-            current_date = date.split(',')[0]});
-        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>{
+        mainPage.elements.getCurrentDate().invoke('text').then(function (date) {
+            current_date = date.split(',')[0]
+        });
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) => {
             expect(date).to.include(current_date);
         });
+    });
 
-      });
+    it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+        mainPage.elements.getIconToDetailedWeather().each((el, i) => {
+            mainPage.elements.getIconToDetailedWeather()
+                .eq(i)
+                .click({ force: true });
+            mainPage.elements.getDailyDetailContainerWeather().should('be.visible');
+            mainPage.elements.getTimeOfDayInDetailedWeather()
+                .should('have.text', this.data.weatherDetails)
+    });
+});
+
 });

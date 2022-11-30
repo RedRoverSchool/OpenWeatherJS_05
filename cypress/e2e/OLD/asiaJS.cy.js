@@ -177,7 +177,7 @@ describe('asiaJS', () => {
     });
   });
 
-  it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+  it.skip('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
     let detailed_weather_information = Array();
 
     cy.get('[fill="#48484A"]').each((el, i) => {

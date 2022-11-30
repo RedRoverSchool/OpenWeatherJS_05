@@ -17,6 +17,9 @@ class MainPage {
         getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'),
         getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'),
         getCurrentDate: () => cy.get('.current-container .orange-text'),
+        getDailyDetailContainerWeather: () => cy.get('.daily-detail-container'),
+        getIconToDetailedWeather: () => cy.get('[fill="#48484A"]'),
+        getTimeOfDayInDetailedWeather: () => this.elements.getDailyDetailContainerWeather().find('tr').eq(0).find('th'),
     }
 
     clickSearchBtn() {
