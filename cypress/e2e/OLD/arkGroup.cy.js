@@ -297,4 +297,14 @@ describe('group Ark', () => {
     cy.get('h2.orange-text').should('have.text','Where-to')
   })
 
+  it('AT_001.006 | Main page > Section with search > Verify that the city of is displayed', () => {
+     const city ='Copenhagen'
+    cy.get('div.search-container').should('be.visible')
+      .click({force: true})
+      .type(city)
+    cy.get('div button.button-round ').click()
+    cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+    cy.get('.current-container > :nth-child(1) > h2').should('have.text','Copenhagen, DK')
+})
+
 })
