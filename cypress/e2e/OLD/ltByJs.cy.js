@@ -357,13 +357,13 @@ describe('Group lt_by_js', () => {
     const weather = '.current-temp span[data-v-3e6e9f12]'
     const temp = '.heading'
 
-    cy.get(imperial).click({ force: true })
+    cy.get(imperial).click()
     cy.wait(4000)
     cy.get(highlighting).should('have.attr', 'style', "left: 72pt;")  
 
     cy.get(temp).then(($data) => {
         let tempF = parseInt($data.text())
-    cy.get(metric).click({ force: true }).wait(4000).then(() =>{
+    cy.get(metric).click().wait(4000).then(() =>{
         let tempC = parseInt($data.text())
         expect(tempC).to.eq(Math.round(5 / 9 * (tempF - 32)))                   
         })
