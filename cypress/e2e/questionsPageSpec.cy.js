@@ -29,4 +29,17 @@ describe('Questions page test suite', () => {
 
         questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });
+
+    it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', function () {
+        header.clickSupportDropDownMenu();
+        header.clickAskAquestionMenuLink();
+    
+        questionsPage.selectNotAuser();
+        questionsPage.enterEmail(this.data.email);
+        questionsPage.selectSecondSubject();
+        questionsPage.enterMessage(this.data.message);
+        questionsPage.clickSubmitBtn();
+
+        questionsPage.elements.getCaptchaError().should('have.text',this.data.reCaptchaError);
+      });
 });

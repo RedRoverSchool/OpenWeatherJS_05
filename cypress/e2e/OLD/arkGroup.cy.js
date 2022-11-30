@@ -168,7 +168,7 @@ describe('group Ark', () => {
     cy.get('h1.breadcrumb-title').should('have.text', 'Weather API')
   })
 
-  it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', function () {
+  it.skip('AT_014.004 | Support > Ask a question > The captcha error message is displayed', function () {
     cy.get('#support-dropdown').click()
     cy.get('.dropdown-menu').contains('Ask a question').invoke('removeAttr', 'target').click()
 

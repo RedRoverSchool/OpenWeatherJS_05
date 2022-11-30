@@ -22,6 +22,11 @@ class QuestionsPage {
             .select('I want to discuss a purchase of OpenWeather products/subscriptions');
     };
 
+    selectSecondSubject() {
+        this.elements.getSubjectInputField()
+            .select('Questions about weather data: data quality, data sources, data issues, etc.')
+    }
+
     enterMessage(message) {
         this.elements.getMessageInputField().type(message);
     };
