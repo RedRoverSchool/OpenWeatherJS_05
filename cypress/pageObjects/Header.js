@@ -21,6 +21,7 @@ class Header {
         getUserLogoutLink: () => cy.get('.dropdown-menu [href*="/sign_out"]'),
         getUserDropDownMyApiLink: () => cy.get('#user-dropdown-menu [href$="/api_keys"]'),
         getPaymentMenuLink: () => cy.get('.dropdown-menu a[href="/payments"]'),
+        getSupportHowToStartLink: () => cy.get('#support-dropdown-menu a[href ="/appid"]'),
         getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li')
     };
 
@@ -112,6 +113,9 @@ class Header {
     };
     clickPaymentMenuLink() {
         this.elements.getPaymentMenuLink().click({force : true})
+    };
+    clickSupportHowToStartLink() {
+        this.elements.getSupportHowToStartLink().click({ force: true });
     };
 };
 export default Header;
