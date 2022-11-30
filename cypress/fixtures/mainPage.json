@@ -13,5 +13,6 @@
     "copyright": "©",
     "RGB": "rgb(235, 110, 75)",
     "tempretureScaleDefault": "Imperial: °F, mph",
-    "tempretureScale": "Metric: °C, m/s"
+    "tempretureScale": "Metric: °C, m/s",
+    "weatherDetails":"MorningAfternoonEveningNight"
 }

@@ -21,11 +21,7 @@ describe('Questions page test suite', () => {
         header.clickAskAquestionMenuLink();
         questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
 
-        questionsPage.selectNotAuser();
-        questionsPage.enterEmail(this.data.email);
-        questionsPage.selectFirstSubject();
-        questionsPage.enterMessage(this.data.message);
-        questionsPage.clickSubmitBtn();
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
 
         questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });

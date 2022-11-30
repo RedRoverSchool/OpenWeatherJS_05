@@ -3,7 +3,7 @@
 const searchCity = '.search input'
 const btnSubmit = 'button[type = "submit"]'
 
-describe('group jsTeachers', () => {
+describe.skip('group jsTeachers', () => {
 
   beforeEach(function () {
     cy.visit('/');

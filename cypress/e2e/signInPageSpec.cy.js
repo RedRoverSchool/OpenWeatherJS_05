@@ -41,9 +41,7 @@ describe('SignIn test suit', () => {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
 
-    signInPage.elements.getEmailInput().type(this.data.userProfile.email, {log : false})
-    signInPage.elements.getPasswordInput().type(this.data.userProfile.wrongPassword, {log : false})
-    signInPage.clickSubmitButton()
+    signInPage.signIn(this.data.userProfile.email, this.data.userProfile.wrongPassword)
 
     signInPage.elements
       .getAllert()
