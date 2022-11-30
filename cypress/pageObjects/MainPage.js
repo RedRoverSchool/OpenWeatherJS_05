@@ -13,7 +13,10 @@ class MainPage {
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
         getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
         getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
-        getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation')
+        getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation'),
+        getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'),
+        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'),
+        getCurrentDate: () => cy.get('.current-container .orange-text'),
     }
 
     clickSearchBtn() {
@@ -42,6 +45,12 @@ class MainPage {
     clickSolarRadiationLink() {
         this.elements.getSolarRadiationLink().click({force: true});
     }
+
+    clickTempretureToggle() {
+        this.elements.getTempreture()
+            .click({ force: true });
+    }
+
 }
 
 export default MainPage;

@@ -31,7 +31,8 @@ describe('mainPageSpec', () => {
     it('AT_001.001 | Main page > Section with search > Verify entered a Zip code into the Search city field', function () {
         mainPage.setSearchInputText(this.data.searchInputText.zipCode);
         mainPage.clickSearchBtn();
-        mainPage.elements
+        mainPage
+            .elements
             .getSearchInput()
             .invoke('val')
             .should('eq', this.data.searchInputText.zipCode);
@@ -40,7 +41,8 @@ describe('mainPageSpec', () => {
     it('AT_001.008 | Main page > Section with search > Verify entered a City name into the Search city field', function () {
         mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
-        mainPage.elements
+        mainPage
+            .elements
             .getSearchInput()
             .invoke('val')
             .should('eq', this.data.searchInputText.cityName);
@@ -117,7 +119,6 @@ describe('mainPageSpec', () => {
         cy.title().should('eq', this.titles.copyrightTitle);
     });
 
-
     it('AT_055.001 | Main page > Our new product > Solar Radiation API', function () {
         mainPage.elements.getOurNewProductSubHeaderTitle()
             .should('have.text', "new").and('have.css', 'color', this.data.RGB);
@@ -131,4 +132,22 @@ describe('mainPageSpec', () => {
         mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
     });
+    
+    it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
+        mainPage.elements.getToggleTempretureDefault().should('contain', this.data.tempretureScaleDefault);
+        mainPage.elements.getToggleTempreture().should('contain', this.data.tempretureScale);
+        mainPage.clickTempretureToggle;
+    });
+
+    it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+        let current_date = String();
+
+        mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
+        mainPage.elements.getCurrentDate().invoke('text').then(function(date){
+            current_date = date.split(',')[0]});
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>{
+            expect(date).to.include(current_date);
+        });
+
+      });
 });

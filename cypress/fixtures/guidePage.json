@@ -1,3 +1,8 @@
 {
-    "pageDescriptionText": "Weather data in a fast and easy-to-use way"
+    "pageDescriptionText": "Weather data in a fast and easy-to-use way",
+    "openWeatherText": "OpenWeather products",
+    "professionalCollectionsText": "Professional collections:",
+    "dedicatedWatherProductsText": "Dedicated weather products ",
+    "openWeatherNwnText": "Openweather NWP model",
+    "howToStartText": "How to start using Weather API"
 }

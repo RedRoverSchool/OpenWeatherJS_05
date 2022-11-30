@@ -15,8 +15,8 @@ class ApiKeys {
         getNotification: () => cy.get('.col-md-6'),  
         getEditAPIkeyField: () => cy.get('#edit_key_form_name'),
         getSaveEditKeyButton: () => cy.get('button.dark[onclick*=submit]'),
-        getFirstApiKey: () => cy.get('.material_table tbody tr td pre')
-
+        getFirstApiKey: () => cy.get('.material_table tbody tr td pre'),
+        getAlertInfoMessage: () => cy.get('.alert-info')
     }
 
     clickGenerateButton() {

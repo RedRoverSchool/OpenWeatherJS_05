@@ -83,7 +83,7 @@ it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the 
     })
   })
 
-  it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
+  it.skip('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
  
   cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
   cy.get('#user_email').type(this.data.userProfile.email)
