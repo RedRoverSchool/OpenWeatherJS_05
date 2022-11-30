@@ -10,5 +10,9 @@
 
     "nameWidgetsLink": "Widgets",
 
-    "facebookTitleText": "Facebook"
+    "facebookTitleText": "Facebook",
+
+    "twitterUrl": "https://twitter.com/OpenWeatherMap",
+
+    "twitterTitleText": "Twitter"
 }

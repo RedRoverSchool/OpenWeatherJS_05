@@ -160,7 +160,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq','https://openweathermap.org/price');
     });
     
-    it('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
+    it.skip('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
         cy.get('.social a:nth-child(2)').should('be.visible');
         cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('be.equal','https://twitter.com/OpenWeatherMap');
