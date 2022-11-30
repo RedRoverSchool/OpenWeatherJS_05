@@ -80,7 +80,7 @@ describe('Footer test suite', () => {
         footer.elements.getTwitterLink().should('be.visible');
         footer.clickTwitterLink();
 
-        cy.url().should('be.equal',this.data.twitterUrl);
+        cy.url().should('be.equal',this.url.twitterUrl);
         cy.title().should('include', this.data.twitterTitleText);
     });
 });

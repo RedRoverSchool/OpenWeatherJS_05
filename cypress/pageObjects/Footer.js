@@ -4,7 +4,7 @@ class Footer {
         getAppStoreLink: () => cy.get('.my-5 a[href*=apple]'),
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]'),
-        getAboutUsLink: () => cy.get('div#footer-website a[href="/about-us"]'),
+        getAboutUsLink: () => cy.get('a[href*="/about-us"]'),
         getWidgetsLink: () => cy.get('[href$="/widgets-constructor"]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
         getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),

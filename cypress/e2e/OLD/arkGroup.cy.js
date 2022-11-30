@@ -5,7 +5,7 @@ const mainMenuDesk = {
   "maps": "#desktop-menu a[href*='/weathermap']"
   }
 
-describe('group Ark', () => {
+describe.skip('group Ark', () => {
 
   beforeEach(function () {
     cy.fixture('arkGroup.json').then(data => {
