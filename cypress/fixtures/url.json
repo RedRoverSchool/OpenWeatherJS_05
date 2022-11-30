@@ -20,5 +20,7 @@
     "facebookUrl": "270748973021342",
     "mapsPage": "https://openweathermap.org/weathermap",
     "mainAbout": "https://openweather.co.uk/#main_about",
-    "howToStartPage": "https://openweathermap.org/appid"
+    "mainProduct": "https://openweather.co.uk/#main_products",
+    "openWetherForBusiness": "https://openweather.co.uk/"
+
 }
