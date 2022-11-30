@@ -18,5 +18,6 @@
     "FAQPage": "https://openweathermap.org/faq",
     "widgetWPCloudyPlugin": "https://wordpress.org/plugins/wp-cloudy/",
     "facebookUrl": "270748973021342",
-    "mapsPage": "https://openweathermap.org/weathermap"
+    "mapsPage": "https://openweathermap.org/weathermap",
+    "howToStartPage": "https://openweathermap.org/appid"
 }
