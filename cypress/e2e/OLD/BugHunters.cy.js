@@ -482,4 +482,20 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.get('p a[href="/technology"] ').click()
     cy.get('.breadcrumb-title').should('have.text', 'Technology')
   });
+
+  it('AT_042.00 User page >My payments>Go to the page /payments',() => {
+    cy.visit('/')
+    cy.get('li.user-li a[href*="sign_in"]').click()
+    cy.url().should('include', '/users/sign_in')
+    cy.get('.sign-form').should('include.text', 'Sign In To Your Account')
+    cy.get('.input-group #user_email').type('5603119@list.ru')
+    cy.get('#user_password').type('s5603119')
+    cy.get('.btn[value="Submit"]').click()
+    cy.url().should('include', 'home.')
+    cy.get('#user-dropdown').click()
+    cy.get ('#user-dropdown-menu').should('be.visible')
+    cy.get('#user-dropdown-menu a[href="/payments"]').click()
+    cy.url().should('include', '/payments')
+    cy.get('#myTab li.active').should('be.visible')
+    })
 })
