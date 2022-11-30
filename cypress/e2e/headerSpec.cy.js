@@ -47,4 +47,11 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mapsPageLink);
         cy.title().should('eq', this.mapsData.pageTitle);
     });
+
+    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
+        header.clickGuideMenuLink();
+        
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
+    });
 })

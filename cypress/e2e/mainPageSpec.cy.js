@@ -138,4 +138,16 @@ describe('mainPageSpec', () => {
         mainPage.elements.getToggleTempreture().should('contain', this.data.tempretureScale);
         mainPage.clickTempretureToggle;
     });
+
+    it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+        let current_date = String();
+
+        mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
+        mainPage.elements.getCurrentDate().invoke('text').then(function(date){
+            current_date = date.split(',')[0]});
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>{
+            expect(date).to.include(current_date);
+        });
+
+      });
 });
