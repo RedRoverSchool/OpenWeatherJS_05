@@ -1,7 +1,7 @@
 /// <reference types="cypress"/> 
 
 
-describe('groupBugHunters', () => {
+describe.skip('groupBugHunters', () => {
 
   beforeEach(function () {
     cy.fixture('bugHunters').then(data => {
