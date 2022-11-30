@@ -24,7 +24,8 @@ describe('User Home Page suite', () => {
 
     it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
       
-    cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
 
     userHomePage.elements.getNavBarBlocks()
         .should('have.length', 3)
@@ -38,7 +39,8 @@ describe('User Home Page suite', () => {
 
     it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
-        cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
     
         userHomePage.clickNewProductsLink()
     
