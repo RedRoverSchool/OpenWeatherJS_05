@@ -3,9 +3,11 @@
 
 import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
+import FAQPage from "../pageObjects/FAQPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
+const faqPage = new FAQPage();
 
 describe('Header test suit', () => {
 
@@ -15,6 +17,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('guidePage').then(text => {
             this.text = text
+        });
+        cy.fixture('faqPage').then(faqData => {
+            this.faqData = faqData;
         });
         cy.fixture('mapsPage').then(mapsData => {
             this.mapsData = mapsData
@@ -27,7 +32,15 @@ describe('Header test suit', () => {
         cy.url().should('be.equal', this.url.guidePage);
     
         guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText).and('be.visible')
-    })
+    });
+
+    it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', function () {
+        header.clickSupportDropDownMenu();
+        header.clickFAQMenuLink();
+
+        cy.url().should('eq', this.url.FAQPage);
+        faqPage.elements.getTitle().should('have.text', this.faqData.h1Title);
+    });
 
     it('AT_033.012 | Header > Navigation > Verify "Maps" menu link', function () {
         header.clickMapsMenuLink();
