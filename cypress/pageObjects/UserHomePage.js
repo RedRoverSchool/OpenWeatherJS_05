@@ -1,7 +1,7 @@
 class UserHomePage {
     elements = {
         getNavBarBlocks: () => cy.get('.text-block .text-color '),
-        getNewProductsLink : () => cy.get('#myTab a[href="/"]').should('have.text', 'New Products'),
+        getNewProductsLink : () => cy.get('#myTab > li:nth-child(1)'),
         getNavBarLink : () => cy.get('.clearfix #myTab li'),
         getActiveElement: () => cy.get('.active'),
         getBillingPlanLink: () => cy.get('[href="/subscriptions"]'),

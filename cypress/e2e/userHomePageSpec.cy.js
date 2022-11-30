@@ -42,7 +42,8 @@ describe('User Home Page suite', () => {
         header.clickSignInMenuLink()
         signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
     
-        userHomePage.clickNewProductsLink()
+        userHomePage.elements.getNewProductsLink()
+            .should('have.class', 'active')
     
         userHomePage.elements.getNavBarBlocks()
             .should('have.length', 3)

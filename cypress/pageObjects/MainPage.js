@@ -34,10 +34,6 @@ class MainPage {
         this.elements.getApiLink().click({force: true});
     }
 
-    clickHomePageButton() {
-        this.elements.getHomePageButton().click({force: true});
-    }
-    
     clickCopyrightMapLink () {
         this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({force: true});
     }
