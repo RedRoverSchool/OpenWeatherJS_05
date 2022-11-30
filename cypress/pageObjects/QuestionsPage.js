@@ -3,7 +3,8 @@ class QuestionsPage {
         getHeadLine: () => cy.get('.headline'),
         getQuestionFormIsUser: () => cy.get('#question_form_is_user_false'),
         getEmailInputField: () => cy.get('#question_form_email'),
-        getSubjectInputField: () => cy.get('#question_form_subject'),
+        getSubjectDropDownField: () => cy.get('#question_form_subject'),
+        getSubjectDropDownFieldAllOptions: () => cy.get('#question_form_subject option'),
         getMessageInputField: () => cy.get('#question_form_message'),
         getSubmitBtn: () => cy.get('.btn'),
         getCaptchaError: () => cy.get('.has-error')
@@ -17,9 +18,12 @@ class QuestionsPage {
         this.elements.getEmailInputField().type(email);
     };
 
-    selectFirstSubject() {
-        this.elements.getSubjectInputField()
-            .select('I want to discuss a purchase of OpenWeather products/subscriptions');
+    selectSubject(optionNumber) {
+        this.elements.getSubjectDropDownFieldAllOptions().each(($el, idx) => {
+           if(idx == optionNumber) {
+            this.elements.getSubjectDropDownField().select($el.text());
+            }
+        })
     };
 
     enterMessage(message) {
@@ -29,5 +33,13 @@ class QuestionsPage {
     clickSubmitBtn() {
         this.elements.getSubmitBtn().click();
     };
+
+    fillQuestionFormAsNotAuser(email, optionNumber, message) {
+        this.selectNotAuser();
+        this.enterEmail(email);
+        this.selectSubject(optionNumber);
+        this.enterMessage(message);
+        this.clickSubmitBtn();
+    }
 }
 export default QuestionsPage;
