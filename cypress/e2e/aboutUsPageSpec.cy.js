@@ -5,12 +5,16 @@ import AboutUs from "../pageObjects/AboutUsPage";
 import ApiPage from "../pageObjects/ApiPage";
 import SubscriptionsPage from "../pageObjects/SubscriptionsPage";
 import MarketplacePage from "../pageObjects/MarketplacePage";
+import Header from "../pageObjects/Header.js";
+import SignInPage from "../pageObjects/SignInPage.js";
 
 const footer = new Footer();
 const aboutUs = new AboutUs();
 const apiPage = new ApiPage();
 const subscriptionsPage = new SubscriptionsPage();
 const marketplacePage = new MarketplacePage();
+const singInPage = new SignInPage();
+const header = new Header();
 
 describe('About Us', () => {
 
@@ -36,11 +40,13 @@ describe('About Us', () => {
         footer.clickAboutUsLink();
         aboutUs.clickBuyBySubscriptionButton();
             
-        cy.login(this.signIn.userProfileBugHunters.email, this.signIn.userProfileBugHunters.password);
+        header.clickSignInMenuLink()
+        singInPage.signIn(this.signIn.userProfileBugHunters.email, this.signIn.userProfileBugHunters.password);
         
         cy.url().should('be.equal', this.url.Subscriptions);
         subscriptionsPage.elements.getOneCallByCallSubscriptionPlan().should('be.visible');  
     });
+
     it('AT_028.009 | About us > Verify the button "Buy in the Marketplace" redirects to the Marketplace page', function() {
         footer.clickAboutUsLink();
         aboutUs.clickBuyMarketplaceButton();
