@@ -22,9 +22,6 @@ describe('businessPageSpec', () => {
         cy.fixture('mainAboutPage').then(data2 => {
             this.data2 = data2;
         });
-        cy.fixture('url').then(url2 => {
-            this.url2 = url2;
-        });
         cy.fixture('mainProduct').then(data3 => {
             this.data3 = data3;
         })
@@ -58,7 +55,7 @@ describe('businessPageSpec', () => {
 
         mainAboutUsPage.clickOurProductButton();
 
-        cy.url().should('eq', this.url2.mainProduct)
+        cy.url().should('eq', this.url.mainProduct)
         mainProductPage.elements.getTitle().should('contain', this.data3.title)
     });    
 });
