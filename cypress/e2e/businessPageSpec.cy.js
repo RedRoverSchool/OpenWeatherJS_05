@@ -26,15 +26,8 @@ describe('businessPageSpec', () => {
         cy.visit('/');
     })
         
-    it('AT_034.001 | <Header > verify "For Business" button', function () {
+    it.skip('AT_034.001 | <Header > verify "For Business" button', function () {
         header.clickBusinessMenuLink()
-        cy.url().should('eq', this.data.url)
-        businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
-    });
-
-    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
-        header.clickBusinessMenuLink()
-
         cy.url().should('eq', this.data.url)
         businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
     });
@@ -55,6 +48,6 @@ describe('businessPageSpec', () => {
 
         cy.url().should('eq', this.url.mainProduct)
         mainProductPage.elements.getTitle().should('contain', this.data.titleAfterOurProductBtn)
-    });    
+    })  
 });
 

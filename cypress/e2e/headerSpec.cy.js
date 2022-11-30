@@ -5,11 +5,13 @@ import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
 import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
+import BusinessPage from "../pageObjects/BusinessPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
 const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
+const businessPage = new BusinessPage();
 
 describe('Header test suit', () => {
 
@@ -26,6 +28,9 @@ describe('Header test suit', () => {
         cy.fixture('howToStartPage').then(pageText => {
             this.pageText = pageText
         });
+        cy.fixture('businessPage').then(data => {
+            this.data = data;
+        })
         cy.visit('/');
     });
 
@@ -57,5 +62,12 @@ describe('Header test suit', () => {
 
         cy.url().should('eq', this.url.howToStartPage);
         howToStart.elements.getTitle().should('have.text', this.pageText.headerTitle);
+    });
+
+    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
+        header.clickBusinessMenuLink()
+
+        cy.url().should('eq', this.url.openWetherForBusiness)
+        businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
     });
 })
