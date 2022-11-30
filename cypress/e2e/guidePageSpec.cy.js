@@ -75,7 +75,7 @@ describe('Guide page test suite', () => {
         guidePage.elements.getHowToStartText().should('have.text', this.text.howToStartText)
     })
 
-    it.only('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
         header.clickGuideMenuLink();
         guidePage.clickFirstLearnMoreButton();
 
