@@ -17,11 +17,13 @@ describe('Header test suit', () => {
 
     beforeEach(function () {
         cy.fixture('url').then(url => {
-            this.url = url
+            this.url = url;
         });
+        
         cy.fixture('guidePage').then(text => {
-            this.text = text
+            this.text = text;
         });
+        
         cy.fixture('faqPage').then(faqData => {
             this.faqData = faqData;
         });
@@ -31,6 +33,11 @@ describe('Header test suit', () => {
         cy.fixture('businessPage').then(data => {
             this.data = data;
         })
+
+        cy.fixture('header').then(supportList => {
+            this.supportList = supportList;
+        })
+
         cy.visit('/');
     });
 
@@ -69,5 +76,16 @@ describe('Header test suit', () => {
 
         cy.url().should('eq', this.url.openWetherForBusiness)
         businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
+    });
+    
+    it('AT_018.009 | Header > Support > Verify Drop Down menu', function () {
+        header.elements.getSupportDropDownMenuList().should('not.be.visible');
+        header.clickSupportDropDownMenu();
+
+        header.elements.getSupportDropDownMenuList().should('be.visible')
+              .and('have.length', 3);        
+        header.elements.getSupportDropDownMenuList().each(($el, idx) => {
+            expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
+        });    
     });
 })

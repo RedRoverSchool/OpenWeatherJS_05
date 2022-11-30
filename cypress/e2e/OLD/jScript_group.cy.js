@@ -181,7 +181,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
-    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
+    it.skip('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
           .click({force: true});
@@ -474,7 +474,7 @@ describe.skip('Group jScript_group', () => {
           .and('be.visible');
     });
 
-    it('AT_018.009 | Support > Verify Drop Down menu', function() {
+    it.skip('AT_018.009 | Support > Verify Drop Down menu', function() {
         cy.get('#support-dropdown').as('Support').click({force: true});
 
         cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
