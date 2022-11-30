@@ -161,5 +161,16 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchBtn();
         mainPage.assertDropdownContains(this.info.searchInputText.cityName);
     });
+
+    it('AT_005.003 | Main Page > Verify the website name and description', function () {
+        mainPage.elements
+        .getMainPageContent()
+        .should('be.visible')
+        .and('have.text', this.data.mainText);
+        mainPage.elements
+        .getPageDescriptionWhiteText()
+        .should('be.visible')
+        .and('have.text', this.data.pageDescriptionWhiteText);
+    });
 });
 
