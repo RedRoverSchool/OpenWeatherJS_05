@@ -19,11 +19,11 @@ describe('businessPageSpec', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
-        cy.fixture('mainAboutPage').then(data2 => {
-            this.data2 = data2;
+        cy.fixture('mainAboutPage').then(data => {
+            this.data = data;
         });
-        cy.fixture('mainProduct').then(data3 => {
-            this.data3 = data3;
+        cy.fixture('mainProduct').then(data => {
+            this.data = data;
         })
         cy.visit('/');
     })
@@ -47,7 +47,7 @@ describe('businessPageSpec', () => {
         mainAboutUsPage.clickAboutUsButton();
         
         cy.url().should('eq', this.url.mainAbout);
-        mainAboutUsPage.elements.getTitle().should('contain', this.data2.text);
+        mainAboutUsPage.elements.getTitle().should('contain', this.data.text);
     });
 
     it('AT_038.003 | For business page > Our producs', function () {
@@ -56,7 +56,7 @@ describe('businessPageSpec', () => {
         mainAboutUsPage.clickOurProductButton();
 
         cy.url().should('eq', this.url.mainProduct)
-        mainProductPage.elements.getTitle().should('contain', this.data3.title)
+        mainProductPage.elements.getTitle().should('contain', this.data.title)
     });    
 });
 
