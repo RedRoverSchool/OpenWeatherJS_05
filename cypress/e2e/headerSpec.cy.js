@@ -6,12 +6,14 @@ import Header from "../pageObjects/Header.js";
 import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
+import MainPage from "../pageObjects/MainPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
 const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
+const mainPage = new MainPage();
 
 describe('Header test suit', () => {
 
@@ -30,7 +32,10 @@ describe('Header test suit', () => {
         });
         cy.fixture('businessPage').then(data => {
             this.data = data;
-        })
+        });
+        cy.fixture('mainPage').then(headerText => {
+            this.headerText = headerText;
+        });
         cy.visit('/');
     });
 
@@ -69,5 +74,12 @@ describe('Header test suit', () => {
 
         cy.url().should('eq', this.url.openWetherForBusiness)
         businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
+    });
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.headerText.mainText);
     });
 })
