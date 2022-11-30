@@ -28,14 +28,10 @@ describe('Questions page test suite', () => {
 
     it('AT_014.001 | Support > Ask a question > After not checking reCAPTCHA the error message appears', function () {
         header.clickSupportDropDownMenu();
-        header.clickAskAquestionMenuLink(); 
+        header.clickAskAquestionMenuLink();
         questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
 
-        questionsPage.selectNotAuser();
-        questionsPage.enterEmail(this.data.email);
-        questionsPage.selectFirstSubject();
-        questionsPage.enterMessage(this.data.message);
-        questionsPage.clickSubmitBtn();
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
 
         questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });
