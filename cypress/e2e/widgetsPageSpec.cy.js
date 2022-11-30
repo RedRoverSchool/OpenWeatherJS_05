@@ -66,7 +66,7 @@ describe('Widgets page test suite', () => {
         widgetsPage.elements.getPopupWindowTitle().should('have.text', this.data.popupWindowTitle.validTitle);
     });
 
-    it('AT_021.007 | Footer > Widgets> Verify popup window with info appears after clicking "Get code" button', function() {
+    it('AT_021.007 | Footer > Widgets> Verify popup windows with info appear after clicking "Get code" buttons', function() {
         header.clickSignInMenuLink()
         singInPage.signIn(this.data.userData1.login, this.data.userData1.password)
         header.clickUserDropDownMenu()
