@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Group lt_by_js', () => {
+describe.skip('Group lt_by_js', () => {
     beforeEach(function() {
         cy.fixture('ItByJs_group').then(data => {
             this.data = data
@@ -20,7 +20,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
         cy.get('#desktop-menu a[href="/our-initiatives"]').click()
-        cy.get('.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')       
@@ -123,7 +123,7 @@ describe('Group lt_by_js', () => {
         cy.url().should('include', '/faq')
     })
 
-   it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function () {
+   it.skip('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function () {
         const howToStart = '#support-dropdown-menu a[href="/appid"]'
 
         cy.get('#support-dropdown').click()
@@ -191,7 +191,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
         cy.get('#desktop-menu  a[href*="dashboard"]').click()
-        cy.get('li.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
