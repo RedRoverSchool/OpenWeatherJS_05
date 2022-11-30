@@ -2,9 +2,11 @@
 
 import Header from "../pageObjects/Header.js"
 import ApiKeys from "../pageObjects/ApiKeysPage.js";
+import SignInPage from "../pageObjects/SignInPage.js";
 
 const header = new Header();
-const apiKeys = new ApiKeys()
+const apiKeys = new ApiKeys();
+const signInPage = new SignInPage();
 
 describe('API keys', () => {
     
@@ -16,7 +18,8 @@ describe('API keys', () => {
     })
 
     it('AT_056.001 | My API keys > Managing API keys> Create new API key', function() {
-        cy.login(this.data.userData1.login, this.data.userData1.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userData1.login, this.data.userData1.password)
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
         cy.url().should('contain', this.data.urn)
@@ -41,7 +44,8 @@ describe('API keys', () => {
     })
 
     it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function() {
-        cy.login(this.data.userDataRenameKey.login, this.data.userDataRenameKey.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userDataRenameKey.login, this.data.userDataRenameKey.password)
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
         cy.url().should('include', this.data.urn)
@@ -68,4 +72,14 @@ describe('API keys', () => {
         apiKeys.actionWithKey(this.data.keyNames.renameKey, apiKeys.locators.DeleteKeysButton)
     })
 
+    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.data.userData1.login, this.data.userData1.password);
+        header.clickUserDropDownMenu()
+        header.clickMyApiKyesLink()
+
+        apiKeys.elements.getAlertInfoMessage()
+            .should('be.visible')
+            .and('have.text', this.data.alertInfoText)
+  });
 })

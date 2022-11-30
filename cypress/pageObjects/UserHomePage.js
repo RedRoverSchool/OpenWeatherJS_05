@@ -4,6 +4,7 @@ class UserHomePage {
         getNewProductsLink : () => cy.get('#myTab a[href="/"]').should('have.text', 'New Products'),
         getNavBarLink : () => cy.get('.clearfix #myTab li'),
         getActiveElement: () => cy.get('.active'),
+        getBillingPlanLink: () => cy.get('[href="/subscriptions"]'),
     }  
 
     clickBillingPlanLink() {
@@ -12,6 +13,10 @@ class UserHomePage {
 
     clickNewProductsLink () {
         this.elements.getNewProductsLink().click();
+    }
+
+    clickBillingPlanLink() {
+        this.elements.getBillingPlanLink().click();
     }
 
 }

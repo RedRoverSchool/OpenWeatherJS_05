@@ -3,10 +3,12 @@
 import UserHomePage from "../pageObjects/UserHomePage";
 import Header from "../pageObjects/Header";
 import UserServicesPage from "../pageObjects/UserServicesPage";
+import SignInPage from "../pageObjects/SignInPage";
 
 const userHomePage = new UserHomePage();
 const header = new Header();
 const userServicesPage = new UserServicesPage();
+const signInPage = new SignInPage();
 
 describe('User Home Page suite', () => {
 
@@ -22,7 +24,8 @@ describe('User Home Page suite', () => {
 
     it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
       
-    cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
 
     userHomePage.elements.getNavBarBlocks()
         .should('have.length', 3)
@@ -36,7 +39,8 @@ describe('User Home Page suite', () => {
 
     it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
-        cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
     
         userHomePage.clickNewProductsLink()
     
@@ -50,7 +54,8 @@ describe('User Home Page suite', () => {
 
     it('AT_043.002 | NavBar > User > My profile > Verify that NavBar has 9 options', function() {
  
-        cy.login(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
 
         userHomePage.elements.getNavBarLink().should('have.length', 9)
         userHomePage.elements.getNavBarLink().each(($el, idx) => {
@@ -59,16 +64,17 @@ describe('User Home Page suite', () => {
     })
 
     it('AT_047.001 | User page > New Products > Check that an unauthorized user gets to the New Products page after logged in', function () {
-        
-        cy.login(this.data.loginData.email, this.data.loginData.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.loginData.email, this.data.loginData.password);
 
         cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
     })
 
     it('AT_047.002 | User page > Check that authorized user can get to the New Products page', function () {
-        cy.login(this.data.loginData.email, this.data.loginData.password)
-        header.clickLogoLink();
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.loginData.email, this.data.loginData.password)
+        header.clickLogoLink()
 
         header.clickUserDropDownMenu()
         header.clickUserMyServicesLink()

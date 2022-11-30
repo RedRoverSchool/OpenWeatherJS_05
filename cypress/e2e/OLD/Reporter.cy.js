@@ -25,13 +25,13 @@ describe('GroupReporters', () => {
 
     function enterCityOrZipCode(inputText) {
         cy.get(inputSearchCity)
-            .clear()
-            .type(inputText);
+            .clear({force: true})
+            .type(inputText, {force: true});
         return this
     };
 
     function submit() {
-        cy.get('.search-block button').click()
+        cy.get('.search-block button').click({force: true})
     };
 
     it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
@@ -61,23 +61,23 @@ describe('GroupReporters', () => {
         cy.get(inputSearchCity).invoke('val').should('eq', zipCode);
     });
 
-    it('AT_024.002 | After clicking on "send" button, the form window automatically disappears', () => {
-        cy.get(differentWeatherBtn).click()
-        cy.get(differentWeatherPopup).should('be.be.visible')
+    it.skip('AT_024.002 | After clicking on "send" button, the form window automatically disappears', () => {
+        cy.get(differentWeatherBtn).click({force: true})
+        cy.get(differentWeatherPopup).should('be.visible')
         cy.get(differentWeatherIcon).contains('clear sky')
         cy.get(diffWeathMoreOptions).click()
-        cy.get(diffWeathTemperatureField).clear({ force: true }).type('50')
-        cy.get(diffWeathWindStrong).click({ force: true })
-        cy.get(diffWeathEmail).type('test@mail.com')
-        cy.get(diffWeathDataSourseDropArr).click()
-        cy.get(diffWeathDataSourseDropItem).contains('Personal feelings').click()
-        cy.get(diffWeathAddInfo).type('Not nice to lie about weather!')
-        cy.get(diffWeathSendBtn).click()
+        cy.get(diffWeathTemperatureField).clear({ force: true }).type('50', {force: true})
+        cy.get(diffWeathWindStrong).click({force: true})
+        cy.get(diffWeathEmail).type('test@mail.com', {force: true})
+        cy.get(diffWeathDataSourseDropArr).click({force: true})
+        cy.get(diffWeathDataSourseDropItem).contains('Personal feelings').click({force: true})
+        cy.get(diffWeathAddInfo).type('Not nice to lie about weather!', {force: true})
+        cy.get(diffWeathSendBtn).click({force: true})
         cy.get(differentWeatherPopup).should('not.exist')
     })
 
     it.skip('AT_034.001 | <Header > verify "For Business" button', () => {
-        cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click()
+        cy.get('#desktop-menu :nth-child(10) > a').invoke('removeAttr', 'target').click({force: true})
         cy.url().should('eq', 'https://openweather.co.uk/')
     });
 
@@ -91,10 +91,10 @@ describe('GroupReporters', () => {
 
     it('AT_001.010 | Main page > Section with search > Verify entered a city or Zip code into the Search city field', () => {
         cy.get(inputSearchCity)
-            .type('Buffalo Grove')
-            .click()
+            .type('Buffalo Grove', {force: true})
+            .click({force: true})
         cy.get('button[class="button-round dark"]')
-            .click()
+            .click({force: true})
         cy.get('ul[class="search-dropdown-menu"]')
             .click()
         cy.url()
@@ -108,16 +108,16 @@ describe('GroupReporters', () => {
         const password = '1234rewQ'
 
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click()
+            .click({force: true})
         cy.url().should('include', 'users/sign_in')
         cy.get('.input-group > #user_email')
-            .type(emailLogin)
+            .type(emailLogin, {force: true})
         cy.get('.input-group > #user_password')
-            .type(password)
+            .type(password, {force: true})
         cy.get('#user_remember_me')
-            .click()
+            .click({force: true})
         cy.contains('Submit')
-            .click()
+            .click({force: true})
         cy.url().should('include', '/')
         cy.get('.panel-body')
             .should('have.text', 'Signed in successfully.')
@@ -129,7 +129,7 @@ describe('GroupReporters', () => {
         const headerMainPage = 'h1 [class="orange-text"]'
 
         cy.get(navBarGuide)
-            .click()
+            .click({force: true})
         cy.url()
             .should('include', '/guide')
         cy.get(headerGuide)
@@ -143,13 +143,13 @@ describe('GroupReporters', () => {
     });
 
     it('AT_033.012 | Header > Navigation > Verify "Maps" menu link', () => {
-        cy.get('div#desktop-menu a[href*="/weathermap"]').click()
+        cy.get('div#desktop-menu a[href*="/weathermap"]').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
     });
 
     it('AT_024.003 | Main page > "Different weather?" option > verify 9 weather icons are shown and their text',
         function () {
-            cy.get(differentWeatherBtn).click()
+            cy.get(differentWeatherBtn).click({force: true})
             cy.get(differentWeatherIcon).should('have.length', 9)
             cy.get(differentWeatherIcon).each(($el, idx) => {
                 expect($el.text()).to.include(this.data.diffWeathIcons[idx])
@@ -168,8 +168,8 @@ describe('GroupReporters', () => {
     })
 
     it('AT_002.005 | Guide > Verifying the website logo is clickable and redirects User to the Main page', () => {
-        cy.get('div#desktop-menu a[href*="guide"]').click()
-        cy.get('#first-level-nav > li.logo > a > img').click()
+        cy.get('div#desktop-menu a[href*="guide"]').click({force: true})
+        cy.get('#first-level-nav > li.logo > a > img').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
     })
 
@@ -179,7 +179,7 @@ describe('GroupReporters', () => {
         enterCityOrZipCode(cityName)
         submit()
         cy.get('ul.search-dropdown-menu').should('exist')
-        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click({force: true})
         cy.url().should('include', '/city/')
         cy.get('div.current-temp .owm-weather-icon').should('exist')
         cy.get(metric).should('exist')
@@ -192,7 +192,7 @@ describe('GroupReporters', () => {
         enterCityOrZipCode(cityName)
         submit()
         cy.get('ul.search-dropdown-menu').should('exist')
-        cy.get('ul.search-dropdown-menu li:nth-child(1)').click()
+        cy.get('ul.search-dropdown-menu li:nth-child(1)').click({force: true})
         cy.url().should('include', '/city/')
         cy.get('div.current-container h2').should('contain', cityName)
     })
@@ -210,55 +210,55 @@ describe('GroupReporters', () => {
     });
 
     it.skip('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', () => {
-      cy.get('#support-dropdown').should('be.visible').click();
-      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click();
+      cy.get('#support-dropdown').should('be.visible').click({force: true});
+      cy.get('ul#support-dropdown-menu a[href="/faq"]').should('be.visible').click({force: true});
       cy.get('div.topic h1').should('have.text', 'Frequently Asked Questions');
     });
     
-    it.skip('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
+    it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', () => {
         const email = 'test@eail.cm'
 
-        cy.get('#desktop-menu > ul > li.user-li > a').click()
+        cy.get('#desktop-menu > ul > li.user-li > a').click({force: true})
         cy.url().should('include', '/users/sign_in')
         cy.get('.pwd-lost-q.show').should('be.visible')
-        cy.get('div.pwd-lost-q.show > a').click()
+        cy.get('div.pwd-lost-q.show > a').click({force: true})
         cy.get('.text-muted')
             .should('have.text', 'Enter your email address and we will send you a link to reset your password.')
-        cy.get('div.pwd-lost #user_email').type(email).should('be.visible')
-        cy.get('div.pwd-lost [type = "submit"]').click()
+        cy.get('div.pwd-lost #user_email').type(email, {force: true}).should('be.visible')
+        cy.get('div.pwd-lost [type = "submit"]').click({force: true})
         cy.url().should('eq', 'https://home.openweathermap.org/users/password')
         cy.get('div.container h3').should('have.text', 'Forgot your password?')
     });
 
     it('Verify if user cantnot create an account without checking reCAPTCHA', () => {
         cy.get('#first-level-nav a[href="https://openweathermap.org/home/sign_in"]')
-            .click()
+            .click({force: true})
         cy.url().should('include', 'users/sign_in')
         cy.get('.sign-form a[href="/users/sign_up"]')
-            .click()
+            .click({force: true})
         cy.url().should('include', 'users/sign_up')
         cy.get('#user_username')
-            .type('JesSummers')
+            .type('JesSummers', {force: true})
         cy.get('#user_email')
-            .type('narec38376@sopulit.com')
+            .type('narec38376@sopulit.com', {force: true})
         cy.get('#user_password')
-            .type('1234rewQ')
+            .type('1234rewQ', {force: true})
         cy.get('#user_password_confirmation')
-            .type('1234rewQ')
+            .type('1234rewQ', {force: true})
         cy.get('#agreement_is_age_confirmed')
-            .check()
+            .check({force: true})
         cy.get('#agreement_is_accepted')
-            .check()
+            .check({force: true})
         cy.get('#mailing_system')
-            .check()
+            .check({force: true})
         cy.get('#mailing_product')
-            .check()
+            .check({force: true})
         cy.get('#mailing_news')
-            .check()
+            .check({force: true})
         cy.get('.help-block')
             .should('not.exist')
         cy.get('[value="Create Account"]')
-            .click()
+            .click({force: true})
         cy.get('.help-block')
             .should('exist')
         cy.get('.help-block').invoke('text').then( text => {
@@ -267,17 +267,17 @@ describe('GroupReporters', () => {
     })
 
     it.skip('TC_008.011 | Main menu > Guide > verify button "Home"', () => {
-        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click()
+        cy.get('#desktop-menu > ul > li:nth-child(1) > a').click({force: true})
         cy.url().should('include', '/guide')
 
-        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click()
+        cy.get('.breadcrumb.pull-right.hidden-xs li :nth-child(1)').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
     });
 
     it('AT 051.004 | API > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page.', () => {
-        cy.get('#desktop-menu a[href="/api"]').click()
+        cy.get('#desktop-menu a[href="/api"]').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/api')
-        cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click()
+        cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
     })
 });
