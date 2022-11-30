@@ -3,10 +3,13 @@
 import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
 import PricingPage from "../pageObjects/PricingPage.js";
+import ApiPage from "../pageObjects/ApiPage.js";
+
 
 const guidePage = new GuidePage();
 const header = new Header();
 const pricingPage = new PricingPage();
+const apiPage = new ApiPage();
 
 describe('Guide page test suite', () => {
     beforeEach(function () {
@@ -21,6 +24,9 @@ describe('Guide page test suite', () => {
         })
         cy.fixture('pricingPage').then(pricingPage => {
             this.pricing = pricingPage
+        });
+        cy.fixture('apiPage').then(apiPage => {
+            this.apiPage = apiPage
         });
         cy.visit('/');
     });
@@ -68,4 +74,12 @@ describe('Guide page test suite', () => {
         guidePage.elements.getOpenWeatherNwnText().should('have.text', this.text.openWeatherNwnText);
         guidePage.elements.getHowToStartText().should('have.text', this.text.howToStartText)
     })
+
+    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+        header.clickGuideMenuLink();
+        guidePage.clickFirstLearnMoreButton();
+
+        cy.url().should('be.equal', this.url.apiCurrent);
+        apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title);
+    });
 });
