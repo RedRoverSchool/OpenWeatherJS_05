@@ -51,6 +51,14 @@ class MainPage {
             .click({ force: true });
     }
 
+    assertDropdownContains(name) {
+        this.elements.getSearchResultsDropdown()
+        .should('be.visible')
+        .each($el => {
+            cy.wrap($el).should('contain', name)
+        })
+    }
+
 }
 
 export default MainPage;

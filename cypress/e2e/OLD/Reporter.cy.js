@@ -14,7 +14,7 @@ const diffWeathSendBtn = '.pop-up-footer .button-round';
 const metric = '#selected[style="left: 2pt;"]';
 
 
-describe('GroupReporters', () => {
+describe.skip('GroupReporters', () => {
 
     beforeEach(function () {
         cy.visit('/')
