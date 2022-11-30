@@ -45,7 +45,14 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.FAQPage);
         faqPage.elements.getTitle().should('have.text', this.faqData.h1Title);
     });
-    
+
+    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
+        header.clickGuideMenuLink();
+        
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
+      });
+  
     it('AT_018.009 | Header > Support > Verify Drop Down menu', function () {
         header.elements.getSupportDropDownMenuList().should('not.be.visible');
         header.clickSupportDropDownMenu();
