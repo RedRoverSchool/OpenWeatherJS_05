@@ -25,6 +25,10 @@ describe('mainPageSpec', () => {
             this.solarRadiationPage = solarRadiationPage;
         });
 
+        cy.fixture('bugHunters').then(info => {
+            this.info = info;
+        });
+
         cy.visit('/');
     })
 
@@ -132,7 +136,7 @@ describe('mainPageSpec', () => {
         mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.data.pageDescriptionWhiteText);
     });
-    
+
     it('AT_004.001 | Main page > Verify the temperature can be switched from Imperial to Metric', function () {
         mainPage.elements.getToggleTempretureDefault().should('contain', this.data.tempretureScaleDefault);
         mainPage.elements.getToggleTempreture().should('contain', this.data.tempretureScale);
@@ -143,11 +147,19 @@ describe('mainPageSpec', () => {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
-        mainPage.elements.getCurrentDate().invoke('text').then(function(date){
-            current_date = date.split(',')[0]});
-        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>{
+        mainPage.elements.getCurrentDate().invoke('text').then(function (date) {
+            current_date = date.split(',')[0]
+        });
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) => {
             expect(date).to.include(current_date);
         });
 
-      });
+    });
+
+    it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', function () {
+        mainPage.setSearchInputText(this.info.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.assertDropdownContains(this.info.searchInputText.cityName);
+    });
 });
+

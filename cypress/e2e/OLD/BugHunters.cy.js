@@ -81,7 +81,7 @@ describe.skip('groupBugHunters', () => {
     cy.url().should('eq', 'https://openweathermap.org/api')
   })
 
-  it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
+  it.skip('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
     const cityName = 'New York'
 
     cy.get('.search input').type(cityName)
