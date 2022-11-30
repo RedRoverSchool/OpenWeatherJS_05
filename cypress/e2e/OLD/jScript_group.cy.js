@@ -84,7 +84,7 @@ describe.skip('Group jScript_group', () => {
         cy.url().should('include', '/weather-dashboard');
     });
     
-    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+    it.skip('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
         cy.get("#desktop-menu ul li a[href='/guide']").click({force: true});
         cy.get("ol [href='/api#current']").click();
         cy.url().should('include', '/api#current');
