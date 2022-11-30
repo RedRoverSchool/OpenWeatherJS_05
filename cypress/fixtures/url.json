@@ -21,5 +21,7 @@
     "mapsPage": "https://openweathermap.org/weathermap",
     "mainAbout": "https://openweather.co.uk/#main_about",
     "howToStartPage": "https://openweathermap.org/appid",
-    "apiCurrent": "https://openweathermap.org/api#current"
+    "apiCurrent": "https://openweathermap.org/api#current",
+    "mainProduct": "https://openweather.co.uk/#main_products",
+    "openWetherForBusiness": "https://openweather.co.uk/"
 }
