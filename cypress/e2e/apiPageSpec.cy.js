@@ -26,8 +26,8 @@ describe('Api page test suite', () => {
             apiPage.elements.getWeatherApiTitle().should('have.text', this.data.h1Title)
       });
 
-      it.only('AT_051.002 | API > Testing Home button > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page of the site.', function () {
-            mainPage.clickApiLink()
+      it('AT_051.002 | API > Testing Home button > Verify that after clicking on the Home link on the API page the user gets redirected to the Home page of the site.', function () {
+            header.clickApiMenuLink()
            
             topicPage.clickHomePageButton()
     
