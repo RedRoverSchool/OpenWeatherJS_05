@@ -13,6 +13,5 @@
     "copyright": "©",
     "RGB": "rgb(235, 110, 75)",
     "tempretureScaleDefault": "Imperial: °F, mph",
-    "tempretureScale": "Metric: °C, m/s",
-    "supportDropdownList": ["FAQ", "How to start", "Ask a question"]
+    "tempretureScale": "Metric: °C, m/s"
 }
