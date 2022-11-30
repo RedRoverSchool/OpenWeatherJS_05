@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('asiaJS', () => {
+describe.skip('asiaJS', () => {
   beforeEach(function () {
     cy.fixture('asiaJS').then((data) => {
       this.data = data
