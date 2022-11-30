@@ -20,7 +20,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page', function (){     
         cy.get('#desktop-menu a[href="/our-initiatives"]').click()
-        cy.get('.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')       
@@ -191,7 +191,7 @@ describe('Group lt_by_js', () => {
 
     it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
         cy.get('#desktop-menu  a[href*="dashboard"]').click()
-        cy.get('li.logo').click()
+        cy.get('.logo > a').click()
 
         cy.url().should('eq', 'https://openweathermap.org/')
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather')
