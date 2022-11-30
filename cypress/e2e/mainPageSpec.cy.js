@@ -162,7 +162,7 @@ describe('mainPageSpec', () => {
         mainPage.assertDropdownContains(this.info.searchInputText.cityName);
     });
 
-    it.only('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', function () {
+    it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', function () {
         mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
