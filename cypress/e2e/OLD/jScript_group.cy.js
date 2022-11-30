@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Group jScript_group', () => {
+describe.skip('Group jScript_group', () => {
     beforeEach(function() {
         cy.fixture('jScript_group').then(data => {
             this.data = data;

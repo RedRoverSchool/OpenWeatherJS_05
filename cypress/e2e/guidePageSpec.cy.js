@@ -39,13 +39,7 @@ describe('Guide page test suite', () => {
         cy.url().should('include', this.data.menuLink.guide.endPoint);
         guidePage.elements.getTitleGuide().should('be.visible');
     });
-
-    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-        guidePage.elements.getTitleGuide().should('have.text', this.data.menuLink.guide.text)
-      })
-
+    
     it('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
         header.clickGuideMenuLink();
 
