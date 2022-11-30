@@ -117,7 +117,13 @@ describe('Header test suit', () => {
         .should('be.visible')
         .and('have.text', this.supportList.signInOnHeader)
     });
-<<<<<<< HEAD
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
 
     it('AT_034.001 | <Header > verify "For Business" button', function () {
         header.clickBusinessMenuLink()
@@ -134,6 +140,3 @@ describe('Header test suit', () => {
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
 });
-=======
-})
->>>>>>> 7223338 (HeaderSignInAT 060.002 (#510))
