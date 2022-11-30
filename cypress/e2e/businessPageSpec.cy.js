@@ -3,10 +3,12 @@
 import Header from "../pageObjects/Header.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainAboutUsPage from "../pageObjects/MainAboutUsPage.js";
+import MainProductPage from "../pageObjects/MainProductPage.js";
 
 const header = new Header();
 const businessPage = new BusinessPage();
 const mainAboutUsPage = new MainAboutUsPage();
+const mainProductPage = new MainProductPage();
 
 describe('businessPageSpec', () => {
     
@@ -16,9 +18,15 @@ describe('businessPageSpec', () => {
         });
         cy.fixture('url').then(url => {
             this.url = url;
-        })
+        });
         cy.fixture('mainAboutPage').then(data2 => {
             this.data2 = data2;
+        });
+        cy.fixture('url').then(url2 => {
+            this.url2 = url2;
+        });
+        cy.fixture('mainProduct').then(data3 => {
+            this.data3 = data3;
         })
         cy.visit('/');
     })
@@ -43,7 +51,15 @@ describe('businessPageSpec', () => {
         
         cy.url().should('eq', this.url.mainAbout);
         mainAboutUsPage.elements.getTitle().should('contain', this.data2.text);
-        // cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
     });
+
+    it('AT_038.003 | For business page > Our producs', function () {
+        header.clickBusinessMenuLink();
+
+        mainAboutUsPage.clickOurProductButton();
+
+        cy.url().should('eq', this.url2.mainProduct)
+        mainProductPage.elements.getTitle().should('contain', this.data3.title)
+    });    
 });
 
