@@ -48,7 +48,7 @@ describe('businessPageSpec', () => {
         mainAboutUsPage.elements.getTitle().should('contain', this.data.titleAfterAboutUsBtn);
     });
 
-    it.only('AT_038.003 | For business page > Our producs', function () {
+    it('AT_038.003 | For business page > Our producs', function () {
         header.clickBusinessMenuLink();
 
         mainAboutUsPage.clickOurProductButton();
