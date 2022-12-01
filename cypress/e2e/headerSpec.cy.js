@@ -120,4 +120,12 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
+
+    it('AT_034.001 | <Header > verify "For Business" button', function () {
+        header.clickBusinessMenuLink()
+        cy.url().should('eq', this.data.url)
+
+        businessPage.elements.getH1Title()
+            .should('have.text', this.data.h1Title)
+    });
 });
