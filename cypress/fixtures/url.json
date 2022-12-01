@@ -26,5 +26,6 @@
     "openWetherForBusiness": "https://openweather.co.uk/",
     "apiCurrent": "https://openweathermap.org/api#current",
     "twitterUrl": "https://twitter.com/OpenWeatherMap",
+    "howToStartPage": "https://openweathermap.org/appid",
     "apiHistory": "https://openweathermap.org/api#history"
 }
