@@ -88,4 +88,4 @@ describe('Header test suit', () => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
     });
-})
+});
