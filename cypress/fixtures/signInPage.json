@@ -12,7 +12,8 @@
   "userProfileBugHunters": {
     "userName": "bugHunters",
     "email": "redroverschool@yahoo.com",
-    "password": "123456789"
+    "password": "123456789",
+    "newPassword": "123456789"
   },
 
   "userProfile": {
