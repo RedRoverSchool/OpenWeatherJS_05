@@ -38,8 +38,8 @@ describe('Header test suit', () => {
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
         });
-        cy.fixture('mainPage').then(headerText => {
-            this.headerText = headerText;
+        cy.fixture('mainPage').then(mainPage => {
+            this.mainPage = mainPage;
         });
         cy.visit('/');
     });
@@ -95,6 +95,6 @@ describe('Header test suit', () => {
         header.clickLogoLink();
     
         cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.headerText.mainText);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText);
     });
 })
