@@ -7,6 +7,7 @@ import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
+import BlogPage from "../pageObjects/BlogPage.js"
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -14,6 +15,7 @@ const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
 const mainPage = new MainPage();
+const blogPage = new BlogPage();
 
 describe('Header test suit', () => {
 
@@ -46,6 +48,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('mainPage').then(mainPage => {
             this.mainPage = mainPage;
+        });
+        cy.fixture('blogPage').then(blogPageData => {
+            this.blogPageData = blogPageData;
         });
         cy.visit('/');
     });
@@ -146,5 +151,12 @@ describe('Header test suit', () => {
     
         cy.url().should('eq', this.url.mainPageLink)
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
+    });
+
+    it('AT_013.001 | Header > After clicking the Blog menu User is redirected to the Blog page', function () {
+        header.clickBlogMenuLink();
+
+        cy.url().should('be.equal', this.blogPageData.url);
+        blogPage.elements.getWeatherFilter().should('have.text', this.blogPageData.weatherFilter);
     });
 });
