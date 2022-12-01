@@ -103,7 +103,7 @@ describe('User Home Page suite', () => {
 
     it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options', function () {
         header.clickSignInMenuLink()
-        signInPage.signIn(this.userData.userProfileLtByJS.realEmail, this.userData.userProfileLtByJS.password)
+        signInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password)
         header.clickUserDropDownMenu()
 
         header
