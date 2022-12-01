@@ -33,8 +33,8 @@ describe('Header test suit', () => {
         cy.fixture('howToStartPage').then(pageText => {
             this.pageText = pageText
         });
-        cy.fixture('businessPage').then(data => {
-            this.data = data;
+        cy.fixture('businessPage').then(title => {
+            this.title = title;
         })
 
         cy.fixture('header').then(supportList => {
@@ -84,7 +84,7 @@ describe('Header test suit', () => {
         header.clickBusinessMenuLink()
 
         cy.url().should('eq', this.url.openWetherForBusiness)
-        businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
+        businessPage.elements.getH1Title().should('have.text', this.title.h1Title)
     });
     
     it('AT_018.009 | Header > Support > Verify Drop Down menu', function () {
@@ -97,4 +97,4 @@ describe('Header test suit', () => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
     });
-})
+});
