@@ -53,9 +53,7 @@ describe('Footer test suite', () => {
         footer.elements.getMediumIcon().should('be.visible')
         footer.clickMediumIcon()
 
-        cy.url().should('eq', this.url.mediumUrl)
-        footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
-            
+        cy.url().should('eq', this.url.mediumUrl)      
     });
 
     it('AT_030.002 | Footer > Verify redirection to terms and conditions', function () {

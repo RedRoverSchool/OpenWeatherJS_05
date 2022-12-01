@@ -15,7 +15,6 @@ const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
 const mainPage = new MainPage();
 
-
 describe('Header test suit', () => {
 
     beforeEach(function () {
@@ -44,8 +43,8 @@ describe('Header test suit', () => {
             this.supportList = supportList;
         })
 
-        cy.fixture('mainPage').then(mainPage => {
-            this.mainPage = mainPage;
+        cy.fixture('mainPage').then(mainPageData => {
+            this.mainPageData = mainPageData;
         });
 
         cy.visit('/');
@@ -105,12 +104,20 @@ describe('Header test suit', () => {
         });    
     });
 
+    it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
+        header.clickInitiativePage()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
+    });
+
     it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
         header.clickPartnersMenuLink();
 
         header.clickLogoLink();
 
         cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
 })

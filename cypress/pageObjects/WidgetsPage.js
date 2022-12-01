@@ -8,7 +8,8 @@ class WidgetsPage {
         getAllGetAcodeButtons: () => cy.get('button[id*=brown]'),
         getPopupWindow: () => cy.get('#popup'),
         getCopyInBufferButton: () => cy.get('#copy-js-code'),
-        getClosePopupWin: () => cy.get('#popup-close')
+        getClosePopupWin: () => cy.get('#popup-close'),
+        getApiInputFieldErrMessage: () => cy.get('#error-key')
     }
 
     clickCodeWidgetFirstBtn() {
@@ -17,6 +18,12 @@ class WidgetsPage {
 
     clickClosePopupWin() {
         this.elements.getClosePopupWin().click()
+    }
+
+    pasteCopiedApiKeyInInputField(myApiKey) {
+        cy.get(myApiKey).then($el => {
+            this.elements.getApiKeyInputField().type($el);
+          });
     }
 }
 
