@@ -94,7 +94,7 @@ describe('SignIn test suit', () => {
 
     signInPage.passwordChange(this.data.userProfileLtByJS.newpassword)
 
-    signInPage.elements.getSignOutAllert().should('have.text', this.data.messageSuccessPasswordChange)
+    signInPage.elements.getAllertMessage().should('have.text', this.data.messageSuccessPasswordChange)
 
     header.clickUserDropDownMenu()
     header.clickUserLogoutLink()
