@@ -55,7 +55,7 @@ describe('About Us', () => {
         marketplacePage.elements.getMarketplacePageTitle().should('be.visible')
     });
 
-    it.only('AT_028.001 | About us > Verify "About us" link redirects to the corresponding page', function () {
+    it('AT_028.001 | About us > Verify "About us" link redirects to the corresponding page', function () {
         footer.clickAboutUsLink();
         cy.url().should('include', '/about-us');
     });
