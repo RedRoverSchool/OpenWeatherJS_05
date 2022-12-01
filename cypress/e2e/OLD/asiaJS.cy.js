@@ -111,8 +111,8 @@ describe.skip('asiaJS', () => {
       });
   });
 
-  it('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', () => {
-    cy.get('#desktop-menu a[href="/our-initiatives"]').click();
+  it.skip('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', () => {
+    cy.get('#desktop-menu a[href="/our-initiatives"]').click({force: true});
     cy.get('.ow-btn').click();
     cy.url().should('include', '/student-initiative');
     cy.get('.topic h1').should('have.text', 'Student initiative');
