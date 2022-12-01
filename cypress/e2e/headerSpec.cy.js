@@ -6,12 +6,15 @@ import Header from "../pageObjects/Header.js";
 import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
+import MainPage from "../pageObjects/MainPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
 const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
+const mainPage = new MainPage();
+
 
 describe('Header test suit', () => {
 
@@ -40,6 +43,10 @@ describe('Header test suit', () => {
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
         })
+
+        cy.fixture('mainPage').then(mainPage => {
+            this.mainPage = mainPage;
+        });
 
         cy.visit('/');
     });
@@ -96,5 +103,14 @@ describe('Header test suit', () => {
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
+    });
+
+    it.only('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        header.clickPartnersMenuLink();
+
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText);
     });
 })
