@@ -81,4 +81,10 @@ describe('Footer test suite', () => {
         cy.url().should('be.equal',this.url.twitterUrl);
         cy.title().should('include', this.data.twitterTitleText);
     });
+
+    it('AT_050.003 | Footer > The User is redirected to Terms and conditions of sale page', function () {
+        footer.clickOnTermsAndConditionsOfSaleLink();
+
+        cy.url().should('eq', this.data.termsAndConditionsOfSaleUrl);
+      });
 });
