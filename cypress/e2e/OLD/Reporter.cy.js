@@ -14,7 +14,7 @@ const diffWeathSendBtn = '.pop-up-footer .button-round';
 const metric = '#selected[style="left: 2pt;"]';
 
 
-describe('GroupReporters', () => {
+describe.skip('GroupReporters', () => {
 
     beforeEach(function () {
         cy.visit('/')
@@ -142,7 +142,7 @@ describe('GroupReporters', () => {
             .should('have.text', 'OpenWeather')
     });
 
-    it('AT_033.012 | Header > Navigation > Verify "Maps" menu link', () => {
+    it.skip('AT_033.012 | Header > Navigation > Verify "Maps" menu link', () => {
         cy.get('div#desktop-menu a[href*="/weathermap"]').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
     });

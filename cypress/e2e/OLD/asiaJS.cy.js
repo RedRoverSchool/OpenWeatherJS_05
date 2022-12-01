@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('asiaJS', () => {
+describe.skip('asiaJS', () => {
   beforeEach(function () {
     cy.fixture('asiaJS').then((data) => {
       this.data = data
@@ -148,7 +148,7 @@ describe('asiaJS', () => {
     cy.url().should('include', '/payments');
   });
 
-  it('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function () {
+  it.skip('AT_048.003 Myservices > Billing plans > Verify billing plans are present', function () {
     cy.login_asiaJS(this.data.email, this.data.password);
     cy.visit('https://home.openweathermap.org/myservices');
 
@@ -177,7 +177,7 @@ describe('asiaJS', () => {
     });
   });
 
-  it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+  it.skip('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
     let detailed_weather_information = Array();
 
     cy.get('[fill="#48484A"]').each((el, i) => {

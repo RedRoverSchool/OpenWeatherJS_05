@@ -5,6 +5,7 @@
     "HistoryBulk": "https://openweathermap.org/history-bulk",
     "userHomePage": "https://home.openweathermap.org/",
     "WebsiteTermsAndConditions": "https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf",
+    "Subscriptions": "https://home.openweathermap.org/subscriptions",
     "guidePage": "https://openweathermap.org/guide",
     "mediumUrl": "https://openweathermap.medium.com/",
     "MarketPage": "https://home.openweathermap.org/marketplace",
@@ -18,5 +19,12 @@
     "FAQPage": "https://openweathermap.org/faq",
     "widgetWPCloudyPlugin": "https://wordpress.org/plugins/wp-cloudy/",
     "facebookUrl": "270748973021342",
-    "mapsPage": "https://openweathermap.org/weathermap"
+    "mapsPage": "https://openweathermap.org/weathermap",
+    "mapsPageLink": "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5",
+    "mainAbout": "https://openweather.co.uk/#main_about",
+    "mainProduct": "https://openweather.co.uk/#main_products",
+    "openWetherForBusiness": "https://openweather.co.uk/",
+    "apiCurrent": "https://openweathermap.org/api#current",
+    "twitterUrl": "https://twitter.com/OpenWeatherMap",
+    "howToStartPage": "https://openweathermap.org/appid"
 }
