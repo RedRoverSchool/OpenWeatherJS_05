@@ -136,13 +136,24 @@ describe('mainPageSpec', () => {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
-        mainPage.elements.getCurrentDate().invoke('text').then(function (date) {
+        mainPage.elements.getCurrentDate().invoke('text').then(function  (date)  {
             current_date = date.split(',')[0]
+        
         });
-        mainPage.elements.getForecastFirstDay().invoke('text').then((date) => {
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>  {
             expect(date).to.include(current_date);
         });
+    });
 
+    it('AT_045.009 | Main page > Section with 8-day forecast > Detailed weather for each of these days is displayed', function () {
+        mainPage.elements.getIconToDetailedWeather().each((el, i) => {
+            mainPage.elements.getIconToDetailedWeather()
+                .eq(i)
+                .click({ force: true });
+            mainPage.elements.getDailyDetailContainerWeather().should('be.visible');
+            mainPage.elements.getTimeOfDayInDetailedWeather()
+                .should('have.text', this.data.weatherDetails)
+    });
     });
 
     it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', function () {
@@ -150,6 +161,7 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchBtn();
         mainPage.assertDropdownContains(this.info.searchInputText.cityName);
     });
+<<<<<<< HEAD
 
     it('AT_005.003 | Main Page > Verify the website name and description', function () {
         mainPage.elements
@@ -161,5 +173,8 @@ describe('mainPageSpec', () => {
         .should('be.visible')
         .and('have.text', this.data.pageDescriptionWhiteText);
     });
+=======
+    
+>>>>>>> 24caaead9d4644b38264222c6f3ed00e4064eb2a
 });
 

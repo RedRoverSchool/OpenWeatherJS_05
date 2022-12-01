@@ -84,7 +84,7 @@ describe.skip('Group jScript_group', () => {
         cy.url().should('include', '/weather-dashboard');
     });
     
-    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+    it.skip('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
         cy.get("#desktop-menu ul li a[href='/guide']").click({force: true});
         cy.get("ol [href='/api#current']").click();
         cy.url().should('include', '/api#current');
@@ -160,7 +160,7 @@ describe.skip('Group jScript_group', () => {
         cy.url().should('eq','https://openweathermap.org/price');
     });
     
-    it('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
+    it.skip('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
         cy.get('.social a:nth-child(2)').should('be.visible');
         cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('be.equal','https://twitter.com/OpenWeatherMap');
@@ -181,7 +181,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
-    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
+    it.skip('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
           .click({force: true});
@@ -372,7 +372,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
     });
 
-    it('AT_038.003 | For business page > Our Products', function () {
+    it.skip('AT_038.003 | For business page > Our Products', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
     
         cy.get('[href="#main_products"]').invoke('removeAttr', 'target').click({force: true});
@@ -474,7 +474,7 @@ describe.skip('Group jScript_group', () => {
           .and('be.visible');
     });
 
-    it('AT_018.009 | Support > Verify Drop Down menu', function() {
+    it.skip('AT_018.009 | Support > Verify Drop Down menu', function() {
         cy.get('#support-dropdown').as('Support').click({force: true});
 
         cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');
