@@ -161,6 +161,20 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchBtn();
         mainPage.assertDropdownContains(this.info.searchInputText.cityName);
     });
+
+    it('AT_001.003 | Main page > Section with search > Search City > Verify a user is able to select a city from the search results dropdown', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+                .getSearchResultsDropdown()
+                .should('exist')
+
+        mainPage.clickSearchResultFromDropdown()
+        cy.url().should('include', '/city/')
+        mainPage.elements
+                .getCityNameSubHeaderTitle()
+                .should('contain', this.data.searchInputText.cityName)
+    })
     
 });
 
