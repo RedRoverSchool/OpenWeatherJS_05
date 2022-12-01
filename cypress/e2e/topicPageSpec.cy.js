@@ -22,39 +22,14 @@ const mainPage = new MainPage();
 
 describe('Topic Page test suite', () => {
     beforeEach(function () {
-        
-         cy.fixture('faqPage').then(faqData => {
-            this.faqData = faqData;
-        });
-        cy.fixture('mapsPage').then(mapsData => {
-            this.mapsData = mapsData
-        });
-        cy.fixture('howToStartPage').then(pageText => {
-            this.pageText = pageText
-        });
-        cy.fixture('businessPage').then(data => {
-            this.data = data;
-        })
-
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
-        })
-
-        cy.fixture('mainPage').then(mainPageData => {
-            this.mainPageData = mainPageData;
         })
         cy.fixture('url').then(url => {
             this.url = url
         });
         cy.fixture('guidePage').then(text => {
             this.text = text
-        })
-        cy.fixture('pricingPage').then(pricingPage => {
-            this.pricing = pricingPage
-        });
-        cy.fixture('apiPage').then(apiPage => {
-            this.apiPage = apiPage
-        });
         cy.visit('/');
     });
 
