@@ -139,4 +139,12 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
+
+    it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
+        header.clickDashboardMenu()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
+    });
 });
