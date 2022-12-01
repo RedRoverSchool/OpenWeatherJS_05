@@ -22,7 +22,7 @@ describe('Header test suit', () => {
         cy.fixture('guidePage').then(text => {
             this.text = text;
         });
-                cy.fixture('faqPage').then(faqData => {
+        cy.fixture('faqPage').then(faqData => {
             this.faqData = faqData;
         });
         cy.fixture('mapsPage').then(mapsData => {
