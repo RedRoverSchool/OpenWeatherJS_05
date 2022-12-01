@@ -105,7 +105,7 @@ describe('Header test suit', () => {
         });    
     });
 
-    it.only('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
         header.clickPartnersMenuLink();
 
         header.clickLogoLink();
