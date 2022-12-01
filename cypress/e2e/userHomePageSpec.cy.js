@@ -19,8 +19,8 @@ describe('User Home Page suite', () => {
             cy.fixture('url').then(url  => {
                 this.url = url;
             });
-            cy.fixture('signInPage').then(data => {
-                this.userData = data
+            cy.fixture('signInPage').then(userData => {
+                this.userData = userData
             });
             cy.visit('/');
     });
