@@ -51,7 +51,7 @@ describe('Widgets page test suite', () => {
 
     })
 
-    it('AT_021.004 | Widgets > The widget code is visible', function () {
+    it.skip('AT_021.004 | Widgets > The widget code is visible', function () {
         header.clickSignInMenuLink();
         singInPage.signIn(this.signIn.userEmail, this.signIn.userPassword);
         header.clickUserDropDownMenu();
