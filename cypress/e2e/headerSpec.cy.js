@@ -117,6 +117,7 @@ describe('Header test suit', () => {
         .should('be.visible')
         .and('have.text', this.supportList.signInOnHeader)
     });
+<<<<<<< HEAD
 
     it('AT_034.001 | <Header > verify "For Business" button', function () {
         header.clickBusinessMenuLink()
@@ -133,3 +134,6 @@ describe('Header test suit', () => {
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
 });
+=======
+})
+>>>>>>> 7223338 (HeaderSignInAT 060.002 (#510))
