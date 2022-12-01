@@ -97,7 +97,7 @@ describe('Header test suit', () => {
         });    
     });
 
-    it.only('AT_034.001 | <Header > verify "For Business" button', function () {
+    it('AT_034.001 | <Header > verify "For Business" button', function () {
         header.clickBusinessMenuLink()
         cy.url().should('eq', this.data.url)
 
