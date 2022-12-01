@@ -55,4 +55,13 @@ describe('Marketplace page test suite', () => {
             })
       });
 
+      it('009.007 | Marketplace > Verification of displayed "Documentation" button for History bulk', function () {
+            header.clickMarketplaceMenuLink()
+            marketplacePage.elements.getDocumentationBtnHistoryBulk().should('be.visible')
+            marketplacePage.clickDocumentationBtnHistoryBulk()
+
+            cy.url().should('eq', this.urls.HistoryBulk)
+            historyBulk.elements.getHistoryBulkTitle().should('have.text', this.historyBulkPageData.HistoryBulkTitle)
+      });
+
 })

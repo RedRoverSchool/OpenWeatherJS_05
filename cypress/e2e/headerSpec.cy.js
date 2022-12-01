@@ -29,6 +29,9 @@ describe('Header test suit', () => {
         cy.fixture('faqPage').then(faqData => {
             this.faqData = faqData;
         });
+        cy.fixture('mapsPage').then(mapsData => {
+            this.mapsData = mapsData
+        });
         cy.fixture('howToStartPage').then(pageText => {
             this.pageText = pageText
         });
@@ -37,6 +40,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
+        });
+        cy.fixture('mainPage').then(mainPageData => {
+            this.mainPageData = mainPageData;
         });
         cy.fixture('mainPage').then(mainPage => {
             this.mainPage = mainPage;
@@ -49,7 +55,7 @@ describe('Header test suit', () => {
         cy.url().should('be.equal', this.url.guidePage);
     
         guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText).and('be.visible')
-    })
+    });
 
     it('AT_016.001 | Support > FAQ page > Verify Support button and FAQ link is clickable and redirects to the FAQ page', function () {
         header.clickSupportDropDownMenu();
@@ -59,14 +65,20 @@ describe('Header test suit', () => {
         faqPage.elements.getTitle().should('have.text', this.faqData.h1Title);
     });
 
+    it('AT_033.012 | Header > Navigation > Verify "Maps" menu link', function () {
+        header.clickMapsMenuLink();
+        cy.url().should('eq', this.url.mapsPageLink);
+        cy.title().should('eq', this.mapsData.pageTitle);
+    });
+
     it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
         header.clickGuideMenuLink();
         
         cy.url().should('be.equal', this.url.guidePage);
         guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
-      });
+    });
 
-    it.skip('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();
 
@@ -89,12 +101,29 @@ describe('Header test suit', () => {
               .and('have.length', 3);        
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
+    }); 
+    
+    it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
+        header.clickInitiativePage()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
     });
-        
+    
+    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        header.clickPartnersMenuLink();
+
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+    
     it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
         header.clickLogoLink();
     
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText);
     });
-})
+});

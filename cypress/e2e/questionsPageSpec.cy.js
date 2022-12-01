@@ -16,7 +16,26 @@ describe('Questions page test suite', () => {
         cy.visit('/');
     });
 
-    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it('AT_015.001 | questionsPage > Not checking eCAPTCHA checkbox', function () {
+        header.clickSupportDropDownMenu();
+        header.clickAskAquestionMenuLink();
+        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
+
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
+
+        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
+    });
+
+    it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', function () {
+        header.clickSupportDropDownMenu();
+        header.clickAskAquestionMenuLink();
+        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
+
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 3, this.data.message);
+        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
+    });
+ 
+    it('AT_014.001 | questionsPage > After not checking reCAPTCHA the error message appears', function () {
         header.clickSupportDropDownMenu();
         header.clickAskAquestionMenuLink();
         questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);

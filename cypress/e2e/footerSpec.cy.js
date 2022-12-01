@@ -53,9 +53,7 @@ describe('Footer test suite', () => {
         footer.elements.getMediumIcon().should('be.visible')
         footer.clickMediumIcon()
 
-        cy.url().should('eq', this.url.mediumUrl)
-        footer.elements.getNameOfPageMedium().should('have.text', this.data.mainPageText).and('be.visible')
-            
+        cy.url().should('eq', this.url.mediumUrl)      
     });
 
     it('AT_030.002 | Footer > Verify redirection to terms and conditions', function () {
@@ -71,7 +69,16 @@ describe('Footer test suite', () => {
     it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
         footer.elements.getFacebookLink().should('be.visible');
         footer.clickFacebookLink();
+
         cy.url().should('include',this.url.facebookUrl);
         cy.title().should('eq', this.data.facebookTitleText);
+    });
+
+    it('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
+        footer.elements.getTwitterLink().should('be.visible');
+        footer.clickTwitterLink();
+
+        cy.url().should('be.equal',this.url.twitterUrl);
+        cy.title().should('include', this.data.twitterTitleText);
     });
 });

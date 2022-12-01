@@ -7,9 +7,9 @@ class Footer {
         getAboutUsLink: () => cy.get('a[href*="/about-us"]'),
         getWidgetsLink: () => cy.get('[href$="/widgets-constructor"]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
-        getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),
         getSocialMediaIconLinks: () => cy.get('.social a'),
-        getFacebookLink: () => cy.get('.social a:first-child')
+        getFacebookLink: () => cy.get('.social a:first-child'),
+        getTwitterLink: () => cy.get('.social a:nth-child(2)')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -35,11 +35,15 @@ class Footer {
     };
 
         clickMediumIcon(){
-            this.elements.getMediumIcon().invoke('removeAttr', 'target').click()
+            this.elements.getMediumIcon().invoke('removeAttr', 'target').click({force: true})
     };
 
         clickFacebookLink() {
             this.elements.getFacebookLink().invoke('removeAttr', 'target').click({force: true});
+        };
+
+        clickTwitterLink() {
+            this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
         }
 };
 export default Footer;
