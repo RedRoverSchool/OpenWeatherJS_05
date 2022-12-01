@@ -132,7 +132,7 @@ describe('mainPageSpec', () => {
         mainPage.clickTempretureToggle;
     });
 
-    it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+    it.skip('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
@@ -174,6 +174,28 @@ describe('mainPageSpec', () => {
         mainPage.elements
                 .getCityNameSubHeaderTitle()
                 .should('contain', this.data.searchInputText.cityName)
+    })
+
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+                .getSearchResultsDropdown()
+                .should('exist')
+        mainPage.clickSearchResultFromDropdown()
+        mainPage.elements
+                .getCityNameSubHeaderTitle()
+                .should('contain', this.data.searchInputText.cityName)
+
+        mainPage.elements
+                .getWeatherIcon()
+                .should('exist')
+        mainPage.elements
+                .getToggleMetric()
+                .should('exist')
+        mainPage.elements
+                .getTemperatureHeading()
+                .should('contain','°C')
     })
     
 });
