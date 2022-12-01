@@ -17,7 +17,7 @@ describe('AGRO page in blog test suite', () => {
         header.clickBlogMenuLink();
     
         blogPage.clickAgroLink();
-        blogAgroPage.elements.getPostInfoArray().each(($el, idx) => {
+        blogAgroPage.elements.getPostInfoArray().each($el => {
             cy.wrap($el).should('include.text', 'AGRO');
         });   
     });    
