@@ -10,6 +10,7 @@ class MainPage {
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
+        getSearchResultFromDropdown: () => cy.get('ul.search-dropdown-menu li:nth-child(1)'),
         getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
         getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
         getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation'),
@@ -19,6 +20,7 @@ class MainPage {
         getDailyDetailContainerWeather: () => cy.get('.daily-detail-container'),
         getIconToDetailedWeather: () => cy.get('[fill="#48484A"]'),
         getTimeOfDayInDetailedWeather: () => this.elements.getDailyDetailContainerWeather().find('tr').eq(0).find('th'),
+        getCityNameSubHeaderTitle: () => cy.get('div.current-container h2')
     }
 
     clickSearchBtn() {
@@ -55,6 +57,10 @@ class MainPage {
         .each($el => {
             cy.wrap($el).should('contain', name)
         })
+    }
+
+    clickSearchResultFromDropdown() {
+        this.elements.getSearchResultFromDropdown().click();
     }
 
 }
