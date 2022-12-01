@@ -48,7 +48,7 @@ describe('our_initiatives', () => {
             studentInititative.elements.getStudentInitiativeTitle().should('have.text', this.bugHunters.titleStudentInitiative);
     });
 
-    it.only('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', function(){
+    it('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', function(){
         header.clickInitiativePage();
         ourInitiative.clickLearnMoreButton();
         
