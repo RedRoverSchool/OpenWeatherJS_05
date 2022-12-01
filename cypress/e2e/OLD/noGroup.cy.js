@@ -1,15 +1,15 @@
 
 /// <reference types="cypress" />
 
-Cypress.Commands.add('login', (userName, password) => {
-  cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
-  cy.get('#user_email').type(userName).should('have.value', userName)
-  cy.get('#user_password').type(password).should('have.value', password)
-  cy.get('#new_user input[value="Submit"]').click({force: true})
-  cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
-})
+// Cypress.Commands.add('login', (userName, password) => {
+//   cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
+//   cy.get('#user_email').type(userName).should('have.value', userName)
+//   cy.get('#user_password').type(password).should('have.value', password)
+//   cy.get('#new_user input[value="Submit"]').click({force: true})
+//   cy.get('.panel-green .panel-body').should('contain', 'Signed in successfully')
+// })
 
-describe('group noGroup', () => {
+describe.skip('group noGroup', () => {
 
 beforeEach(function() {
   cy.fixture('noGroup').then(data => {
@@ -83,7 +83,7 @@ it.skip('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the 
     })
   })
 
-  it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
+  it.skip('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
  
   cy.get('#desktop-menu a[href="https://openweathermap.org/home/sign_in"]').click()
   cy.get('#user_email').type(this.data.userProfile.email)

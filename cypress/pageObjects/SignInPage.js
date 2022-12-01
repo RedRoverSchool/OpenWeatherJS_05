@@ -9,7 +9,10 @@ class SignInPage {
   getOpenTextResetPassword: () => cy.get('.text-muted'),
   getFieldForEmailPasswordReset: () => cy.get('div.pwd-lost #user_email'),
   getBtnSendEmailResetPassword: () => cy.get('div.pwd-lost [type = "submit"]'),
-  getForgotYourPassword: () =>  cy.get('div.container h3')
+  getForgotYourPassword: () =>  cy.get('div.panel-body > span'),
+  getAllert : () => cy.get('.panel.panel-red .panel-body'),
+  getCheckRememberMe: () => cy.get('[type="checkbox"]#user_remember_me'),
+  getNoticeAfterSigned: () => cy.get('.panel-body')
   };
 
   typeEnterEmail(userEmail) {
@@ -42,5 +45,16 @@ class SignInPage {
     this.elements.getBtnSendEmailResetPassword().click({force: true})
   }
 
+  checkRememberMe() {
+    this.elements.getCheckRememberMe().check();
+  }
+
+  signInWithRememberMe(email, password) {
+    this.typeEnterEmail(email);
+    this.typeEnterPassword(password);
+    this.checkRememberMe();
+    this.clickSubmitButton();
+  };
+  
 };
 export default SignInPage;

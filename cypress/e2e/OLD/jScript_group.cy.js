@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Group jScript_group', () => {
+describe.skip('Group jScript_group', () => {
     beforeEach(function() {
         cy.fixture('jScript_group').then(data => {
             this.data = data;
@@ -75,7 +75,7 @@ describe('Group jScript_group', () => {
         cy.get('.panel-body').should('have.text', 'You need to sign in or sign up before continuing.');
     });
 
-    it('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
+    it.skip('AT_022.001 | Footer > Verification of displayed six Social Media icons', function () {
         cy.get('.social a').should('have.length', 6).and('be.visible');
     });
     
@@ -84,7 +84,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include', '/weather-dashboard');
     });
     
-    it('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
+    it.skip('AT_008.002 | Main menu > Guide | Verify the first button "Learn more" is clickable and user will be redirected new url', function () {
         cy.get("#desktop-menu ul li a[href='/guide']").click({force: true});
         cy.get("ol [href='/api#current']").click();
         cy.url().should('include', '/api#current');
@@ -96,7 +96,7 @@ describe('Group jScript_group', () => {
         cy.url().should('include','weather-dashboard');
     });
 
-    it('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
+    it.skip('AT_022.002 | Footer > Ensure Facebook icon redirection', function () {
         cy.get('.social a:first-child').should('be.visible');
         cy.get('.social a:first-child').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('include','270748973021342');
@@ -116,7 +116,7 @@ describe('Group jScript_group', () => {
         cy.get('#weather-widget  input[type="email"]').clear().type('test@gmail.com');
     });
     
-    it('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
+    it.skip('AT_012.004 | Partners > CMS > Verify "View widget" button', function () {
         cy.get('div#desktop-menu a[href*="examples"]').as('Partners').click({force: true});
 
         cy.get('a[href="http://wordpress.org/extend/plugins/awesome-weather/"]')
@@ -132,7 +132,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf');
     });
 
-    it('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
+    it.skip('AT_012.005 | Partners > CMS > Verify “View plugin” button for WordPress HD Weather Widget by The Waypoint', function () {
         cy.get('#desktop-menu a[href="/examples"]').click({force: true});
         cy.get('a[href="#cms"]').click();
         cy.get('a[href="http://wordpress.org/plugins/waypoint-hd-weather-widget/"]').invoke('removeAttr', 'target').click({force: true});
@@ -160,7 +160,7 @@ describe('Group jScript_group', () => {
         cy.url().should('eq','https://openweathermap.org/price');
     });
     
-    it('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
+    it.skip('AT_022.003 | Footer > Verify Tweeter icon redirection', function () {
         cy.get('.social a:nth-child(2)').should('be.visible');
         cy.get('.social a:nth-child(2)').invoke('removeAttr', 'target').click({force: true});
         cy.url().should('be.equal','https://twitter.com/OpenWeatherMap');
@@ -181,7 +181,7 @@ describe('Group jScript_group', () => {
         cy.get('span.white-text').should('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
     });
 
-    it('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
+    it.skip('AT_013.005 | Blog > Weather > The Road to a New Thinking in Transport Power', function () {
         cy.get('div#desktop-menu a[href="https://openweather.co.uk/blog/category/weather"]')
           .invoke('removeAttr', 'target')
           .click({force: true});
@@ -356,7 +356,7 @@ describe('Group jScript_group', () => {
         cy.title().should('eq', 'Members');
     });
 
-    it('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
+    it.skip('AT_013.007 | Blog > Weather > Verify that after landing on the Blog page 10 posts displayed on the first page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
 
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);
@@ -372,7 +372,7 @@ describe('Group jScript_group', () => {
         cy.get('h2[style="margin-top: 0;"]').should('include.text', 'OpenWeather products are all');
     });
 
-    it('AT_038.003 | For business page > Our Products', function () {
+    it.skip('AT_038.003 | For business page > Our Products', function () {
         cy.get('#desktop-menu a[href="https://openweather.co.uk"]').invoke('removeAttr','target').click({force: true});
     
         cy.get('[href="#main_products"]').invoke('removeAttr', 'target').click({force: true});
@@ -455,7 +455,7 @@ describe('Group jScript_group', () => {
         cy.get('.headline').should('have.text', this.data.questionsPageHeader);    
  });
         
-    it('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
+    it.skip('AT_041.002 | Header > User > My API keys > Verify that user can navigate to api keys page and see alert info message', function () {
         cy.get('.user-li a').click({force: true});
         cy.get('[class*="string email optional "]').type(this.data.loginUserEmail);
         cy.get('[name="user[password]"]').type(this.data.loginUserPassword);
@@ -474,7 +474,7 @@ describe('Group jScript_group', () => {
           .and('be.visible');
     });
 
-    it('AT_018.009 | Support > Verify Drop Down menu', function() {
+    it.skip('AT_018.009 | Support > Verify Drop Down menu', function() {
         cy.get('#support-dropdown').as('Support').click({force: true});
 
         cy.get('#support-dropdown-menu li').as('Support_Dropdown').should('be.visible');

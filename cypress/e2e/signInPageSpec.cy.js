@@ -12,6 +12,11 @@ describe('SignIn test suit', () => {
     cy.fixture('signInPage').then(data => {
       this.data = data;
     })
+
+    cy.fixture('bugHunters').then(userAccMenu => {
+      this.userAccMenu = userAccMenu;
+    })
+
     cy.visit('/');
   });
 
@@ -25,16 +30,52 @@ describe('SignIn test suit', () => {
     signInPage.elements.getSignOutAllert().should('have.text', this.data.signOutAllertMessage)
   });
 
-  it('AT_007.006 | Main page>Sign in> Create an account > "Lost your password? Click here to recover." checking.', function ()  {
+  it('AT_007.006 | Sign in > Create an account > Verify Negative Email', function ()  {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
-    signInPage.elements.getTextClickHereToRecover().should('be.visible')
+    signInPage.elements.getTextClickHereToRecover()
+      .should('be.visible')
     signInPage.clickHereToRecover() 
-    signInPage.elements.getOpenTextResetPassword().should('have.text', this.data.resetYourPassord)
-    signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.data.userNegativeEmail)
+    signInPage.elements.getOpenTextResetPassword()
+      .should('have.text', this.data.resetYourPassord)
+    signInPage.elements.getFieldForEmailPasswordReset()
+      .should('be.visible').type(this.data.userNegativeEmail)
     signInPage.clickBtnSendEmailResetPassword()
 
     cy.url().should('eq', this.data.urlUsersPassword)
-    signInPage.elements.getForgotYourPassword().should('have.text', this.data.textForgotYourPassword)
+    signInPage.elements.getForgotYourPassword()
+    .should('have.text', this.data.textEmailNotFound)
   });
+
+  it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.data.signInUrlUsers)
+
+    signInPage.signIn(this.data.userProfile.email, this.data.userProfile.wrongPassword)
+
+    signInPage.elements
+      .getAllert()
+      .should('be.visible')
+      .should('have.text', this.data.allerInvalidEmail)
+    
+  });
+
+  it('AT_020.004 |Verify dropdown menu is visible and exist', function() {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.data.signInUrlUsers)
+
+    signInPage.signInWithRememberMe(
+      this.data.userProfileBugHunters.email , 
+      this.data.userProfileBugHunters.password
+    );
+    signInPage.elements.getNoticeAfterSigned().should('have.text', 'Signed in successfully.');
+
+    header.clickUserDropDownMenu();
+    header.elements
+      .getUserDropDownAllMenuVisible()
+      .each(($el, ind) => {expect($el.text()).to.include(this.userAccMenu.userAccountMenu[ind])})
+    
+      header.clickUserLogoutLink();
+  });
+  
 });

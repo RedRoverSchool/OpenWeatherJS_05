@@ -4,15 +4,28 @@
         "password": "123456789"
     },
 
+    "userDataRenameKey": {
+        "login": "yurik@mailto.plus",
+        "password": "12345678"
+    },
+
     "urn": "/api_keys",
 
     "keyNames": {
         "defaultNameKey": "Default",
-        "newNameKey": "testAPIkey"
+        "newNameKey": "testAPIkey",
+        "renameKey": "NEW_KEY_NAME"
     },
 
     "CreatedKeyNotice": {
         "shortNotice": "Notice",
         "longNotice": "API key was created successfully"
-    }
+    },
+
+    "EditedKeyNotice": {
+        "shortNotice": "Notice",
+        "longNotice": "API key was edited successfully"
+    },
+
+    "alertInfoText": "\nYou can generate as many API keys as needed for your subscription. We accumulate the total load from all of them.\n"
 }

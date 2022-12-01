@@ -1,7 +1,7 @@
 /// <reference types="cypress"/> 
 
 
-describe('groupBugHunters', () => {
+describe.skip('groupBugHunters', () => {
 
   beforeEach(function () {
     cy.fixture('bugHunters').then(data => {
@@ -48,7 +48,7 @@ describe('groupBugHunters', () => {
       .should('contain', 'Precipitation, mm/h');
   })
 
-  it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
+  it.skip('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', () => {
     cy.get('#desktop-menu').contains('Guide').click({
       force: true
     });
@@ -81,7 +81,7 @@ describe('groupBugHunters', () => {
     cy.url().should('eq', 'https://openweathermap.org/api')
   })
 
-  it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
+  it.skip('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', () => {
     const cityName = 'New York'
 
     cy.get('.search input').type(cityName)
@@ -139,7 +139,7 @@ describe('groupBugHunters', () => {
     cy.get(documentationButton).should('be.visible').invoke('removeAttr', 'target').click()
   })
 
-  it('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
+  it.skip('AT_008.009 | Main menu > Guide > Verify text on the page', () => {
     cy.get('#desktop-menu').contains('Guide').click({
       force: true
     });
@@ -245,7 +245,7 @@ describe('groupBugHunters', () => {
     cy.get('.scale-details:first-child').should('contain.contain.text', 'Wind speed')
   })
 
-  it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
+  it.skip('AT_056.002 | My API keys > Managing API keys> Rename an API key', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('yurik@mailto.plus')
     cy.get('#user_password').type('12345678')
@@ -294,7 +294,7 @@ describe('groupBugHunters', () => {
     cy.get('.current-container > :nth-child(1) > h2').should('contain', city);
   })
 
-  it('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
+  it.skip('AT_046.002|Click on the link “Learn more” should take user to the new page', function () {
     cy.get('#desktop-menu [href="/our-initiatives"]').click();
     cy.get('.col-sm-12 :nth-child(9) h2>span')
       .as('Education')
@@ -339,7 +339,7 @@ describe('groupBugHunters', () => {
       expect($el.text()).to.include(this.data.userAccountMenu[index])
     })
 
-  it('AT_028.008 | Footer > About us > Verify the button "Buy by Subscription"', function() {
+  it.skip('AT_028.008 | Footer > About us > Verify the button "Buy by Subscription"', function() {
     let aboutUs = 'a[href="/about-us"]'
     let buyBySubscription = 'a[href="https://home.openweathermap.org/subscriptions"]'
 
@@ -482,6 +482,22 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.get('p a[href="/technology"] ').click()
     cy.get('.breadcrumb-title').should('have.text', 'Technology')
   });
+
+  it('AT_042.00 User page >My payments>Go to the page /payments',() => {
+    cy.visit('/')
+    cy.get('li.user-li a[href*="sign_in"]').click()
+    cy.url().should('include', '/users/sign_in')
+    cy.get('.sign-form').should('include.text', 'Sign In To Your Account')
+    cy.get('.input-group #user_email').type('5603119@list.ru')
+    cy.get('#user_password').type('s5603119')
+    cy.get('.btn[value="Submit"]').click()
+    cy.url().should('include', 'home.')
+    cy.get('#user-dropdown').click()
+    cy.get ('#user-dropdown-menu').should('be.visible')
+    cy.get('#user-dropdown-menu a[href="/payments"]').click()
+    cy.url().should('include', '/payments')
+    cy.get('#myTab li.active').should('be.visible')
+    })
 
   it('AT_007.004 | Main page> Create an account', () => {
     cy.get('.user-li a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
