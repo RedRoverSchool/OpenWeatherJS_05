@@ -9,7 +9,8 @@ class Footer {
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
         getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),
         getSocialMediaIconLinks: () => cy.get('.social a'),
-        getFacebookLink: () => cy.get('.social a:first-child')
+        getFacebookLink: () => cy.get('.social a:first-child'),
+        getTwitterLink: () => cy.get('.social a:nth-child(2)')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -40,6 +41,10 @@ class Footer {
 
         clickFacebookLink() {
             this.elements.getFacebookLink().invoke('removeAttr', 'target').click({force: true});
+        };
+
+        clickTwitterLink() {
+            this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
         }
 };
 export default Footer;
