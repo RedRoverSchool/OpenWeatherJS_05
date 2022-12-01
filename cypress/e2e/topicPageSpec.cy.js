@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 
+
 import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
+
 
 describe('Topic Page test suite', () => {
     beforeEach(function () {
