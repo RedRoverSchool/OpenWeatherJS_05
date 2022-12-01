@@ -141,7 +141,7 @@ describe('mainPageSpec', () => {
         
         });
         mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>  {
-            expect(date).to.include(current_date);
+            expect(Date.parse(date)).to.eql(Date.parse(current_date));
         });
     });
 
@@ -174,6 +174,28 @@ describe('mainPageSpec', () => {
         mainPage.elements
                 .getCityNameSubHeaderTitle()
                 .should('contain', this.data.searchInputText.cityName)
+    })
+
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+                .getSearchResultsDropdown()
+                .should('exist')
+        mainPage.clickSearchResultFromDropdown()
+        mainPage.elements
+                .getCityNameSubHeaderTitle()
+                .should('contain', this.data.searchInputText.cityName)
+
+        mainPage.elements
+                .getWeatherIcon()
+                .should('exist')
+        mainPage.elements
+                .getToggleMetric()
+                .should('exist')
+        mainPage.elements
+                .getTemperatureHeading()
+                .should('contain','°C')
     })
     
 });

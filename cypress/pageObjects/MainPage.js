@@ -20,7 +20,10 @@ class MainPage {
         getDailyDetailContainerWeather: () => cy.get('.daily-detail-container'),
         getIconToDetailedWeather: () => cy.get('[fill="#48484A"]'),
         getTimeOfDayInDetailedWeather: () => this.elements.getDailyDetailContainerWeather().find('tr').eq(0).find('th'),
-        getCityNameSubHeaderTitle: () => cy.get('div.current-container h2')
+        getCityNameSubHeaderTitle: () => cy.get('div.current-container h2'),
+        getWeatherIcon: () => cy.get('div.current-temp .owm-weather-icon'),
+        getToggleMetric: () => cy.get('#selected[style="left: 2pt;"]'),
+        getTemperatureHeading: () => cy.get('div.current-temp .heading')
     }
 
     clickSearchBtn() {

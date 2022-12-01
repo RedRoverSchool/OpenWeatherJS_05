@@ -6,12 +6,14 @@ import Header from "../pageObjects/Header.js";
 import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
+import MainPage from "../pageObjects/MainPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
 const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
+const mainPage = new MainPage();
 
 describe('Header test suit', () => {
 
@@ -40,6 +42,10 @@ describe('Header test suit', () => {
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
         })
+
+        cy.fixture('mainPage').then(mainPageData => {
+            this.mainPageData = mainPageData;
+        });
 
         cy.visit('/');
     });
@@ -72,7 +78,7 @@ describe('Header test suit', () => {
         guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
     });
 
-    it.skip('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();
 
@@ -96,6 +102,14 @@ describe('Header test suit', () => {
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
+    });
+
+    it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
+        header.clickInitiativePage()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
     });
 
     it('AT_060.002 | Header > Clicking the "Sign In" link > Verify the "Sign In" is visible and clickable', function () {
