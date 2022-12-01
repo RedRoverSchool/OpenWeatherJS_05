@@ -22,7 +22,6 @@ describe('businessPageSpec', () => {
         cy.fixture('titles').then(data => {
             this.data = data;
         });
-        
         cy.visit('/');
     })
         
