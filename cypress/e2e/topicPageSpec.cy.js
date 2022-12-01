@@ -32,13 +32,13 @@ describe('Topic Page test suite', () => {
             this.text = text
         cy.visit('/');
     });
+});
 
+        it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
+            header.clickGuideMenuLink();
+            cy.url().should('be.equal', this.url.guidePage);
 
-  it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-
-        guidePage.clickHomeMenuLink();
-        cy.url().should('be.equal', this.url.mainPageLink);
-    })
+            guidePage.clickHomeMenuLink();
+            cy.url().should('be.equal', this.url.mainPageLink);
+        });
 })
