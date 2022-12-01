@@ -7,6 +7,7 @@
   "resetYourPassord": "Enter your email address and we will send you a link to reset your password.",
   "textEmailNotFound": "Email not found",
   "urlUsersPassword": "https://home.openweathermap.org/users/password",
+  "signInSuccessful": "Signed in successfully.",
 
 
   "userProfileBugHunters": {
