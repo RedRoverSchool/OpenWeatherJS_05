@@ -10,29 +10,29 @@ const questionsPage = new QuestionsPage();
 describe('Questions page test suite', () => {
 
     beforeEach(function () {
-        cy.fixture('questionsPage').then(data => {
-            this.data = data;
+        cy.fixture('questionsPage').then(questionsPage => {
+            this.questionsPage = questionsPage;
         });
         cy.visit('/');
     });
 
-    it('AT_015.001 | Header > Support > Ask a question > Not checking eCAPTCHA checkbox', function () {
+    it('AT_015.001 | questionsPage > Not checking eCAPTCHA checkbox', function () {
         header.clickSupportDropDownMenu();
         header.clickAskAquestionMenuLink();
-        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
+        questionsPage.elements.getHeadLine().should('have.text', this.questionsPage.headLineText);
 
-        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
+        questionsPage.fillQuestionFormAsNotAuser(this.questionsPage.email, 2, this.questionsPage.message)
 
-        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
+        questionsPage.elements.getCaptchaError().should('have.text', this.questionsPage.reCaptchaError);
     });
 
-    it('AT_014.001 | Support > Ask a question > After not checking reCAPTCHA the error message appears', function () {
+    it('AT_014.001 | questionsPage > After not checking reCAPTCHA the error message appears', function () {
         header.clickSupportDropDownMenu();
         header.clickAskAquestionMenuLink();
-        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
+        questionsPage.elements.getHeadLine().should('have.text', this.questionsPage.headLineText);
 
-        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
+        questionsPage.fillQuestionFormAsNotAuser(this.questionsPage.email, 2, this.questionsPage.message)
 
-        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
+        questionsPage.elements.getCaptchaError().should('have.text', this.questionsPage.reCaptchaError);
     });
 });
