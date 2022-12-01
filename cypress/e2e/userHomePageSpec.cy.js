@@ -100,4 +100,18 @@ describe('User Home Page suite', () => {
         
         userHomePage.elements.getNoticeSuccessPasswordChange().should('be.visible').and('have.text', this.data.noticeSuccessPasswordChange)
     })
+
+    it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options', function () {
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password)
+        header.clickUserDropDownMenu()
+
+        header
+            .elements.getUserDropdownMenuList()
+            .should('be.visible')
+            .and('have.length', this.data.accountMenu.length)
+            .each(($el, i) => {
+                expect($el.text().trim()).to.be.equal(this.data.accountMenu[i])
+            })
+    })
 })
