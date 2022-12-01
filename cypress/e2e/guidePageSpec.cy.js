@@ -46,16 +46,6 @@ describe('Guide page test suite', () => {
         guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText);
     })
 
-
-    it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-
-        guidePage.clickHomeMenuLink();
-        cy.url().should('be.equal', this.url.mainPageLink);
-    });
-    
-
     it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', function () {
         header.clickGuideMenuLink();
         guidePage.clickSubscribeButton();
