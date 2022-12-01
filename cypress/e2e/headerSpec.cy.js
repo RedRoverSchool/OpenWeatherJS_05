@@ -97,4 +97,10 @@ describe('Header test suit', () => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
     });
+
+    it('AT_060.002 | Header > Clicking the "Sign In" link > Verify the "Sign In" is visible and clickable', function () {
+        header.elements.getSignInMenuLink()
+        .should('be.visible')
+        .and('have.text', this.supportList.signInOnHeader)
+    });
 })
