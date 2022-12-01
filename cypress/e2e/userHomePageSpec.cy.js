@@ -19,8 +19,8 @@ describe('User Home Page suite', () => {
             cy.fixture('url').then(url  => {
                 this.url = url;
             });
-            cy.fixture('signInPage').then(userData => {
-                this.userData = userData
+            cy.fixture('signInPage').then(signIn  => {
+                this.signIn = signIn;
             });
             cy.visit('/');
     });
@@ -86,6 +86,19 @@ describe('User Home Page suite', () => {
 
         cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
+    })
+
+    it('AT_032.003 | Header > Account Dropdown Menu > My Profile > Password Change > Verify successful password change', function () {
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.signIn.userProfileBugHunters.email, this.signIn.userProfileBugHunters.password)
+    
+        header.clickUserDropDownMenu()
+        header.clickUserDropDownMyProfileLink()
+             
+        cy.url().should('be.equal', this.data.myProfileURL)
+        userHomePage.changePassword(this.signIn.userProfileBugHunters.password, this.signIn.userProfileBugHunters.newPassword)
+        
+        userHomePage.elements.getNoticeSuccessPasswordChange().should('be.visible').and('have.text', this.data.noticeSuccessPasswordChange)
     })
 
     it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options', function () {
