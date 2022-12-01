@@ -102,6 +102,6 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.data.url)
 
         businessPage.elements.getH1Title()
-        .should('have.text', this.data.h1Title)
+            .should('have.text', this.data.h1Title)
     });
 })
