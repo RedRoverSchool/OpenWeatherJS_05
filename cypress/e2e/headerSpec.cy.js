@@ -19,12 +19,10 @@ describe('Header test suit', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
-        
         cy.fixture('guidePage').then(text => {
             this.text = text;
         });
-        
-        cy.fixture('faqPage').then(faqData => {
+                cy.fixture('faqPage').then(faqData => {
             this.faqData = faqData;
         });
         cy.fixture('mapsPage').then(mapsData => {
@@ -35,12 +33,13 @@ describe('Header test suit', () => {
         });
         cy.fixture('businessPage').then(data => {
             this.data = data;
-        })
-
+        });
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
-        })
-
+        });
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
         cy.visit('/');
     });
 
@@ -96,5 +95,13 @@ describe('Header test suit', () => {
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
         });    
+    });
+
+    it.only('AT_034.001 | <Header > verify "For Business" button', function () {
+        header.clickBusinessMenuLink()
+        cy.url().should('eq', this.data.url)
+
+        businessPage.elements.getH1Title()
+        .should('have.text', this.data.h1Title)
     });
 })
