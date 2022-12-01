@@ -6,7 +6,6 @@ class MainPage {
         getSearchBtn: () => cy.get('.search-block button'),
         getPageDescriptionWhiteText: () => cy.get('h2 .white-text'),
         getApiLink: () => cy.get('#desktop-menu a[href="/api"]'),
-        getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
         getMainPageContent: () => cy.get('h1 .orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
