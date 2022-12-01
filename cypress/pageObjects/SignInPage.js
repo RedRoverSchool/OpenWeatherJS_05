@@ -56,12 +56,10 @@ class SignInPage {
 	};
 
   passwordChange(newpassword) {
-
 		this.clickMyProfileTabmenu()
 		this.elements.getNewPasswordImput().type(newpassword, { log: false })
 		this.elements.getConfirmNewPassword().type(newpassword, { log: false })
 		this.clickChangePaswordBtn()
-
 	};
 
 };
