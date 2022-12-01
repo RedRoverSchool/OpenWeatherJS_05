@@ -72,7 +72,7 @@ describe('Header test suit', () => {
         guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
     });
 
-    it.skip('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();
 
