@@ -2,6 +2,7 @@ class ApiKeys {
 
     locators = {
         NameKeys: "td:nth-child(2)",
+        CodeKey: "td pre",
         DeleteKeysButton: "td a i.fa-remove",
         EditKeyButton: ".fa-edit"
     }
@@ -14,8 +15,8 @@ class ApiKeys {
         getNotification: () => cy.get('.col-md-6'),  
         getEditAPIkeyField: () => cy.get('#edit_key_form_name'),
         getSaveEditKeyButton: () => cy.get('button.dark[onclick*=submit]'),
-        getFirstApiKey: () => cy.get('tbody tr:first-child td pre')
-
+        getFirstApiKey: () => cy.get('.material_table tbody tr td pre'),
+        getAlertInfoMessage: () => cy.get('.alert-info')
     }
 
     clickGenerateButton() {
@@ -34,6 +35,12 @@ class ApiKeys {
         })
     }
 
+    copyApiKey(locator) {
+        locator.then(($el) => {
+            let info = $el.text();
+            return cy.wrap(info).as('myApiKey');
+        });
+      };
 }
 
 export default ApiKeys

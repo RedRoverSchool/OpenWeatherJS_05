@@ -4,11 +4,12 @@ class Footer {
         getAppStoreLink: () => cy.get('.my-5 a[href*=apple]'),
         getGooglePlayLink: () => cy.get('.my-5 a[href*=google]'),
         getTermsAndConditionsOfSaleLink: () => cy.get('[href*="conditions_of_sale"]'),
-        getAboutUsLink: () => cy.get('div#footer-website a[href="/about-us"]'),
+        getAboutUsLink: () => cy.get('a[href*="/about-us"]'),
         getWidgetsLink: () => cy.get('[href$="/widgets-constructor"]'),
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
-        getNameOfPageMedium: () =>  cy.get('.bm.gp.gq'),
-        getSocialMediaIconLinks: () => cy.get('.social a')
+        getSocialMediaIconLinks: () => cy.get('.social a'),
+        getFacebookLink: () => cy.get('.social a:first-child'),
+        getTwitterLink: () => cy.get('.social a:nth-child(2)')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -34,7 +35,15 @@ class Footer {
     };
 
         clickMediumIcon(){
-            this.elements.getMediumIcon().invoke('removeAttr', 'target').click()
-    }
+            this.elements.getMediumIcon().invoke('removeAttr', 'target').click({force: true})
+    };
+
+        clickFacebookLink() {
+            this.elements.getFacebookLink().invoke('removeAttr', 'target').click({force: true});
+        };
+
+        clickTwitterLink() {
+            this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
+        }
 };
 export default Footer;

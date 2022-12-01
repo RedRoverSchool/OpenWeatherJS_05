@@ -19,12 +19,16 @@ describe('User Home Page suite', () => {
             cy.fixture('url').then(url  => {
                 this.url = url;
             });
+            cy.fixture('signInPage').then(signIn  => {
+                this.signIn = signIn;
+            });
             cy.visit('/');
     });
 
     it('AT_043.005 | NavBar > User > Verify that title of 3 text blocks on the home page have the same color', function() {
       
-    cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
 
     userHomePage.elements.getNavBarBlocks()
         .should('have.length', 3)
@@ -38,9 +42,11 @@ describe('User Home Page suite', () => {
 
     it('AT_043.004 | NavBar > User > Verify that tab "New Products" has 3 text-block', function() {
  
-        cy.loginNoGroup(this.data.userProfile.email, this.data.userProfile.password)
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
     
-        userHomePage.clickNewProductsLink()
+        userHomePage.elements.getNewProductsLink()
+            .should('have.class', 'active')
     
         userHomePage.elements.getNavBarBlocks()
             .should('have.length', 3)
@@ -80,5 +86,18 @@ describe('User Home Page suite', () => {
 
         cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
+    })
+
+    it('AT_032.003 | Header > Account Dropdown Menu > My Profile > Password Change > Verify successful password change', function () {
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.signIn.userProfileBugHunters.email, this.signIn.userProfileBugHunters.password)
+    
+        header.clickUserDropDownMenu()
+        header.clickUserDropDownMyProfileLink()
+             
+        cy.url().should('be.equal', this.data.myProfileURL)
+        userHomePage.changePassword(this.signIn.userProfileBugHunters.password, this.signIn.userProfileBugHunters.newPassword)
+        
+        userHomePage.elements.getNoticeSuccessPasswordChange().should('be.visible').and('have.text', this.data.noticeSuccessPasswordChange)
     })
 })
