@@ -176,7 +176,7 @@ describe('mainPageSpec', () => {
                 .should('contain', this.data.searchInputText.cityName)
     })
 
-    it.only('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
         mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
