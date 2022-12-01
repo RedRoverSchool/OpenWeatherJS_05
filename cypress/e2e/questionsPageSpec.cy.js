@@ -10,8 +10,8 @@ const questionsPage = new QuestionsPage();
 describe('Questions page test suite', () => {
 
     beforeEach(function () {
-        cy.fixture('questionsPage').then(questionsPage => {
-            this.questionsPage = questionsPage;
+        cy.fixture('questionsPage').then(data => {
+            this.data = data;
         });
         cy.visit('/');
     });
@@ -19,21 +19,11 @@ describe('Questions page test suite', () => {
     it('AT_015.001 | questionsPage > Not checking eCAPTCHA checkbox', function () {
         header.clickSupportDropDownMenu();
         header.clickAskAquestionMenuLink();
-        questionsPage.elements.getHeadLine().should('have.text', this.questionsPage.headLineText);
+        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
 
-        questionsPage.fillQuestionFormAsNotAuser(this.questionsPage.email, 2, this.questionsPage.message)
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
 
-        questionsPage.elements.getCaptchaError().should('have.text', this.questionsPage.reCaptchaError);
-    });
-
-    it('AT_014.001 | questionsPage > After not checking reCAPTCHA the error message appears', function () {
-        header.clickSupportDropDownMenu();
-        header.clickAskAquestionMenuLink();
-        questionsPage.elements.getHeadLine().should('have.text', this.questionsPage.headLineText);
-
-        questionsPage.fillQuestionFormAsNotAuser(this.questionsPage.email, 2, this.questionsPage.message)
-
-        questionsPage.elements.getCaptchaError().should('have.text', this.questionsPage.reCaptchaError);
+        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });
 
     it('AT_014.004 | Support > Ask a question > The captcha error message is displayed', function () {
@@ -42,6 +32,16 @@ describe('Questions page test suite', () => {
         questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
 
         questionsPage.fillQuestionFormAsNotAuser(this.data.email, 3, this.data.message);
+        questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
+    });
+ 
+    it('AT_014.001 | questionsPage > After not checking reCAPTCHA the error message appears', function () {
+        header.clickSupportDropDownMenu();
+        header.clickAskAquestionMenuLink();
+        questionsPage.elements.getHeadLine().should('have.text', this.data.headLineText);
+
+        questionsPage.fillQuestionFormAsNotAuser(this.data.email, 2, this.data.message)
+
         questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });
 });
