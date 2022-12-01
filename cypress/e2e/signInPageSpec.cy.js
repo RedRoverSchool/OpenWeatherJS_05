@@ -12,6 +12,11 @@ describe('SignIn test suit', () => {
     cy.fixture('signInPage').then(data => {
       this.data = data;
     })
+
+    cy.fixture('bugHunters').then(userAccMenu => {
+      this.userAccMenu = userAccMenu;
+    })
+
     cy.visit('/');
   });
 
@@ -54,4 +59,23 @@ describe('SignIn test suit', () => {
       .should('have.text', this.data.allerInvalidEmail)
     
   });
+
+  it('AT_020.004 |Verify dropdown menu is visible and exist', function() {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.data.signInUrlUsers)
+
+    signInPage.signInWithRememberMe(
+      this.data.userProfileBugHunters.email , 
+      this.data.userProfileBugHunters.password
+    );
+    signInPage.elements.getNoticeAfterSigned().should('have.text', 'Signed in successfully.');
+
+    header.clickUserDropDownMenu();
+    header.elements
+      .getUserDropDownAllMenuVisible()
+      .each(($el, ind) => {expect($el.text()).to.include(this.userAccMenu.userAccountMenu[ind])})
+    
+      header.clickUserLogoutLink();
+  });
+  
 });

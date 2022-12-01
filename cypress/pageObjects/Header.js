@@ -22,7 +22,8 @@ class Header {
         getUserDropDownMyApiLink: () => cy.get('#user-dropdown-menu [href$="/api_keys"]'),
         getPaymentMenuLink: () => cy.get('.dropdown-menu a[href="/payments"]'),
         getSupportHowToStartLink: () => cy.get('#support-dropdown-menu a[href ="/appid"]'),
-        getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li')
+        getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li'),
+        getUserDropDownAllMenuVisible: () => cy.get('#user-dropdown-menu')
     };
 
     clickSupportDropDownMenu() {
