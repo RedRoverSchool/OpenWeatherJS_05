@@ -16,6 +16,10 @@ class WidgetsPage {
         this.elements.getCodeWidgetFirstBtn().click();
     };    
 
+    setApiKeyField(text) {
+        this.elements.getApiKeyInputField().type(text)
+    }
+
     clickClosePopupWin() {
         this.elements.getClosePopupWin().click()
     }
