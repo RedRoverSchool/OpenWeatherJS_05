@@ -82,4 +82,12 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.apiCurrent);
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title);
     });
+
+    it('AT_008.013 | Guide > Verify the second button "Learn more" is clickable and user will be redirected new url', function () {
+        header.clickGuideMenuLink();
+        guidePage.clickLearnMoreSecondButton();
+        cy.url().should('be.equal', this.url.apiHistory);
+        apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
+    });
+    
 });
