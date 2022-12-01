@@ -72,6 +72,8 @@ describe('Widgets page test suite', () => {
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
         cy.url().should('contain', this.keys.urn)
+        apiKeysPage.elements.getAPIkyes().should('have.length', 1)
+        apiKeysPage.elements.getNamesAPIkeys().should('have.text', this.keys.keyNames.defaultNameKey)
         apiKeysPage.elements.getCreateKeyField().type(this.keys.keyNames.newNameKey)
         apiKeysPage.clickGenerateButton()
 
