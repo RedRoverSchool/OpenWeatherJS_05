@@ -37,16 +37,16 @@ describe('Header test suit', () => {
         });
         cy.fixture('businessPage').then(data => {
             this.data = data;
-        })
-
+        });
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
-        })
-
+        });
         cy.fixture('mainPage').then(mainPageData => {
             this.mainPageData = mainPageData;
-        })
-        
+        });
+        cy.fixture('mainPage').then(mainPage => {
+            this.mainPage = mainPage;
+        });
         cy.visit('/');
     });
 
@@ -101,9 +101,9 @@ describe('Header test suit', () => {
               .and('have.length', 3);        
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
-        });  
-    });  
-
+        });
+    }); 
+    
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
         header.clickInitiativePage()
         header.clickLogoLink()
@@ -117,4 +117,26 @@ describe('Header test suit', () => {
         .should('be.visible')
         .and('have.text', this.supportList.signInOnHeader)
     });
-})
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+
+    it('AT_034.001 | <Header > verify "For Business" button', function () {
+        header.clickBusinessMenuLink()
+        cy.url().should('eq', this.data.url)
+
+        businessPage.elements.getH1Title()
+            .should('have.text', this.data.h1Title)
+    });
+    
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+});
