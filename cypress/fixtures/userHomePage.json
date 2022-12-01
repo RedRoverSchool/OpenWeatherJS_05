@@ -16,5 +16,17 @@
     },
         
     "color" : "rgb(233, 110, 80)",
-    "newProductsHeading": "New Products"
+    "newProductsHeading": "New Products",
+
+    "myProfileURL": "https://home.openweathermap.org/home",
+
+    "noticeSuccessPasswordChange": "Password was changed successfully",
+
+    "accountMenu": [ 
+        "My services",
+        "My API keys",
+        "My payments",
+        "My profile",
+        "Logout"
+    ]
 }
