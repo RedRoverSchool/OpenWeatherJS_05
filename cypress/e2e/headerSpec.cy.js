@@ -45,8 +45,8 @@ describe('Header test suit', () => {
 
         cy.fixture('mainPage').then(mainPageData => {
             this.mainPageData = mainPageData;
-        });
-
+        })
+        
         cy.visit('/');
     });
 
@@ -101,8 +101,8 @@ describe('Header test suit', () => {
               .and('have.length', 3);        
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
-        });    
-    });
+        });  
+    });  
 
     it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
         header.clickInitiativePage()
@@ -111,4 +111,13 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink)
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
     });
-})
+    
+    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
+        header.clickPartnersMenuLink();
+
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+});
