@@ -76,13 +76,6 @@ describe('Header test suit', () => {
         cy.title().should('eq', this.mapsData.pageTitle);
     });
 
-    it('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', function () {
-        header.clickGuideMenuLink();
-        
-        cy.url().should('be.equal', this.url.guidePage);
-        guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
-    });
-
     it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();
@@ -91,13 +84,6 @@ describe('Header test suit', () => {
         howToStart.elements.getTitle().should('have.text', this.pageText.headerTitle);
     });
 
-    it('AT_038.001 | For business page > Verify that user can be redirected to the business page', function () {
-        header.clickBusinessMenuLink()
-
-        cy.url().should('eq', this.url.openWetherForBusiness)
-        businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
-    });
-    
     it('AT_018.009 | Header > Support > Verify Drop Down menu', function () {
         header.elements.getSupportDropDownMenuList().should('not.be.visible');
         header.clickSupportDropDownMenu();
