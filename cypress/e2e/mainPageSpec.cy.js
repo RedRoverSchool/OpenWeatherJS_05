@@ -161,7 +161,6 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchBtn();
         mainPage.assertDropdownContains(this.info.searchInputText.cityName);
     });
-<<<<<<< HEAD
 
     it('AT_005.003 | Main Page > Verify the website name and description', function () {
         mainPage.elements
@@ -173,8 +172,5 @@ describe('mainPageSpec', () => {
         .should('be.visible')
         .and('have.text', this.data.pageDescriptionWhiteText);
     });
-=======
-    
->>>>>>> 24caaead9d4644b38264222c6f3ed00e4064eb2a
 });
 
