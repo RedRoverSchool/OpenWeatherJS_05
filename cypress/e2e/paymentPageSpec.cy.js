@@ -52,4 +52,15 @@ describe('Payment page test suite', () => {
         paymentPage.elements.getColomnText().eq(1).should('contain', this.paymentsTable.paymentsTable[1])
         paymentPage.elements.getColomnText().eq(2).should('contain', this.paymentsTable.paymentsTable[2])
       });
+
+      it('AT_042.002 | User page >My payments>Verify that text displayed on the page', function () {
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.userProfile.userProfileLtByJS.realEmail, this.userProfile.userProfileLtByJS.password)
+        signInPage.elements.getSignOutAllert().should('be.visible').and('have.text', this.userProfile.signInSuccessful)
+        header.clickUserDropDownMenu();
+        header.clickPaymentMenuLink();
+        paymentPage.elements.getColomnText().should('have.length', 4).each(($el, i) => {
+            expect($el.text()).to.include(this.paymentsTable.paymentsTable[i])
+        })       
+    })
 });
