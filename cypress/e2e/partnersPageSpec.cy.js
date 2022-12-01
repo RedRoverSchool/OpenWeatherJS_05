@@ -44,7 +44,7 @@ describe('Partners page test suite', () => {
         });
     });
 
-    it('AT_012.002 | Partners > CMS > Verify "See on the website" button', function() {        
+    it.skip('AT_012.002 | Partners > CMS > Verify "See on the website" button', function() {        
         partnersPage.clickCmsSeeOnTheWebsiteButton();
 
         cy.url().should('eq', this.url.drupalWebsite);
