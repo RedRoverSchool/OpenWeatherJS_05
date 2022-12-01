@@ -505,7 +505,6 @@ describe.skip('groupBugHunters', () => {
     cy.get('#desktop-menu a[href*="marketplace"]').invoke('removeAttr', 'target').click({force: true})
     cy.get('#desktop-menu a[href="/history_bulks/new"]').should('contain', "History Bulk").and('be.visible')
   })
-});
 
   it('AT_007.004 | Main page> Create an account', () => {
     cy.get('.user-li a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
@@ -527,5 +526,5 @@ describe.skip('groupBugHunters', () => {
     cy.get('#agreement_is_accepted').check().should('be.checked')
     cy.get('.btn').click()
   });
-})
+});
 
