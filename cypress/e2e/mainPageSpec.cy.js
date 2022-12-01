@@ -132,7 +132,7 @@ describe('mainPageSpec', () => {
         mainPage.clickTempretureToggle;
     });
 
-    it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+    it.skip('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
