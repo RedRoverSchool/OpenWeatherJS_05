@@ -506,3 +506,26 @@ describe.skip('groupBugHunters', () => {
     cy.get('#desktop-menu a[href="/history_bulks/new"]').should('contain', "History Bulk").and('be.visible')
   })
 });
+
+  it('AT_007.004 | Main page> Create an account', () => {
+    cy.get('.user-li a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
+    cy.get('a[href="/users/sign_up"]').click()
+    cy.url().should('include', '/users/sign_up')
+    cy.get('#user_username')
+      .should('have.attr', 'placeholder', 'Username').click()
+      .type('Wies')
+    cy.get('#user_email')
+      .should('have.attr', 'placeholder', 'Enter email').click()
+      .type('wiesvictoriaqa@gmail.com')
+    cy.get('#user_password')
+      .should('have.attr', 'placeholder', 'Password').click()
+      .type('12345678wies')
+    cy.get('#user_password_confirmation')
+      .should('have.attr', 'placeholder', 'Repeat Password').click()
+      .type('12345678wies')
+    cy.get('#agreement_is_age_confirmed').check().should('be.checked')
+    cy.get('#agreement_is_accepted').check().should('be.checked')
+    cy.get('.btn').click()
+  });
+})
+
