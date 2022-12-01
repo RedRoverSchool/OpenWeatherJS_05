@@ -16,5 +16,13 @@
     },
         
     "color" : "rgb(233, 110, 80)",
-    "newProductsHeading": "New Products"
+    "newProductsHeading": "New Products",
+
+    "accountMenu": [ 
+        "My services",
+        "My API keys",
+        "My payments",
+        "My profile",
+        "Logout"
+    ]
 }

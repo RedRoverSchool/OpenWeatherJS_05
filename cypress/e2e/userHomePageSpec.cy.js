@@ -19,6 +19,9 @@ describe('User Home Page suite', () => {
             cy.fixture('url').then(url  => {
                 this.url = url;
             });
+            cy.fixture('signInPage').then(data => {
+                this.userData = data
+            });
             cy.visit('/');
     });
 
@@ -83,5 +86,19 @@ describe('User Home Page suite', () => {
 
         cy.url().should('include', this.url.userHomePage)
         userHomePage.elements.getActiveElement().should('contain.text', this.data.newProductsHeading)
+    })
+
+    it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options', function () {
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.userData.userProfileLtByJS.realEmail, this.userData.userProfileLtByJS.password)
+        header.clickUserDropDownMenu()
+
+        header
+            .elements.getUserDropdownMenuList()
+            .should('be.visible')
+            .and('have.length', this.data.accountMenu.length)
+            .each(($el, i) => {
+                expect($el.text().trim()).to.be.equal(this.data.accountMenu[i])
+            })
     })
 })
