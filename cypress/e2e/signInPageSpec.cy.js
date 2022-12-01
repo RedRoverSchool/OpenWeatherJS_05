@@ -77,5 +77,15 @@ describe('SignIn test suit', () => {
     
       header.clickUserLogoutLink();
   });
+
+  it('AT_054.002 | PersonalAccountName > Verify a successful Sign-out', function () {
+    header.clickSignInMenuLink();
+    signInPage.signIn(this.data.userEmail, this.data.userPassword);
+    signInPage.elements.getNoticeAfterSigned().should('have.text', this.data.signInSuccessful);
+
+    header.clickUserDropDownMenu();
+    header.clickUserLogoutLink();
+    signInPage.elements.getAllert().should('have.text', this.data.signOutAllertMessage);
+  })
   
 });
