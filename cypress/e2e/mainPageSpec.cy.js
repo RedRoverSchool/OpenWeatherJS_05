@@ -1,11 +1,9 @@
 /// <reference types="cypress"/>
 
-import Header from "../pageObjects/Header.js";
 import MainPage from "../pageObjects/MainPage.js";
 import SolarRadiationPage from "../pageObjects/SolarRadiationPage.js";
 
 const mainPage = new MainPage();
-const header = new Header;
 const solarRadiationPage = new SolarRadiationPage();
 
 describe('mainPageSpec', () => {
@@ -78,15 +76,6 @@ describe('mainPageSpec', () => {
             .each($el => {
                 cy.wrap($el).should('contain', this.data.searchInputText.cityName)
             })
-    });
-
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
-        cy.visit(this.url.partnerPageLink);
-
-        header.clickLogoLink();
-
-        cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
     });
 
     it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
