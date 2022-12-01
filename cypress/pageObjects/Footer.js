@@ -35,7 +35,7 @@ class Footer {
     };
 
         clickMediumIcon(){
-            this.elements.getMediumIcon().invoke('removeAttr', 'target').click()
+            this.elements.getMediumIcon().invoke('removeAttr', 'target').click({force: true})
     };
 
         clickFacebookLink() {
