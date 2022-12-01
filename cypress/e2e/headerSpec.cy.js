@@ -110,20 +110,17 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink)
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
     });
-    
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
-        header.clickPartnersMenuLink();
 
-        header.clickLogoLink();
-
-        cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    it('AT_060.002 | Header > Clicking the "Sign In" link > Verify the "Sign In" is visible and clickable', function () {
+        header.elements.getSignInMenuLink()
+        .should('be.visible')
+        .and('have.text', this.supportList.signInOnHeader)
     });
     
     it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
         header.clickLogoLink();
     
         cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
     });
 });
