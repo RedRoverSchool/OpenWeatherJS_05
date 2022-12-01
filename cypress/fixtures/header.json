@@ -1,3 +1,4 @@
 {
-    "supportDropdownList": ["FAQ", "How to start", "Ask a question"]
+    "supportDropdownList": ["FAQ", "How to start", "Ask a question"],
+    "signInOnHeader": "Sign in"
 }
