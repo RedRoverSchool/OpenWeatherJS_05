@@ -28,22 +28,25 @@ describe('SignIn test suit', () => {
   it('AT_007.006 | Sign in > Create an account > Verify Negative Email', function ()  {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
-    signInPage.elements.getTextClickHereToRecover().should('be.visible')
+    signInPage.elements.getTextClickHereToRecover()
+      .should('be.visible')
     signInPage.clickHereToRecover() 
-    signInPage.elements.getOpenTextResetPassword().should('have.text', this.data.resetYourPassord)
-    signInPage.elements.getFieldForEmailPasswordReset().should('be.visible').type(this.data.userNegativeEmail)
+    signInPage.elements.getOpenTextResetPassword()
+      .should('have.text', this.data.resetYourPassord)
+    signInPage.elements.getFieldForEmailPasswordReset()
+      .should('be.visible').type(this.data.userNegativeEmail)
     signInPage.clickBtnSendEmailResetPassword()
 
-    signInPage.elements.getForgotYourPassword().should('have.text', this.data.textEmailNotFound)
+    cy.url().should('eq', this.data.urlUsersPassword)
+    signInPage.elements.getForgotYourPassword()
+    .should('have.text', this.data.textEmailNotFound)
   });
 
   it('AT_006.005 | Sign in > Sign in to Your Account > Verify that after the user fills in the wrong password the alert pop-up appears', function() {
     header.clickSignInMenuLink();
     cy.url().should('eq', this.data.signInUrlUsers)
 
-    signInPage.elements.getEmailInput().type(this.data.userProfile.email, {log : false})
-    signInPage.elements.getPasswordInput().type(this.data.userProfile.wrongPassword, {log : false})
-    signInPage.clickSubmitButton()
+    signInPage.signIn(this.data.userProfile.email, this.data.userProfile.wrongPassword)
 
     signInPage.elements
       .getAllert()
