@@ -1,11 +1,9 @@
 /// <reference types="cypress"/>
 
-import Header from "../pageObjects/Header.js";
 import MainPage from "../pageObjects/MainPage.js";
 import SolarRadiationPage from "../pageObjects/SolarRadiationPage.js";
 
 const mainPage = new MainPage();
-const header = new Header;
 const solarRadiationPage = new SolarRadiationPage();
 
 describe('mainPageSpec', () => {
@@ -80,15 +78,6 @@ describe('mainPageSpec', () => {
             })
     });
 
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
-        cy.visit(this.url.partnerPageLink);
-
-        header.clickLogoLink();
-
-        cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
-    });
-
     it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
@@ -141,7 +130,7 @@ describe('mainPageSpec', () => {
         
         });
         mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>  {
-            expect(date).to.include(current_date);
+            expect(Date.parse(date)).to.eql(Date.parse(current_date));
         });
     });
 
@@ -174,6 +163,28 @@ describe('mainPageSpec', () => {
         mainPage.elements
                 .getCityNameSubHeaderTitle()
                 .should('contain', this.data.searchInputText.cityName)
+    })
+
+    it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.cityName);
+        mainPage.clickSearchBtn();
+        mainPage.elements
+                .getSearchResultsDropdown()
+                .should('exist')
+        mainPage.clickSearchResultFromDropdown()
+        mainPage.elements
+                .getCityNameSubHeaderTitle()
+                .should('contain', this.data.searchInputText.cityName)
+
+        mainPage.elements
+                .getWeatherIcon()
+                .should('exist')
+        mainPage.elements
+                .getToggleMetric()
+                .should('exist')
+        mainPage.elements
+                .getTemperatureHeading()
+                .should('contain','°C')
     })
     
     it('AT_005.003 | Main Page > Verify the website name and description', function () {

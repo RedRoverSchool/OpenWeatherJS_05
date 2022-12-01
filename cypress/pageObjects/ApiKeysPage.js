@@ -35,6 +35,12 @@ class ApiKeys {
         })
     }
 
+    copyApiKey(locator) {
+        locator.then(($el) => {
+            let info = $el.text();
+            return cy.wrap(info).as('myApiKey');
+        });
+      };
 }
 
 export default ApiKeys
