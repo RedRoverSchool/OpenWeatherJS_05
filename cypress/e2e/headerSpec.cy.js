@@ -159,4 +159,10 @@ describe('Header test suit', () => {
         cy.url().should('be.equal', this.blogPageData.url);
         blogPage.elements.getWeatherFilter().should('have.text', this.blogPageData.weatherFilter);
     });
+
+    it('AT_060.001 | Header > Clicking the "Sign In" link > Verify URL "Sign in" and clickable', function () {
+        header.clickSignInMenuLink();
+
+        cy.url().should('be.equal', this.url.signInPage);
+    });
 });
