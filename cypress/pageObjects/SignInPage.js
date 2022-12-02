@@ -12,7 +12,12 @@ class SignInPage {
   getForgotYourPassword: () =>  cy.get('div.panel-body > span'),
   getAllert : () => cy.get('.panel.panel-red .panel-body'),
   getCheckRememberMe: () => cy.get('[type="checkbox"]#user_remember_me'),
-  getNoticeAfterSigned: () => cy.get('.panel-body')
+  getNoticeAfterSigned: () => cy.get('.panel-body'),
+  getMyProfileTabmenu: () => cy.get('#myTab a[href="/home"]'),
+  getNewPasswordImput: () => cy.get('#password_form_password'),
+	getConfirmNewPassword: () => cy.get('#password_form_password_confirmation'),
+	getChangePasswordBtn: () => cy.get('input[value="Change Password"]'), 
+  getAllertMessage:() => cy.get('.panel-body')
   };
 
   typeEnterEmail(userEmail) {
@@ -43,7 +48,22 @@ class SignInPage {
 
   clickBtnSendEmailResetPassword() {
     this.elements.getBtnSendEmailResetPassword().click({force: true})
-  }
+  };
+
+  clickMyProfileTabmenu() {
+		this.elements.getMyProfileTabmenu().click()
+	};
+
+  clickChangePaswordBtn() {
+		this.elements.getChangePasswordBtn().click()
+	};
+
+  passwordChange(newpassword) {
+		this.clickMyProfileTabmenu()
+		this.elements.getNewPasswordImput().type(newpassword, { log: false })
+		this.elements.getConfirmNewPassword().type(newpassword, { log: false })
+		this.clickChangePaswordBtn()
+	};
 
   checkRememberMe() {
     this.elements.getCheckRememberMe().check();
