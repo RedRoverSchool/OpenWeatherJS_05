@@ -88,4 +88,15 @@ describe('SignIn test suit', () => {
     signInPage.elements.getAllert().should('have.text', this.data.signOutAllertMessage);
   })
   
+  it('AT_032.001 | Sign in > My profile Tab menu > Verify Password Change', function () {
+    header.clickSignInMenuLink()
+    signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
+
+    signInPage.passwordChange(this.data.userProfileLtByJS.newpassword)
+
+    signInPage.elements.getAllertMessage().should('have.text', this.data.messageSuccessPasswordChange)
+
+    header.clickUserDropDownMenu()
+    header.clickUserLogoutLink()
+  })
 });

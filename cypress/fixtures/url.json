@@ -27,5 +27,9 @@
     "apiCurrent": "https://openweathermap.org/api#current",
     "twitterUrl": "https://twitter.com/OpenWeatherMap",
     "howToStartPage": "https://openweathermap.org/appid",
-    "apiHistory": "https://openweathermap.org/api#history"
+    "apiHistory": "https://openweathermap.org/api#history",
+    "widgetPageLink": "https://openweathermap.org/widgets-constructor",
+    "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
+    "studentInitiativeUrl": "/our-initiatives/student-initiative",
+    "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new"
 }

@@ -30,7 +30,10 @@
   "userProfileLtByJS": {
     "userName": "LtByJS",
     "realEmail": "ltbyjs.qa@gmail.com",
-    "password": "12345678"
-    }
+    "password": "12345678",
+    "newpassword": "12345678"
+    },
+
+    "messageSuccessPasswordChange": "Password was changed successfully"
     
 }
