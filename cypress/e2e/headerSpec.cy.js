@@ -7,7 +7,8 @@ import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
-import BlogPage from "../pageObjects/BlogPage.js"
+import BlogPage from "../pageObjects/BlogPage.js";
+import SignInPage from "../pageObjects/SignInPage.js"; 
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -16,6 +17,7 @@ const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
 const mainPage = new MainPage();
 const blogPage = new BlogPage();
+const signInPage = new SignInPage(); 
 
 describe('Header test suit', () => {
 
@@ -51,6 +53,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('blogPage').then(blogPageData => {
             this.blogPageData = blogPageData;
+        });
+        cy.fixture('signInPage').then(signInPageData => {
+            this.signInPageData = signInPageData;
         });
         cy.visit('/');
     });
@@ -164,5 +169,6 @@ describe('Header test suit', () => {
         header.clickSignInMenuLink();
 
         cy.url().should('be.equal', this.url.signInPage);
+        signInPage.elements.getSignInPageTitle().should('have.text', this.signInPageData.signInPageTitle)
     });
 });

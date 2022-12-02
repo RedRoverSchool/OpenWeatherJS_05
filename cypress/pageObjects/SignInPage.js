@@ -17,7 +17,9 @@ class SignInPage {
   getNewPasswordImput: () => cy.get('#password_form_password'),
 	getConfirmNewPassword: () => cy.get('#password_form_password_confirmation'),
 	getChangePasswordBtn: () => cy.get('input[value="Change Password"]'), 
-  getAllertMessage:() => cy.get('.panel-body')
+  getAllertMessage:() => cy.get('.panel-body'),
+  getSignInPageTitle: () => cy.get('.first-child')
+ // body > div.wrapper > div.container > div:nth-child(2) > div > div > h3
   };
 
   typeEnterEmail(userEmail) {

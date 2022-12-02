@@ -34,6 +34,6 @@
     "newpassword": "12345678"
     },
 
-    "messageSuccessPasswordChange": "Password was changed successfully"
-    
+    "messageSuccessPasswordChange": "Password was changed successfully",
+    "signInPageTitle": "Sign In To Your Account"
 }
