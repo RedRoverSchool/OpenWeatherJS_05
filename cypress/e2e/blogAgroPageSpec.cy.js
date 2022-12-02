@@ -22,4 +22,3 @@ describe('AGRO page in blog test suite', () => {
         });   
     });    
 });
-
