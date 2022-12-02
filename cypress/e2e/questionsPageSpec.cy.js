@@ -55,8 +55,8 @@ describe('Questions page test suite', () => {
         questionsPage.elements.getUserAuthYes().should('be.checked');
         questionsPage.elements.getUserAuthYes().should('be.visible');        
         questionsPage.elements.getErrorAuthMsge().should('be.visible')
-                                                .should('have.text', this.data.errorAuthUserText)
-                                                .should('have.class',this.data.errorAuthUserClass)
-                                                .should('have.css' ,'background-color',this.data.errorAuthUserBGCColor)
+                                                .and('have.text', this.data.errorAuthUserText)
+                                                .and('have.class',this.data.errorAuthUserClass)
+                                                .and('have.css' ,'background-color',this.data.errorAuthUserBGCColor)
     });
 });
