@@ -11,5 +11,6 @@
         "invalidTitle": "Important! You need to"
     },
 
-    "copyInBufferBtn": " Copy in buffer"
+    "copyInBufferBtn": " Copy in buffer",
+    "apiInputFielValidMessage": "Validation accept"
 }

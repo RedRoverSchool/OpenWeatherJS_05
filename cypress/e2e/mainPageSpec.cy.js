@@ -1,11 +1,9 @@
 /// <reference types="cypress"/>
 
-import Header from "../pageObjects/Header.js";
 import MainPage from "../pageObjects/MainPage.js";
 import SolarRadiationPage from "../pageObjects/SolarRadiationPage.js";
 
 const mainPage = new MainPage();
-const header = new Header;
 const solarRadiationPage = new SolarRadiationPage();
 
 describe('mainPageSpec', () => {
@@ -80,15 +78,6 @@ describe('mainPageSpec', () => {
             })
     });
 
-    it('AT_002.001 | Header > After clicking the logo user is redirected to the home page', function () {
-        cy.visit(this.url.partnerPageLink);
-
-        header.clickLogoLink();
-
-        cy.url().should('eq', this.url.mainPageLink);
-        mainPage.elements.getMainPageContent().should('have.text', this.data.mainText);
-    });
-
     it('AT_045.001 | Main page > Section with 8-day forecast>See the weather forecast for 8 days', function () {
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
     });
@@ -132,7 +121,7 @@ describe('mainPageSpec', () => {
         mainPage.clickTempretureToggle;
     });
 
-    it.skip('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
+    it('AT_045.008 | Main page > Section with 8-day forecast > See the weather forecast for 8 days', function () {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
@@ -141,7 +130,7 @@ describe('mainPageSpec', () => {
         
         });
         mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>  {
-            expect(date).to.include(current_date);
+            expect(Date.parse(date)).to.eql(Date.parse(current_date));
         });
     });
 
