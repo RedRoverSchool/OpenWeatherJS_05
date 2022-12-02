@@ -197,13 +197,13 @@ describe.skip('GroupReporters', () => {
         cy.get('div.current-container h2').should('contain', cityName)
     })
 
-    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+    it.skip('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
         cy.get('.social a').each(($el, index) => {
             expect($el.attr('href')).to.include(this.data.socialIcons[index])
         });
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+    it.skip("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
         cy.get(".social a:nth-child(6)").should("be.visible");
         cy.get(".social a:nth-child(6)").invoke('removeAttr', 'target').click({force: true})
         cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
@@ -279,5 +279,5 @@ describe.skip('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/api')
         cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
-    })
-});
+    });
+})
