@@ -1,5 +1,16 @@
 {
     "pressureScaleName": "Pressure",
     "pressureScaleNameFull": "Pressure, hPa",
-    "pageTitle": "Interactive weather maps - OpenWeatherMap"
+    "pageTitle": "Interactive weather maps - OpenWeatherMap",
+    "cityName": "Marrakesh",
+    
+    "cityData" : [
+        "country",
+        "temp",
+        "clouds",
+        "humidity",
+        "pressure",
+        "wind direction",
+        "wind speed"
+      ]
 }
