@@ -223,7 +223,22 @@ describe('mainPageSpec', () => {
         mainPage.elements.getPageDescriptionWhiteText()
           .should('be.visible')
           .and('have.text', this.data.pageDescriptionWhiteText);
-      });
+    });
 
+    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.specialCharacters);
+        mainPage.clickSearchBtn();
+        
+        mainPage
+            .elements
+            .getSearchNotFoundMessage()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundMessage);
+        mainPage
+            .elements
+            .getSearchNotFoundWidgetNotification()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundWidgetNotification + this.data.searchInputText.specialCharacters);
+    });
 });
 

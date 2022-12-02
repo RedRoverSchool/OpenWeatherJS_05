@@ -34,7 +34,7 @@ describe.skip('GroupReporters', () => {
         cy.get('.search-block button').click({force: true})
     };
 
-    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
+    it.skip('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
         const inputCity = "$$$";
 
         enterCityOrZipCode(inputCity);
