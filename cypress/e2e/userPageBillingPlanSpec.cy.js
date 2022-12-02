@@ -16,6 +16,10 @@ describe('User Page Billing plans suite', () => {
             cy.fixture('userPageBillingPlan').then(data => {
                   this.data = data;
             });
+
+            cy.fixture('signInPage').then(login => {
+                this.login = login;
+            });
             cy.visit('/');
     });
 
@@ -36,6 +40,20 @@ describe('User Page Billing plans suite', () => {
     userPageBillingPlan.elements.getTitle()
         .should('be.visible')
         .and('have.text', this.data.titleText)
+
+    });
+
+    it('AT_048.001 | User page > Billing plans > Verify page for billing plans', function () {
+    
+        //login
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.login.userEmail, this.login.userPassword);
+
+        //open 'My services' and verify link and page
+        header.clickUserMyServicesLink()
+        userHomePage.clickBillingPlanLink();
+        userPageBillingPlan.clickOneCallByCallLink();
+        userPageBillingPlan.elements.getTitle().should('contain', this.data.titleText);
 
     });
 });
