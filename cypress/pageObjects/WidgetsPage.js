@@ -11,7 +11,9 @@ class WidgetsPage {
         getClosePopupWin: () => cy.get('#popup-close'),
         getApiInputFieldErrMessage: () => cy.get('#error-key'),
         getMoreOptionsDropdown: () => cy.get('#dialogDesc div.more-options'),
-        getEmailFieldEnter: () => cy.get('#weather-widget  input[type="email"]')
+        getEmailFieldEnter: () => cy.get('#weather-widget  input[type="email"]'),
+        getfieldCityName: () => cy.get('#city-name'),
+        getErrorMessage: () => cy.get('#error-key'),
     }
 
     clickCodeWidgetFirstBtn() {
@@ -38,6 +40,10 @@ class WidgetsPage {
 
     typeEmailInInputField(email) {
         this.elements.getEmailFieldEnter().type(email);
+    }
+
+    clickOnFieldCiteName(){
+        this.elements.getfieldCityName().click({force : true})
     }
 }
 

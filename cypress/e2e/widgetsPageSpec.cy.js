@@ -36,6 +36,10 @@ describe('Widgets page test suite', () => {
             this.example = example;
         });
 
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
+
         cy.visit('/');
     });
 
@@ -120,4 +124,15 @@ describe('Widgets page test suite', () => {
         widgetsPage.typeEmailInInputField(this.example.email)
         widgetsPage.elements.getEmailFieldEnter().should('have.value', this.example.email)
     });
+
+    it('AT_021.001 | Footer > Widgets > Invalid API', function () {
+        footer.clickWidgetsLink()
+        cy.url().should('eq', this.url.widgetPageLink)
+        widgetsPage.elements.getPageTitle().should('contain', this.data.pageTitle)
+
+        widgetsPage. setApiKeyField(this.data.invalidApi)
+        widgetsPage.clickOnFieldCiteName()
+
+        widgetsPage.elements.getErrorMessage().should('be.visible').and('contain', this.data.errorWidgetPageInvalidApi)
+    })
 });
