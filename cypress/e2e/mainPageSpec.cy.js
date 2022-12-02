@@ -198,7 +198,7 @@ describe('mainPageSpec', () => {
             .and('have.text', this.data.pageDescriptionWhiteText);
     });
 
-    it('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
+    it('AT_004.003 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
         const result = Array();
 
         mainPage.clickToggleTempretureDefault();
@@ -211,7 +211,7 @@ describe('mainPageSpec', () => {
             });
         mainPage.clickToggleTempreture();
         mainPage.elements.getFullConvertToDegreesCelsius();
-        
+
         mainPage.elements.getTemperatureHeading()
             .invoke('text')
             .then((tempC) => {
