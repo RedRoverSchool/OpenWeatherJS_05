@@ -64,4 +64,17 @@ describe('Marketplace page test suite', () => {
             historyBulk.elements.getHistoryBulkTitle().should('have.text', this.historyBulkPageData.HistoryBulkTitle)
       });
 
-})
+      it('AT_061.002 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying all state names are in alphabetical order', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
+
+            marketplacePage.elements.getFullListOfStates().then(($stateNamesArray) => {
+                  const stringOfStateNames = $stateNamesArray
+                        .toArray()
+                        .map(el => el.innerText)
+                        .join(' ');
+                  
+                        expect(stringOfStateNames).to.eql(this.marketPlacePageData.listOfStatesInAlphabeticalOrder.join(' '));
+            });
+      });
+});
