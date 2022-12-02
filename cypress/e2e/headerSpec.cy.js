@@ -159,4 +159,12 @@ describe('Header test suit', () => {
         cy.url().should('be.equal', this.blogPageData.url);
         blogPage.elements.getWeatherFilter().should('have.text', this.blogPageData.weatherFilter);
     });
+
+    it('AT_002.002 | Header > Verifying the website logo is clickable and it redirects a User to the Main page', function () {
+        header.clickGuideMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
+      })
 });
