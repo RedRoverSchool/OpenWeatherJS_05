@@ -1,8 +1,8 @@
 class TopicPage {
 
     elements = {
-    getHomePageButton: () => cy.get('.breadcrumb a[href="/"]')
-
+    getHomePageButton: () => cy.get('.breadcrumb a[href="/"]'),
+    getPageTitle: () => cy.get('.breadcrumb-title')
     }
 
     clickHomePageButton() {
