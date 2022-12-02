@@ -14,7 +14,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.url().should('include', '/about-us');
     });
 
-    it('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
+    it.skip('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
         const SIGN_IN_BARMENU_ITEM =  "li.user-li a";
         const SUPPORT_BARMENU_ITEM = "li.with-dropdown div"
         const ASK_QUESTION_SUB_SUPPORTMENU_ITEM ="ul#support-dropdown-menu a[href*='/questions']";
@@ -43,7 +43,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.url().should('contain', '/faq');
     });
 
-    it('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
+    it.skip('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
         const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
         const MAINHEADER_H1_GUIDE_PAGE = "div.col-sm-12 h1";
 
