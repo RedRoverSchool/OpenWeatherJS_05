@@ -9,7 +9,8 @@ class Footer {
         getMediumIcon: () => cy.get('a[href="https://medium.com/@openweathermap"]'),
         getSocialMediaIconLinks: () => cy.get('.social a'),
         getFacebookLink: () => cy.get('.social a:first-child'),
-        getTwitterLink: () => cy.get('.social a:nth-child(2)')
+        getTwitterLink: () => cy.get('.social a:nth-child(2)'),
+        getFAQLink: () => cy.get('.footer-section a[href$="/faq"]')
     };
 
         clickOnTermsAndConditionsOfSaleLink() {
@@ -45,5 +46,9 @@ class Footer {
         clickTwitterLink() {
             this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
         }
+
+        clickFAQLink() {
+            this.elements.getFAQLink().click({force: true});
+    };
 };
 export default Footer;
