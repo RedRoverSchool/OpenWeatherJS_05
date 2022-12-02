@@ -77,6 +77,13 @@ describe('Guide page test suite', () => {
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
     });
 
+    it('AT_008.001 | Guide > Verify URL and header is displayed on the page', function () {
+        header.clickGuideMenuLink();
+    
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getPageDescription().should("have.text", this.text.pageDescriptionText);
+    });
+
     it('AT_008.012 | Guide > Verify subheaders are displayed on the page', function () {
         header.clickGuideMenuLink();
 
@@ -87,6 +94,6 @@ describe('Guide page test suite', () => {
         guidePage.elements.getSubHeaders4Level().each(($el, idx) => {
             expect($el.text()).to.include(this.text.headers4[idx])
         })
-    });    
-    
+    });
+
 });
