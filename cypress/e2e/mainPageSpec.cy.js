@@ -219,5 +219,11 @@ describe('mainPageSpec', () => {
             });
     });
 
+    it('AT_005.005 | Main page > Verifying the website"s description is correct and visible', function () {
+        mainPage.elements.getPageDescriptionWhiteText()
+          .should('be.visible')
+          .and('have.text', this.data.pageDescriptionWhiteText);
+      });
+
 });
 
