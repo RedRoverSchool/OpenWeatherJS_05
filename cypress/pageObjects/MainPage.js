@@ -23,7 +23,8 @@ class MainPage {
         getCityNameSubHeaderTitle: () => cy.get('div.current-container h2'),
         getWeatherIcon: () => cy.get('div.current-temp .owm-weather-icon'),
         getToggleMetric: () => cy.get('#selected[style="left: 2pt;"]'),
-        getTemperatureHeading: () => cy.get('div.current-temp .heading')
+        getTemperatureHeading: () => cy.get('div.current-temp .heading'),
+        getDifferentWeatherMenu: () =>  cy.get('#weather-widget span.owm-switch')
     }
 
     clickSearchBtn() {
@@ -66,6 +67,9 @@ class MainPage {
         this.elements.getSearchResultFromDropdown().click();
     }
 
+    clickDifferentWeatherMenu() {
+        this.elements.getDifferentWeatherMenu().click();
+    }
 }
 
 export default MainPage;

@@ -9,7 +9,9 @@ class WidgetsPage {
         getPopupWindow: () => cy.get('#popup'),
         getCopyInBufferButton: () => cy.get('#copy-js-code'),
         getClosePopupWin: () => cy.get('#popup-close'),
-        getApiInputFieldErrMessage: () => cy.get('#error-key')
+        getApiInputFieldErrMessage: () => cy.get('#error-key'),
+        getMoreOptionsDropdown: () => cy.get('#dialogDesc div.more-options'),
+        getEmailFieldEnter: () => cy.get('#weather-widget  input[type="email"]')
     }
 
     clickCodeWidgetFirstBtn() {
@@ -28,6 +30,14 @@ class WidgetsPage {
         cy.get(myApiKey).then($el => {
             this.elements.getApiKeyInputField().type($el);
           });
+    }
+
+    clickMoreOptionsDropdown() {
+        this.elements.getMoreOptionsDropdown().click();
+    }
+
+    typeEmailInInputField(email) {
+        this.elements.getEmailFieldEnter().type(email);
     }
 }
 
