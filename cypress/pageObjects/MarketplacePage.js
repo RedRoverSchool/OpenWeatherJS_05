@@ -5,11 +5,16 @@ class MarketplacePage {
             getDocumentationBtnHistoryBulk :() => cy.get('div.button-container > a[href="https://openweathermap.org/history-bulk"]'),
             getAllProductTitles: () => cy.get('.market-place .product h5 a'),
             getDocumentationBtnHistoryBulk :() => cy.get('div.button-container > a[href="https://openweathermap.org/history-bulk"]'),
-            getMarketplacePageTitle: () => cy.get('#custom_weather_products')
+            getMarketplacePageTitle: () => cy.get('#custom_weather_products'),
+            getDocumentationBtnHistoricalByDataState: () => cy.get('.button-container [href*="history-data-state"]'),
       }
 
 clickDocumentationBtnHistoryBulk () {
             this.elements.getDocumentationBtnHistoryBulk().invoke('removeAttr', 'target').click()
        }
+clickDocumentationBtnHistoricalByDataState () {
+      this.elements.getDocumentationBtnHistoricalByDataState().invoke('removeAttr', 'target').click()
+}
+
 }
 export default MarketplacePage
