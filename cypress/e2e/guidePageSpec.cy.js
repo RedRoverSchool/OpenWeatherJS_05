@@ -76,5 +76,11 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.apiHistory);
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
     });
+
+    it('AT_008.006.02 | Main menu > Guide > Verify The text "OpenWeather products" is displayed.', function () {
+        header.clickGuideMenuLink();
+
+        guidePage.elements.getOpenWeatherText().should('have.text', this.text.openWeatherText)
+      })
     
 });
