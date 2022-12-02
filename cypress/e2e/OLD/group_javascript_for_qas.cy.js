@@ -9,7 +9,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.visit('https://openweathermap.org/');
     });
 
-    it('AT_028.001 | Footer > About us > Verify "About us" link redirects to the corresponding page', function () {
+    it.skip('AT_028.001 | Footer > About us > Verify "About us" link redirects to the corresponding page', function () {
         cy.get('a[href="/about-us"]').click();
         cy.url().should('include', '/about-us');
     });
@@ -38,7 +38,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.get('.switch-container > div:nth-of-type(2)').should('contain', 'Metric: °C, m/s').click();
     });
 
-    it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
+    it.skip('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
         cy.get('.section-content a[href="/faq"]').click();
         cy.url().should('contain', '/faq');
     });
@@ -67,7 +67,7 @@ describe.skip('group_javascript_for_qas', () => {
         })
     });
 
-    it('AT_048.001 | User page > Billing plans > Verify page for billing plans', function () {
+    it.skip('AT_048.001 | User page > Billing plans > Verify page for billing plans', function () {
         cy.get("li.user-li a").contains("Sign in").click();
         cy.get("#user_email").type("rokhmanova@yahoo.com");
         cy.get("#user_password.form-control").type("qatest01");

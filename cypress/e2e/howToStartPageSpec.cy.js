@@ -2,11 +2,11 @@
 
 import Header from "../pageObjects/Header.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
-import TechnologyPage from "../pageObjects/TechnologyPage.js";
+import TopicPage from "../pageObjects/TopicPage.js";
 
 const header = new Header();
 const howToStartPage = new HowToStartPage();
-const technologyPage = new TechnologyPage();
+const topicPage = new TopicPage();
 
     describe('How to start', () => {
 
@@ -21,7 +21,7 @@ const technologyPage = new TechnologyPage();
             header.clickSupportDropDownMenu()
             header.clickSupportHowToStartLink()
             howToStartPage.clickWhyOurFreeWeatherAPILink() 
-            technologyPage.elements.getTitleTechnology().should('have.text', this.title.technologyTitle);
+            topicPage.elements.getPageTitle().should('have.text', this.title.technologyTitle);
           });
     })
 

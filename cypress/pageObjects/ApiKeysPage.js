@@ -40,7 +40,12 @@ class ApiKeys {
             let info = $el.text();
             return cy.wrap(info).as('myApiKey');
         });
-      };
+    };
+
+    getApiKeyText() {
+        return this.elements.getFirstApiKey().invoke('text')
+    }
+
 }
 
 export default ApiKeys

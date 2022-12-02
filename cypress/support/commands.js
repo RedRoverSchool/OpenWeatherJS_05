@@ -23,16 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-  Cypress.Commands.add('copyData', (cyVariable, locator) => {
-    locator.then(($el) => {
-        let info = $el.text();
-        return cy.wrap(info).as(cyVariable);
-    });
-  });
-
-  Cypress.Commands.add('pasteDataInInputField', (cyVariable, locator) => {
-    cy.get(cyVariable).then($el => {
-      locator.type($el);
-    });
-  });

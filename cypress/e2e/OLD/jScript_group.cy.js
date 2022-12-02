@@ -252,7 +252,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('head title').should('include.text', 'Frequently Asked Questions');
     });
 
-    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+    it.skip('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
         cy.get('li.logo').click({force: true});
     
         cy.url().should('include', 'https://openweathermap.org/');

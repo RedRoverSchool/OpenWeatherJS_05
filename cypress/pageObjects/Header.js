@@ -23,8 +23,10 @@ class Header {
         getPaymentMenuLink: () => cy.get('.dropdown-menu a[href="/payments"]'),
         getSupportHowToStartLink: () => cy.get('#support-dropdown-menu a[href ="/appid"]'),
         getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li'),
+        getUserDropdownMenuList: () => cy.get('#user-dropdown-menu li'),
         getUserDropDownAllMenuVisible: () => cy.get('#user-dropdown-menu'),
-        getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]')
+        getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]'),
+        getPricingLink: () => cy.get('#desktop-menu a[href="/price"]')
     };
 
     clickSupportDropDownMenu() {
@@ -102,7 +104,7 @@ class Header {
     };
     
     clickUserDropDownMenu() {
-        this.elements.getUserDropDownMenu().click()
+        this.elements.getUserDropDownMenu().click({force:true})
     }
 
     clickMyApiKyesLink() {
@@ -121,6 +123,10 @@ class Header {
     };
     clickUserDropDownMyProfileLink() {
         this.elements.getUserDropDownMyProfileLink().click({forse : true})
+    };
+
+    clickPricingLink() {
+        this.elements.getPricingLink().click({ force: true });
     };
 };
 export default Header;
