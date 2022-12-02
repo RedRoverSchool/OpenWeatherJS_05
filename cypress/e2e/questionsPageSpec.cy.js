@@ -44,4 +44,19 @@ describe('Questions page test suite', () => {
 
         questionsPage.elements.getCaptchaError().should('have.text', this.data.reCaptchaError);
     });
+
+    it('AT_015.002 | QuestionsPage > Verify error message for an unauthorised user', function () {
+        header.elements.getSignInMenuLink().should('have.text', 'Sign in');
+
+        header.elements.getSupportDropDownMenuList();
+        header.clickAskAquestionMenuLink();
+
+        questionsPage.checkAuthUserYes();
+        questionsPage.elements.getUserAuthYes().should('be.checked');
+        questionsPage.elements.getUserAuthYes().should('be.visible');        
+        questionsPage.elements.getErrorAuthMsge().should('be.visible')
+                                                .should('have.text', this.data.errorAuthUserText)
+                                                .should('have.class',this.data.errorAuthUserClass)
+                                                .should('have.css' ,'background-color',this.data.errorAuthUserBGCColor)
+    });
 });
