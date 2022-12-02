@@ -197,7 +197,7 @@ describe.skip('GroupReporters', () => {
         cy.get('div.current-container h2').should('contain', cityName)
     })
 
-    it.skip('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
         cy.get('.social a').each(($el, index) => {
             expect($el.attr('href')).to.include(this.data.socialIcons[index])
         });

@@ -36,13 +36,14 @@ class Footer {
         this.elements.getWidgetsLink().click({ force: true });
     };
 
-        clickTwitterLink() {
-            this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
-        };
+    clickTwitterLink() {
+        this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
+    };
 
-        clickGithubLink() {
-            this.elements.getGithubLink().invoke('removeAttr', 'target').click({force: true});
-        }
+    clickGithubLink() {
+        this.elements.getGithubLink().invoke('removeAttr', 'target').click({force: true});
+    };
+    
     clickMediumIcon() {
         this.elements.getMediumIcon().invoke('removeAttr', 'target').click({ force: true })
     };
