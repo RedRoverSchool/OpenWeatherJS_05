@@ -86,5 +86,13 @@ describe('Footer test suite', () => {
         footer.clickOnTermsAndConditionsOfSaleLink();
 
         cy.url().should('eq', this.data.termsAndConditionsOfSaleUrl);
-      });
+    });
+
+    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+        footer.elements.getGithubLink().should('be.visible');
+        clickGithubLink();
+
+        cy.url().should('eq', this.url.githubUrl);
+        cy.title().should('include', 'openweathermap')
+    });
 });
