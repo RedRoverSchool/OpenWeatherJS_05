@@ -26,9 +26,7 @@
 
 Cypress.Commands.add('todaysDate', () => {
     const date = new Date().toUTCString().split(' ');
-    const correctDate = [];
-    correctDate.push(date[0], date[2], date[1]);
-    const currentDate = correctDate.join(' ');
+    const currentDate = [date[0], date[2], date[1]].join(' ');
 
     return currentDate;
 });
