@@ -28,5 +28,8 @@
     "twitterUrl": "https://twitter.com/OpenWeatherMap",
     "howToStartPage": "https://openweathermap.org/appid",
     "apiHistory": "https://openweathermap.org/api#history",
+    "widgetPageLink": "https://openweathermap.org/widgets-constructor",
+    "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
+    "studentInitiativeUrl": "/our-initiatives/student-initiative"
     "newsAndUpdates": "https://openweather.co.uk/blog/category/weather"
 }
