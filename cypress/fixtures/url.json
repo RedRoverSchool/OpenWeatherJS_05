@@ -29,5 +29,6 @@
     "howToStartPage": "https://openweathermap.org/appid",
     "apiHistory": "https://openweathermap.org/api#history",
     "widgetPageLink": "https://openweathermap.org/widgets-constructor",
-    "dashboardPageLink": "https://openweathermap.org/weather-dashboard"
+    "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
+    "studentInitiativeUrl": "/our-initiatives/student-initiative"
 }
