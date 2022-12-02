@@ -76,5 +76,12 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.apiHistory);
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
     });
+
+    it('AT_008.001 | Guide > Verify URL and header is displayed on the page', function () {
+        header.clickGuideMenuLink();
     
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getPageDescription().should("have.text", this.text.pageDescriptionText);
+    });
+
 });
