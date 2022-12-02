@@ -38,7 +38,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.get('.switch-container > div:nth-of-type(2)').should('contain', 'Metric: °C, m/s').click();
     });
 
-    it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
+    it.skip('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
         cy.get('.section-content a[href="/faq"]').click();
         cy.url().should('contain', '/faq');
     });
