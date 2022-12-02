@@ -57,7 +57,7 @@ describe.skip('Group jScript_group', () => {
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     });
 
-    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
+    it.skip("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
         cy.get('#desktop-menu a[href="/weathermap"]').click({force: true});
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');

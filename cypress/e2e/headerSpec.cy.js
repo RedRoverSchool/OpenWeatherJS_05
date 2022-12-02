@@ -190,4 +190,11 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.dashboardPageLink)
         dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.dashboardPageData.h1Title)
     })
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
+        header.clickMapsMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.mainPageData.pageDescriptionWhiteText);
+    });
 });
