@@ -77,10 +77,31 @@ describe('Guide page test suite', () => {
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
     });
 
+
     it('AT_008.006.02 | Main menu > Guide > Verify The text "OpenWeather products" is displayed.', function () {
         header.clickGuideMenuLink();
 
         guidePage.elements.getOpenWeatherText().should('have.text', this.text.openWeatherText)
       })
+
+    it('AT_008.001 | Guide > Verify URL and header is displayed on the page', function () {
+        header.clickGuideMenuLink();
+
     
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getPageDescription().should("have.text", this.text.pageDescriptionText);
+    });
+
+    it('AT_008.012 | Guide > Verify subheaders are displayed on the page', function () {
+        header.clickGuideMenuLink();
+
+        guidePage.elements.getSubHeaders2Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers2[idx])
+        })
+
+        guidePage.elements.getSubHeaders4Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers4[idx])
+        })
+    });
+
 });
