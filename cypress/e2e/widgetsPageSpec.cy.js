@@ -56,14 +56,14 @@ describe('Widgets page test suite', () => {
         singInPage.signIn(this.signIn.userEmail, this.signIn.userPassword);
         header.clickUserDropDownMenu();
         header.clickUserDropDownMyApiKeysLink();
-        cy.copyData("myApiKey", apiKeysPage.elements.getFirstApiKey());
+        apiKeysPage.copyApiKey(apiKeysPage.elements.getFirstApiKey());
         footer.clickWidgetsLink();
 
-        cy.pasteDataInInputField("@myApiKey", widgetsPage.elements.getApiKeyInputField());
+        widgetsPage.pasteCopiedApiKeyInInputField('@myApiKey');
         widgetsPage.clickCodeWidgetFirstBtn();
-        widgetsPage.elements.getPopupWindowTitle().should('not.have.text', this.data.popupWindowTitle.invalidTitle);
-
         widgetsPage.elements.getPopupWindowTitle().should('have.text', this.data.popupWindowTitle.validTitle);
+
+        widgetsPage.elements.getApiInputFieldErrMessage().should('have.text', this.data.apiInputFielValidMessage)
     });
 
     it('AT_021.007 | Footer > Widgets> Verify popup windows with info appear after clicking "Get code" buttons', function() {
@@ -72,6 +72,8 @@ describe('Widgets page test suite', () => {
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
         cy.url().should('contain', this.keys.urn)
+        apiKeysPage.elements.getAPIkyes().should('have.length', 1)
+        apiKeysPage.elements.getNamesAPIkeys().should('have.text', this.keys.keyNames.defaultNameKey)
         apiKeysPage.elements.getCreateKeyField().type(this.keys.keyNames.newNameKey)
         apiKeysPage.clickGenerateButton()
 
@@ -104,4 +106,18 @@ describe('Widgets page test suite', () => {
         header.clickMyApiKyesLink()
         apiKeysPage.actionWithKey(this.keys.keyNames.newNameKey, apiKeysPage.locators.DeleteKeysButton)
     })
+
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+        header.clickSignInMenuLink();
+        singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
+        header.clickUserDropDownMenu();
+        header.clickUserDropDownMyApiKeysLink();
+
+        apiKeysPage.getApiKeyText().then((apiKey) => {
+            footer.clickWidgetsLink();
+            widgetsPage.setApiKeyField(apiKey);
+            widgetsPage.clickCodeWidgetFirstBtn();
+        })
+        widgetsPage.elements.getCopyInBufferButton().should('be.visible').and('have.text', this.data.copyInBufferBtn)
+    });
 });

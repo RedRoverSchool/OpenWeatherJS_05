@@ -25,12 +25,6 @@ describe('businessPageSpec', () => {
         
         cy.visit('/');
     })
-        
-    it.skip('AT_034.001 | <Header > verify "For Business" button', function () {
-        header.clickBusinessMenuLink()
-        cy.url().should('eq', this.data.url)
-        businessPage.elements.getH1Title().should('have.text', this.data.h1Title)
-    });
 
     it('AT_038.002 | For business page > About us', function () {
         header.clickBusinessMenuLink();

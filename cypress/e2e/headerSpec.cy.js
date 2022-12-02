@@ -6,12 +6,16 @@ import Header from "../pageObjects/Header.js";
 import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
+import MainPage from "../pageObjects/MainPage.js";
+import BlogPage from "../pageObjects/BlogPage.js"
 
 const guidePage = new GuidePage();
 const header = new Header();
 const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
+const mainPage = new MainPage();
+const blogPage = new BlogPage();
 
 describe('Header test suit', () => {
 
@@ -35,12 +39,19 @@ describe('Header test suit', () => {
         });
         cy.fixture('businessPage').then(data => {
             this.data = data;
-        })
-
+        });
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
-        })
-
+        });
+        cy.fixture('mainPage').then(mainPageData => {
+            this.mainPageData = mainPageData;
+        });
+        cy.fixture('mainPage').then(mainPage => {
+            this.mainPage = mainPage;
+        });
+        cy.fixture('blogPage').then(blogPageData => {
+            this.blogPageData = blogPageData;
+        });
         cy.visit('/');
     });
 
@@ -72,7 +83,7 @@ describe('Header test suit', () => {
         guidePage.elements.getTitleGuide().should('have.text', this.text.h1Title);
     });
 
-    it.skip('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
+    it('AT_018.002 | Support > Dropdown menu > Verify "How to start" menu link', function() {
         header.clickSupportDropDownMenu();
         header.clickSupportHowToStartLink();
 
@@ -95,6 +106,57 @@ describe('Header test suit', () => {
               .and('have.length', 3);        
         header.elements.getSupportDropDownMenuList().each(($el, idx) => {
             expect($el.text()).to.be.equal(this.supportList.supportDropdownList[idx]);
-        });    
+        });
+    }); 
+    
+    it('AT_002.006 | Our Initiatives > Verifying the websites logo is clickable and redirects User to the Main page',function () {
+        header.clickInitiativePage()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
     });
-})
+
+    it('AT_060.002 | Header > Clicking the "Sign In" link > Verify the "Sign In" is visible and clickable', function () {
+        header.elements.getSignInMenuLink()
+        .should('be.visible')
+        .and('have.text', this.supportList.signInOnHeader)
+    });
+
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+
+    it('AT_034.001 | <Header > verify "For Business" button', function () {
+        header.clickBusinessMenuLink()
+        cy.url().should('eq', this.data.url)
+
+        businessPage.elements.getH1Title()
+            .should('have.text', this.data.h1Title)
+    });
+    
+    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+        header.clickLogoLink();
+    
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText);
+    });
+
+    it('AT_002.008 | Dashboard > Verifying the website"s logo is clickable and redirects User to the Main page', function () {
+        header.clickDashboardMenu()
+        header.clickLogoLink()
+    
+        cy.url().should('eq', this.url.mainPageLink)
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
+    });
+
+    it('AT_013.001 | Header > After clicking the Blog menu User is redirected to the Blog page', function () {
+        header.clickBlogMenuLink();
+
+        cy.url().should('be.equal', this.blogPageData.url);
+        blogPage.elements.getWeatherFilter().should('have.text', this.blogPageData.weatherFilter);
+    });
+});
