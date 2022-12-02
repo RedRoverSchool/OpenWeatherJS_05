@@ -136,7 +136,7 @@ describe('Widgets page test suite', () => {
         widgetsPage.elements.getErrorMessage().should('be.visible').and('contain', this.data.errorWidgetPageInvalidApi)
     })
 
-    it.only('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
         header.clickSignInMenuLink();
         singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
         header.clickUserDropDownMenu();
