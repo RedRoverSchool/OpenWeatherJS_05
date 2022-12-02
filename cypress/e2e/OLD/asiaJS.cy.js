@@ -44,7 +44,7 @@ describe.skip('asiaJS', () => {
     cy.url().should('include', 'terms_and_conditions_of_use.pdf');
   });
 
-  it('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
+  it.skip('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
     const Imperial_F = '#selected:not(.slideRight)';
     const Metric_C = '#selected:not(.slideLeft)';
     cy.get('.option')
