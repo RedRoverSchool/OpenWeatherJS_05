@@ -17,9 +17,12 @@ describe('our_initiatives', () => {
         cy.fixture('bugHunters').then(data => {
             this.bugHunters = data;
         });
-        cy.fixture('asiaJS').then(data => {
-            this.asiaJS = data;
+        cy.fixture('url').then(data => {
+            this.url = data;
         });
+        cy.fixture('titles').then(data => {
+            this.titles = data;
+        })
         cy.visit('/');
 
     })
@@ -43,9 +46,9 @@ describe('our_initiatives', () => {
         header.clickInitiativePage();
         ourInitiative.clickLearnMoreButton();
         
-        cy.url().should('include', this.asiaJS.consts.ourInitiatives.studentInitiative.url);
+        cy.url().should('include', this.url.studentInitiativeUrl);
         studentInititative.elements.getStudentInitiativeTitle()
-            .should('have.text', this.asiaJS.consts.ourInitiatives.studentInitiative.title);
+            .should('have.text', this.titles.studentInitiativeTitle);
     });
     
 })

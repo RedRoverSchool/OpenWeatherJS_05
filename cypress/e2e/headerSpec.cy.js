@@ -7,7 +7,9 @@ import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
-import BlogPage from "../pageObjects/BlogPage.js"
+import BlogPage from "../pageObjects/BlogPage.js";
+import TopicPage from "../pageObjects/TopicPage.js";
+import DashboardPage from "../pageObjects/DashboardPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -16,6 +18,8 @@ const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
 const mainPage = new MainPage();
 const blogPage = new BlogPage();
+const topicPage = new TopicPage();
+const dashboardPage = new DashboardPage();
 
 describe('Header test suit', () => {
 
@@ -51,6 +55,12 @@ describe('Header test suit', () => {
         });
         cy.fixture('blogPage').then(blogPageData => {
             this.blogPageData = blogPageData;
+        });
+        cy.fixture('titles').then(titlesData => {
+            this.titlesData = titlesData;
+        });
+        cy.fixture('dashboardPage').then(dashboardPageData => {
+            this.dashboardPageData = dashboardPageData;
         });
         cy.visit('/');
     });
@@ -158,5 +168,33 @@ describe('Header test suit', () => {
 
         cy.url().should('be.equal', this.blogPageData.url);
         blogPage.elements.getWeatherFilter().should('have.text', this.blogPageData.weatherFilter);
+    });
+
+    it('AT_033.013 | Header > Navigation > Verify "Pricing" menu link', function () {
+        header.clickPricingLink();
+        cy.url().should('eq', this.url.pricingPage)
+        topicPage.elements.getPageTitle().should('have.text', this.titlesData.pricingTitle);
+    })    
+
+    it('AT_002.002 | Header > Verifying the website logo is clickable and it redirects a User to the Main page', function () {
+        header.clickGuideMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
+     })
+
+    it('AT_025.008 | Main menu > Dashboard > After clicking "Dashboard" item on bar menu User is redirected to Dashboard page', function () {
+        header.clickDashboardMenu()
+
+        cy.url().should('eq', this.url.dashboardPageLink)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.dashboardPageData.h1Title)
+    })
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
+        header.clickMapsMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.mainPageData.pageDescriptionWhiteText);
     });
 });
