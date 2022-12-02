@@ -477,8 +477,8 @@ describe.skip('groupBugHunters', () => {
     cy.get(hrefHome).should('be.visible')
   })
 
-  it('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
-    cy.get('#support-dropdown-menu a[href="/appid"]').click({ force: true })
+  it.skip('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
+    cy.get('#support-dropdown-menu a[href="/appid"]').click({force: true})
     cy.get('p a[href="/technology"] ').click()
     cy.get('.breadcrumb-title').should('have.text', 'Technology')
   });
@@ -527,4 +527,3 @@ describe.skip('groupBugHunters', () => {
     cy.get('.btn').click()
   });
 });
-
