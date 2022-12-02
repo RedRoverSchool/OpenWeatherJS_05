@@ -84,4 +84,16 @@ describe('Guide page test suite', () => {
         guidePage.elements.getPageDescription().should("have.text", this.text.pageDescriptionText);
     });
 
+    it('AT_008.012 | Guide > Verify subheaders are displayed on the page', function () {
+        header.clickGuideMenuLink();
+
+        guidePage.elements.getSubHeaders2Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers2[idx])
+        })
+
+        guidePage.elements.getSubHeaders4Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers4[idx])
+        })
+    });
+
 });

@@ -52,7 +52,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.get(MAINHEADER_H1_GUIDE_PAGE).should("have.text", this.data.headers1)
     });
 
-    it('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
+    it.skip('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
         const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
         const SUBHEADERS_H2_GUIDE_PAGE = "main h2";
         const SUBHEADERS_H4_GUIDE_PAGE = "h4 b";
