@@ -4,9 +4,9 @@ class MainPage {
     elements = {
         getSearchInput: () => cy.get('input[placeholder = "Search city"]'),
         getSearchBtn: () => cy.get('.search-block button'),
-        getPageDescriptionWhiteText: () => cy.get('span.white-text'),
+        getPageDescriptionWhiteText: () => cy.get('h2 .white-text'),
         getApiLink: () => cy.get('#desktop-menu a[href="/api"]'),
-        getMainPageContent: () => cy.get('h1 span.orange-text'),
+        getMainPageContent: () => cy.get('h1 .orange-text'),
         getForecastDays: () => cy.get('.day-list li'),
         getForecastFirstDay: () => cy.get('.day-list li:first-child > span'),
         getSearchResultsDropdown: () => cy.get('ul.search-dropdown-menu li'),
@@ -14,8 +14,8 @@ class MainPage {
         getCopyrightMapLink: () => cy.get('a[href*="copyright"]'),
         getOurNewProductSubHeaderTitle: () => cy.get('.no-mobile-padding h2 span'),
         getSolarRadiationLink: () => cy.get('a[href="/api/solar-radiation'),
-        getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'),
-        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'),
+        getToggleTempretureDefault: () => cy.get('.switch-container :nth-child(3)'), // imperial
+        getToggleTempreture: () => cy.get('.switch-container :nth-of-type(2)'), // Metric
         getCurrentDate: () => cy.get('.current-container .orange-text'),
         getDailyDetailContainerWeather: () => cy.get('.daily-detail-container'),
         getIconToDetailedWeather: () => cy.get('[fill="#48484A"]'),
@@ -24,30 +24,32 @@ class MainPage {
         getWeatherIcon: () => cy.get('div.current-temp .owm-weather-icon'),
         getToggleMetric: () => cy.get('#selected[style="left: 2pt;"]'),
         getTemperatureHeading: () => cy.get('div.current-temp .heading'),
-        getDifferentWeatherMenu: () =>  cy.get('#weather-widget span.owm-switch')
+        getDifferentWeatherMenu: () => cy.get('#weather-widget span.owm-switch'),
+        getFullConvertToDegreesCelsius: () => cy.get('#selected').filter(':not(".slideLeft")'),
+        getFullConvertToDegreesFahrenheit: () => cy.get('#selected').filter(':not(".slideRight")'),
     }
 
     clickSearchBtn() {
-        this.elements.getSearchBtn().click({force: true});
+        this.elements.getSearchBtn().click({ force: true });
     }
 
     setSearchInputText(inputText) {
         this.elements
             .getSearchInput()
-            .clear({force: true})
-            .type(inputText, {force: true});
+            .clear({ force: true })
+            .type(inputText, { force: true });
     }
 
     clickApiLink() {
-        this.elements.getApiLink().click({force: true});
+        this.elements.getApiLink().click({ force: true });
     }
 
-    clickCopyrightMapLink () {
-        this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({force: true});
+    clickCopyrightMapLink() {
+        this.elements.getCopyrightMapLink().invoke('removeAttr', 'target').click({ force: true });
     }
 
     clickSolarRadiationLink() {
-        this.elements.getSolarRadiationLink().click({force: true});
+        this.elements.getSolarRadiationLink().click({ force: true });
     }
 
     clickTempretureToggle() {
@@ -57,10 +59,10 @@ class MainPage {
 
     assertDropdownContains(name) {
         this.elements.getSearchResultsDropdown()
-        .should('be.visible')
-        .each($el => {
-            cy.wrap($el).should('contain', name)
-        })
+            .should('be.visible')
+            .each($el => {
+                cy.wrap($el).should('contain', name)
+            })
     }
 
     clickSearchResultFromDropdown() {
@@ -69,6 +71,14 @@ class MainPage {
 
     clickDifferentWeatherMenu() {
         this.elements.getDifferentWeatherMenu().click();
+    }
+
+    clickToggleTempretureDefault() {
+        this.elements.getToggleTempretureDefault().click()
+    }
+
+    clickToggleTempreture() {
+        this.elements.getToggleTempreture().click()
     }
 }
 

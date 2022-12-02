@@ -9,6 +9,7 @@ import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
 import BlogPage from "../pageObjects/BlogPage.js";
 import TopicPage from "../pageObjects/TopicPage.js";
+import DashboardPage from "../pageObjects/DashboardPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -18,6 +19,7 @@ const businessPage = new BusinessPage();
 const mainPage = new MainPage();
 const blogPage = new BlogPage();
 const topicPage = new TopicPage();
+const dashboardPage = new DashboardPage();
 
 describe('Header test suit', () => {
 
@@ -56,6 +58,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('titles').then(titlesData => {
             this.titlesData = titlesData;
+        });
+        cy.fixture('dashboardPage').then(dashboardPageData => {
+            this.dashboardPageData = dashboardPageData;
         });
         cy.visit('/');
     });
@@ -178,4 +183,11 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
      })
+
+    it('AT_025.008 | Main menu > Dashboard > After clicking "Dashboard" item on bar menu User is redirected to Dashboard page', function () {
+        header.clickDashboardMenu()
+
+        cy.url().should('eq', this.url.dashboardPageLink)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.dashboardPageData.h1Title)
+    })
 });
