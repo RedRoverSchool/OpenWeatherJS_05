@@ -3,10 +3,12 @@
 import Header from "../pageObjects/Header.js"
 import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
+import HistoryBulksNewPage from "../pageObjects/HistoryBulksNewPage.js";
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
+const historyBulksNew = new HistoryBulksNewPage();
 
 describe('Marketplace page test suite', () => {
 
@@ -64,4 +66,12 @@ describe('Marketplace page test suite', () => {
             historyBulk.elements.getHistoryBulkTitle().should('have.text', this.historyBulkPageData.HistoryBulkTitle)
       });
 
+      it('AT_009.008 | <Menu> Marketplace > Verification than "Place order" button is displayed and leads to URL', function() {
+            header.clickMarketplaceMenuLink()
+            marketplacePage.elements.getPlaceOrderHistoryBulk().should('be.visible')
+            marketplacePage.clickPlaceOrderHistoryBulk()
+
+            cy.url().should('eq', this.urls.placeOrderHistoryBulk)
+            historyBulksNew.elements.getHistoryBulksNewTitle().should('be.visible')
+      });
 })

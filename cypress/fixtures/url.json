@@ -30,6 +30,8 @@
     "apiHistory": "https://openweathermap.org/api#history",
     "widgetPageLink": "https://openweathermap.org/widgets-constructor",
     "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
-    "studentInitiativeUrl": "/our-initiatives/student-initiative"
+    "studentInitiativeUrl": "/our-initiatives/student-initiative",
+    "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new",
+    "studentInitiativeUrl": "/our-initiatives/student-initiative",
     "newsAndUpdates": "https://openweather.co.uk/blog/category/weather"
 }
