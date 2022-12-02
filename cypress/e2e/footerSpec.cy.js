@@ -90,9 +90,9 @@ describe('Footer test suite', () => {
 
     it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
         footer.elements.getGithubLink().should('be.visible');
-        clickGithubLink();
+        footer.clickGithubLink();
 
-        cy.url().should('eq', this.url.githubUrl);
-        cy.title().should('include', 'openweathermap')
+       cy.url().should('eq', this.url.githubUrl);
+       cy.title().should('include', this.data.githubTitleText);
     });
 });
