@@ -5,12 +5,14 @@ import Footer from "../pageObjects/Footer.js"
 import Header from "../pageObjects/Header.js";
 import SignInPage from "../pageObjects/SignInPage.js";
 import WidgetsPage from "../pageObjects/WidgetsPage.js";
+import MainPage from "../pageObjects/MainPage.js";
 
 const footer = new Footer();
 const widgetsPage = new WidgetsPage();
 const singInPage = new SignInPage();
 const header = new Header();
 const apiKeysPage = new ApiKeysPage();
+const mainPage = new MainPage();
 
 describe('Widgets page test suite', () => {
 
@@ -28,6 +30,10 @@ describe('Widgets page test suite', () => {
 
         cy.fixture('apiKeysPage').then(keys => {
             this.keys = keys;
+        });
+
+        cy.fixture('example').then(example => {
+            this.example = example;
         });
 
         cy.visit('/');
@@ -107,17 +113,11 @@ describe('Widgets page test suite', () => {
         apiKeysPage.actionWithKey(this.keys.keyNames.newNameKey, apiKeysPage.locators.DeleteKeysButton)
     })
 
-    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
-        header.clickSignInMenuLink();
-        singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
-        header.clickUserDropDownMenu();
-        header.clickUserDropDownMyApiKeysLink();
+    it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
+        mainPage.clickDifferentWeatherMenu()
+        widgetsPage.clickMoreOptionsDropdown()
 
-        apiKeysPage.getApiKeyText().then((apiKey) => {
-            footer.clickWidgetsLink();
-            widgetsPage.setApiKeyField(apiKey);
-            widgetsPage.clickCodeWidgetFirstBtn();
-        })
-        widgetsPage.elements.getCopyInBufferButton().should('be.visible').and('have.text', this.data.copyInBufferBtn)
+        widgetsPage.typeEmailInInputField(this.example.email)
+        widgetsPage.elements.getEmailFieldEnter().should('have.value', this.example.email)
     });
 });
