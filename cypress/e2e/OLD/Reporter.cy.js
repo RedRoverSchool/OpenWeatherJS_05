@@ -281,3 +281,9 @@ describe.skip('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/')
     });
 })
+
+    it('AT_033.013 | Header > Navigation > Verify "Pricing" menu link', () => {
+        cy.get('#desktop-menu a[href="/price"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/price')
+        cy.get('.breadcrumb-title').should('contain', 'Pricing')
+    })

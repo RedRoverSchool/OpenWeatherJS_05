@@ -7,7 +7,9 @@ class QuestionsPage {
         getSubjectDropDownFieldAllOptions: () => cy.get('#question_form_subject option'),
         getMessageInputField: () => cy.get('#question_form_message'),
         getSubmitBtn: () => cy.get('.btn'),
-        getCaptchaError: () => cy.get('.has-error')
+        getCaptchaError: () => cy.get('.has-error'),
+        getErrorAuthMsge: () => cy.get('div#prompt'),        
+        getUserAuthYes: ()  => cy.get('input#question_form_is_user_true')        
     }
 
     selectNotAuser() {
@@ -41,5 +43,10 @@ class QuestionsPage {
         this.enterMessage(message);
         this.clickSubmitBtn();
     }
+
+    checkAuthUserYes() {
+        this.elements.getUserAuthYes().check();
+    };
+    
 }
 export default QuestionsPage;
