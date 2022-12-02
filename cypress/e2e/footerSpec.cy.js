@@ -91,7 +91,7 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.data.termsAndConditionsOfSaleUrl);
     });
 
-    it.only('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
+    it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
         footer.clickFAQLink();
         cy.url().should('eq', this.url.FAQPage);
         cy.contains(this.faqPage.h1Title);
