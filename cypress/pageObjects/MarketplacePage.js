@@ -13,7 +13,7 @@ class MarketplacePage {
 
       clickDocumentationBtnHistoryBulk () {
             this.elements.getDocumentationBtnHistoryBulk().invoke('removeAttr', 'target').click()
-       }
+      }
 
       clickPlaceOrderHistoryBulk () {
             this.elements.getPlaceOrderHistoryBulk().invoke('removeAttr', 'target').click()
@@ -22,5 +22,5 @@ class MarketplacePage {
       clickHistoricalDataArchivesDocumentationLink () {
             this.elements.getHistoricalDataArchivesDocumentationLink().invoke('removeAttr', 'target').click();
       };
-}
+};
 export default MarketplacePage

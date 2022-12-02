@@ -88,4 +88,4 @@ describe('Marketplace page test suite', () => {
                         expect(stringOfStateNames).to.eql(this.marketPlacePageData.listOfStatesInAlphabeticalOrder.join(' '));
             });
       });
-})
+});
