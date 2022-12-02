@@ -3,10 +3,12 @@
 import Header from "../pageObjects/Header.js"
 import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
+import HistoryDataState from "../pageObjects/HistoryDataStatePage.js";
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
+const historyDataState = new HistoryDataState();
 
 describe('Marketplace page test suite', () => {
 
@@ -19,6 +21,9 @@ describe('Marketplace page test suite', () => {
             });
             cy.fixture('historybulk').then(data => {
                   this.historyBulkPageData = data;
+            });
+            cy.fixture('historyDataState').then(historyDataState => {
+                  this.historyDataState = historyDataState;
             });
             cy.visit('/');
       });
@@ -62,6 +67,18 @@ describe('Marketplace page test suite', () => {
 
             cy.url().should('eq', this.urls.HistoryBulk)
             historyBulk.elements.getHistoryBulkTitle().should('have.text', this.historyBulkPageData.HistoryBulkTitle)
+      });
+
+      it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.elements.getDocumentationBtnHistoryDataState().should('be.visible');
+            marketplacePage.clickDocumentationBtnHistoryDataState();
+
+            cy.url().should('eq', this.urls.historyDataState);
+            historyDataState.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
+
+            historyDataState.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
+
       });
 
 })
