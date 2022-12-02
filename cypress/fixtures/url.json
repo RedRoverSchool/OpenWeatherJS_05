@@ -33,5 +33,6 @@
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
     "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new",
     "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform",
-    "questionsUrl": "https://home.openweathermap.org/questions"
+    "questionsUrl": "https://home.openweathermap.org/questions",
+    "historyDataState": "https://openweathermap.org/api/history-data-state"
 }
