@@ -117,6 +117,19 @@ describe('Widgets page test suite', () => {
         apiKeysPage.actionWithKey(this.keys.keyNames.newNameKey, apiKeysPage.locators.DeleteKeysButton)
     })
 
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+        header.clickSignInMenuLink();
+        singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
+        header.clickUserDropDownMenu();
+        header.clickUserDropDownMyApiKeysLink();
+        apiKeysPage.getApiKeyText().then((apiKey) => {
+            footer.clickWidgetsLink();
+            widgetsPage.setApiKeyField(apiKey);
+            widgetsPage.clickCodeWidgetFirstBtn();
+        })
+        widgetsPage.elements.getCopyInBufferButton().should('be.visible').and('have.text', this.data.copyInBufferBtn)
+    });
+
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
         mainPage.clickDifferentWeatherMenu()
         widgetsPage.clickMoreOptionsDropdown()
