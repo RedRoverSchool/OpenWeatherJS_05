@@ -107,4 +107,20 @@ describe('Marketplace page test suite', () => {
             });
         });
 
+      it('AT_061.004 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying price for any state is correct', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
+
+            historicalWeatherDataByStatePage.elements.getFullListOfPrices().then(($pricesArray) => {
+                  const stringOfPriceNames = $pricesArray
+                        .toArray()
+                        .map(el => el.innerText)
+                        .join(' ');
+
+                  expect(stringOfPriceNames).to.eql(this.historicalWeatherDataByStatePage.listOfPrices.join(' '));
+
+            });
+
+      });
+
 });
