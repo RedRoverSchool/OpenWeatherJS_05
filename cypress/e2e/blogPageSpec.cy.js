@@ -50,4 +50,9 @@ describe('Blog page test suite', () => {
         });
     });
 
+    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+        header.clickBlogMenuLink();
+        
+        blogPage.elements.getWeatherFilter().should('have.text', this.data.weatherFilter);
+    });
 });
