@@ -91,7 +91,7 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.data.termsAndConditionsOfSaleUrl);
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", function () {
         footer.elements.getGithubLink().should('be.visible');
         footer.clickGithubLink();
 
