@@ -7,6 +7,7 @@ import FAQPage from "../pageObjects/FAQPage.js";
 import HowToStartPage from "../pageObjects/HowToStartPage.js";
 import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
+import AskQuestionPage from "../pageObjects/AskQuestionPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -14,6 +15,7 @@ const faqPage = new FAQPage();
 const howToStart = new HowToStartPage();
 const businessPage = new BusinessPage();
 const mainPage = new MainPage();
+const askQuestionPage = new AskQuestionPage();
 
 describe('Header test suit', () => {
 
@@ -21,32 +23,39 @@ describe('Header test suit', () => {
         cy.fixture('url').then(url => {
             this.url = url;
         });
-        
+
         cy.fixture('guidePage').then(text => {
             this.text = text;
         });
-        
+    
         cy.fixture('faqPage').then(faqData => {
             this.faqData = faqData;
         });
+
         cy.fixture('mapsPage').then(mapsData => {
             this.mapsData = mapsData
         });
+
         cy.fixture('howToStartPage').then(pageText => {
             this.pageText = pageText
         });
+
         cy.fixture('businessPage').then(data => {
             this.data = data;
-        })
+        });
 
         cy.fixture('header').then(supportList => {
             this.supportList = supportList;
-        })
+        });
 
         cy.fixture('mainPage').then(mainPageData => {
             this.mainPageData = mainPageData;
         });
 
+        cy.fixture('questionsPage').then(questionsPage => {
+            this.questionsPage = questionsPage;
+        });
+        
         cy.visit('/');
     });
 
@@ -110,5 +119,13 @@ describe('Header test suit', () => {
     
         cy.url().should('eq', this.url.mainPageLink)
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)      
+    });
+
+    it('AT_014.003 | Support > Ask a question>Verify if the "Ask the question" page opens', function () {
+        header.clickSupportDropDownMenu();
+        header.clickSupportAskQuestionLink();
+
+        cy.url().should('eq', this.url.askQuestionPage);
+        askQuestionPage.elements.getPageHeader().should('have.text', this.questionsPage.headLineText)
     });
 })

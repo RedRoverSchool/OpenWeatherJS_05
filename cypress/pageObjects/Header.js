@@ -24,7 +24,8 @@ class Header {
         getSupportHowToStartLink: () => cy.get('#support-dropdown-menu a[href ="/appid"]'),
         getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li'),
         getUserDropDownAllMenuVisible: () => cy.get('#user-dropdown-menu'),
-        getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]')
+        getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]'),
+        getSupportAskQuestionLink: () => cy.get('#support-dropdown-menu a[href$="/questions"]')
     };
 
     clickSupportDropDownMenu() {
@@ -121,6 +122,12 @@ class Header {
     };
     clickUserDropDownMyProfileLink() {
         this.elements.getUserDropDownMyProfileLink().click({forse : true})
+    };
+    
+    clickSupportAskQuestionLink(){
+        this.elements.getSupportAskQuestionLink()
+        .invoke('removeAttr', 'target')
+        .click();
     };
 };
 export default Header;
