@@ -203,7 +203,7 @@ describe.skip('GroupReporters', () => {
         });
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+    it.skip("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
         cy.get(".social a:nth-child(6)").should("be.visible");
         cy.get(".social a:nth-child(6)").invoke('removeAttr', 'target').click({force: true})
         cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
@@ -279,11 +279,11 @@ describe.skip('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/api')
         cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
-    })
+    });
 
     it('AT_033.013 | Header > Navigation > Verify "Pricing" menu link', () => {
         cy.get('#desktop-menu a[href="/price"]').click()
         cy.url().should('eq', 'https://openweathermap.org/price')
         cy.get('.breadcrumb-title').should('contain', 'Pricing')
     })
-});
+})
