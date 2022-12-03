@@ -1,7 +1,10 @@
 {
     "searchInputText": {
         "zipCode": "60604",
-        "cityName": "Washington"
+        "cityName": "Washington",
+        "specialCharacters": "$$$",
+        "notFoundMessage": "Not found. To make search more precise put the city's name, comma, 2-letter country code (ISO3166).",
+        "notFoundWidgetNotification": "No results for "
     },
     "pageDescriptionWhiteText": "Weather forecasts, nowcasts and history in a fast and elegant way",
     "forecastDaysLength": 8, 

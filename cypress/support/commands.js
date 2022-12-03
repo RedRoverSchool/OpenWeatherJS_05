@@ -23,3 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('todaysDate', () => {
+    const date = new Date().toUTCString().split(' ');
+    return [date[0], date[2], date[1]].join(' ');
+});

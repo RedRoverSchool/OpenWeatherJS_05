@@ -10,7 +10,8 @@ class Footer {
         getSocialMediaIconLinks: () => cy.get('.social a'),
         getFacebookLink: () => cy.get('.social a:first-child'),
         getTwitterLink: () => cy.get('.social a:nth-child(2)'),
-        getFAQLink: () => cy.get('.section-content a[href="/faq"]')
+        getGithubLink: () => cy.get('.social a:nth-child(6)'),
+        getFAQLink: () => cy.get('.section-content a[href="/faq"]'),
     };
 
     clickOnTermsAndConditionsOfSaleLink() {
@@ -35,6 +36,14 @@ class Footer {
         this.elements.getWidgetsLink().click({ force: true });
     };
 
+    clickTwitterLink() {
+        this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
+    };
+
+    clickGithubLink() {
+        this.elements.getGithubLink().invoke('removeAttr', 'target').click({force: true});
+    };
+    
     clickMediumIcon() {
         this.elements.getMediumIcon().invoke('removeAttr', 'target').click({ force: true })
     };

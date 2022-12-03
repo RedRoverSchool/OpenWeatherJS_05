@@ -7,6 +7,7 @@ class BlogPage {
         getAllPostsLinks: () => cy.get('.post-list .post .post__title-link'),
         getAgroLink: () => cy.get('a[href="/blog/category/agro"]'),
         getPlatformLink: () => cy.get('a[href="/blog/category/platform"]'),
+        getTechnologiesLink: () => cy.get('a[href="/blog/category/technologies"]'),
     }
      
     clickFirstPostsLink() {
@@ -19,6 +20,10 @@ class BlogPage {
 
     clickPlatformLink() {
         this.elements.getPlatformLink().click();
+    }
+
+    clickTechnologiesLink() {
+        this.elements.getTechnologiesLink().click();
     }
 }
 export default BlogPage;

@@ -4,11 +4,13 @@ import Header from "../pageObjects/Header.js"
 import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
 import HistoryBulksNewPage from "../pageObjects/HistoryBulksNewPage.js";
+import HistoricalWeatherDataByStatePage from "../pageObjects/HistoricalWeatherDataByStatePage";
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
 const historyBulksNew = new HistoryBulksNewPage();
+const historicalWeatherDataByStatePage = new HistoricalWeatherDataByStatePage();
 
 describe('Marketplace page test suite', () => {
 
@@ -21,6 +23,9 @@ describe('Marketplace page test suite', () => {
             });
             cy.fixture('historybulk').then(data => {
                   this.historyBulkPageData = data;
+            });
+            cy.fixture('historicalWeatherDataByStatePage').then(data => {
+                  this.historicalWeatherDataByStatePage = data;
             });
             cy.visit('/');
       });
@@ -74,4 +79,18 @@ describe('Marketplace page test suite', () => {
             cy.url().should('eq', this.urls.placeOrderHistoryBulk)
             historyBulksNew.elements.getHistoryBulksNewTitle().should('be.visible')
       });
-})
+
+      it('AT_061.002 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying all state names are in alphabetical order', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
+
+            historicalWeatherDataByStatePage.elements.getFullListOfStates().then(($stateNamesArray) => {
+                  const stringOfStateNames = $stateNamesArray
+                        .toArray()
+                        .map(el => el.innerText)
+                        .join(' ');
+                  
+                  expect(stringOfStateNames).to.eql(this.historicalWeatherDataByStatePage.listOfStatesInAlphabeticalOrder.join(' '));
+            });
+      });
+});
