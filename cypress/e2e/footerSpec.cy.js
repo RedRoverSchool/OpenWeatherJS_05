@@ -96,6 +96,7 @@ describe('Footer test suite', () => {
         footer.clickGithubLink();
 
        cy.url().should('eq', this.url.githubUrl);
+       cy.title().should('include', this.data.githubTitleText);
     });
 
     it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
