@@ -112,4 +112,11 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.url.FAQPage);
         cy.title().should('include', this.faqPage.h1Title)
     });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        footer.elements.getAllowAllCookiesBtn().should('be.visible');
+        footer.clickAllowAllCookiesBtn();
+        
+        footer.elements.getCookiesMessageField().should('not.be.visible');
+    });
 });
