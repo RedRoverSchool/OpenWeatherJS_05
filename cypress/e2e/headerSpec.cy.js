@@ -197,4 +197,19 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.mainPageData.pageDescriptionWhiteText);
     });
+
+    it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
+        header.elements.getMainMenuListLink().each(($el, ind) => {
+          expect($el.text()).to.include(this.supportList.mainMenuList[ind])
+        })
+    
+        header.clickSupportDropDownMenu()
+        header.elements.getSupportDropDownMenuList().each(($el, ind) => {
+          expect($el.text()).to.include(this.supportList.supportDropdownList[ind])
+        })
+    
+        header.clickFAQMenuLink()
+        cy.url().should('eq', this.url.FAQPage)
+        faqPage.elements.getTitle().should('have.text', this.faqData.h1Title)
+      })
 });

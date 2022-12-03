@@ -1,4 +1,18 @@
 {
     "supportDropdownList": ["FAQ", "How to start", "Ask a question"],
-    "signInOnHeader": "Sign in"
+    "signInOnHeader": "Sign in",
+    "mainMenuList": [
+        "Guide",
+        "API",
+        "Dashboard",
+        "Marketplace",
+        "Pricing",
+        "Maps",
+        "Our Initiatives",
+        "Partners",
+        "Blog",
+        "For Business",
+        "Sign in",
+        "Support"
+      ]
 }
