@@ -118,9 +118,6 @@ describe('Marketplace page test suite', () => {
                         .join(' ');
 
                   expect(stringOfPriceNames).to.eql(this.historicalWeatherDataByStatePage.listOfPrices.join(' '));
-
             });
-
       });
-
 });
