@@ -11,9 +11,6 @@ const paymentPage = new PaymentPage();
 describe('Payment page test suite', () => {
 
     beforeEach(function (){
-        cy.fixture('asiaJS').then(payment => {
-            this.payment = payment;
-        });
         cy.fixture('url').then(url => {
             this.url = url;
         });
@@ -28,10 +25,8 @@ describe('Payment page test suite', () => {
 
     it('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
         header.clickSignInMenuLink();
-        signInPage.signIn(this.payment.email, this.payment.password);
+        signInPage.signIn(this.userProfile.userEmail, this.userProfile.userPassword);
 
-        header.elements.getUserDropDownMenu()
-        .should('contain.text', this.payment.textAsia);
         header.clickUserDropDownMenu();
         header.clickPaymentMenuLink();
         cy.url().should('include', this.url.urlPayment);
