@@ -4,11 +4,13 @@ import Header from "../pageObjects/Header.js"
 import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
 import HistoryBulksNewPage from "../pageObjects/HistoryBulksNewPage.js";
+import HistoricalWeatherDataByStatePage from "../pageObjects/HistoricalWeatherDataByStatePage";
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
 const historyBulksNew = new HistoryBulksNewPage();
+const historicalWeatherDataByStatePage = new HistoricalWeatherDataByStatePage();
 
 describe('Marketplace page test suite', () => {
 
@@ -21,6 +23,9 @@ describe('Marketplace page test suite', () => {
             });
             cy.fixture('historybulk').then(data => {
                   this.historyBulkPageData = data;
+            });
+            cy.fixture('historicalWeatherDataByStatePage').then(data => {
+                  this.historicalWeatherDataByStatePage = data;
             });
             cy.visit('/');
       });
@@ -79,13 +84,27 @@ describe('Marketplace page test suite', () => {
             header.clickMarketplaceMenuLink();
             marketplacePage.clickHistoricalDataArchivesDocumentationLink();
 
-            marketplacePage.elements.getFullListOfStates().then(($stateNamesArray) => {
+            historicalWeatherDataByStatePage.elements.getFullListOfStates().then(($stateNamesArray) => {
                   const stringOfStateNames = $stateNamesArray
                         .toArray()
                         .map(el => el.innerText)
                         .join(' ');
                   
-                        expect(stringOfStateNames).to.eql(this.marketPlacePageData.listOfStatesInAlphabeticalOrder.join(' '));
+                  expect(stringOfStateNames).to.eql(this.historicalWeatherDataByStatePage.listOfStatesInAlphabeticalOrder.join(' '));
             });
       });
+
+      it('AT_061.003 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verify sorted by names', function () {
+            let statesArr = Array();
+            header.clickMarketplaceMenuLink();
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
+    
+            historyBulksNew.elements.getAllStateNames().then((list) => {
+                    statesArr = list.toArray().map(el => el.innerText)
+                    let sortStates = [...statesArr].sort((a, b) => a.localeCompare(b))
+    
+                    expect(JSON.stringify(sortStates)).to.eql(JSON.stringify(statesArr))
+            });
+        });
+
 });
