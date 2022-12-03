@@ -10,6 +10,8 @@ class Footer {
         getSocialMediaIconLinks: () => cy.get('.social a'),
         getFacebookLink: () => cy.get('.social a:first-child'),
         getTwitterLink: () => cy.get('.social a:nth-child(2)'),
+        getGithubLink: () => cy.get('.social a:nth-child(6)'),
+        getFAQLink: () => cy.get('.section-content a[href="/faq"]'),
         getFAQLink: () => cy.get('.section-content a[href="/faq"]'),
         getAllowAllCookiesBtn: () => cy.get('#stick-footer-panel button'),
         getCookiesMessageField: () => cy.get('#stick-footer-panel .stick-footer-panel')
@@ -37,6 +39,14 @@ class Footer {
         this.elements.getWidgetsLink().click({ force: true });
     };
 
+    clickTwitterLink() {
+        this.elements.getTwitterLink().invoke('removeAttr', 'target').click({force: true});
+    };
+
+    clickGithubLink() {
+        this.elements.getGithubLink().invoke('removeAttr', 'target').click({force: true});
+    };
+    
     clickMediumIcon() {
         this.elements.getMediumIcon().invoke('removeAttr', 'target').click({ force: true })
     };

@@ -340,7 +340,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
     });
 
-    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+    it.skip('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);

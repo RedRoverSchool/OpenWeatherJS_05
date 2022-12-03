@@ -8,7 +8,6 @@ class MarketplacePage {
             getMarketplacePageTitle: () => cy.get('#custom_weather_products'),
             getPlaceOrderHistoryBulk: () => cy.get('div.button-container a[href="/history_bulks/new"]'),
             getHistoricalDataArchivesDocumentationLink: () => cy.get('a[href*="history-data-state"]'),
-            getFullListOfStates: () => cy.get('.material-table td:first-child')
       }
 
       clickDocumentationBtnHistoryBulk () {
