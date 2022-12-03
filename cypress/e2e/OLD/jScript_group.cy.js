@@ -323,7 +323,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
-    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+    it.skip('AT_044.003 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel button').should('be.visible');
         cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
         cy.get('#stick-footer-panel button').click();
