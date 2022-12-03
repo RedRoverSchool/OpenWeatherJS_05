@@ -212,4 +212,12 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.FAQPage)
         faqPage.elements.getTitle().should('have.text', this.faqData.h1Title)
       })
+
+    it('AT_008.003 | Main menu > Guide | Verifying the link on the page "Guide"', function () {
+        header.elements.getGuideMenuLink().should('contain.text', this.text.h1Title);
+        header.clickGuideMenuLink(); 
+
+        cy.url().should('include', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('be.visible');
+    });
 });
