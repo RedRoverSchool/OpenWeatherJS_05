@@ -59,12 +59,9 @@ describe('mainPageSpec', () => {
     });
 
     it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
-        const date = new Date().toUTCString().split(' ');
-        const correctDate = [];
-        correctDate.push(date[0], date[2], date[1]);
-        const todaysDate = correctDate.join(' ');
-
-        mainPage.elements.getForecastFirstDay().should('have.text', todaysDate);
+        cy.todaysDate().then(($todaysDate) => {
+            mainPage.elements.getForecastFirstDay().should('have.text', $todaysDate);
+        });
     });
 
     it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
@@ -223,7 +220,22 @@ describe('mainPageSpec', () => {
         mainPage.elements.getPageDescriptionWhiteText()
           .should('be.visible')
           .and('have.text', this.data.pageDescriptionWhiteText);
-      });
+    });
 
+    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.specialCharacters);
+        mainPage.clickSearchBtn();
+        
+        mainPage
+            .elements
+            .getSearchNotFoundMessage()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundMessage);
+        mainPage
+            .elements
+            .getSearchNotFoundWidgetNotification()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundWidgetNotification + this.data.searchInputText.specialCharacters);
+    });
 });
 
