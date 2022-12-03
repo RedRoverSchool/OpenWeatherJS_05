@@ -27,6 +27,8 @@ class MainPage {
         getDifferentWeatherMenu: () => cy.get('#weather-widget span.owm-switch'),
         getFullConvertToDegreesCelsius: () => cy.get('#selected').filter(':not(".slideLeft")'),
         getFullConvertToDegreesFahrenheit: () => cy.get('#selected').filter(':not(".slideRight")'),
+        getSearchNotFoundMessage: () => cy.get('.sub.not-found'),
+        getSearchNotFoundWidgetNotification: () => cy.get('div.widget-notification')
     }
 
     clickSearchBtn() {
