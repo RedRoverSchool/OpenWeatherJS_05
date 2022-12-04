@@ -28,6 +28,7 @@
     "twitterUrl": "https://twitter.com/OpenWeatherMap",
     "howToStartPage": "https://openweathermap.org/appid",
     "apiHistory": "https://openweathermap.org/api#history",
+    "historyDataState": "https://openweathermap.org/api/history-data-state",
     "widgetPageLink": "https://openweathermap.org/widgets-constructor",
     "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
