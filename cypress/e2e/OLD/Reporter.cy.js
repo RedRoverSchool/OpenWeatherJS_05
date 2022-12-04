@@ -34,7 +34,7 @@ describe.skip('GroupReporters', () => {
         cy.get('.search-block button').click({force: true})
     };
 
-    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
+    it.skip('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', () => {
         const inputCity = "$$$";
 
         enterCityOrZipCode(inputCity);
@@ -197,13 +197,13 @@ describe.skip('GroupReporters', () => {
         cy.get('div.current-container h2').should('contain', cityName)
     })
 
-    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+    it.skip('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
         cy.get('.social a').each(($el, index) => {
             expect($el.attr('href')).to.include(this.data.socialIcons[index])
         });
     });
 
-    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
+    it.skip("AT_022.008 | Footer > Social media > Verify Github icon redirection", () => {
         cy.get(".social a:nth-child(6)").should("be.visible");
         cy.get(".social a:nth-child(6)").invoke('removeAttr', 'target').click({force: true})
         cy.url().should('eq', 'https://github.com/search?q=openweathermap&ref=cmdform');
@@ -279,5 +279,11 @@ describe.skip('GroupReporters', () => {
         cy.url().should('eq', 'https://openweathermap.org/api')
         cy.get('.breadcrumb a[href="/"]').should('contain', 'Home').click({force: true})
         cy.url().should('eq', 'https://openweathermap.org/')
+    });
+
+    it('AT_033.013 | Header > Navigation > Verify "Pricing" menu link', () => {
+        cy.get('#desktop-menu a[href="/price"]').click()
+        cy.url().should('eq', 'https://openweathermap.org/price')
+        cy.get('.breadcrumb-title').should('contain', 'Pricing')
     })
-});
+})

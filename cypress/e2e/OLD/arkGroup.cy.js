@@ -89,7 +89,7 @@ describe.skip('group Ark', () => {
     cy.url().should('eq', 'https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf')
   });
 
-  it('AT_017.003 |Support >How to start > Verify navigation to "API care recommendations" page', function () {
+  it.skip('AT_017.003 |Support >How to start > Verify navigation to "API care recommendations" page', function () {
     cy.get('#support-dropdown').click({ force: true })
     cy.get('#support-dropdown-menu:nth-child(2) a[href ="/appid"]').click({ force: true })
     cy.url().should('eq', 'https://openweathermap.org/appid')
@@ -297,7 +297,7 @@ describe.skip('group Ark', () => {
     cy.get('h2.orange-text').should('have.text','Where-to')
   })
 
-  it('AT_001.006 | Main page > Section with search > Verify that the city of is displayed', () => {
+  it.skip('AT_001.017 | Main page > Section with search > Verify that the city of is displayed', () => {
      const city ='Copenhagen'
     cy.get('div.search-container').should('be.visible')
       .click({force: true})

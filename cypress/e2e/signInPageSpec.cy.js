@@ -99,4 +99,15 @@ describe('SignIn test suit', () => {
     header.clickUserDropDownMenu()
     header.clickUserLogoutLink()
   })
+
+  it('AT_031.002 | Sign In > Account Dropdown Menu > Verify user is able to log out', function () {
+    header.clickSignInMenuLink()
+    signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
+    signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signInSuccessful)
+
+    header.clickUserDropDownMenu()
+    header.clickUserLogoutLink()
+    
+    signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signOutAllertMessage)
+  })
 });

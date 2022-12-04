@@ -9,12 +9,12 @@ describe.skip('group_javascript_for_qas', () => {
         cy.visit('https://openweathermap.org/');
     });
 
-    it('AT_028.001 | Footer > About us > Verify "About us" link redirects to the corresponding page', function () {
+    it.skip('AT_028.001 | Footer > About us > Verify "About us" link redirects to the corresponding page', function () {
         cy.get('a[href="/about-us"]').click();
         cy.url().should('include', '/about-us');
     });
 
-    it('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
+    it.skip('AT_015.002 | Header > Support > Ask a question > Verify error message for an unauthorised user', function () {
         const SIGN_IN_BARMENU_ITEM =  "li.user-li a";
         const SUPPORT_BARMENU_ITEM = "li.with-dropdown div"
         const ASK_QUESTION_SUB_SUPPORTMENU_ITEM ="ul#support-dropdown-menu a[href*='/questions']";
@@ -38,12 +38,12 @@ describe.skip('group_javascript_for_qas', () => {
         cy.get('.switch-container > div:nth-of-type(2)').should('contain', 'Metric: °C, m/s').click();
     });
 
-    it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
+    it.skip('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
         cy.get('.section-content a[href="/faq"]').click();
         cy.url().should('contain', '/faq');
     });
 
-    it('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
+    it.skip('AT_008.001 | Main menu > Guide > Verify URL and header is displayed on the page', function () {
         const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
         const MAINHEADER_H1_GUIDE_PAGE = "div.col-sm-12 h1";
 
@@ -52,7 +52,7 @@ describe.skip('group_javascript_for_qas', () => {
         cy.get(MAINHEADER_H1_GUIDE_PAGE).should("have.text", this.data.headers1)
     });
 
-    it('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
+    it.skip('AT_008.012 | Main menu > Guide > Verify subheaders are displayed on the page', function () {
         const GUIDE_BARMENU_ITEM = "div#desktop-menu a[href='/guide']";
         const SUBHEADERS_H2_GUIDE_PAGE = "main h2";
         const SUBHEADERS_H4_GUIDE_PAGE = "h4 b";
@@ -67,7 +67,7 @@ describe.skip('group_javascript_for_qas', () => {
         })
     });
 
-    it('AT_048.001 | User page > Billing plans > Verify page for billing plans', function () {
+    it.skip('AT_048.001 | User page > Billing plans > Verify page for billing plans', function () {
         cy.get("li.user-li a").contains("Sign in").click();
         cy.get("#user_email").type("rokhmanova@yahoo.com");
         cy.get("#user_password.form-control").type("qatest01");

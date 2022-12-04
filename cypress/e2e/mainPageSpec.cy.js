@@ -59,12 +59,9 @@ describe('mainPageSpec', () => {
     });
 
     it('AT_045.007 | Main page > Section with 8-day forecast > Verifying the first displayed day in the section matches today\'s date', function () {
-        const date = new Date().toUTCString().split(' ');
-        const correctDate = [];
-        correctDate.push(date[0], date[2], date[1]);
-        const todaysDate = correctDate.join(' ');
-
-        mainPage.elements.getForecastFirstDay().should('have.text', todaysDate);
+        cy.todaysDate().then(($todaysDate) => {
+            mainPage.elements.getForecastFirstDay().should('have.text', $todaysDate);
+        });
     });
 
     it('AT_001.002 | Main page > Section with search > Search City > On clicking the Search button, Dropdown menu with relevant options appears', function () {
@@ -125,11 +122,11 @@ describe('mainPageSpec', () => {
         let current_date = String();
 
         mainPage.elements.getForecastDays().should('have.length', this.data.forecastDaysLength);
-        mainPage.elements.getCurrentDate().invoke('text').then(function  (date)  {
+        mainPage.elements.getCurrentDate().invoke('text').then(function (date) {
             current_date = date.split(',')[0]
-        
         });
-        mainPage.elements.getForecastFirstDay().invoke('text').then((date) =>  {
+
+        mainPage.elements.getForecastFirstDay().invoke('text').then((date) => {
             expect(Date.parse(date)).to.eql(Date.parse(current_date));
         });
     });
@@ -142,7 +139,7 @@ describe('mainPageSpec', () => {
             mainPage.elements.getDailyDetailContainerWeather().should('be.visible');
             mainPage.elements.getTimeOfDayInDetailedWeather()
                 .should('have.text', this.data.weatherDetails)
-    });
+        });
     });
 
     it('AT_001.013 | Main page > Search section > Verify "Search City" valid input shows dropdown', function () {
@@ -155,37 +152,100 @@ describe('mainPageSpec', () => {
         mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
-                .getSearchResultsDropdown()
-                .should('exist')
+            .getSearchResultsDropdown()
+            .should('exist')
 
         mainPage.clickSearchResultFromDropdown()
         cy.url().should('include', '/city/')
         mainPage.elements
-                .getCityNameSubHeaderTitle()
-                .should('contain', this.data.searchInputText.cityName)
+            .getCityNameSubHeaderTitle()
+            .should('contain', this.data.searchInputText.cityName)
     })
 
     it('AT_001.004 | Main page > Section with search > Search City > Verify weather icon and current weather in Metric system are displayed', function () {
         mainPage.setSearchInputText(this.data.searchInputText.cityName);
         mainPage.clickSearchBtn();
         mainPage.elements
-                .getSearchResultsDropdown()
-                .should('exist')
+            .getSearchResultsDropdown()
+            .should('exist')
         mainPage.clickSearchResultFromDropdown()
         mainPage.elements
-                .getCityNameSubHeaderTitle()
-                .should('contain', this.data.searchInputText.cityName)
+            .getCityNameSubHeaderTitle()
+            .should('contain', this.data.searchInputText.cityName)
 
         mainPage.elements
-                .getWeatherIcon()
-                .should('exist')
+            .getWeatherIcon()
+            .should('exist')
         mainPage.elements
-                .getToggleMetric()
-                .should('exist')
+            .getToggleMetric()
+            .should('exist')
         mainPage.elements
-                .getTemperatureHeading()
-                .should('contain','°C')
+            .getTemperatureHeading()
+            .should('contain', '°C')
     })
-    
+
+    it('AT_005.003 | Main Page > Verify the website name and description', function () {
+        mainPage.elements
+            .getMainPageContent()
+            .should('be.visible')
+            .and('have.text', this.data.mainText);
+        mainPage.elements
+            .getPageDescriptionWhiteText()
+            .should('be.visible')
+            .and('have.text', this.data.pageDescriptionWhiteText);
+    });
+
+    it('AT_004.003 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
+        const result = Array();
+
+        mainPage.clickToggleTempretureDefault();
+        mainPage.elements.getFullConvertToDegreesFahrenheit();
+        mainPage.elements.getTemperatureHeading()
+            .invoke('text')
+            .then((tempF) => {
+                let formula_convert_tempF_to_tempC = Math.round((parseInt(tempF) - 32) * 5 / 9);
+                result.push(formula_convert_tempF_to_tempC, formula_convert_tempF_to_tempC - 1, formula_convert_tempF_to_tempC + 1)
+            });
+        mainPage.clickToggleTempreture();
+        mainPage.elements.getFullConvertToDegreesCelsius();
+
+        mainPage.elements.getTemperatureHeading()
+            .invoke('text')
+            .then((tempC) => {
+                expect(result).to.includes(parseInt(tempC))
+            });
+    });
+
+    it('AT_005.005 | Main page > Verifying the website"s description is correct and visible', function () {
+        mainPage.elements.getPageDescriptionWhiteText()
+          .should('be.visible')
+          .and('have.text', this.data.pageDescriptionWhiteText);
+    });
+
+    it('AT_001.006 | Main page > Section with search > Verify text message when entering special characters', function () {
+        mainPage.setSearchInputText(this.data.searchInputText.specialCharacters);
+        mainPage.clickSearchBtn();
+        
+        mainPage
+            .elements
+            .getSearchNotFoundMessage()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundMessage);
+        mainPage
+            .elements
+            .getSearchNotFoundWidgetNotification()
+            .should('be.visible')
+            .and('have.text', this.data.searchInputText.notFoundWidgetNotification + this.data.searchInputText.specialCharacters);
+    });
+
+    it('AT_001.017 | Main page > Section with search > Verify that the city of is displayed', function () {
+        mainPage.elements.getSearchInput().should('be.visible')
+        .click({force: true})
+        .type(this.data.city_Name)
+
+        mainPage.clickSearchBtn()
+        mainPage.clickSearchResultFromDropdown()
+        mainPage.elements.getCityNameSubHeaderTitle().should('have.text', this.data.searchResultCityName)
+    })
 });
 
