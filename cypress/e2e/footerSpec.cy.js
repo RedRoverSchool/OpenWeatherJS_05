@@ -113,6 +113,12 @@ describe('Footer test suite', () => {
         cy.title().should('include', this.faqPage.h1Title)
     });
 
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        footer.elements.getSocialMediaIconLinks().each(($el, index) => {
+        expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
+
     it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
         footer.elements.getAllowAllCookiesBtn().should('be.visible');
         footer.clickAllowAllCookiesBtn();
@@ -120,3 +126,4 @@ describe('Footer test suite', () => {
         footer.elements.getCookiesMessageField().should('not.be.visible');
     });
 });
+            
