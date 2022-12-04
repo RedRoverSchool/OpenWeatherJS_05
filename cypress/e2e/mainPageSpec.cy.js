@@ -237,5 +237,15 @@ describe('mainPageSpec', () => {
             .should('be.visible')
             .and('have.text', this.data.searchInputText.notFoundWidgetNotification + this.data.searchInputText.specialCharacters);
     });
+
+    it('AT_001.017 | Main page > Section with search > Verify that the city of is displayed', function () {
+        mainPage.elements.getSearchInput().should('be.visible')
+        .click({force: true})
+        .type(this.data.city_Name)
+
+        mainPage.clickSearchBtn()
+        mainPage.clickSearchResultFromDropdown()
+        mainPage.elements.getCityNameSubHeaderTitle().should('have.text', this.data.searchResultCityName)
+    })
 });
 
