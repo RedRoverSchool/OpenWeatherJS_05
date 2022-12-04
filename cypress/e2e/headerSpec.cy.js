@@ -220,4 +220,12 @@ describe('Header test suit', () => {
         cy.url().should('include', this.url.guidePage);
         guidePage.elements.getTitleGuide().should('be.visible');
     });
+
+    it.only('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        header.clickGuideMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText)
+    });
 });
