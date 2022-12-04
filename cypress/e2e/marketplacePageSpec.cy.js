@@ -9,6 +9,9 @@ const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
 const historyDataState = new HistoryDataState();
+const historyBulksNew = new HistoryBulksNewPage();
+const historicalWeatherDataByStatePage = new HistoricalWeatherDataByStatePage();
+const historyDataState = new HistoryDataState();
 
 describe('Marketplace page test suite', () => {
 
