@@ -538,4 +538,5 @@ describe.skip('Group jScript_group', () => {
         cy.get('#weather-widget  input[type="email"]').clear().type(this.data.email);
         cy.get('#weather-widget  input[type="email"]').should('have.value',this.data.email);
     });
+    
 });

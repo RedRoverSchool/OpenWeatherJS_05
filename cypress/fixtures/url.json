@@ -34,4 +34,5 @@
     "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new",
     "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform",
     "questionsUrl": "https://home.openweathermap.org/questions"
+    "askQuestionPage": "https://home.openweathermap.org/questions"
 }
