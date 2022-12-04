@@ -32,5 +32,6 @@
     "dashboardPageLink": "https://openweathermap.org/weather-dashboard",
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
     "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new",
-    "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform"
+    "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform",
+    "historyForecastBulk": "/history_forecast_bulks/new"
 }
