@@ -104,4 +104,11 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.url.FAQPage);
         cy.title().should('include', this.faqPage.h1Title)
     });
+
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        footer.elements.getSocialMediaIconLinks().each(($el, index) => {
+        expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
 });
+            
