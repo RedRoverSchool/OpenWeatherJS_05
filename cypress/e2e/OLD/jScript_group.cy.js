@@ -57,7 +57,7 @@ describe.skip('Group jScript_group', () => {
         cy.url().should('eq', 'https://www.drupal.org/project/olowm');
     });
 
-    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
+    it.skip("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
         cy.get('#desktop-menu a[href="/weathermap"]').click({force: true});
         cy.get('.logo').click();
         cy.url().should('include', 'https://openweathermap.org/');
@@ -252,7 +252,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('head title').should('include.text', 'Frequently Asked Questions');
     });
 
-    it('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
+    it.skip('AT_002.010 | Header > Clicking the logo > Verify that the logo is clickable', function () {
         cy.get('li.logo').click({force: true});
     
         cy.url().should('include', 'https://openweathermap.org/');
@@ -323,7 +323,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('h1 .orange-text').should('have.text', 'OpenWeather');
     });
 
-    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+    it.skip('AT_044.003 | Footer > PopUps > Manage cookies', function () {
         cy.get('#stick-footer-panel button').should('be.visible');
         cy.get('#stick-footer-panel button').should('include.text', 'Allow all');
         cy.get('#stick-footer-panel button').click();
@@ -340,7 +340,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('h1.breadcrumb-title').should('be.visible').and('include.text','Weather dashboard');
     });
 
-    it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
+    it.skip('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
         cy.get('#desktop-menu [href*="blog"]').invoke('removeAttr', 'target').click({force: true});
         
         cy.get('#blog-categories [for="weather"] a').should('have.text', this.data.blogPageWeatherFilter);

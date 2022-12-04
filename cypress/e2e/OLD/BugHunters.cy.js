@@ -26,12 +26,12 @@ describe.skip('groupBugHunters', () => {
     cy.get('.panel-body').should('have.text', 'Signed in successfully.')
   })
 
-  it.skip ('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
+  it.skip('AT_029.001 | Footer >Download OpenWeather App> Verify two icons are visible', function () {
     cy.get('.my-5 a[href*=apple]').should('be.visible')
     cy.get('.my-5 a[href*=google]').should('be.visible')
   })
 
-  it.skip ("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function () {
+  it.skip("AT_029.002 | Footer >Download OpenWeather App> Download on the App Store' button link", function () {
     cy.get('.my-5 a[href*=apple]').invoke('removeAttr', 'target').click()
     cy.url().should('eq', 'https://apps.apple.com/gb/app/openweather/id1535923697')
   })
@@ -65,7 +65,7 @@ describe.skip('groupBugHunters', () => {
     cy.url().should('contain', '/faq')
   })
 
-  it.skip ("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function () {
+  it.skip("AT_029.003 | Footer >Download OpenWeather App> Download on the Google play' button link", function () {
     cy.get('.my-5 a[href*=google]').invoke('removeAttr', 'target').click()
     cy.url().should('eq', 'https://play.google.com/store/apps/details?id=uk.co.openweather')
   })
@@ -73,7 +73,7 @@ describe.skip('groupBugHunters', () => {
   it.skip('AT_008.007 | Main menu > Guide > Verify user will be redirected to new url "/guide"', () => {
     cy.get('#desktop-menu a[href="/guide"]').click()
     cy.url().should('be.equal', 'https://openweathermap.org/guide')
-    cy.get('h1.breadcrumb-title').should('have.text','Guide')
+    cy.get('h1.breadcrumb-title').should('have.text', 'Guide')
   })
 
   it('AT_033.011 | Header > Navigation > Verify "API" menu link', function () {
@@ -175,7 +175,7 @@ describe.skip('groupBugHunters', () => {
     cy.get('@APIkeys')
       .should('have.length', 2)
       .should('include.text', 'testAPIkey')
-    
+
     //delete created API key
     cy.get('@APIkeys').each(($el) => {
       if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
@@ -258,7 +258,7 @@ describe.skip('groupBugHunters', () => {
 
     cy.get('.api-keys tbody tr').as('APIkeys').each(($el) => {
       if ($el.find('td:nth-child(2)').text() == 'testAPIkey') {
-        cy.wrap($el).find('.fa-edit').click()        
+        cy.wrap($el).find('.fa-edit').click()
       }
     })
 
@@ -278,11 +278,11 @@ describe.skip('groupBugHunters', () => {
 
     //delete renamed API key 
     cy.get('@APIkeys').each(($el) => {
-      if($el.find('td:nth-child(2)').text() == 'NEW_KEY_NAME') {
-          cy.wrap($el).find('.fa-remove').click()
+      if ($el.find('td:nth-child(2)').text() == 'NEW_KEY_NAME') {
+        cy.wrap($el).find('.fa-remove').click()
       }
     })
-  })  
+  })
 
   it('AT_001.016 | Main page > Section with search > Search City', () => {
     const city = 'Boston';
@@ -343,25 +343,25 @@ describe.skip('groupBugHunters', () => {
     let aboutUs = 'a[href="/about-us"]'
     let buyBySubscription = 'a[href="https://home.openweathermap.org/subscriptions"]'
 
-    cy.get('li.user-li').contains('Sign in').click({ force: true })
-    cy.get('#user_email')
-      .should('have.attr', 'placeholder', 'Enter email')
-      .type('oforostinko@gmail.com')
-    cy.get('#user_password.form-control')
-      .should('have.attr', 'placeholder', 'Password')
-      .type('12341234')
-    cy.get('#user_remember_me').check().should('be.checked')
-    cy.contains('Submit').click()
-    cy.get('.panel-body').should('have.text', 'Signed in successfully.')
-    
-    cy.get(aboutUs).click()
-    cy.get(buyBySubscription).click()
+      cy.get('li.user-li').contains('Sign in').click({ force: true })
+      cy.get('#user_email')
+        .should('have.attr', 'placeholder', 'Enter email')
+        .type('oforostinko@gmail.com')
+      cy.get('#user_password.form-control')
+        .should('have.attr', 'placeholder', 'Password')
+        .type('12341234')
+      cy.get('#user_remember_me').check().should('be.checked')
+      cy.contains('Submit').click()
+      cy.get('.panel-body').should('have.text', 'Signed in successfully.')
 
-    cy.url().should('include', '/subscriptions')   
-  });
+      cy.get(aboutUs).click()
+      cy.get(buyBySubscription).click()
+
+      cy.url().should('include', '/subscriptions')
+    });
 
   })
- 
+
 
   it('AT_026.004 | Maps > Click on any city on the map and see the data', function () {
     cy.get('button.stick-footer-panel__link').wait(6000).click();
@@ -372,7 +372,7 @@ describe.skip('groupBugHunters', () => {
 
     })
   })
-  
+
   it('AT_041.003 | Header > User > My API keys >', () => {
     cy.get('li.user-li').contains('Sign in').click({
       force: true
@@ -395,15 +395,15 @@ describe.skip('groupBugHunters', () => {
     cy.get('.alert').contains('You can generate as many API keys as needed for your subscription.').should('be.visible')
   });
 
-it('AT_033.018 | Header > Navigation > API', () => {
-  cy.visit('/')
-  cy.get('#desktop-menu a[href="/api"]').click({
-    force: true
-  })
-  cy.url().should('include', '/api')
-});
+  it('AT_033.018 | Header > Navigation > API', () => {
+    cy.visit('/')
+    cy.get('#desktop-menu a[href="/api"]').click({
+      force: true
+    })
+    cy.url().should('include', '/api')
+  });
 
-  it.skip('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function() {
+  it.skip('AT_021.005 | Footer > Widgets> Verify redirect to Widgets constructor page', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('push@mailto.plus')
     cy.get('#user_password').type('123456789')
@@ -418,7 +418,7 @@ it('AT_033.018 | Header > Navigation > API', () => {
       .should('have.text', 'Widgets constructor')
   })
 
-  it('AT_021.006 | Footer > Widgets> Verify there are 9 widgets on the page', function(){
+  it('AT_021.006 | Footer > Widgets> Verify there are 9 widgets on the page', function () {
     cy.get('.user-li a[href*=sign_in]').click()
     cy.get('.input-group #user_email').type('push@mailto.plus')
     cy.get('#user_password').type('123456789')
@@ -439,12 +439,12 @@ it('AT_033.018 | Header > Navigation > API', () => {
 
   it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
     cy.get('#desktop-menu > ul').each(($el, ind) => {
-        expect($el.text()).to.include(this.data.mainMenu[ind])
+      expect($el.text()).to.include(this.data.mainMenu[ind])
     })
-    
+
     cy.get('#support-dropdown').click()
     cy.get('#support-dropdown-menu').each(($el, ind) => {
-        expect($el.text()).to.include(this.data.supportDropdownMenu[ind])
+      expect($el.text()).to.include(this.data.supportDropdownMenu[ind])
     })
 
     cy.get('#support-dropdown-menu a[href="/faq"]').click()
@@ -452,11 +452,11 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.get('h1.breadcrumb-title').should('have.text', 'Frequently Asked Questions')
   })
 
-  it ('AT_001.011 Main page > Section with search >Selected city wheather info is displayed', () => {
+  it('AT_001.011 Main page > Section with search >Selected city wheather info is displayed', () => {
     let cityName = 'Italy'
     let searchCity = '.search-container > input'
     let btnSubmit = '.button-round'
-    let dataTime ='.current-container > :nth-child(1)'
+    let dataTime = '.current-container > :nth-child(1)'
 
     cy.visit('https://openweathermap.org')
     cy.get(searchCity).click().type(cityName)
@@ -465,11 +465,11 @@ it('AT_033.018 | Header > Navigation > API', () => {
       .should('be.visible')
     cy.get(':nth-child(1) > [style="width: 140px;"]').click()
     cy.get('.current-container > :nth-child(1)').should('contain.text', cityName)
-    cy.get(dataTime ).should('contain', 'Nov')
+    cy.get(dataTime).should('contain', 'Nov')
   })
 
-  it ('AT_051.001 API > Testing Home button>Verify Home link is visible on the right upper side of the page', () => {
-    let hrefHome='.breadcrumb > :nth-child(1) > a'
+  it('AT_051.001 API > Testing Home button>Verify Home link is visible on the right upper side of the page', () => {
+    let hrefHome = '.breadcrumb > :nth-child(1) > a'
     cy.visit('/')
 
     cy.get('#desktop-menu a[href="/api"]').click()
@@ -477,7 +477,7 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.get(hrefHome).should('be.visible')
   })
 
-  it('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
+  it.skip('AT_017.004 | Support > How to start > Verify the newly opened page title is Technology', () => {
     cy.get('#support-dropdown-menu a[href="/appid"]').click({force: true})
     cy.get('p a[href="/technology"] ').click()
     cy.get('.breadcrumb-title').should('have.text', 'Technology')
@@ -498,4 +498,32 @@ it('AT_033.018 | Header > Navigation > API', () => {
     cy.url().should('include', '/payments')
     cy.get('#myTab li.active').should('be.visible')
     })
-})
+
+  it('AT_009.009 | Main menu > Marketplace> Verifying that History bulk item is displayed', () => {
+    cy.get('#desktop-menu a[href="https://home.openweathermap.org/marketplace"]').click({force: true})
+    cy.get('#desktop-menu a[href*="marketplace"]').click({force: true})
+    cy.get('#desktop-menu a[href*="marketplace"]').invoke('removeAttr', 'target').click({force: true})
+    cy.get('#desktop-menu a[href="/history_bulks/new"]').should('contain', "History Bulk").and('be.visible')
+  })
+
+  it('AT_007.004 | Main page> Create an account', () => {
+    cy.get('.user-li a[href="https://openweathermap.org/home/sign_in"]').click({force: true})
+    cy.get('a[href="/users/sign_up"]').click()
+    cy.url().should('include', '/users/sign_up')
+    cy.get('#user_username')
+      .should('have.attr', 'placeholder', 'Username').click()
+      .type('Wies')
+    cy.get('#user_email')
+      .should('have.attr', 'placeholder', 'Enter email').click()
+      .type('wiesvictoriaqa@gmail.com')
+    cy.get('#user_password')
+      .should('have.attr', 'placeholder', 'Password').click()
+      .type('12345678wies')
+    cy.get('#user_password_confirmation')
+      .should('have.attr', 'placeholder', 'Repeat Password').click()
+      .type('12345678wies')
+    cy.get('#agreement_is_age_confirmed').check().should('be.checked')
+    cy.get('#agreement_is_accepted').check().should('be.checked')
+    cy.get('.btn').click()
+  });
+});

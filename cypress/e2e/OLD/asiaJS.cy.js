@@ -44,7 +44,7 @@ describe.skip('asiaJS', () => {
     cy.url().should('include', 'terms_and_conditions_of_use.pdf');
   });
 
-  it('AT_003.002 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
+  it.skip('AT_004.003 | Main page > Section with search > Verify the converted temperature in °C is correct', function () {
     const Imperial_F = '#selected:not(.slideRight)';
     const Metric_C = '#selected:not(.slideLeft)';
     cy.get('.option')
@@ -111,8 +111,8 @@ describe.skip('asiaJS', () => {
       });
   });
 
-  it('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', () => {
-    cy.get('#desktop-menu a[href="/our-initiatives"]').click();
+  it.skip('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', () => {
+    cy.get('#desktop-menu a[href="/our-initiatives"]').click({force: true});
     cy.get('.ow-btn').click();
     cy.url().should('include', '/student-initiative');
     cy.get('.topic h1').should('have.text', 'Student initiative');

@@ -9,7 +9,10 @@ class GuidePage {
         getDedicatedWeatherProductsText: () => cy.get('div.col-sm-12 > ol > :nth-child(14)'),
         getOpenWeatherNwnText: ()=> cy.get('div.col-sm-12 :nth-child(21)'),
         getHowToStartText: ()=> cy.get('div.col-sm-12 > ol > :nth-child(24)'),
-        getFirstLearnMoreButton: ()=> cy.get('ol [href="/api#current"]')
+        getFirstLearnMoreButton: ()=> cy.get('ol [href="/api#current"]'),
+        getSecondButtonLearnMore: ()=> cy.get('ol [href="/api#history"]'),
+        getSubHeaders2Level: ()=> cy.get('main h2'),
+        getSubHeaders4Level: ()=> cy.get('h4 b')        
     };
 
     clickHomeMenuLink() {
@@ -23,6 +26,10 @@ class GuidePage {
 
     clickFirstLearnMoreButton() {
         this.elements.getFirstLearnMoreButton().click();
+    };
+
+    clickLearnMoreSecondButton(){
+        this.elements.getSecondButtonLearnMore().click({force: true});
     }
 }
 export default GuidePage;

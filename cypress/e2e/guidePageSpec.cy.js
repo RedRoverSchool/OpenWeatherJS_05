@@ -13,9 +13,6 @@ const apiPage = new ApiPage();
 
 describe('Guide page test suite', () => {
     beforeEach(function () {
-        cy.fixture('asiaJS').then(data => {
-            this.data = data
-        });
         cy.fixture('url').then(url => {
             this.url = url
         });
@@ -31,30 +28,12 @@ describe('Guide page test suite', () => {
         cy.visit('/');
     });
 
-    it('AT_008.003 | Main menu > Guide | Verifying the link on the page "Guide"', function () {
-        header.elements.getGuideMenuLink().should('contain.text', this.data.menuLink.guide.text);
-        header.clickGuideMenuLink(); 
-
-        cy.url().should('include', this.data.menuLink.guide.endPoint);
-        guidePage.elements.getTitleGuide().should('be.visible');
-    });
-    
     it('AT_008.008 | Main menu > Guide > Verify the user is redirected to new url', function () {
         header.clickGuideMenuLink();
 
         cy.url().should('be.equal', this.url.guidePage);
         guidePage.elements.getPageDescription().should('have.text', this.text.pageDescriptionText);
     })
-
-
-    it('AT_008.011 | Main menu > Guide > verify button "Home"', function () {
-        header.clickGuideMenuLink();
-        cy.url().should('be.equal', this.url.guidePage);
-
-        guidePage.clickHomeMenuLink();
-        cy.url().should('be.equal', this.url.mainPageLink);
-    });
-    
 
     it('AT_008.004 | Main menu > Guide | Verify the button "Subscribe to One Call by Call" is clickable and user be redirected new url', function () {
         header.clickGuideMenuLink();
@@ -82,4 +61,31 @@ describe('Guide page test suite', () => {
         cy.url().should('be.equal', this.url.apiCurrent);
         apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title);
     });
+
+    it('AT_008.013 | Guide > Verify the second button "Learn more" is clickable and user will be redirected new url', function () {
+        header.clickGuideMenuLink();
+        guidePage.clickLearnMoreSecondButton();
+        cy.url().should('be.equal', this.url.apiHistory);
+        apiPage.elements.getWeatherApiTitle().should('have.text', this.apiPage.h1Title)
+    });
+
+    it('AT_008.001 | Guide > Verify URL and header is displayed on the page', function () {
+        header.clickGuideMenuLink();
+    
+        cy.url().should('be.equal', this.url.guidePage);
+        guidePage.elements.getPageDescription().should("have.text", this.text.pageDescriptionText);
+    });
+
+    it('AT_008.012 | Guide > Verify subheaders are displayed on the page', function () {
+        header.clickGuideMenuLink();
+
+        guidePage.elements.getSubHeaders2Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers2[idx])
+        })
+
+        guidePage.elements.getSubHeaders4Level().each(($el, idx) => {
+            expect($el.text()).to.include(this.text.headers4[idx])
+        })
+    });
+
 });

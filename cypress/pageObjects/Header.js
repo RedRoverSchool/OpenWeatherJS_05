@@ -23,7 +23,11 @@ class Header {
         getPaymentMenuLink: () => cy.get('.dropdown-menu a[href="/payments"]'),
         getSupportHowToStartLink: () => cy.get('#support-dropdown-menu a[href ="/appid"]'),
         getSupportDropDownMenuList: () => cy.get('#support-dropdown-menu li'),
+        getUserDropdownMenuList: () => cy.get('#user-dropdown-menu li'),
         getUserDropDownAllMenuVisible: () => cy.get('#user-dropdown-menu'),
+        getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]'),
+        getPricingLink: () => cy.get('#desktop-menu a[href="/price"]'),
+        getMainMenuListLink: () => cy.get('#desktop-menu > ul'),
         getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]'),
         getSupportAskQuestionLink: () => cy.get('#support-dropdown-menu a[href$="/questions"]')
     };
@@ -82,17 +86,16 @@ class Header {
 
     clickGuideMenuLink() {
         this.elements.getGuideMenuLink().click({ force: true });
-    }
+    };
 
     clickDashboardMenu() {
         this.elements.getDashboardMenuLink().invoke('removeAttr', 'target').click({force: true});
-    }
+    };
 
     clickSignInMenuLink() {
         this.elements.getSignInMenuLink().click({force : true})
     };
 
-    
     clickUserLogoutLink() {
         this.elements.getUserLogoutLink().click({force : true})
     };
@@ -103,27 +106,33 @@ class Header {
     };
     
     clickUserDropDownMenu() {
-        this.elements.getUserDropDownMenu().click()
-    }
+        this.elements.getUserDropDownMenu().click({force:true})
+    };
 
     clickMyApiKyesLink() {
         this.elements.getMyApiKeysLink().click()
-    }
-
+    };
 
     clickUserDropDownMyApiKeysLink() {
         this.elements.getUserDropDownMyApiLink().click({force : true})
     };
+
     clickPaymentMenuLink() {
         this.elements.getPaymentMenuLink().click({force : true})
     };
+
     clickSupportHowToStartLink() {
         this.elements.getSupportHowToStartLink().click({ force: true });
     };
+
     clickUserDropDownMyProfileLink() {
         this.elements.getUserDropDownMyProfileLink().click({forse : true})
     };
-    
+
+    clickPricingLink() {
+        this.elements.getPricingLink().click({ force: true });
+    };
+
     clickSupportAskQuestionLink(){
         this.elements.getSupportAskQuestionLink()
         .invoke('removeAttr', 'target')

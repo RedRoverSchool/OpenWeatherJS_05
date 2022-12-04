@@ -15,8 +15,14 @@ describe('our_initiatives', () => {
             this.data = data;
         });
         cy.fixture('bugHunters').then(data => {
-                this.bugHunters = data;
-            });
+            this.bugHunters = data;
+        });
+        cy.fixture('url').then(data => {
+            this.url = data;
+        });
+        cy.fixture('titles').then(data => {
+            this.titles = data;
+        })
         cy.visit('/');
 
     })
@@ -35,4 +41,14 @@ describe('our_initiatives', () => {
             cy.url().should('be.equal', this.bugHunters.urlStudent);
             studentInititative.elements.getStudentInitiativeTitle().should('have.text', this.bugHunters.titleStudentInitiative);
     });
+
+    it('AT_046.004 | Main page > Our initiatives > button "Learn more" > page has text Student initiative', function(){
+        header.clickInitiativePage();
+        ourInitiative.clickLearnMoreButton();
+        
+        cy.url().should('include', this.url.studentInitiativeUrl);
+        studentInititative.elements.getStudentInitiativeTitle()
+            .should('have.text', this.titles.studentInitiativeTitle);
+    });
+    
 })

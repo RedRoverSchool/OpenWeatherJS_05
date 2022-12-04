@@ -11,9 +11,6 @@ const paymentPage = new PaymentPage();
 describe('Payment page test suite', () => {
 
     beforeEach(function (){
-        cy.fixture('asiaJS').then(payment => {
-            this.payment = payment;
-        });
         cy.fixture('url').then(url => {
             this.url = url;
         });
@@ -28,10 +25,8 @@ describe('Payment page test suite', () => {
 
     it('AT_042.005 | User page >My payments>Verify that text displays on the page', function () {
         header.clickSignInMenuLink();
-        signInPage.signIn(this.payment.email, this.payment.password);
+        signInPage.signIn(this.userProfile.userEmail, this.userProfile.userPassword);
 
-        header.elements.getUserDropDownMenu()
-        .should('contain.text', this.payment.textAsia);
         header.clickUserDropDownMenu();
         header.clickPaymentMenuLink();
         cy.url().should('include', this.url.urlPayment);
@@ -52,4 +47,16 @@ describe('Payment page test suite', () => {
         paymentPage.elements.getColomnText().eq(1).should('contain', this.paymentsTable.paymentsTable[1])
         paymentPage.elements.getColomnText().eq(2).should('contain', this.paymentsTable.paymentsTable[2])
       });
+
+      it('AT_042.002 | User page >My payments>Verify that text displayed on the page', function () {
+        header.clickSignInMenuLink()
+        signInPage.signIn(this.userProfile.userProfileLtByJS.realEmail, this.userProfile.userProfileLtByJS.password)
+        signInPage.elements.getSignOutAllert().should('be.visible').and('have.text', this.userProfile.signInSuccessful)
+        header.clickUserDropDownMenu()
+        header.clickPaymentMenuLink()
+
+        paymentPage.elements.getColomnText().should('have.length', 4).each(($el, i) => {
+            expect($el.text()).to.include(this.paymentsTable.paymentsTable[i])
+        })       
+    })
 });

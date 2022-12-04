@@ -7,6 +7,7 @@
   "resetYourPassord": "Enter your email address and we will send you a link to reset your password.",
   "textEmailNotFound": "Email not found",
   "urlUsersPassword": "https://home.openweathermap.org/users/password",
+  "signInSuccessful": "Signed in successfully.",
 
 
   "userProfileBugHunters": {
@@ -29,7 +30,10 @@
   "userProfileLtByJS": {
     "userName": "LtByJS",
     "realEmail": "ltbyjs.qa@gmail.com",
-    "password": "12345678"
-    }
+    "password": "12345678",
+    "newpassword": "12345678"
+    },
+
+    "messageSuccessPasswordChange": "Password was changed successfully"
     
 }
