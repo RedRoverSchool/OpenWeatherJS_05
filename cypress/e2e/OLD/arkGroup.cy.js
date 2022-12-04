@@ -297,7 +297,7 @@ describe.skip('group Ark', () => {
     cy.get('h2.orange-text').should('have.text','Where-to')
   })
 
-  it('AT_001.006 | Main page > Section with search > Verify that the city of is displayed', () => {
+  it.skip('AT_001.017 | Main page > Section with search > Verify that the city of is displayed', () => {
      const city ='Copenhagen'
     cy.get('div.search-container').should('be.visible')
       .click({force: true})
