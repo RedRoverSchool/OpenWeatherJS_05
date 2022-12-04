@@ -3,10 +3,12 @@
 import Header from "../pageObjects/Header.js";
 import DashboardPage from "../pageObjects/DashboardPage.js";
 import SignInPage from "../pageObjects/SignInPage.js";
+import QuestionsPage from "../pageObjects/QuestionsPage.js";
 
 const header = new Header();
 const dashboardPage = new DashboardPage();
 const signInPage = new SignInPage();
+const questionsPage = new QuestionsPage();
 
 describe('Dashboard page test suite', () => {
 
@@ -16,6 +18,12 @@ describe('Dashboard page test suite', () => {
         });
         cy.fixture('signInPage').then(signInData => {
             this.signInData = signInData;
+        });
+        cy.fixture('url').then(urlData => {
+            this.urlData = urlData;
+        });
+        cy.fixture('questionsPage').then(questionsData => {
+            this.questionsData = questionsData;
         });
         cy.visit('/');
     });
@@ -34,5 +42,14 @@ describe('Dashboard page test suite', () => {
 
         cy.url().should('eq', this.signInData.signInUrlUsers)
         signInPage.elements.getSignOutAllert().should('have.text', this.signInData.signOutAllertMessage)
+    });
+
+    it('AT_025.010 | Dashboard > Verify the first button "Contact us" is clickable and redirects User to the Questions page', function () {
+        header.clickDashboardMenu()
+
+        dashboardPage.clickContactUsButton()
+
+        cy.url().should('eq', this.urlData.questionsUrl)
+        questionsPage.elements.getHeadLine().should('have.text', this.questionsData.headLineText)
     });
 });
