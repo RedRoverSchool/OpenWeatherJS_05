@@ -104,8 +104,10 @@ describe('SignIn test suit', () => {
     header.clickSignInMenuLink()
     signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
     signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signInSuccessful)
+
     header.clickUserDropDownMenu()
     header.clickUserLogoutLink()
+    
     signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signOutAllertMessage)
   })
 });
