@@ -29,6 +29,9 @@ describe('Marketplace page test suite', () => {
             cy.fixture('historicalWeatherDataByStatePage').then(data => {
                   this.historicalWeatherDataByStatePage = data;
             });
+            cy.fixture('historyBulksNew').then(data => {
+                  this.historyBulksNew = data;
+            });
             cy.fixture('historyDataState').then(historyDataState => {
                   this.historyDataState = historyDataState;
             });
@@ -142,6 +145,15 @@ describe('Marketplace page test suite', () => {
             marketplacePage.clickHistoricalWeatherData ()
             cy.url().should('include', this.urls.historicalWeatherData);
       });
+      
+      it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+        
+            marketplacePage.clickHistoryBulkLink();
+            cy.url().should('eq', this.urls.placeOrderHistoryBulk);
+            historyBulksNew.elements.getHistoryBulksNewTitle().should('have.text', this.historyBulksNew.historyBulksNewTitle);
+      });
+      
 
       it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
             header.clickMarketplaceMenuLink();
