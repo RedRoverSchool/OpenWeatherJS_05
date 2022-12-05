@@ -252,7 +252,7 @@ describe('mainPageSpec', () => {
         mainPage.elements.getCityNameSubHeaderTitle().should('have.text', this.data.searchResultCityName)
     })
 
-    it.only('AT_024.002 | After clicking on "send" button, the form window automatically disappears', function () {
+    it('AT_024.002 | After clicking on "send" button, the form window automatically disappears', function () {
         mainPage.clickDifferentWeatherMenu()
         mainPage.clickDifferentWeatherIcon(this.data.differentWeatherIcons[0])
         mainPage.clickDifferentWeatherMoreOptionsBtn()
