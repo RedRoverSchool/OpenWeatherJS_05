@@ -125,5 +125,14 @@ describe('Footer test suite', () => {
         
         footer.elements.getCookiesMessageField().should('not.be.visible');
     });
+
+    it('AT_022.006 | Footer > Social media> Check LinkedIn icon is clickable', function () {
+        footer.elements.getLinkedIn().should('be.visible');
+        footer.clickLinkedInk();
+  
+        cy.url().should('eq', this.url.linkedinUrl);
+        cy.title().should('include', 'LinkedIn Login');
+    });
+ 
 });
             
