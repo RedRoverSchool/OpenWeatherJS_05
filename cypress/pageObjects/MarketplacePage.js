@@ -9,6 +9,7 @@ class MarketplacePage {
             getPlaceOrderHistoryBulk: () => cy.get('div.button-container a[href="/history_bulks/new"]'),
             getHistoricalDataArchivesDocumentationLink: () => cy.get('a[href*="history-data-state"]'),
             getHistoryForecastBulk: () => cy.get('.product a[href*="forecast"]:not(.button-round)'),
+            getHistoricalWeatherData: () => cy.get('.product a[href="/zip_code_data/new"]:not(.button-round)'),
             getHistoryBulkLink: () => cy.get('div.product a[href="/history_bulks/new"]:not(.button-round)')
       }
 
@@ -26,6 +27,10 @@ class MarketplacePage {
 
       clickHistoryForecastBulk () { 
             this.elements.getHistoryForecastBulk().click();
+      }
+
+      clickHistoricalWeatherData () {
+            this.elements.getHistoricalWeatherData().click();
       }
 
       clickHistoryBulkLink() {
