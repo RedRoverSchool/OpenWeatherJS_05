@@ -120,4 +120,16 @@ describe('Marketplace page test suite', () => {
                   expect(stringOfPriceNames).to.eql(this.historicalWeatherDataByStatePage.listOfPrices.join(' '));
             });
       });
+
+      it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.elements.getDocumentationBtnHistoryDataState().should('be.visible');
+            marketplacePage.clickDocumentationBtnHistoryDataState();
+
+            cy.url().should('eq', this.urls.historyDataState);
+            historyDataState.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
+
+            historyDataState.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
+
+      });
 });
