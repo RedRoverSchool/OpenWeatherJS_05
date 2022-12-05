@@ -11,7 +11,6 @@ class MarketplacePage {
             getHistoryForecastBulk: () => cy.get('.product a[href*="forecast"]:not(.button-round)'),
             getHistoricalWeatherData: () => cy.get('.product a[href="/zip_code_data/new"]:not(.button-round)'),
             getHistoryBulkLink: () => cy.get('div.product a[href="/history_bulks/new"]:not(.button-round)')
-            getDocumentationBtnHistoryDataState: () => cy.get('div.button-container > a[href="http://openweathermap.org/api/history-data-state"]'),
       }
 
       clickDocumentationBtnHistoryBulk () {

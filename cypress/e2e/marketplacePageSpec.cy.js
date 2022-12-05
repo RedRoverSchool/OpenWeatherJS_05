@@ -5,14 +5,12 @@ import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
 import HistoryBulksNewPage from "../pageObjects/HistoryBulksNewPage.js";
 import HistoricalWeatherDataByStatePage from "../pageObjects/HistoricalWeatherDataByStatePage";
-import HistoryDataStatePage from "../pageObjects/HistoryDataStatePage.js"
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
 const historyBulksNew = new HistoryBulksNewPage();
 const historicalWeatherDataByStatePage = new HistoricalWeatherDataByStatePage();
-const historyDataStatePage = new HistoryDataStatePage();
 
 describe('Marketplace page test suite', () => {
 
@@ -155,13 +153,13 @@ describe('Marketplace page test suite', () => {
       });
       
 
-      it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
+      it.only('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
             header.clickMarketplaceMenuLink();
-            marketplacePage.elements.getDocumentationBtnHistoryDataState().should('be.visible');
-            marketplacePage.clickDocumentationBtnHistoryDataState();
+            marketplacePage.elements.getHistoricalDataArchivesDocumentationLink().should('be.visible');
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
 
             cy.url().should('eq', this.urls.historyDataState);
-            historyDataStatePage.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
-            historyDataStatePage.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
+            historicalWeatherDataByStatePage.elements.getTitlePage().should('have.text', this.historicalWeatherDataByStatePage.titlePage);
+            historicalWeatherDataByStatePage.elements.getFullListOfStates().should('have.length', this.historicalWeatherDataByStatePage.listOfStatesInAlphabeticalOrder.length);
       });
 });
