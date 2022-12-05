@@ -19,7 +19,7 @@ describe.skip('asiaJS', () => {
     cy.url().should('include', '/history_bulks/new');
   });
 
-  it('AT_010.003 | Marketplace > Verify link “History Forecast Bulk” are clickable', () => {
+  it.skip('AT_010.003 | Marketplace > Verify link “History Forecast Bulk” are clickable', () => {
     cy.get('#desktop-menu [href$="marketplace"]')
       .invoke('removeAttr', 'target')
       .click();
@@ -88,7 +88,7 @@ describe.skip('asiaJS', () => {
     cy.get(titleGuide).should('be.visible');
   });
 
-  it('AT_005.005 | Main page > Verifying the website"s description is correct and visible', () => {
+  it.skip('AT_005.005 | Main page > Verifying the website"s description is correct and visible', () => {
     cy.get('.mobile-padding h2 .white-text')
       .should('be.visible')
       .and('have.text', 'Weather forecasts, nowcasts and history in a fast and elegant way');
