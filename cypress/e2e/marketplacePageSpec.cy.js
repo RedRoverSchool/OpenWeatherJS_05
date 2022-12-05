@@ -120,4 +120,20 @@ describe('Marketplace page test suite', () => {
                   expect(stringOfPriceNames).to.eql(this.historicalWeatherDataByStatePage.listOfPrices.join(' '));
             });
       });
+
+      it('AT_010.003 | Marketplace > Verify link “History Forecast Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+            cy.url().should('eql', this.urls.MarketPage);        
+            
+            marketplacePage.clickHistoryForecastBulk();
+            cy.url().should('include', this.urls.historyForecastBulk);
+          });
+
+      it('AT_010.005 | Marketplace > Verify link “Historical Weather Data by State for all ZIP codes, USA” are clickable', function () {
+            header.clickMarketplaceMenuLink(); 
+            cy.url().should('eql', this.urls.MarketPage);
+      
+            marketplacePage.clickHistoricalWeatherData ()
+            cy.url().should('include', this.urls.historicalWeatherData);
+      });
 });

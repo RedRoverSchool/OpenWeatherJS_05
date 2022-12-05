@@ -14,7 +14,8 @@ class Footer {
         getFAQLink: () => cy.get('.section-content a[href="/faq"]'),
         getFAQLink: () => cy.get('.section-content a[href="/faq"]'),
         getAllowAllCookiesBtn: () => cy.get('#stick-footer-panel button'),
-        getCookiesMessageField: () => cy.get('#stick-footer-panel .stick-footer-panel')
+        getCookiesMessageField: () => cy.get('#stick-footer-panel .stick-footer-panel'),
+        getLinkedIn: () => cy.get('.social a:nth-child(3)'),
     };
 
     clickOnTermsAndConditionsOfSaleLink() {
@@ -65,6 +66,11 @@ class Footer {
 
     clickAllowAllCookiesBtn() {
         this.elements.getAllowAllCookiesBtn().click({ force: true });
-    }
+    };
+    
+    clickLinkedInk() {
+        this.elements.getLinkedIn().invoke('removeAttr', 'target').click({ force: true });
+    };
+ 
 };
 export default Footer;

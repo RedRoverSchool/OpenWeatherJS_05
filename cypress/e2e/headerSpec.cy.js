@@ -226,6 +226,14 @@ describe('Header test suit', () => {
         guidePage.elements.getTitleGuide().should('be.visible');
     });
 
+    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+        header.clickGuideMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getMainPageContent().should('have.text', this.mainPage.mainText)
+    });
+    
     it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
         header.clickSignInMenuLink();
         signInPage.signIn(this.signIn.userProfile.email, this.signIn.userProfile.password);
@@ -236,5 +244,6 @@ describe('Header test suit', () => {
           expect($el).to.be.visible
           expect($el.text()).to.include(this.supportList.userAccountHeaderDropdownMenu[i]);
         })
-      });
+    });
+
 });

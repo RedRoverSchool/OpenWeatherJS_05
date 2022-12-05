@@ -33,5 +33,11 @@
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
     "placeOrderHistoryBulk": "https://home.openweathermap.org/history_bulks/new",
     "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform",
-    "questionsUrl": "https://home.openweathermap.org/questions"
+    "historyForecastBulk": "/history_forecast_bulks/new",
+    "questionsUrl": "https://home.openweathermap.org/questions",
+    "studentInitiativeUrl": "/our-initiatives/student-initiative",
+    "newsAndUpdates": "https://openweather.co.uk/blog/category/weather",
+    "linkedinUrl": "https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F9816754",
+    "historicalWeatherData": "https://home.openweathermap.org/zip_code_data/new"
+
 }
