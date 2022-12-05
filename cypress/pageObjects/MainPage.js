@@ -101,7 +101,7 @@ class MainPage {
         this.elements.getDifferentWeatherMoreOptionsBtn().click()
     }
 
-    clickDifferentWeatherWindStrong() {
+    checkDifferentWeatherWindStrong() {
         this.elements.getDifferentWeatherWindStrongBtn().check({force: true})
     }
 
