@@ -331,7 +331,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('#stick-footer-panel .stick-footer-panel').should('not.be.visible');
     });
 
-    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+    it.skip('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
         cy.get('div.section.where-to').should('exist');
 
         cy.get('#desktop-menu [href="/weather-dashboard"]').click();
