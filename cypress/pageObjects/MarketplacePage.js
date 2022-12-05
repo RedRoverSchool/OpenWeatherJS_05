@@ -23,7 +23,7 @@ class MarketplacePage {
             this.elements.getHistoricalDataArchivesDocumentationLink().invoke('removeAttr', 'target').click();
       };
 
-      clickHistoryForecastBulk () {
+      clickHistoryForecastBulk () { 
             this.elements.getHistoryForecastBulk().click();
       }
 };
