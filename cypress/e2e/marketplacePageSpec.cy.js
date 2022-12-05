@@ -5,12 +5,14 @@ import MarketplacePage from "../pageObjects/MarketplacePage.js"
 import HistoryBulkPage from "../pageObjects/HistoryBulkPage.js";
 import HistoryBulksNewPage from "../pageObjects/HistoryBulksNewPage.js";
 import HistoricalWeatherDataByStatePage from "../pageObjects/HistoricalWeatherDataByStatePage";
+import HistoryDataStatePage from "../pageObjects/HistoryDataStatePage.js"
 
 const header = new Header();
 const marketplacePage = new MarketplacePage();
 const historyBulk = new HistoryBulkPage();
 const historyBulksNew = new HistoryBulksNewPage();
 const historicalWeatherDataByStatePage = new HistoricalWeatherDataByStatePage();
+const historyDataStatePage = new HistoryDataStatePage();
 
 describe('Marketplace page test suite', () => {
 
@@ -27,6 +29,10 @@ describe('Marketplace page test suite', () => {
             cy.fixture('historicalWeatherDataByStatePage').then(data => {
                   this.historicalWeatherDataByStatePage = data;
             });
+            cy.fixture('historyDataState').then(historyDataState => {
+                  this.historyDataState = historyDataState;
+            });
+
             cy.visit('/');
       });
       
@@ -127,9 +133,8 @@ describe('Marketplace page test suite', () => {
             marketplacePage.clickDocumentationBtnHistoryDataState();
 
             cy.url().should('eq', this.urls.historyDataState);
-            historyDataState.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
+            historyDataStatePage.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
 
-            historyDataState.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
-
+            historyDataStatePage.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
       });
 });
