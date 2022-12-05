@@ -9,6 +9,7 @@ import BusinessPage from "../pageObjects/BusinessPage.js";
 import MainPage from "../pageObjects/MainPage.js";
 import BlogPage from "../pageObjects/BlogPage.js";
 import TopicPage from "../pageObjects/TopicPage.js";
+import DashboardPage from "../pageObjects/DashboardPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -18,6 +19,7 @@ const businessPage = new BusinessPage();
 const mainPage = new MainPage();
 const blogPage = new BlogPage();
 const topicPage = new TopicPage();
+const dashboardPage = new DashboardPage();
 
 describe('Header test suit', () => {
 
@@ -56,6 +58,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('titles').then(titlesData => {
             this.titlesData = titlesData;
+        });
+        cy.fixture('dashboardPage').then(dashboardPageData => {
+            this.dashboardPageData = dashboardPageData;
         });
         cy.visit('/');
     });
@@ -178,4 +183,41 @@ describe('Header test suit', () => {
         cy.url().should('eq', this.url.mainPageLink);
         mainPage.elements.getMainPageContent().should('have.text', this.mainPageData.mainText)
      })
+
+    it('AT_025.008 | Main menu > Dashboard > After clicking "Dashboard" item on bar menu User is redirected to Dashboard page', function () {
+        header.clickDashboardMenu()
+
+        cy.url().should('eq', this.url.dashboardPageLink)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.dashboardPageData.h1Title)
+    })
+    it("AT_002.003 | Header > Verifying the website's logo is clickable and redirects User to the Main page", function () {
+        header.clickMapsMenuLink();
+        header.clickLogoLink();
+
+        cy.url().should('eq', this.url.mainPageLink);
+        mainPage.elements.getPageDescriptionWhiteText().should('have.text', this.mainPageData.pageDescriptionWhiteText);
+    });
+
+    it('AT_033.019 | Header > Navigation > Verify "Support" dropdown menu, FAQ', function () {
+        header.elements.getMainMenuListLink().each(($el, ind) => {
+          expect($el.text()).to.include(this.supportList.mainMenuList[ind])
+        })
+    
+        header.clickSupportDropDownMenu()
+        header.elements.getSupportDropDownMenuList().each(($el, ind) => {
+          expect($el.text()).to.include(this.supportList.supportDropdownList[ind])
+        })
+    
+        header.clickFAQMenuLink()
+        cy.url().should('eq', this.url.FAQPage)
+        faqPage.elements.getTitle().should('have.text', this.faqData.h1Title)
+      })
+
+    it('AT_008.003 | Main menu > Guide | Verifying the link on the page "Guide"', function () {
+        header.elements.getGuideMenuLink().should('contain.text', this.text.h1Title);
+        header.clickGuideMenuLink(); 
+
+        cy.url().should('include', this.url.guidePage);
+        guidePage.elements.getTitleGuide().should('be.visible');
+    });
 });

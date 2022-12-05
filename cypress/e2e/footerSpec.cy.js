@@ -91,9 +91,39 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.data.termsAndConditionsOfSaleUrl);
     });
 
+    it("AT_022.008 | Footer > Social media > Verify Github icon redirection", function () {
+        footer.elements.getGithubLink().should('be.visible');
+        footer.clickGithubLink();
+
+       cy.url().should('eq', this.url.githubUrl);
+       cy.title().should('include', this.data.githubTitleText);
+    });
+
     it('AT_023.001 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
         footer.clickFAQLink();
         cy.url().should('eq', this.url.FAQPage);
         cy.contains(this.faqPage.h1Title);
     });
+
+    it('AT_023.002 | Footer > FAQ > Verify "FAQ" link redirects to the corresponding page', function () {
+        footer.elements.getFAQLink().should('be.visible');
+        footer.clickFAQLink();
+
+        cy.url().should('eq', this.url.FAQPage);
+        cy.title().should('include', this.faqPage.h1Title)
+    });
+
+    it('AT_022.005 | Footer > Social media > 6 social media icons on the footer', function () {
+        footer.elements.getSocialMediaIconLinks().each(($el, index) => {
+        expect($el.attr('href')).to.include(this.data.socialIcons[index])
+        });
+    });
+
+    it('AT_044.003 | Footer > PopUps > Manage cookies', function () {
+        footer.elements.getAllowAllCookiesBtn().should('be.visible');
+        footer.clickAllowAllCookiesBtn();
+        
+        footer.elements.getCookiesMessageField().should('not.be.visible');
+    });
 });
+            

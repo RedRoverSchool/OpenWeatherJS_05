@@ -26,7 +26,8 @@ class Header {
         getUserDropdownMenuList: () => cy.get('#user-dropdown-menu li'),
         getUserDropDownAllMenuVisible: () => cy.get('#user-dropdown-menu'),
         getUserDropDownMyProfileLink: () => cy.get('.dropdown-menu a[href*="/home"]'),
-        getPricingLink: () => cy.get('#desktop-menu a[href="/price"]')
+        getPricingLink: () => cy.get('#desktop-menu a[href="/price"]'),
+        getMainMenuListLink: () => cy.get('#desktop-menu > ul')
     };
 
     clickSupportDropDownMenu() {

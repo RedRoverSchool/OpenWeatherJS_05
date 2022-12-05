@@ -36,6 +36,10 @@ describe('Widgets page test suite', () => {
             this.example = example;
         });
 
+        cy.fixture('url').then(url => {
+            this.url = url;
+        });
+
         cy.visit('/');
     });
 
@@ -72,7 +76,7 @@ describe('Widgets page test suite', () => {
         widgetsPage.elements.getApiInputFieldErrMessage().should('have.text', this.data.apiInputFielValidMessage)
     });
 
-    it('AT_021.007 | Footer > Widgets> Verify popup windows with info appear after clicking "Get code" buttons', function() {
+    it.skip('AT_021.007 | Footer > Widgets> Verify popup windows with info appear after clicking "Get code" buttons', function() {
         header.clickSignInMenuLink()
         singInPage.signIn(this.data.userData1.login, this.data.userData1.password)
         header.clickUserDropDownMenu()
@@ -113,6 +117,19 @@ describe('Widgets page test suite', () => {
         apiKeysPage.actionWithKey(this.keys.keyNames.newNameKey, apiKeysPage.locators.DeleteKeysButton)
     })
 
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+        header.clickSignInMenuLink();
+        singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
+        header.clickUserDropDownMenu();
+        header.clickUserDropDownMyApiKeysLink();
+        apiKeysPage.getApiKeyText().then((apiKey) => {
+            footer.clickWidgetsLink();
+            widgetsPage.setApiKeyField(apiKey);
+            widgetsPage.clickCodeWidgetFirstBtn();
+        })
+        widgetsPage.elements.getCopyInBufferButton().should('be.visible').and('have.text', this.data.copyInBufferBtn)
+    });
+
     it('AT_024.001 | Main page > "Different weather?" option > Verify email enter', function () {
         mainPage.clickDifferentWeatherMenu()
         widgetsPage.clickMoreOptionsDropdown()
@@ -120,4 +137,30 @@ describe('Widgets page test suite', () => {
         widgetsPage.typeEmailInInputField(this.example.email)
         widgetsPage.elements.getEmailFieldEnter().should('have.value', this.example.email)
     });
+
+    it('AT_021.001 | Footer > Widgets > Invalid API', function () {
+        footer.clickWidgetsLink()
+        cy.url().should('eq', this.url.widgetPageLink)
+        widgetsPage.elements.getPageTitle().should('contain', this.data.pageTitle)
+
+        widgetsPage. setApiKeyField(this.data.invalidApi)
+        widgetsPage.clickOnFieldCiteName()
+
+        widgetsPage.elements.getErrorMessage().should('be.visible').and('contain', this.data.errorWidgetPageInvalidApi)
+    })
+
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+        header.clickSignInMenuLink();
+        singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
+        header.clickUserDropDownMenu();
+        header.clickUserDropDownMyApiKeysLink();
+
+        apiKeysPage.getApiKeyText().then((apiKey) => {
+            footer.clickWidgetsLink();
+            widgetsPage.setApiKeyField(apiKey);
+            widgetsPage.clickCodeWidgetFirstBtn();
+        })
+        widgetsPage.elements.getCopyInBufferButton().should('be.visible').and('have.text', this.data.copyInBufferBtn)
+    });
+
 });
