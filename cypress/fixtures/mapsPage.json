@@ -12,5 +12,6 @@
         "pressure",
         "wind direction",
         "wind speed"
-      ]
+      ],
+      "endPoint":"/weathermap"
 }

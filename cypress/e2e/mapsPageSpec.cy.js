@@ -33,13 +33,25 @@ describe('Maps page test suite', () => {
         mapsPage.elements.getScaleName().should('contain', this.data.pressureScaleNameFull)
     })
 
-    it('AT_026.004 | Maps > Click on any city on the map and see the data', function () {
+    it.skip('AT_026.004 | Maps > Click on any city on the map and see the data', function () {
         header.clickMapsMenuLink();
         mapsPage.elements.getCityName().contains(this.data.cityName).click();
 
         mapsPage.elements.getCityData().each(($el, i) => {
             expect($el.text()).to.include(this.data.cityData[i]);
         });
+    });
+
+    it('RF_027.003 |Section with the scale >The scale in the lower right corner changes to "Precipitation, mm/h".', 
+        function() {
+
+        header.clickMapsMenuLink();
+        cy.url().should('include',this.data.endPoint);
+        mapsPage.elements.getTemperatureLabel().should('have.text',' Temperature');
+
+        mapsPage.clickGlobalPrecipitationLabel();
+
+        mapsPage.elements.getScale().should('contain', 'Precipitation, mm/h')
     });
 
 });

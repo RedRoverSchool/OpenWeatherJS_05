@@ -14,6 +14,12 @@ const topicPage = new TopicPage();
             cy.fixture('titles').then(title => {
                 this.title = title;
             });
+            cy.fixture('howToStartPage').then(data  => {
+                this.data = data;
+            });
+            cy.fixture('url').then(url => {
+                this.url = url
+            });
             cy.visit('/');
         })
 
@@ -22,7 +28,23 @@ const topicPage = new TopicPage();
             header.clickSupportHowToStartLink()
             howToStartPage.clickWhyOurFreeWeatherAPILink() 
             topicPage.elements.getPageTitle().should('have.text', this.title.technologyTitle);
-          });
+        });
+
+        it('AT_017.003 |How to start > Verify navigation to "API care recommendations" page', function () {
+            header.clickSupportDropDownMenu();
+            header.clickSupportHowToStartLink();
+
+            howToStartPage.elements.getTitle()
+                .should('be.visible')
+                .contains(this.data.headerTitle)
+
+            howToStartPage.clickApiCareRecommendationsLink();
+            cy.url().should('contain', this.data.urlIdApiCare)
+    
+            howToStartPage.elements.apiCareRecommendationsTitle()
+                .should('be.visible')
+                .contains(this.data.titleApiCare)
+        });  
     })
 
     

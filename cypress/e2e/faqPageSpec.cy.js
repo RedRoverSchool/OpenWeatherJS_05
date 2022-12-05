@@ -26,4 +26,16 @@ describe('faqPageSpec', () => {
             .contains(this.data.HowToGetAnApiKeyQuestionContent)
             .should('be.visible');
     });
+
+    it('AT_016.003 | Support > FAQ page > Verify text questions and style by clicking on the question plus sign', function () {
+        header.clickSupportDropDownMenu();
+        header.clickFAQMenuLink();
+
+        faqPage.elements.getQuestionsElement().each(($el, index) => {
+            cy.wrap($el)
+              .click({force: true})
+              .should('have.css', 'font-weight', '600')
+              .and('have.text', this.data.faqQuestions[index]);
+        });
+    });
 });
