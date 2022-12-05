@@ -8,6 +8,7 @@ import MarketplacePage from "../pageObjects/MarketplacePage";
 import Header from "../pageObjects/Header.js";
 import SignInPage from "../pageObjects/SignInPage.js";
 import NewsAndUpdatesPage from "../pageObjects/NewsAndUpdatesPage";
+import QuestionsPage from "../pageObjects/QuestionsPage";
 
 const footer = new Footer();
 const aboutUs = new AboutUs();
@@ -17,6 +18,7 @@ const marketplacePage = new MarketplacePage();
 const singInPage = new SignInPage();
 const header = new Header();
 const newsAndUpdatesPage = new NewsAndUpdatesPage();
+const questionsPage = new QuestionsPage();
 
 describe('About Us', () => {
 
@@ -26,6 +28,9 @@ describe('About Us', () => {
         });
         cy.fixture('signInPage').then(signIn  => {
             this.signIn = signIn;
+        });
+        cy.fixture('questionsPage').then(data => {
+            this.data = data;
         });
         cy.visit('/');
     })
@@ -72,4 +77,14 @@ describe('About Us', () => {
         
     });
 
+    it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
+        footer.clickAboutUsLink();
+        aboutUs.clickContactUsButton();
+
+        cy.url().should('include', this.url.questionsUrl);
+        questionsPage.elements
+        .getHeadLine()
+        .should('be.visible')
+        .and('have.text', this.data.headLineText);
+    });
 });
