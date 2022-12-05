@@ -28,7 +28,7 @@ describe.skip('asiaJS', () => {
     cy.url().should('include', '/history_forecast_bulks/new');
   });
 
-  it('AT_010.005 | Marketplace > Verify link “Historical Weather Data by State for all ZIP codes, USA” are clickable', () => {
+  it.skip('AT_010.005 | Marketplace > Verify link “Historical Weather Data by State for all ZIP codes, USA” are clickable', () => {
     cy.get('#desktop-menu [href$="marketplace"]')
       .invoke('removeAttr', 'target')
       .click();

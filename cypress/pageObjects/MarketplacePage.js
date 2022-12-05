@@ -8,7 +8,8 @@ class MarketplacePage {
             getMarketplacePageTitle: () => cy.get('#custom_weather_products'),
             getPlaceOrderHistoryBulk: () => cy.get('div.button-container a[href="/history_bulks/new"]'),
             getHistoricalDataArchivesDocumentationLink: () => cy.get('a[href*="history-data-state"]'),
-            getHistoryForecastBulk: () => cy.get('.product a[href*="forecast"]:not(.button-round)')
+            getHistoryForecastBulk: () => cy.get('.product a[href*="forecast"]:not(.button-round)'),
+            getHistoricalWeatherData: () => cy.get('.product a[href="/zip_code_data/new"]:not(.button-round)')
       }
 
       clickDocumentationBtnHistoryBulk () {
@@ -25,6 +26,10 @@ class MarketplacePage {
 
       clickHistoryForecastBulk () { 
             this.elements.getHistoryForecastBulk().click();
+      }
+
+      clickHistoricalWeatherData () {
+            this.elements.getHistoricalWeatherData().click();
       }
 };
 export default MarketplacePage
