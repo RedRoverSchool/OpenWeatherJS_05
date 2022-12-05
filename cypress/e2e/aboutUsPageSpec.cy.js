@@ -7,6 +7,7 @@ import SubscriptionsPage from "../pageObjects/SubscriptionsPage";
 import MarketplacePage from "../pageObjects/MarketplacePage";
 import Header from "../pageObjects/Header.js";
 import SignInPage from "../pageObjects/SignInPage.js";
+import NewsAndUpdatesPage from "../pageObjects/NewsAndUpdatesPage";
 
 const footer = new Footer();
 const aboutUs = new AboutUs();
@@ -15,6 +16,7 @@ const subscriptionsPage = new SubscriptionsPage();
 const marketplacePage = new MarketplacePage();
 const singInPage = new SignInPage();
 const header = new Header();
+const newsAndUpdatesPage = new NewsAndUpdatesPage();
 
 describe('About Us', () => {
 
@@ -58,6 +60,16 @@ describe('About Us', () => {
     it('AT_028.001 | About us > Verify "About us" link redirects to the corresponding page', function () {
         footer.clickAboutUsLink();
         cy.url().should('include', '/about-us');
+    });
+
+
+    it('AT_028.005 | Footer > About us > Verify New and Updates button', function() {
+        footer.clickAboutUsLink();
+        aboutUs.clickNewsAndUpdatesButton();
+
+        cy.url().should('include', this.url.newsAndUpdates);
+        newsAndUpdatesPage.elements.getNewsAndUpdatesTitle().should('be.visible');
+        
     });
 
 });
