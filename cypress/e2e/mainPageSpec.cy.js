@@ -27,6 +27,10 @@ describe('mainPageSpec', () => {
             this.info = info;
         });
 
+        cy.fixture('signInPage').then(userData => {
+            this.userData = userData;
+        });
+
         cy.visit('/');
     })
 
@@ -247,5 +251,18 @@ describe('mainPageSpec', () => {
         mainPage.clickSearchResultFromDropdown()
         mainPage.elements.getCityNameSubHeaderTitle().should('have.text', this.data.searchResultCityName)
     })
-});
 
+    it('AT_024.002 | After clicking on "send" button, the form window automatically disappears', function () {
+        mainPage.clickDifferentWeatherMenu()
+        mainPage.clickDifferentWeatherIcon(this.data.differentWeatherIcons[0])
+        mainPage.clickDifferentWeatherMoreOptionsBtn()
+        mainPage.clickDifferentWeatherWindStrong()
+        mainPage.selectItemDiffWeathDataSourseDropdown(this.data.differentWeatherDataSourseItem[2])
+        mainPage.fillDifferentWeatherTemperatureField(this.data.differentWeatherTemperature)
+        mainPage.fillDifferentWeatherEmail(this.userData.userEmail)
+        mainPage.fillDifferentWeatherAddInfo(this.data.additionalInfo)
+        mainPage.clickDifferentWeatherSendBtn()
+
+        mainPage.elements.getDifferentWeatherPopup().should('not.exist')
+    })
+});

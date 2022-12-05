@@ -19,5 +19,25 @@
     "tempretureScale": "Metric: °C, m/s",
     "weatherDetails":"MorningAfternoonEveningNight",
     "city_Name": "Copenhagen",
-    "searchResultCityName": "Copenhagen, DK"
+    "searchResultCityName": "Copenhagen, DK",
+    "differentWeatherIcons": [
+        "clear sky",
+        "few clouds",
+        "overcast clouds",
+        "drizzle",
+        "rain",
+        "shower rain",
+        "thunderstorm",
+        "snow",
+        "mist"
+    ],
+    "differentWeatherDataSourseItem": [
+        "Personal feelings",
+        "Own weather station or devices",
+        "Local weather provider",
+        "Global weather provider",
+        "Other"
+    ],
+    "differentWeatherTemperature": 50,
+    "additionalInfo": "Not nice to lie about the weather!"
 }
