@@ -4,6 +4,7 @@ class AboutUs {
         getBuyBySubscriptionButton: () => cy.get('a[href="https://home.openweathermap.org/subscriptions"]'),
         getBuyMarketplaceButton : () => cy.get('div.grid-container a[href$="/marketplace"]'),
         getNewsAndUpdatesButton: () => cy.get('a.round[href*="blog"]'),
+        getContactUsButton: () => cy.get('.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]'),
     }
 
     clickProductsDocumentationButton() {
@@ -20,6 +21,10 @@ class AboutUs {
 
     clickNewsAndUpdatesButton() {
         this.elements.getNewsAndUpdatesButton().invoke('removeAttr', 'target').click();
+    }
+
+    clickContactUsButton() {
+        this.elements.getContactUsButton().invoke('removeAttr', 'target').click();
     }
 }
 export default AboutUs;
