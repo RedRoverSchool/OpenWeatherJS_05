@@ -53,6 +53,13 @@ describe('Dashboard page test suite', () => {
         questionsPage.elements.getHeadLine().should('have.text', this.questionsData.headLineText)
     });
 
+    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+        header.clickDashboardMenu();
+        
+        cy.url().should('be.equal', this.data.url)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.data.h1Title)
+    });
+
     it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
         header.elements.getUserDropDownMenu().should('not.exist');
 
