@@ -139,7 +139,7 @@ describe('Footer test suite', () => {
         footer.clickTelegram();
 
         cy.url().should('eq', this.url.telegramUrl);
-        cy.title().should('include', this.data.telegramTitleText);
+        cy.title().should('include', 'Telegram: Contact @openweathermap');
     });
  
  
