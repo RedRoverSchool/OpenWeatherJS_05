@@ -238,8 +238,7 @@ describe('Header test suit', () => {
         header.clickSignInMenuLink();
         signInPage.signIn(this.signIn.userProfile.email, this.signIn.userProfile.password);
         header.clickUserDropDownMenu();
-        //cy.get('#user-dropdown').click()
-    
+        
         header.elements.getUserDropdownMenuList().find('a').each(($el, i) => {
           expect($el).to.be.visible
           expect($el.text()).to.include(this.supportList.userAccountHeaderDropdownMenu[i]);
