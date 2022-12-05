@@ -127,6 +127,22 @@ describe('Marketplace page test suite', () => {
             });
       });
 
+      it('AT_010.003 | Marketplace > Verify link “History Forecast Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+            cy.url().should('eql', this.urls.MarketPage);        
+            
+            marketplacePage.clickHistoryForecastBulk();
+            cy.url().should('include', this.urls.historyForecastBulk);
+          });
+
+      it('AT_010.005 | Marketplace > Verify link “Historical Weather Data by State for all ZIP codes, USA” are clickable', function () {
+            header.clickMarketplaceMenuLink(); 
+            cy.url().should('eql', this.urls.MarketPage);
+      
+            marketplacePage.clickHistoricalWeatherData ()
+            cy.url().should('include', this.urls.historicalWeatherData);
+      });
+
       it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
             header.clickMarketplaceMenuLink();
             marketplacePage.elements.getDocumentationBtnHistoryDataState().should('be.visible');
@@ -134,7 +150,6 @@ describe('Marketplace page test suite', () => {
 
             cy.url().should('eq', this.urls.historyDataState);
             historyDataStatePage.elements.getHistoryDataStateTitle().should('have.text', this.historyDataState.HistoryDataStateTitle);
-
             historyDataStatePage.elements.getStateNameArray().should('have.length', this.historyDataState.StateNameArray.length);
       });
 });
