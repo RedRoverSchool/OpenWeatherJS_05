@@ -110,4 +110,12 @@ describe('SignIn test suit', () => {
     
     signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signOutAllertMessage)
   })
+
+  it.only('AT_006.001 | Sign in > After successful sign in new window should display text "Signed in successfully."', function() {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.data.signInUrlUsers)
+
+    signInPage.signInWithRememberMe(this.data.userProfileBugHunters.email, this.data.userProfileBugHunters.password)
+    signInPage.elements.getNoticeAfterSigned().should('have.text', 'Signed in successfully.')  
+  });
 });
