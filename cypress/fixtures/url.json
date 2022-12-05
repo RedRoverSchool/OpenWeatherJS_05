@@ -35,5 +35,6 @@
     "githubUrl": "https://github.com/search?q=openweathermap&ref=cmdform",
     "questionsUrl": "https://home.openweathermap.org/questions",
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
-    "newsAndUpdates": "https://openweather.co.uk/blog/category/weather"
+    "newsAndUpdates": "https://openweather.co.uk/blog/category/weather",
+    "historyDataState": "https://openweathermap.org/api/history-data-state"
 }
