@@ -19,7 +19,7 @@ class AboutUs {
     }    
 
     clickNewsAndUpdatesButton() {
-        this.elements.getNewsAndUpdatesButton().click().invoke('removeAttr', 'target');
+        this.elements.getNewsAndUpdatesButton().invoke('removeAttr', 'target').click();
     }
 }
 export default AboutUs;
