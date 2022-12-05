@@ -38,6 +38,7 @@
     "studentInitiativeUrl": "/our-initiatives/student-initiative",
     "newsAndUpdates": "https://openweather.co.uk/blog/category/weather",
     "linkedinUrl": "https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F9816754",
-    "historicalWeatherData": "https://home.openweathermap.org/zip_code_data/new"
+    "historicalWeatherData": "https://home.openweathermap.org/zip_code_data/new",
+    "telegramUrl": "https://t.me/openweathermap"
 
 }

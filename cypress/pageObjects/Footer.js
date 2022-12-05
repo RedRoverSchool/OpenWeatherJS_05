@@ -16,6 +16,7 @@ class Footer {
         getAllowAllCookiesBtn: () => cy.get('#stick-footer-panel button'),
         getCookiesMessageField: () => cy.get('#stick-footer-panel .stick-footer-panel'),
         getLinkedIn: () => cy.get('.social a:nth-child(3)'),
+        getTelegram: () => cy.get('.social a:nth-child(5)')
     };
 
     clickOnTermsAndConditionsOfSaleLink() {
@@ -70,6 +71,10 @@ class Footer {
     
     clickLinkedInk() {
         this.elements.getLinkedIn().invoke('removeAttr', 'target').click({ force: true });
+    };
+
+    clickTelegram() {
+        this.elements.getTelegram().invoke('removeAttr', 'target').click({ force: true });
     };
  
 };

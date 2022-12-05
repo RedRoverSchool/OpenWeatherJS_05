@@ -133,6 +133,15 @@ describe('Footer test suite', () => {
         cy.url().should('eq', this.url.linkedinUrl);
         cy.title().should('include', 'LinkedIn Login');
     });
+
+    it('AT_022.007| Footer > Social media > Verify Telegram icon redirection', function () {
+        footer.elements.getTelegram().should('be.visible');
+        footer.clickTelegram();
+
+        cy.url().should('eq', this.url.telegramUrl);
+        cy.title().should('include', this.data.telegramTitleText);
+    });
+ 
  
 });
             

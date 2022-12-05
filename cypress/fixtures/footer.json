@@ -18,5 +18,6 @@
         "https://medium.com/@openweathermap",
         "https://t.me/openweathermap",
         "https://github.com/search?q=openweathermap&ref=cmdform"
-    ] 
+    ],
+    "telegramTitleText": "Telegram"
 }
