@@ -315,7 +315,7 @@ describe.skip('Group jScript_group', () => {
         cy.get('head title').should('include.text', 'Cookies settings');
     });
             
-    it('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
+    it.skip('AT_002.007 | Header > Verify the website logo is clickable and the user is redirected to the Main Page', function () {
         cy.visit('/guide');
         
         cy.get ('nav#nav-website a[href="/"]').click();
