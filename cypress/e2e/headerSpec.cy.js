@@ -10,6 +10,7 @@ import MainPage from "../pageObjects/MainPage.js";
 import BlogPage from "../pageObjects/BlogPage.js";
 import TopicPage from "../pageObjects/TopicPage.js";
 import DashboardPage from "../pageObjects/DashboardPage.js";
+import SignInPage from "../pageObjects/SignInPage";
 
 const guidePage = new GuidePage();
 const header = new Header();
@@ -20,6 +21,7 @@ const mainPage = new MainPage();
 const blogPage = new BlogPage();
 const topicPage = new TopicPage();
 const dashboardPage = new DashboardPage();
+const signInPage = new SignInPage();
 
 describe('Header test suit', () => {
 
@@ -61,6 +63,9 @@ describe('Header test suit', () => {
         });
         cy.fixture('dashboardPage').then(dashboardPageData => {
             this.dashboardPageData = dashboardPageData;
+        });
+        cy.fixture('signInPage').then(signIn  => {
+            this.signIn = signIn;
         });
         cy.visit('/');
     });
@@ -220,4 +225,16 @@ describe('Header test suit', () => {
         cy.url().should('include', this.url.guidePage);
         guidePage.elements.getTitleGuide().should('be.visible');
     });
+
+    it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.signIn.userProfile.email, this.signIn.userProfile.password);
+        header.clickUserDropDownMenu();
+        //cy.get('#user-dropdown').click()
+    
+        header.elements.getUserDropdownMenuList().find('a').each(($el, i) => {
+          expect($el).to.be.visible
+          expect($el.text()).to.include(this.supportList.userAccountHeaderDropdownMenu[i]);
+        })
+      });
 });

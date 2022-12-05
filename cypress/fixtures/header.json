@@ -14,5 +14,6 @@
         "For Business",
         "Sign in",
         "Support"
-      ]
+      ],
+    "userAccountHeaderDropdownMenu": ["My services", "My API keys", "My payments", "My profile", "Logout"]
 }

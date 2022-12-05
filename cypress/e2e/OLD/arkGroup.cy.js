@@ -278,7 +278,7 @@ describe.skip('group Ark', () => {
     cy.get('.services-table th').contains('Blocked').should('have.text', 'Blocked at')
   });
 
-  it('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
+  it.skip('AT_039.002 | PersonalAccountName > Checking for options in account dropdown menu', function () {
     const accountDropdownOptions = ["My services", "My API keys", "My payments", "My profile", "Logout"]
 
     cy.login_asiaJS(this.data.userProfile.email, this.data.userProfile.password)
