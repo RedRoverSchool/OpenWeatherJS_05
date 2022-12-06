@@ -30,9 +30,6 @@ describe('Marketplace page test suite', () => {
             cy.fixture('historyBulksNew').then(data => {
                   this.historyBulksNew = data;
             });
-            // cy.fixture('historyDataState').then(historyDataState => {
-            //       this.historyDataState = historyDataState;
-            // });
 
             cy.visit('/');
       });
