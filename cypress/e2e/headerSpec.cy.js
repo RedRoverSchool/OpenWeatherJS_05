@@ -244,5 +244,12 @@ describe('Header test suit', () => {
           expect($el.text()).to.include(this.supportList.userAccountHeaderDropdownMenu[i]);
         })
     });
+    
+    it('AT_008.006.02 | Main menu > Guide > Verify The text "OpenWeather products" is displayed.', function () {
+        header.clickGuideMenuLink();
+
+        cy.url().should('eq', this.url.guidePage)
+        guidePage.elements.getOpenWeatherText().should('have.text', this.text.openWeatherText)
+    })
 
 });

@@ -27,6 +27,9 @@ describe('Marketplace page test suite', () => {
             cy.fixture('historicalWeatherDataByStatePage').then(data => {
                   this.historicalWeatherDataByStatePage = data;
             });
+            cy.fixture('historyBulksNew').then(data => {
+                  this.historyBulksNew = data;
+            });
             cy.visit('/');
       });
       
@@ -136,4 +139,13 @@ describe('Marketplace page test suite', () => {
             marketplacePage.clickHistoricalWeatherData ()
             cy.url().should('include', this.urls.historicalWeatherData);
       });
+      
+      it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+        
+            marketplacePage.clickHistoryBulkLink();
+            cy.url().should('eq', this.urls.placeOrderHistoryBulk);
+            historyBulksNew.elements.getHistoryBulksNewTitle().should('have.text', this.historyBulksNew.historyBulksNewTitle);
+      });
+      
 });
