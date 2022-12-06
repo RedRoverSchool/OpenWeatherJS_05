@@ -52,4 +52,11 @@ describe('Dashboard page test suite', () => {
         cy.url().should('eq', this.urlData.questionsUrl)
         questionsPage.elements.getHeadLine().should('have.text', this.questionsData.headLineText)
     });
+
+    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+        header.clickDashboardMenu();
+        
+        cy.url().should('be.equal', this.data.url)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.data.h1Title)
+    });
 });
