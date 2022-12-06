@@ -153,7 +153,7 @@ describe('Marketplace page test suite', () => {
       });
       
 
-      it.only('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
+      it('AT_061.001 | |Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying the table "List of states, ZIP codes and price" is correct', function () {
             header.clickMarketplaceMenuLink();
             marketplacePage.elements.getHistoricalDataArchivesDocumentationLink().should('be.visible');
             marketplacePage.clickHistoricalDataArchivesDocumentationLink();
