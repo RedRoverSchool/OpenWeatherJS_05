@@ -5,7 +5,7 @@ let CREATED_ID
 
 describe("API with Cypress", () => {
 
-    describe.skip("Get all BookingIds", () => {
+    describe("Get all BookingIds", () => {
 
         const getResponse = () => 
             cy.request({
