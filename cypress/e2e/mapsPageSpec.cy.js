@@ -54,7 +54,7 @@ describe('Maps page test suite', () => {
         mapsPage.elements.getScale().should('contain', 'Precipitation, mm/h')
     });
 
-    it('AT_027.005 | Section with the scale > The scale\s name matches the label\s name after selecting "Wind speed"', function()  {
+    it('AT_027.005 | Maps > Section with the scale > The scale\s name matches the label\s name after selecting "Wind speed"', function()  {
         header.clickMapsMenuLink()
         cy.url().should("include", this.url.mapsPage)
        
