@@ -8,7 +8,6 @@
 
  describe("API with Cypress", () => {
 
-    console.log(apiBooking)
     const getResponse = () =>
         cy.request({
             method: "POST",
