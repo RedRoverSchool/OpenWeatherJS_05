@@ -47,6 +47,7 @@
                 cy.log('BOOKING_ID = ' + BOOKING_ID)
 
                 expect(response).to.have.any.keys('booking')
+                expect(response.booking.firstname, apiBooking.createBookingInfo.firstname)
                 cy.log('Name: ' + response.booking.firstname + " " + response.booking.lastname)
                 cy.log('Dates: ' + response.booking.bookingdates.checkin + "-" + response.booking.bookingdates.checkin)
                 cy.log('Options: ' + response.booking.additionalneeds)
@@ -121,6 +122,7 @@ describe("API get token and update booking information (first name and additiona
             .then(response => {
                 expect(response).to.have.any.keys('additionalneeds')
                 expect(response).to.have.any.keys('firstname')
+                expect(response.firstname, apiBooking.updateBookingInfo.firstname)
                 cy.log('Updated Name: ' + response.firstname + " " + response.lastname)
                 cy.log('Updated Options: ' + response.additionalneeds)
             })
