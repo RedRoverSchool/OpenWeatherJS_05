@@ -13,7 +13,7 @@
         "username": "admin",
         "password": "password123"
     },
-    "elviraKh1CreateBookingInfo": {
+    "createBookingInfo": {
         "firstname": "Kia",
         "lastname": "Motors",
         "totalprice": 200,
@@ -22,7 +22,7 @@
         "additionalneeds": "Parking",
         "depositpaid": false
     },
-    "elviraKh1UpdateBookingInfo": {
+    "updateBookingInfo": {
         "firstname": "Toyota",
         "lastname": "Motors",
         "totalprice": 200,
