@@ -54,6 +54,7 @@ describe("API with Cypress", () => {
            })
    })
 })
+
 describe("API get token and update booking information (first name and additional needs)", () => {
     const getResponseAuth = () =>
         cy.request({
@@ -122,6 +123,7 @@ describe("API get token and update booking information (first name and additiona
                 expect(response).to.have.any.keys('additionalneeds')
                 expect(response).to.have.any.keys('firstname')
                 expect(response.firstname).to.eq(apiBooking.updateBookingInfo.firstname)
+                expect(response.additionalneeds).to.eq(apiBooking.updateBookingInfo.additionalneeds)
                 cy.log('Updated Name: ' + response.firstname + " " + response.lastname)
                 cy.log('Updated Options: ' + response.additionalneeds)
             })
