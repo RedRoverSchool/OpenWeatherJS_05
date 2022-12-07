@@ -7,5 +7,29 @@
         "checkin": "2018-01-01",
         "checkout": "2019-01-01"
     },
-    "additionalneeds": "Breakfast"
+    "additionalneeds": "Breakfast",
+
+    "admin": {
+        "username": "admin",
+        "password": "password123"
+    },
+    "elviraKh1CreateBookingInfo": {
+        "firstname": "Kia",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "checkin": "2020-03-15",
+        "checkout": "2021-03-15",
+        "additionalneeds": "Parking",
+        "depositpaid": false
+    },
+    "elviraKh1UpdateBookingInfo": {
+        "firstname": "Toyota",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "checkin": "2020-03-15",
+        "checkout": "2022-12-12",
+        "additionalneeds": "Parking and Breakfast",
+        "depositpaid": false
+    }
+
 }

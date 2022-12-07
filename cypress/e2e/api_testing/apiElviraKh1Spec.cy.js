@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
- import api from '../../fixtures/apiBooking.json'
+ import api from '../../fixtures/apiData.json'
 
  const apiBooking = api
  const API_BASE_URL = Cypress.env('apiBaseUrl')
