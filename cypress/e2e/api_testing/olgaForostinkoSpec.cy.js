@@ -33,7 +33,7 @@ describe("API Tests with Cypress", () => {
             })
         })
 
-        it.only('Verify response statusText', () => {
+        it('Verify response statusText', () => {
             getResponse()
             .then(response => {
                 console.log(response.statusText)
