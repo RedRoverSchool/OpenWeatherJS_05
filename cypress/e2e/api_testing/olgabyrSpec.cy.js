@@ -50,6 +50,13 @@ describe("Delete booking", () => {
 			})
 	})
 
+	it ('verify status of created bookingid', ()  => {
+		cy.request( "GET", `https://restful-booker.herokuapp.com/booking/${CREATED_ID}`)
+		 .then(response => {
+			expect(response.status).to.equal(200)
+		})
+	})
+
 	it('delete created booking', () => {
 		deleteBooking()
 			.then(response => {
