@@ -7,5 +7,8 @@
         "checkin": "2018-01-01",
         "checkout": "2019-01-01"
     },
-    "additionalneeds": "Breakfast"
+    "additionalneeds": "Breakfast",
+    "bookingID": 23770,
+    "statusOk": 200,
+    "typeBoolean": "boolean"
 }
