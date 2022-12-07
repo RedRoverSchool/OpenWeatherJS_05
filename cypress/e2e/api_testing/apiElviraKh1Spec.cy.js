@@ -16,15 +16,15 @@
                 "Content-Type": "application/json"
             },
             body: {
-                "firstname": apiBooking.elviraKh1CreateBookingInfo.firstname,
-                "lastname": apiBooking.elviraKh1CreateBookingInfo.lastname,
-                "totalprice": apiBooking.elviraKh1CreateBookingInfo.totalprice,
-                "depositpaid": apiBooking.elviraKh1CreateBookingInfo.depositpaid,
+                "firstname": apiBooking.createBookingInfo.firstname,
+                "lastname": apiBooking.createBookingInfo.lastname,
+                "totalprice": apiBooking.createBookingInfo.totalprice,
+                "depositpaid": apiBooking.createBookingInfo.depositpaid,
                 "bookingdates": {
-                    "checkin": apiBooking.elviraKh1CreateBookingInfo.checkin,
-                    "checkout": apiBooking.elviraKh1CreateBookingInfo.checkout
+                    "checkin": apiBooking.createBookingInfo.checkin,
+                    "checkout": apiBooking.createBookingInfo.checkout
                 },
-                "additionalneeds": apiBooking.elviraKh1CreateBookingInfo.additionalneeds
+                "additionalneeds": apiBooking.createBookingInfo.additionalneeds
 
             }
         })
@@ -46,6 +46,7 @@
                 cy.log('BOOKING_ID = ' + BOOKING_ID)
 
                 expect(response).to.have.any.keys('booking')
+                expect(response.booking.firstname).to.eq(apiBooking.createBookingInfo.firstname)
                 cy.log('Name: ' + response.booking.firstname + " " + response.booking.lastname)
                 cy.log('Dates: ' + response.booking.bookingdates.checkin + "-" + response.booking.bookingdates.checkin)
                 cy.log('Options: ' + response.booking.additionalneeds)
