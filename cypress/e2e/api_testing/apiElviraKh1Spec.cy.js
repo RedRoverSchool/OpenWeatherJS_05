@@ -1,17 +1,14 @@
 /// <reference types="cypress"/>
 
-const API_BASE_URL = Cypress.env('apiBaseUrl')
-let BOOKING_ID
+ import api from '../../fixtures/apiBooking.json'
 
-let firsNname = "Kia"
-let lastName = "Motors"
-let totalPrice = 200
-let checkIn = "2020-03-15"
-let checkOut = "2021-03-15"
-let additionalNeeds = "Parking"
+ const apiBooking = api
+ const API_BASE_URL = Cypress.env('apiBaseUrl')
+ let BOOKING_ID
 
-describe("API with Cypress", () => {
+ describe("API with Cypress", () => {
 
+    console.log(apiBooking)
     const getResponse = () =>
         cy.request({
             method: "POST",
@@ -20,15 +17,16 @@ describe("API with Cypress", () => {
                 "Content-Type": "application/json"
             },
             body: {
-                "firstname": firsNname,
-                "lastname": lastName,
-                "totalprice": totalPrice,
-                "depositpaid": true,
+                "firstname": apiBooking.elviraKh1CreateBookingInfo.firstname,
+                "lastname": apiBooking.elviraKh1CreateBookingInfo.lastname,
+                "totalprice": apiBooking.elviraKh1CreateBookingInfo.totalprice,
+                "depositpaid": apiBooking.elviraKh1CreateBookingInfo.depositpaid,
                 "bookingdates": {
-                    "checkin": checkIn,
-                    "checkout": checkOut
+                    "checkin": apiBooking.elviraKh1CreateBookingInfo.checkin,
+                    "checkout": apiBooking.elviraKh1CreateBookingInfo.checkout
                 },
-                "additionalneeds": additionalNeeds
+                "additionalneeds": apiBooking.elviraKh1CreateBookingInfo.additionalneeds
+
             }
         })
 
