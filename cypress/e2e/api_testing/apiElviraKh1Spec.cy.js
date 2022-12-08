@@ -1,60 +1,62 @@
 /// <reference types="cypress"/>
 
- import api from '../../fixtures/apiData.json'
+import api from '../../fixtures/apiData.json'
 
- const apiBooking = api
- const API_BASE_URL = Cypress.env('apiBaseUrl')
- let BOOKING_ID
- let TOKEN_AUTH
+const apiBooking = api
+const API_BASE_URL = Cypress.env('apiBaseUrl')
+let BOOKING_ID
+let TOKEN_AUTH
 
- describe("API with Cypress", () => {
+describe("API with Cypress", () => {
 
-    const getResponse = () =>
-        cy.request({
-            method: "POST",
-            url: `${API_BASE_URL}/booking`,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: {
-                "firstname": apiBooking.createBookingInfo.firstname,
-                "lastname": apiBooking.createBookingInfo.lastname,
-                "totalprice": apiBooking.createBookingInfo.totalprice,
-                "depositpaid": apiBooking.createBookingInfo.depositpaid,
-                "bookingdates": {
-                    "checkin": apiBooking.createBookingInfo.checkin,
-                    "checkout": apiBooking.createBookingInfo.checkout
+    describe("1. Create booking ", () => {
+        const getResponse = () =>
+            cy.request({
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                "additionalneeds": apiBooking.createBookingInfo.additionalneeds
+                body: {
+                    "firstname": apiBooking.createBookingInfo.firstname,
+                    "lastname": apiBooking.createBookingInfo.lastname,
+                    "totalprice": apiBooking.createBookingInfo.totalprice,
+                    "depositpaid": apiBooking.createBookingInfo.depositpaid,
+                    "bookingdates": {
+                        "checkin": apiBooking.createBookingInfo.checkin,
+                        "checkout": apiBooking.createBookingInfo.checkout
+                    },
+                    "additionalneeds": apiBooking.createBookingInfo.additionalneeds
 
-            }
+                }
+            })
+
+        it('API | Print response status: create booking confirmation', () => {
+            getResponse()
+                .then(response => {
+                    console.log(response)
+                    expect(response.status).to.equal(200)
+                })
         })
 
-    it('API | Print response status: create booking confirmation', () => {
-        getResponse()
-            .then(response => {
-                console.log(response)
-                expect(response.status).to.equal(200)
-            })
+        it('API Verify response:  created booking has fileds bookingid and object booking ', () => {
+            getResponse()
+                .its('body')
+                .then(response => {
+                    expect(response).to.have.any.keys('bookingid')
+                    BOOKING_ID = response.bookingid
+                    cy.log('BOOKING_ID = ' + BOOKING_ID)
+
+                    expect(response).to.have.any.keys('booking')
+                    expect(response.booking.firstname).to.eq(apiBooking.createBookingInfo.firstname)
+                    cy.log('Name: ' + response.booking.firstname + " " + response.booking.lastname)
+                    cy.log('Dates: ' + response.booking.bookingdates.checkin + "-" + response.booking.bookingdates.checkin)
+                    cy.log('Options: ' + response.booking.additionalneeds)
+                })
+        })
     })
 
-    it('API Verify response:  created booking has fileds bookingid and object booking ', () => {
-        getResponse()
-            .its('body')
-            .then(response => {
-                expect(response).to.have.any.keys('bookingid')
-                BOOKING_ID = response.bookingid
-                cy.log('BOOKING_ID = ' + BOOKING_ID)
-
-                expect(response).to.have.any.keys('booking')
-                expect(response.booking.firstname).to.eq(apiBooking.createBookingInfo.firstname)
-                cy.log('Name: ' + response.booking.firstname + " " + response.booking.lastname)
-                cy.log('Dates: ' + response.booking.bookingdates.checkin + "-" + response.booking.bookingdates.checkin)
-                cy.log('Options: ' + response.booking.additionalneeds)
-            })
-    })
-
-    describe("API get token and update booking information (first name and additional needs)", () => {
+    describe("2. Get token and update booking information (first name and additional needs)", () => {
         const getResponseAuth = () =>
             cy.request({
                 method: "POST",
@@ -67,7 +69,7 @@
                     "password": apiBooking.admin.password,
                 }
             })
-    
+
         it('API get status for create auth token', () => {
             getResponseAuth()
                 .then(response => {
@@ -75,17 +77,16 @@
                     expect(response.status).to.equal(200)
                 })
         })
-    
+
         it('API get token', () => {
             getResponseAuth()
                 .its('body')
                 .then(response => {
                     expect(response).to.have.any.keys('token')
-                    cy.log('TOKEN = ' + response.token)
                     TOKEN_AUTH = response.token
                 })
         })
-    
+
         const getResponse = () =>
             cy.request({
                 method: "PUT",
@@ -106,7 +107,7 @@
                     "additionalneeds": apiBooking.updateBookingInfo.additionalneeds
                 }
             })
-    
+
         it('API | Print response status: update booking confirmation', () => {
             getResponse()
                 .then(response => {
@@ -114,7 +115,7 @@
                     expect(response.status).to.equal(200)
                 })
         })
-    
+
         it('API Verify response:  update booking firsttname and additionalNeeds were changed ', () => {
             getResponse()
                 .its('body')
@@ -124,10 +125,8 @@
                     expect(response.firstname).to.not.eq(apiBooking.createBookingInfo.firstname)
                     expect(response.firstname).to.eq(apiBooking.updateBookingInfo.firstname)
                     expect(response.additionalneeds).to.eq(apiBooking.updateBookingInfo.additionalneeds)
-                    cy.log('Updated Name: ' + response.firstname + " " + response.lastname)
-                    cy.log('Updated Options: ' + response.additionalneeds)
                 })
         })
     })
-    
+
 })
