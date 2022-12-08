@@ -7,6 +7,7 @@
     "wrongPassword": "TestTest"
     },
 
-"titleText": "Pricing"
+"titleText": "Pricing",
+"billingPlansTables":[["Base plan","0.15 USD"], ["Free plan","Free","Startup plan","40 USD","Developer plan","180 USD","Professional plan","470 USD","Enterprise plan","2000 USD"], ["Starter plan","150 USD","Medium plan","950 USD"]]
 
 }

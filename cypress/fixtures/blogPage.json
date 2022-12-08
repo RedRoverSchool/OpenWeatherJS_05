@@ -2,5 +2,6 @@
     "url": "https://openweather.co.uk/blog/category/weather",
     "weatherFilter": "WEATHER",
     "postsQuantity": 10,
-    "postsLink": "https://openweather.co.uk/blog/post/"
+    "postsLink": "https://openweather.co.uk/blog/post/",
+    "postCategoryNameArray": ["ALL", "WEATHER", "AGRO", "PLATFORM", "TECHNOLOGIES", "TEAM&COMPANY"]
 }

@@ -6,6 +6,8 @@ class BlogPage {
         getPostsImage: () => cy.get('.post-page__img'),
         getAllPostsLinks: () => cy.get('.post-list .post .post__title-link'),
         getAgroLink: () => cy.get('a[href="/blog/category/agro"]'),
+        getPlatformLink: () => cy.get('a[href="/blog/category/platform"]'),
+        getTechnologiesLink: () => cy.get('a[href="/blog/category/technologies"]'),
     }
      
     clickFirstPostsLink() {
@@ -14,6 +16,14 @@ class BlogPage {
 
     clickAgroLink() {
         this.elements.getAgroLink().click();
+    }
+
+    clickPlatformLink() {
+        this.elements.getPlatformLink().click();
+    }
+
+    clickTechnologiesLink() {
+        this.elements.getTechnologiesLink().click();
     }
 }
 export default BlogPage;

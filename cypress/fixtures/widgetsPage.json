@@ -12,5 +12,7 @@
     },
 
     "copyInBufferBtn": " Copy in buffer",
-    "apiInputFielValidMessage": "Validation accept"
+    "apiInputFielValidMessage": "Validation accept",
+    "invalidApi": "785347584375",
+    "errorWidgetPageInvalidApi": "Validation error"
 }

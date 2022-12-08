@@ -11,6 +11,9 @@ module.exports = defineConfig({
           // implement node event listeners here
         },
     },
+    env: {
+        apiBaseUrl: 'https://restful-booker.herokuapp.com'
+    },
     video: false,
     reporter: 'junit',
     reporterOptions: {
