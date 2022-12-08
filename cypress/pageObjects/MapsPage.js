@@ -6,6 +6,8 @@ class MapsPage {
         getCityData: () => cy.get('.expanded > :nth-child(1) > .city-data > .city-full-info > table > tbody'),
         getTemperatureLabel: () => cy.get('label[for=Temperature]'),
         getGlobalPrecipitationLabel: () => cy.get('label[for="Global Precipitation"]'),
+        getScale: () => cy.get('.scale-details'),
+        getWindSpeedLabel: () => cy.get('label[for="Wind speed"]')
         getScale: () => cy.get('.scale-details'), 
         getSearchIcon: () => cy.get('[class="leaflet-bar leaflet-control"] div'),
         getSearchInput: () => cy.get('[class="leaflet-bar leaflet-control"] input'),
@@ -32,7 +34,11 @@ class MapsPage {
         this.elements.getGlobalPrecipitationLabel().click();
     }
 
-    clickOnSearchIcon() {
+    clickWindSpeedLabel() {
+        this.elements.getWindSpeedLabel().click();
+    }
+    
+        clickOnSearchIcon() {
         this.elements.getSearchIcon().click();
     }
 

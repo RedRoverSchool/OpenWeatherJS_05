@@ -53,6 +53,17 @@ describe('Maps page test suite', () => {
 
             mapsPage.elements.getScale().should('contain', 'Precipitation, mm/h')
         });
+        
+     it('AT_027.005 | Maps > Section with the scale > The scale\s name matches the label\s name after selecting "Wind speed"', function()  {
+        header.clickMapsMenuLink()
+        cy.url().should("include", this.url.mapsPage)
+       
+        mapsPage.clickWindSpeedLabel()
+
+        mapsPage.elements.getScale().should('contain', 'Wind speed, m/s')
+    });
+
+});  
 
     it('AT_026.002 | Maps > Visualization of data on the map Verify that user can Click on any city on the map and see the data', function () {
         header.clickMapsMenuLink()
@@ -96,9 +107,10 @@ describe('Maps page test suite', () => {
             .invoke('text')
             .then(showNumberValuesOnly)
             .should('match', /[.0-9]+/)
-
+            
         function showNumberValuesOnly(char) {
             return char.replace(/[^0-9.]+/g, '')
         }
     });
 });
+
