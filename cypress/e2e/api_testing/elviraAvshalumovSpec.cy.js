@@ -4,7 +4,7 @@ const API_BASE_URL = Cypress.env('apiBaseUrl');
 const apiData = require('../../fixtures/apiData.json')
 let CREATED_ID;
 
-describe('API with Cypress', () => {
+describe('API | elviraAvshalumovSpec ', () => {
 
     describe('Get all bookingIds', () =>{
 
