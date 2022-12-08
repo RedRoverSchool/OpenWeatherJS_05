@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-const API_BASE_URL = Cypress.env('https://restful-booker.herokuapp.com')
+const API_BASE_URL = Cypress.env('apiBaseUrl')
 const apiData = require('../../fixtures/apiData.json')
 let CREATED_ID
 let TOKEN
@@ -12,7 +12,7 @@ describe('olgabyrSpec', () => {
 		const postResponse = () =>
 			cy.request({
 				method: "POST",
-				url: "https://restful-booker.herokuapp.com/booking",
+				url: `${API_BASE_URL}/booking`,
 				headers: {
 					"Content-Type": "application/json"
 				},
@@ -51,7 +51,7 @@ describe('olgabyrSpec', () => {
 		const createToken = () =>
 			cy.request({
 				method: "POST",
-				url: "https://restful-booker.herokuapp.com/auth",
+				url: `${API_BASE_URL}/auth`,
 				headers: {
 					"Content-Type": "application/json"
 				},
@@ -82,7 +82,7 @@ describe('olgabyrSpec', () => {
 		it('delete created booking using authorization token', () => {
 			cy.request({
 				method: "DELETE",
-				url: `https://restful-booker.herokuapp.com/booking/${CREATED_ID}`,
+				url: `${API_BASE_URL}/booking/${CREATED_ID}`,
 				headers: {
 					"Content-Type": "application/json", "Cookie": `token = ${TOKEN}`
 				}
