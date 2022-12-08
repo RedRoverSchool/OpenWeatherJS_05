@@ -6,7 +6,8 @@ class MapsPage {
         getCityData: () => cy.get('.expanded > :nth-child(1) > .city-data > .city-full-info > table > tbody'),
         getTemperatureLabel: () => cy.get('label[for=Temperature]'),
         getGlobalPrecipitationLabel: () => cy.get('label[for="Global Precipitation"]'),
-        getScale: () => cy.get('.scale-details')
+        getScale: () => cy.get('.scale-details'),
+        getWindSpeedLabel: () => cy.get('label[for="Wind speed"]')
     }
      
     clickPressureLabel() {
@@ -19,6 +20,10 @@ class MapsPage {
 
     clickGlobalPrecipitationLabel() {
         this.elements.getGlobalPrecipitationLabel().click();
+    }
+
+    clickWindSpeedLabel() {
+        this.elements.getWindSpeedLabel().click();
     }
     
 }
