@@ -5,7 +5,7 @@ const apiData = require('../../fixtures/apiData.json')
 let CREATED_ID
 let TOKEN
 
-describe("Create and delete booking", () => {
+describe('olgabyrSpec', () => {
 
 	describe("Create booking", () => {
 
