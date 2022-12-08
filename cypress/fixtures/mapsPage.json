@@ -3,6 +3,7 @@
     "pressureScaleNameFull": "Pressure, hPa",
     "pageTitle": "Interactive weather maps - OpenWeatherMap",
     "cityName": "Marrakesh",
+    "cityName2": "Chicago",
     
     "cityData" : [
         "country",

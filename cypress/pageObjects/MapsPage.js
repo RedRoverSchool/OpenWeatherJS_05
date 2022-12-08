@@ -9,13 +9,27 @@ class MapsPage {
         getScale: () => cy.get('.scale-details'), 
         getSearchIcon: () => cy.get('[class="leaflet-bar leaflet-control"] div'),
         getSearchInput: () => cy.get('[class="leaflet-bar leaflet-control"] input'),
-        getRandomCity: () => cy.get('$("div:contains("^Chicago$")")')
-       
-        //div:nth-child(6) span:nth-child(2)
+        getNameOfCity: () => cy.get('span.city-name'),
+        getTableHeader: () => cy.get('thead > tr .city-param:visible'),
+        getTableCountryValue: () => cy.get('tbody tr:nth-child(1) .city-param:visible'),
+        getTableTempValue: () => cy.get('tbody tr:nth-child(2) .city-param:visible'),
+        getTableCloudsValue: () => cy.get('tbody tr:nth-child(3) .city-param:visible'),
+        getTableHumidityValue: () => cy.get('tbody tr:nth-child(4) .city-param:visible'),
+        getTablePressureValue: () => cy.get('tbody tr:nth-child(5) .city-param:visible'),
+        getTableWindDirectionValue: () => cy.get('tbody tr:nth-child(6) .city-param:visible'),
+        getTableWindeSpeedValue: () => cy.get('tbody tr:nth-child(7) .city-param:visible')
     }
      
     clickPressureLabel() {
         this.elements.getPressureLabel().click({force: true});
+    }
+
+    clickCityName() {
+        this.elements.getCityName().click();
+    }
+
+    clickGlobalPrecipitationLabel() {
+        this.elements.getGlobalPrecipitationLabel().click();
     }
 
     clickOnSearchIcon() {
@@ -28,11 +42,6 @@ class MapsPage {
 
     sibmitSearch() {
         this.elements.getSearchInput().type('{enter}')
-    }
-
-    openCityInfoSection() {
-        this.elements.getRandomCity().click()
-        
     }
 }
 export default MapsPage;
