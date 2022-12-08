@@ -66,7 +66,7 @@ describe("API testing with Cypress", function () {
                     },
                     "additionalneeds" : "Duck feather pillows"
                 }
-            })
+            });
 
         it('Verify the status of the booking creation', function () {
             createABooking().then(response => {
