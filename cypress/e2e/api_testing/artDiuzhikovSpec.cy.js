@@ -5,7 +5,7 @@ const API_DATA = require('../../fixtures/apiData.json');
 const DATE_FORMAT = /\d{4}-\d{2}-\d{2}/;
 let CREATION_ID;
 
-describe.skip("API testing with Cypress", function () {
+describe("API testing with Cypress", function () {
 
     describe.skip("Get a booking test suite", function () {
 
