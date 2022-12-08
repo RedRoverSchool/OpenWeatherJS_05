@@ -12,6 +12,9 @@
     "statusOk": 200,
     "typeBoolean": "boolean",
     "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
+    "responsebobyafterdeletebooking" : "Created",
+    "usernamefortokenauthorization": "admin", 
+    "passwordfortokenauthorization" :"password123",
     "admin": {
         "username": "admin",
         "password": "password123"
@@ -33,5 +36,5 @@
         "checkout": "2022-12-12",
         "additionalneeds": "Parking and Breakfast",
         "depositpaid": false
-    }
+    }    
 }

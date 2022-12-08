@@ -1,59 +1,101 @@
 /// <reference types="cypress"/>
 
 const API_BASE_URL = Cypress.env('apiBaseUrl');
-const apiData = require('../../fixtures/apiData.json');
-const dateFormat = /\d{4}-\d{2}-\d{2}/;
+const API_DATA = require('../../fixtures/apiData.json');
+const DATE_FORMAT = /\d{4}-\d{2}-\d{2}/;
+let CREATION_ID;
 
 describe("API testing with Cypress", function () {
 
-    beforeEach(function () {
-        cy.fixture('apiData').then(apiData => {
-            this.apiData = apiData;
+    describe.skip("Get a booking test suite", function () {
+
+        const getTheBooking = () =>
+            cy.request(`${API_BASE_URL}/booking/${API_DATA.bookingID}`);
+
+        it('Verify the status of the response', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking).to.have.property('status', API_DATA.statusOk);
+            });
+        });
+
+        it.skip('Verify the booking ID', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.allRequestResponses['0']['Request URL']).to.include(API_DATA.bookingID);
+            });
+        });
+
+        it.skip('Verify the format of "check in date" key', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.body.bookingdates.checkin).to.match(DATE_FORMAT);
+            });
+        });
+
+        it.skip('Verify the format of "check out date" key', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.body.bookingdates.checkout).to.match(DATE_FORMAT);
+            });
+        });
+
+        it.skip('Verify the type of "deposit paid" key', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.body.depositpaid).to.be.a(API_DATA.typeBoolean);
+            });
         });
     });
 
-    describe("Get a booking test suite", function () {
+    describe("Create a booking test suite", function () {
 
-        const getTheBooking = () => 
+        const createABooking = () =>
             cy.request({
-                method: "GET",
-                url: `${API_BASE_URL}/booking/${apiData.bookingID}`
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: {
+                    "firstname": "Ivanka",
+                    "lastname": "Roust",
+                    "totalprice": 214,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2022-06-06",
+                        "checkout": "2019-06-12"
+                    },
+                    "additionalneeds": "Duck feather pillows"
+                }
             });
-    
-        it('Verify the status of the response', function () {
-            getTheBooking()
-            .then(response => {
-                console.log(response);
-                expect(response).to.have.property('status', this.apiData.statusOk);
+
+        it('Verify the status of the booking creation', function () {
+            createABooking()
+                .then(createdBooking => {
+                    expect(createdBooking).to.have.property('status', API_DATA.statusOk);
+                    CREATION_ID = createdBooking.body.bookingid;
             });
         });
 
-        it('Verify the booking ID', function () {
-            getTheBooking()
-            .then(response => {
-                expect(response.allRequestResponses['0']['Request URL']).to.include(this.apiData.bookingID);
-            });
+        it('Verify the last name in the latest created booking', function () {
+            cy.get(CREATION_ID)
+                .then(creationID => {
+                    cy.request(`${API_BASE_URL}/booking/${creationID[0]}`)
+                        .then(createdBooking => {
+                            expect(createdBooking.body.lastname).to.be.equal('Roust');
+                        });
+                });
         });
 
-        it('Verify the format of "check in date" key', function () {
-            getTheBooking()
-            .then(response => {
-                expect(response.body.bookingdates.checkin).to.match(dateFormat);
-            });
-        });
-
-        it('Verify the format of "check out date" key', function () {
-            getTheBooking()
-            .then(response => {
-                expect(response.body.bookingdates.checkout).to.match(dateFormat);
-            });
-        });
-
-        it('Verify the type of "deposit paid" key', function () {
-            getTheBooking()
-            .then(response => {
-                expect(response.body.depositpaid).to.be.a(this.apiData.typeBoolean);
-            });
+        it('Verify the price in the latest created booking', function () {
+            cy.get(CREATION_ID)
+                .then(creationID => {
+                    cy.request(`${API_BASE_URL}/booking/${creationID[0]}`)
+                        .then(createdBooking => {
+                            expect(createdBooking.body.totalprice).to.be.equal(214);
+                        });
+                });
         });
     });
 });
