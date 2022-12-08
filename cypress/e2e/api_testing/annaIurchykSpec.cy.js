@@ -1,6 +1,8 @@
 /// <reference types="cypress"/>
 
+const apiData = require('../../fixtures/apiData.json')
 const API_BASE_URL = Cypress.env('apiBaseUrl')
+let BOOKING_ID
 
 describe("API Tests with Cypress", () => {
 
@@ -65,6 +67,60 @@ describe("API Tests with Cypress", () => {
             .its('body')
             .then(response => {
                 expect(response[0]).to.have.property('bookingid')
+            })
+        })
+    })
+
+
+    describe('Create Booking', () => {
+        
+        const createBooking = () => 
+        cy.request({
+            method: "POST",
+            url: `${API_BASE_URL}/booking`,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: {
+                "firstname" : apiData.firstname,
+                "lastname" : apiData.lastname,
+                "totalprice" : apiData.totalprice,
+                "depositpaid" : apiData.depositpaid,
+                "bookingdates" : {
+                    "checkin" : apiData.bookingdates.checkin,
+                    "checkout" : apiData.bookingdates.checkout
+                },
+                "additionalneeds" : apiData.additionalneeds
+            }
+        })
+
+        it('Verify response body is an object', () => {
+            createBooking()
+                .its('body')
+                .should('be.an', 'object')
+        });
+
+        it('Verify booking has First and Last Name', () => {
+            createBooking()
+            .then(response => {
+                expect(response.body.booking).has.property('firstname', apiData.firstname)
+                expect(response.body.booking).has.property('lastname', apiData.lastname)
+            })
+        })
+
+        it('Verify booking has Status 200', () => {
+            createBooking()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Verify booking has Booking ID', () => {
+            createBooking()
+            .then(response => {
+                expect(response.body).has.property('bookingid')
+                BOOKING_ID = response.body.bookingid
+                console.log(BOOKING_ID)
             })
         })
     })
