@@ -11,6 +11,7 @@
     "bookingID": 23770,
     "statusOk": 200,
     "typeBoolean": "boolean",
+    "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
     "admin": {
         "username": "admin",
         "password": "password123"
@@ -32,5 +33,5 @@
         "checkout": "2022-12-12",
         "additionalneeds": "Parking and Breakfast",
         "depositpaid": false
-    }
+    }    
 }

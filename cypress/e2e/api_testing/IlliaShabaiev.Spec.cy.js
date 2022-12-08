@@ -27,7 +27,19 @@ describe("Api test suit", () => {
             createBookingRequest()
                 .then(response => {
                     expect(response.body.booking.lastname).to.equal('White')
+                })
+        })
+
+        it("verify that total price value is number", () => {
+            createBookingRequest()
+                .then(response => {
                     expect(response.body.booking.totalprice).to.be.a('number')
+                })
+        })
+
+        it("verify that request return 200 code", () => {
+            createBookingRequest()
+                .then(response => {
                     expect(response.status).to.eq(200)
                 })
         })
