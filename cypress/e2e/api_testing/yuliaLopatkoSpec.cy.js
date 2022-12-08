@@ -6,9 +6,9 @@ describe("Api test suit", () => {
   describe("Create booking", () => {
     const createBookingRequest = () =>
       cy.request({
-        method: 'POST',
+        method: "POST",
         url: `${API_BASE_URL}/booking`,
-        
+
         body: {
           firstname: "Jim",
           lastname: "Brown",
@@ -22,10 +22,21 @@ describe("Api test suit", () => {
         },
       })
 
-    it("verify that request creates booking", () => {
-      createBookingRequest().then(response => {
-        expect(response.body.booking.lastname).to.equal('Brown')
-      } )
+    it.only("verify that request creates booking", () => {
+      createBookingRequest().then((response) => {
+        expect(response.body.booking.lastname).to.equal("Brown")
+      })
+    })
+
+    describe("Get booking Ids", () => {
+      const getBookingIds = () => cy.request(`${API_BASE_URL}/booking`)
+
+      it("verify response status", () => {
+        getBookingIds().then((response) => {
+          expect(response.status).to.eq(200)
+          cy.log(response.body)
+        })
+      })
     })
   })
 })
