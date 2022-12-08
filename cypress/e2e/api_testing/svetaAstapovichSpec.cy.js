@@ -47,5 +47,17 @@ describe("API test suit", () => {
                 expect(response.booking.totalprice).to.be.a('number')
             })
         })  
-    })
+    });
+
+    describe('Get Booking Id', () => {
+        
+        const getBookingIDs = () => cy.request(`${API_BASE_URL}/booking`)
+
+        it('Verify response status', () => {
+            getBookingIDs()
+            .then(({status}) => {
+            expect(status).to.eq(200)
+            })
+        })
+    });
 })
