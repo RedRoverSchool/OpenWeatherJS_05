@@ -7,7 +7,7 @@ let CREATION_ID;
 
 describe.skip("API testing with Cypress", function () {
 
-    describe("Get a booking test suite", function () {
+    describe.skip("Get a booking test suite", function () {
 
         const getTheBooking = () =>
             cy.request(`${API_BASE_URL}/booking/${API_DATA.bookingID}`);
@@ -19,28 +19,28 @@ describe.skip("API testing with Cypress", function () {
             });
         });
 
-        it('Verify the booking ID', function () {
+        it.skip('Verify the booking ID', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.allRequestResponses['0']['Request URL']).to.include(API_DATA.bookingID);
             });
         });
 
-        it('Verify the format of "check in date" key', function () {
+        it.skip('Verify the format of "check in date" key', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.body.bookingdates.checkin).to.match(DATE_FORMAT);
             });
         });
 
-        it('Verify the format of "check out date" key', function () {
+        it.skip('Verify the format of "check out date" key', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.body.bookingdates.checkout).to.match(DATE_FORMAT);
             });
         });
 
-        it('Verify the type of "deposit paid" key', function () {
+        it.skip('Verify the type of "deposit paid" key', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.body.depositpaid).to.be.a(API_DATA.typeBoolean);
