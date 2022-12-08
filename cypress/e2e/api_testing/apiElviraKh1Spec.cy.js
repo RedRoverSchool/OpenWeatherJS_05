@@ -37,7 +37,7 @@
                 expect(response.status).to.equal(200)
             })
     })
-
+ 
     it('API Verify response:  created booking has fileds bookingid and object booking ', () => {
         getResponse()
             .its('body')
@@ -53,7 +53,7 @@
                 cy.log('Options: ' + response.booking.additionalneeds)
             })
     })
-
+ })
     describe("API get token and update booking information (first name and additional needs)", () => {
         const getResponseAuth = () =>
             cy.request({
@@ -129,5 +129,26 @@
                 })
         })
     })
+
+    describe("API delete booking information", () => {
+
+        const getResponseDelete = () =>
+            cy.request({
+                method: "DELETE",
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Cookie": "token=" + TOKEN_AUTH
+                }
+            })
     
-})
+        it('API | Print response status: delete booking confirmation', () => {
+            getResponseDelete()
+                .then(response => {
+                    console.log(response)
+                    expect(response.status).to.equal(201)
+                    expect(response.statusText).to.equal("Created")
+                })
+        })   
+
+    })
