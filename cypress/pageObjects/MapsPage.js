@@ -17,5 +17,22 @@ class MapsPage {
     clickPressureLabel() {
         this.elements.getPressureLabel().click({force: true});
     }
+
+    clickOnSearchIcon() {
+        this.elements.getSearchIcon().click();
+    }
+
+    typeSearchWord(cityName) {
+        this.elements.getSearchInput().type(cityName)
+    }
+
+    sibmitSearch() {
+        this.elements.getSearchInput().type('{enter}')
+    }
+
+    openCityInfoSection() {
+        this.elements.getRandomCity().click()
+        
+    }
 }
 export default MapsPage;
