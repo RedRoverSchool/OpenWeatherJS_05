@@ -72,7 +72,7 @@ describe("annaIurchykSpec", () => {
     })
 
 
-    describe('Create Booking', () => {
+    describe.only('Create Booking', () => {
         
         const createBooking = () => 
         cy.request({
@@ -81,38 +81,35 @@ describe("annaIurchykSpec", () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: {
-                "firstname" : apiData.firstname,
-                "lastname" : apiData.lastname,
-                "totalprice" : apiData.totalprice,
-                "depositpaid" : apiData.depositpaid,
-                "bookingdates" : {
-                    "checkin" : apiData.bookingdates.checkin,
-                    "checkout" : apiData.bookingdates.checkout
-                },
-                "additionalneeds" : apiData.additionalneeds
+            body: apiData.createBookingInfo
+        })
+
+        const getBookingId = () => 
+        cy.request({
+            method: "GET",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`
+        })
+
+        const partialUpdateBooking = () => 
+        cy.request({
+            method: "PATCH",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json", 
+                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+            },
+            body: apiData.newInformation
+        })
+
+        const deleteBooking = () =>
+        cy.request({
+            method: "DELETE",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
             }
-        })
-
-        it('Verify response body is an object', () => {
-            createBooking()
-                .its('body')
-                .should('be.an', 'object')
-        })
-
-        it('Verify booking has First and Last Name', () => {
-            createBooking()
-            .then(response => {
-                expect(response.body.booking).has.property('firstname', apiData.firstname)
-                expect(response.body.booking).has.property('lastname', apiData.lastname)
-            })
-        })
-
-        it('Verify booking has Status 200', () => {
-            createBooking()
-            .then(response => {
-                expect(response.status).to.eq(200)
-            })
         })
 
         it('Verify booking has Booking ID', () => {
@@ -125,12 +122,59 @@ describe("annaIurchykSpec", () => {
         })
 
         it('Verify Last Name is the right in the POSTed booking', () => {
-            cy.request({
-                method: "GET",
-                url: `${API_BASE_URL}/booking/${BOOKING_ID}`
-            }).then(response => {
+            getBookingId()
+            .then(response => {
                 expect(response.status).to.eq(200)
-                expect(response.body.lastname).to.eq(apiData.lastname)
+                expect(response.body.lastname).to.eq(apiData.createBookingInfo.lastname)
+            })
+        })
+
+        it('Verify response body is an object', () => {
+            getBookingId()
+                .its('body')
+                .should('be.an', 'object')
+        })
+
+        it('Verify booking has First and Last Name', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.body).has.property('firstname', apiData.createBookingInfo.firstname)
+                expect(response.body).has.property('lastname', apiData.createBookingInfo.lastname)
+            })
+        })
+
+        it('Verify booking has Status 200', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Verify booking status after partial update is 200', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Verify Last Name at the booking after partial update', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.body).has.property('lastname', apiData.newInformation.lastname)
+            })
+        })
+
+        it('Verify Total Price at the booking after partial update', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.body).has.property('totalprice', apiData.newInformation.totalprice)
+            })
+        })
+
+        it('Delete Booking', () => {
+            deleteBooking()
+            .then(response => {
+                expect(response.body).to.eq(apiData.responsebobyafterdeletebooking)
             })
         })
     })
