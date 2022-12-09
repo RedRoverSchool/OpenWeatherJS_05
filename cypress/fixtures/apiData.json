@@ -25,5 +25,9 @@
     "responsebobyafterdeletebooking" : "Created",
     "usernamefortokenauthorization": "admin", 
     "passwordfortokenauthorization" :"password123",
-    "responsestatusafterdeletebooking" : 201
+    "responsestatusafterdeletebooking" : 201,
+
+    "getHeaders": ["server", "Connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"]
+
+    
 }
