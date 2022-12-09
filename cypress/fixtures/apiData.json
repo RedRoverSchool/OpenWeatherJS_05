@@ -26,5 +26,31 @@
     "usernamefortokenauthorization": "admin", 
     "passwordfortokenauthorization" :"password123",
     "responsestatusafterdeletebooking" : 201,
-    "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"]
+    "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
+    "admin": {
+        "username": "admin",
+        "password": "password123"
+    },
+    "createBookingInfo": {
+        "firstname": "Ivan",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "bookingdates": {
+            "checkin": "2020-03-15",
+            "checkout": "2021-03-15"
+        },
+        "additionalneeds": "Parking",
+        "depositpaid": false
+    },
+    "updateBookingInfo": {
+        "firstname": "Ivanna",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "bookingdates": {
+            "checkin": "2020-03-15",
+            "checkout": "2022-12-12"
+        },
+        "additionalneeds": "Parking and Breakfast",
+        "depositpaid": false
+    }
 }
