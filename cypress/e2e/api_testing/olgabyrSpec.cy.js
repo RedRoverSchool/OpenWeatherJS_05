@@ -33,7 +33,7 @@ describe('olgabyrSpec', () => {
 		it('creat booking and verify response status', () => {
 			postResponse()
 				.then(response => {
-					expect(response.status).to.equal(200)
+					expect(response.status).to.equal(apiData.statusOk)
 				})
 		})
 
@@ -64,7 +64,7 @@ describe('olgabyrSpec', () => {
 		it('Verify response status code is 200', () => {
 			createToken()
 				.then(response => {
-					expect(response.status).to.equal(200);
+					expect(response.status).to.equal(apiData.statusOk);
 				})
 		})
 
@@ -87,7 +87,7 @@ describe('olgabyrSpec', () => {
 					"Content-Type": "application/json", "Cookie": `token = ${TOKEN}`
 				}
 			}).then(response => {
-				expect(response.status).to.equal(201)
+				expect(response.status).to.equal(apiData.responsestatusafterdeletebooking)
 				expect(response.body).to.equal(apiData.responsebobyafterdeletebooking)
 			})
 		})
