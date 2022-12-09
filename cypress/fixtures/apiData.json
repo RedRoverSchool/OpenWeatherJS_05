@@ -26,6 +26,7 @@
     "usernamefortokenauthorization": "admin", 
     "passwordfortokenauthorization" :"password123",
     "responsestatusafterdeletebooking" : 201,
+    "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
      "newInformation": {
         "lastname" : "SAM",
         "totalprice" : 890
