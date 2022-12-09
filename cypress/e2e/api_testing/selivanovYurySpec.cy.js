@@ -19,7 +19,7 @@ describe ('testing API', function() {
             })
         
 
-        it('verify satatus code and status text', function() {
+        it('verify satatus code', function() {
             getResponse()
                 .then(({status}) => {
                     expect(status).to.eq(200)
