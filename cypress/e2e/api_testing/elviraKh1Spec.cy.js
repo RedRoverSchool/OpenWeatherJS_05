@@ -24,8 +24,8 @@ describe("API | elviraKh1Spec", () => {
                     "totalprice": apiBooking.createBookingInfo.totalprice,
                     "depositpaid": apiBooking.createBookingInfo.depositpaid,
                     "bookingdates": {
-                        "checkin": apiBooking.createBookingInfo.checkin,
-                        "checkout": apiBooking.createBookingInfo.checkout
+                        "checkin": apiBooking.createBookingInfo.bookingdates.checkin,
+                        "checkout": apiBooking.createBookingInfo.bookingdates.checkout
                     },
                     "additionalneeds": apiBooking.createBookingInfo.additionalneeds
 
@@ -94,17 +94,7 @@ describe("API | elviraKh1Spec", () => {
                     "Content-Type": "application/json",
                     "Cookie": "token=" + TOKEN_AUTH
                 },
-                body: {
-                    "firstname": apiBooking.updateBookingInfo.firstname,
-                    "lastname": apiBooking.updateBookingInfo.lastname,
-                    "totalprice": apiBooking.updateBookingInfo.totalprice,
-                    "depositpaid": apiBooking.updateBookingInfo.depositpaid,
-                    "bookingdates": {
-                        "checkin": apiBooking.updateBookingInfo.checkin,
-                        "checkout": apiBooking.updateBookingInfo.checkout
-                    },
-                    "additionalneeds": apiBooking.updateBookingInfo.additionalneeds
-                }
+                body: apiBooking.updateBookingInfo
             })
 
         it('Verify response status update booking confirmation', () => {
