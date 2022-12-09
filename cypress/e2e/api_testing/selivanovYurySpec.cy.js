@@ -2,7 +2,7 @@
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 
-describe ('testing API', function() {
+describe ('selivanovYurySpec', function() {
 
     beforeEach(function () {
         cy.fixture('apiData').then(data => {
