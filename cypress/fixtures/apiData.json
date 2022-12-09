@@ -24,5 +24,10 @@
     },
     "responsebobyafterdeletebooking" : "Created",
     "usernamefortokenauthorization": "admin", 
-    "passwordfortokenauthorization" :"password123"
+    "passwordfortokenauthorization" :"password123",
+    "newInformation": {
+        "lastname" : "SAM",
+        "totalprice" : 890
+
+    }
 }
