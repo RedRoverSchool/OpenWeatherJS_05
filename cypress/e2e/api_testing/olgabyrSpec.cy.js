@@ -7,7 +7,7 @@ let TOKEN
 
 describe('olgabyrSpec', () => {
 
-	describe("Create booking", () => {
+	describe('Create booking', () => {
 
 		const postResponse = () =>
 			cy.request({
