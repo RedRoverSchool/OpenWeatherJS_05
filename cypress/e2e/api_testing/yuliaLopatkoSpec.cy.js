@@ -26,7 +26,7 @@ describe("yuliaLopatkoSpec", () => {
         },
       })
 
-    it.only("verify that request creates booking", () => {
+    it("verify that request creates booking", () => {
       createBookingRequest().then((response) => {
         expect(response.body.booking.lastname).to.equal("Brown")
       })
