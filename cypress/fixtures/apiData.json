@@ -26,7 +26,11 @@
     "usernamefortokenauthorization": "admin", 
     "passwordfortokenauthorization" :"password123",
     "responsestatusafterdeletebooking" : 201,
+
+    "getHeaders": ["server", "Connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
+   
     "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
+
     "admin": {
         "username": "admin",
         "password": "password123"
@@ -52,5 +56,10 @@
         },
         "additionalneeds": "Parking and Breakfast",
         "depositpaid": false
+    },
+    "newInformation": {
+        "lastname" : "SAM",
+        "totalprice" : 890
     }
+
 }
