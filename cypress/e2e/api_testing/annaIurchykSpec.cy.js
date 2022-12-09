@@ -94,25 +94,10 @@ describe("annaIurchykSpec", () => {
             }
         })
 
-        it('Verify response body is an object', () => {
-            createBooking()
-                .its('body')
-                .should('be.an', 'object')
-        })
-
-        it('Verify booking has First and Last Name', () => {
-            createBooking()
-            .then(response => {
-                expect(response.body.booking).has.property('firstname', apiData.firstname)
-                expect(response.body.booking).has.property('lastname', apiData.lastname)
-            })
-        })
-
-        it('Verify booking has Status 200', () => {
-            createBooking()
-            .then(response => {
-                expect(response.status).to.eq(200)
-            })
+        const getBookingId = () => 
+        cy.request({
+            method: "GET",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`
         })
 
         it('Verify booking has Booking ID', () => {
@@ -125,12 +110,31 @@ describe("annaIurchykSpec", () => {
         })
 
         it('Verify Last Name is the right in the POSTed booking', () => {
-            cy.request({
-                method: "GET",
-                url: `${API_BASE_URL}/booking/${BOOKING_ID}`
-            }).then(response => {
+            getBookingId()
+            .then(response => {
                 expect(response.status).to.eq(200)
                 expect(response.body.lastname).to.eq(apiData.lastname)
+            })
+        })
+
+        it('Verify response body is an object', () => {
+            getBookingId()
+                .its('body')
+                .should('be.an', 'object')
+        })
+
+        it('Verify booking has First and Last Name', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.body).has.property('firstname', apiData.firstname)
+                expect(response.body).has.property('lastname', apiData.lastname)
+            })
+        })
+
+        it('Verify booking has Status 200', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.status).to.eq(200)
             })
         })
     })
