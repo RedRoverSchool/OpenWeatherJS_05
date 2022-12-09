@@ -6,6 +6,15 @@ const apiBooking = api
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 let BOOKING_ID
 let TOKEN_AUTH
+const getResponseGetBookingByID = () =>
+cy.request({
+    method: "GET",
+    url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+    headers: {
+        "Content-Type": "application/json"
+    },
+    failOnStatusCode: false
+})
 
 describe("API | elviraKh1Spec", () => {
 
@@ -117,4 +126,66 @@ describe("API | elviraKh1Spec", () => {
                 })
         })
     })
+
+    describe('3. Get booking by ID', () => {
+
+        it('Verify response status Get booking id = 200 and header', () => {
+            getResponseGetBookingByID()
+                .then(response => {
+                    console.log(response)
+                    expect(response.status).to.equal(200)
+                    assert.isObject(response.headers)
+                    assert.isOk(response.statusText)
+                    assert.isTrue(response.isOkStatusCode)
+                    expect(response.headers['content-type']).to.eq("application/json; charset=utf-8")
+               })
+        })
+
+        it('Verify body response and headers Get booking ID ', () => {
+            getResponseGetBookingByID()
+                .its('body')
+                .then((response) => {
+                     expect(response).to.have.any.keys('additionalneeds')
+                    expect(response).to.have.any.keys('firstname')
+                    expect(response.firstname).to.eq(apiBooking.updateBookingInfo.firstname)
+                    expect(response.lastname).to.eq(apiBooking.updateBookingInfo.lastname)
+                    expect(response.totalprice).to.be.a('number')
+                    expect(response.additionalneeds).to.eq(apiBooking.updateBookingInfo.additionalneeds)
+                    expect(response.bookingdates.checkin).to.eq(apiBooking.updateBookingInfo.bookingdates.checkin)
+                })
+        })
+    })
+
+    describe("4. Delete booking information", () => {
+
+        const getResponseDelete = () =>
+            cy.request({
+                method: "DELETE",
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Cookie": "token=" + TOKEN_AUTH
+                }
+            })
+
+        it('Verify response status Delete booking - confirmation', () => {
+            getResponseDelete()
+                .then(response => {
+                    console.log(response)
+                    expect(response.status).to.equal(201)
+                    expect(response.statusText).to.equal("Created")
+                })
+        })
+
+        it('Verify response status Get booking id is 404 ("Not found") after DELETE', () => {
+            getResponseGetBookingByID()
+                .then(response => {
+                    console.log(response)
+                    expect(response.status).to.equal(404)
+                    assert.equal(response.statusText,"Not Found")
+                    assert.isFalse(response.isOkStatusCode)
+              })
+        })
+    })
+
 })
