@@ -7,7 +7,11 @@ class MapsPage {
         getTemperatureLabel: () => cy.get('label[for=Temperature]'),
         getGlobalPrecipitationLabel: () => cy.get('label[for="Global Precipitation"]'),
         getScale: () => cy.get('.scale-details'),
-        getWindSpeedLabel: () => cy.get('label[for="Wind speed"]')
+        getWindSpeedLabel: () => cy.get('label[for="Wind speed"]'),
+        getSearchIcon: () => cy.get('div.leaflet-control-container a[title="Nominatim Search"]'),
+        getInputField: () => cy.get('div.leaflet-control-container form input'),
+        getTagWithCityName: () => cy.get('div.city-data span.city-name') ,
+        getCityNameExpandedInfo:() => cy.get('div.expanded thead th')        
     }
      
     clickPressureLabel() {
@@ -25,6 +29,14 @@ class MapsPage {
     clickWindSpeedLabel() {
         this.elements.getWindSpeedLabel().click();
     }
-    
+
+    clickOnSearchIcon() {
+        this.elements.getSearchIcon().click();
+    }
+
+    sendKeysToSearchInput(searchCity) {
+        this.elements.getInputField().type(searchCity).type('{enter}');
+    }     
+        
 }
 export default MapsPage;

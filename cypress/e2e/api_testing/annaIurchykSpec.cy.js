@@ -4,7 +4,7 @@ const apiData = require('../../fixtures/apiData.json')
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 let BOOKING_ID
 
-describe("API Tests with Cypress", () => {
+describe("annaIurchykSpec", () => {
 
     describe("Get BookingId Tests", () => {
 
@@ -26,7 +26,7 @@ describe("API Tests with Cypress", () => {
             getResponse()
                 .its('body')
                 .should('be.an', 'array')
-        });
+        })
 
         it('Verify response body has a duration', () => {
             getResponse()
@@ -98,7 +98,7 @@ describe("API Tests with Cypress", () => {
             createBooking()
                 .its('body')
                 .should('be.an', 'object')
-        });
+        })
 
         it('Verify booking has First and Last Name', () => {
             createBooking()
@@ -121,6 +121,16 @@ describe("API Tests with Cypress", () => {
                 expect(response.body).has.property('bookingid')
                 BOOKING_ID = response.body.bookingid
                 console.log(BOOKING_ID)
+            })
+        })
+
+        it('Verify Last Name is the right in the POSTed booking', () => {
+            cy.request({
+                method: "GET",
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`
+            }).then(response => {
+                expect(response.status).to.eq(200)
+                expect(response.body.lastname).to.eq(apiData.lastname)
             })
         })
     })
