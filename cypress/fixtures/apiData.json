@@ -12,15 +12,37 @@
     "typeBoolean": "boolean",
     "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
     "romData": {
-        "firstname": "Steve",
-        "lastname": "QA",
-        "totalprice": 2000,
-        "depositpaid": true,
-        "bookingdates": {
-            "checkin": "2022-12-12",
-            "checkout": "2022-12-29"
+        "create": {
+            "firstname": "Steve",
+            "lastname": "QA",
+            "totalprice": 2000,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-12",
+                "checkout": "2022-12-29"
+            },
+            "additionalneeds" : "Breakfast"
         },
-        "additionalneeds" : "Breakfast"
+        "update": {
+            "firstname": "Steve",
+            "lastname": "QA",
+            "totalprice": 2500,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-12",
+                "checkout": "2022-12-30"
+            },
+            "additionalneeds" : "Breakfast + Extra pillows please"
+        },
+        "partialUpdate": {
+            "firstname": "QA",
+            "lastname": "Steve",
+            "bookingdates": {
+                "checkin": "2022-12-26",
+                "checkout": "2023-01-15"
+            }
+        },
+        "authorizationHeader": "Basic YWRtaW46cGFzc3dvcmQxMjM="
     },
     "responsebobyafterdeletebooking" : "Created",
     "usernamefortokenauthorization": "admin", 
