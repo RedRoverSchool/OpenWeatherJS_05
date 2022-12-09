@@ -25,9 +25,9 @@
     "responsebobyafterdeletebooking" : "Created",
     "usernamefortokenauthorization": "admin", 
     "passwordfortokenauthorization" :"password123",
-    "newInformation": {
+    "responsestatusafterdeletebooking" : 201,
+     "newInformation": {
         "lastname" : "SAM",
         "totalprice" : 890
-
     }
 }
