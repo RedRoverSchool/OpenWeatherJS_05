@@ -2,7 +2,7 @@
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 
-describe('API with Cypress', () => {
+describe('IrinadashkSpec', () => {
 
       describe('GET all bookingIds', () => {
             
@@ -18,22 +18,19 @@ describe('API with Cypress', () => {
                         console.log(response)
                         expect(response).to.have.property('headers')
                   })
-            });
+            })
 
             it('Verify response status', () => {
                   getResponse()
                   .its('status')
                   .should('be.eq', 200)
-                  // .then(response => {
-                  //       expect(response.status).to.equal(200)
-                  // })
-            });
+            })
 
             it('Verify response body is array', () => {
                   getResponse()
                   .its('body')
                   .should('be.an', 'array')
-            });
+            })
 
             it('Verify response contains object with key bookingId', () => {
                   getResponse()
@@ -41,6 +38,6 @@ describe('API with Cypress', () => {
                   .then(response => {
                         expect(response[0]).to.have.keys('bookingid')
                   })
-            });
-      });
-});
+            })
+      })
+})
