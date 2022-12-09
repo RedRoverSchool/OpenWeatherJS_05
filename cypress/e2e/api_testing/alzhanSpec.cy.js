@@ -3,28 +3,19 @@
 const API_BASE_URL = Cypress.env('apiBaseUrl');
 let CREATE_ID;
 
-describe('firstApiTestSpec', () => {
+describe('alzhanSpec', () => {
 
-    describe('Conduct Booking Suit Tests', () => {
+    describe('Conduct Booking Tests Suite', () => {
         const getResponse = () => 
             cy.request({
                 method: "GET",
                 url: `${API_BASE_URL}/booking`
-            }) 
+            }); 
         
         it('verify response status is 200', () => {
             getResponse()
             .its('status')
             .should('be.eq', 200) 
-        });
-        
-        it('verify if booking for specific person already exists', () => {
-            getResponse()
-            .then(response => {
-                console.log(response)
-                expect(response.body.lastname).not.to.equal('Musk')
-                expect(response.body.firstname).not.to.equal('Elon')
-            })
         });
     });
 
@@ -48,22 +39,20 @@ describe('firstApiTestSpec', () => {
                     },
                     "additionalneeds" : "Breakfast"
                 }
-            })
+            });
         
         it('verify response status', () => {
             getResponse()
             .its('status')
             .should('be.eq', 200)
-        })
+        });
 
         it('verify response has new booking', () => {
             getResponse()
             .then(response => {
-                console.log(response.body)
                 expect(response.status).to.equal(200)
                 CREATE_ID = response.body.bookingid
-                console.log('CREATE_ID = ', CREATE_ID)
-            })
-        })
+            });
+        });
     });
 });
