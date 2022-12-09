@@ -8,7 +8,6 @@
         "checkout": "2019-01-01"
     },
     "additionalneeds": "Breakfast",
-    "bookingID": 23770,
     "statusOk": 200,
     "typeBoolean": "boolean",
     "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
@@ -22,5 +21,8 @@
             "checkout": "2022-12-29"
         },
         "additionalneeds" : "Breakfast"
-    }
+    },
+    "responsebobyafterdeletebooking" : "Created",
+    "usernamefortokenauthorization": "admin", 
+    "passwordfortokenauthorization" :"password123"
 }
