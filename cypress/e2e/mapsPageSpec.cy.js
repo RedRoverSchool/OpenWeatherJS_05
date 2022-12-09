@@ -63,4 +63,28 @@ describe('Maps page test suite', () => {
         mapsPage.elements.getScale().should('contain', 'Wind speed, m/s')
     });
 
+    it('AT_26.005 | Maps > Verify search city works correctly Happy path', function () {
+        const expectedCity =this.data.cityName;
+
+        header.clickMapsMenuLink();
+        mapsPage.clickOnSearchIcon();
+        mapsPage.sendKeysToSearchInput(expectedCity);
+
+        cy.wait(5000)
+
+        mapsPage.elements.getTagWithCityName().filter(`:contains(${expectedCity})`).each(($span, i) => {
+            cy.wrap($span).then((cities) => {
+
+                let currentCity = cities.toArray().map(el => el.innerText)
+                
+                if (currentCity == expectedCity) {
+                    expect(cities.text()).to.eq(expectedCity)
+                    cy.get(cities).should("be.visible").click()
+                    mapsPage.elements.getCityNameExpandedInfo().should("have.text", expectedCity)
+                
+                    return false;
+                }
+            });
+        });
+    })    
 });
