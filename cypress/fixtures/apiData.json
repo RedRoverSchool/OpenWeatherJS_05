@@ -24,5 +24,6 @@
     },
     "responsebobyafterdeletebooking" : "Created",
     "usernamefortokenauthorization": "admin", 
-    "passwordfortokenauthorization" :"password123"
+    "passwordfortokenauthorization" :"password123",
+    "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"]
 }
