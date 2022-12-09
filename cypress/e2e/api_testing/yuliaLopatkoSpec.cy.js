@@ -1,24 +1,28 @@
 /// <reference types="cypress"/>
 
 const API_BASE_URL = Cypress.env("apiBaseUrl")
+const apiData = require('../../fixtures/apiData.json')
 
-describe("Api test suit", () => {
+describe("yuliaLopatkoSpec", () => {
+
   describe("Create booking", () => {
     const createBookingRequest = () =>
       cy.request({
         method: "POST",
         url: `${API_BASE_URL}/booking`,
-
+        header: {
+          "Content-Type": "application/json"
+        },
         body: {
-          firstname: "Jim",
-          lastname: "Brown",
-          totalprice: 111,
-          depositpaid: true,
-          bookingdates: {
-            checkin: "2018-01-01",
-            checkout: "2019-01-01",
+          "firstname": apiData.firstname,
+          "lastname": apiData.lastname,
+          "totalprice": apiData.totalprice,
+          "depositpaid": apiData.depositpaid,
+          "bookingdates": {
+            "checkin": apiData.checkin,
+            "checkout": apiData.checkout,
           },
-          additionalneeds: "Breakfast",
+          "additionalneeds": apiData.additionalneeds,
         },
       })
 
