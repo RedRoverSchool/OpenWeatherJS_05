@@ -3,8 +3,9 @@
 const apiData = require('../../fixtures/apiData.json')
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 let BOOKING_ID
+let CREATE_TOKEN
 
-describe("API Tests with Cypress", () => {
+describe("annaIurchykSpec", () => {
 
     describe("Get BookingId Tests", () => {
 
@@ -26,7 +27,7 @@ describe("API Tests with Cypress", () => {
             getResponse()
                 .its('body')
                 .should('be.an', 'array')
-        });
+        })
 
         it('Verify response body has a duration', () => {
             getResponse()
@@ -72,7 +73,7 @@ describe("API Tests with Cypress", () => {
     })
 
 
-    describe('Create Booking', () => {
+    describe('Create, Partial Update, Delete Booking', () => {
         
         const createBooking = () => 
         cy.request({
@@ -81,38 +82,35 @@ describe("API Tests with Cypress", () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: {
-                "firstname" : apiData.firstname,
-                "lastname" : apiData.lastname,
-                "totalprice" : apiData.totalprice,
-                "depositpaid" : apiData.depositpaid,
-                "bookingdates" : {
-                    "checkin" : apiData.bookingdates.checkin,
-                    "checkout" : apiData.bookingdates.checkout
-                },
-                "additionalneeds" : apiData.additionalneeds
+            body: apiData.createBookingInfo
+        })
+
+        const getBookingId = () => 
+        cy.request({
+            method: "GET",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`
+        })
+
+        const partialUpdateBooking = () => 
+        cy.request({
+            method: "PATCH",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json", 
+                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+            },
+            body: apiData.newInformation
+        })
+
+        const deleteBooking = () =>
+        cy.request({
+            method: "DELETE",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
             }
-        })
-
-        it('Verify response body is an object', () => {
-            createBooking()
-                .its('body')
-                .should('be.an', 'object')
-        });
-
-        it('Verify booking has First and Last Name', () => {
-            createBooking()
-            .then(response => {
-                expect(response.body.booking).has.property('firstname', apiData.firstname)
-                expect(response.body.booking).has.property('lastname', apiData.lastname)
-            })
-        })
-
-        it('Verify booking has Status 200', () => {
-            createBooking()
-            .then(response => {
-                expect(response.status).to.eq(200)
-            })
         })
 
         it('Verify booking has Booking ID', () => {
@@ -121,6 +119,147 @@ describe("API Tests with Cypress", () => {
                 expect(response.body).has.property('bookingid')
                 BOOKING_ID = response.body.bookingid
                 console.log(BOOKING_ID)
+            })
+        })
+
+        it('Verify Last Name is the right in the POSTed booking', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.status).to.eq(200)
+                expect(response.body.lastname).to.eq(apiData.createBookingInfo.lastname)
+            })
+        })
+
+        it('Verify response body is an object', () => {
+            getBookingId()
+                .its('body')
+                .should('be.an', 'object')
+        })
+
+        it('Verify booking has First and Last Name', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.body).has.property('firstname', apiData.createBookingInfo.firstname)
+                expect(response.body).has.property('lastname', apiData.createBookingInfo.lastname)
+            })
+        })
+
+        it('Verify booking has Status 200', () => {
+            getBookingId()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Verify booking status after partial update is 200', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Verify Last Name at the booking after partial update', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.body).has.property('lastname', apiData.newInformation.lastname)
+            })
+        })
+
+        it('Verify Total Price at the booking after partial update', () => {
+            partialUpdateBooking()
+            .then(response => {
+                expect(response.body).has.property('totalprice', apiData.newInformation.totalprice)
+            })
+        })
+
+        it('Delete Booking', () => {
+            deleteBooking()
+            .then(response => {
+                expect(response.body).to.eq(apiData.responsebobyafterdeletebooking)
+            })
+        })
+    })
+
+    describe('Create Token , Update booking information , Delete Booking', () => {
+
+        const createToken = () => 
+        cy.request({
+            method: "POST",
+            url: `${API_BASE_URL}/auth`,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: apiData.admin
+        })
+
+        const updateBooking = () => 
+        cy.request({
+            method: "PUT",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Cookie": `token=${CREATE_TOKEN}`
+            },
+            body: apiData.updateBookingInfo
+        })
+
+        const deleteBooking = () =>
+        cy.request({
+            method: "DELETE",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+            }
+        })
+
+        it('Verify booking has Booking ID', () => {
+            createBooking()
+            .then(response => {
+                expect(response.body).has.property('bookingid')
+                BOOKING_ID = response.body.bookingid
+                console.log(BOOKING_ID)
+            })
+        })
+
+        const createBooking = () => 
+        cy.request({
+            method: "POST",
+            url: `${API_BASE_URL}/booking`,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: apiData.createBookingInfo
+        })
+        
+        it('Create token', () => {
+            createToken()
+            .then(response => {
+                expect(response.body).to.have.keys('token')
+                CREATE_TOKEN = response.body.token
+            })
+        })
+
+        it('Verify First Name after updating booking', () => {
+            updateBooking()
+            .then(response => {
+                console.log(response)
+                expect(response.body).to.deep.equal(apiData.updateBookingInfo)
+            })
+        })
+
+        it('Verify Booking status after updating is 200', () => {
+            updateBooking()
+            .then(response => {
+                expect(response.status).to.eq(200)
+            })
+        })
+
+        it('Delete Booking', () => {
+            deleteBooking()
+            .then(response => {
+                expect(response.body).to.eq(apiData.responsebobyafterdeletebooking)
             })
         })
     })

@@ -40,6 +40,52 @@ describe('Maps page test suite', () => {
         mapsPage.elements.getCityData().each(($el, i) => {
             expect($el.text()).to.include(this.data.cityData[i]);
         })
+
+    it('RF_027.003 |Section with the scale >The scale in the lower right corner changes to "Precipitation, mm/h".', 
+        function() {
+
+        header.clickMapsMenuLink();
+        cy.url().should('include',this.data.endPoint);
+        mapsPage.elements.getTemperatureLabel().should('have.text',' Temperature');
+
+        mapsPage.clickGlobalPrecipitationLabel();
+
+        mapsPage.elements.getScale().should('contain', 'Precipitation, mm/h')
+    });
+
+    it('AT_027.005 | Maps > Section with the scale > The scale\s name matches the label\s name after selecting "Wind speed"', function()  {
+        header.clickMapsMenuLink()
+        cy.url().should("include", this.url.mapsPage)
+       
+        mapsPage.clickWindSpeedLabel()
+
+        mapsPage.elements.getScale().should('contain', 'Wind speed, m/s')
+    });
+
+    it('AT_26.005 | Maps > Verify search city works correctly Happy path', function () {
+        const expectedCity =this.data.cityName;
+
+        header.clickMapsMenuLink();
+        mapsPage.clickOnSearchIcon();
+        mapsPage.sendKeysToSearchInput(expectedCity);
+
+        cy.wait(5000)
+
+        mapsPage.elements.getTagWithCityName().filter(`:contains(${expectedCity})`).each(($span, i) => {
+            cy.wrap($span).then((cities) => {
+
+                let currentCity = cities.toArray().map(el => el.innerText)
+                
+                if (currentCity == expectedCity) {
+                    expect(cities.text()).to.eq(expectedCity)
+                    cy.get(cities).should("be.visible").click()
+                    mapsPage.elements.getCityNameExpandedInfo().should("have.text", expectedCity)
+                
+                    return false;
+                }
+            });
+        });
+    })    
     });
 
     it('RF_027.003 |Section with the scale >The scale in the lower right corner changes to "Precipitation, mm/h".',

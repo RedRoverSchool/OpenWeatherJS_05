@@ -8,8 +8,118 @@
         "checkout": "2019-01-01"
     },
     "additionalneeds": "Breakfast",
-    "bookingID": 23770,
     "statusOk": 200,
     "typeBoolean": "boolean",
-    "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"]
+    "arrOfHeadersKeys": ["server", "connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
+    "romData": {
+        "create": {
+            "firstname": "Steve",
+            "lastname": "QA",
+            "totalprice": 2000,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-12",
+                "checkout": "2022-12-29"
+            },
+            "additionalneeds" : "Breakfast"
+        },
+        "update": {
+            "firstname": "Steve",
+            "lastname": "QA",
+            "totalprice": 2500,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-12",
+                "checkout": "2022-12-30"
+            },
+            "additionalneeds" : "Breakfast + Extra pillows please"
+        },
+        "partialUpdate": {
+            "firstname": "QA",
+            "lastname": "Steve",
+            "bookingdates": {
+                "checkin": "2022-12-26",
+                "checkout": "2023-01-15"
+            }
+        },
+        "authorizationHeader": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+    },
+    "responsebobyafterdeletebooking" : "Created",
+    "usernamefortokenauthorization": "admin", 
+    "passwordfortokenauthorization" :"password123",
+    "responsestatusafterdeletebooking" : 201,
+
+    "getHeaders": ["server", "Connection", "x-powered-by", "content-type", "content-length", "etag", "date", "via"],
+   
+    "arrOfBodyKeys": ["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
+
+    "admin": {
+        "username": "admin",
+        "password": "password123"
+    },
+    "createBookingInfo": {
+        "firstname": "Ivan",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "bookingdates": {
+            "checkin": "2020-03-15",
+            "checkout": "2021-03-15"
+        },
+        "additionalneeds": "Parking",
+        "depositpaid": false
+    },
+    "updateBookingInfo": {
+        "firstname": "Ivanna",
+        "lastname": "Motors",
+        "totalprice": 200,
+        "bookingdates": {
+            "checkin": "2020-03-15",
+            "checkout": "2022-12-12"
+        },
+        "additionalneeds": "Parking and Breakfast",
+        "depositpaid": false
+    },
+    "newInformation": {
+        "lastname" : "SAM",
+        "totalprice" : 890
+    },
+    "headersContentType": {
+        "Content-Type": "application/json"
+    },
+    "bodyCreateBooking": {
+        "firstname" : "Sara",
+        "lastname" : "Brown",
+        "totalprice" : 111,
+        "depositpaid" : true,
+        "bookingdates" : {
+            "checkin" : "2018-01-01",
+            "checkout" : "2019-01-01"
+        },
+        "additionalneeds" : "Breakfast"
+    },
+    "artData": {
+        "forCreate": {
+            "firstname": "Ivanka",
+            "lastname": "Roust",
+            "totalprice": 214,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-06-06",
+                "checkout": "2019-06-12"
+            },
+            "additionalneeds" : "Bamboo pillows"
+        },
+        "forUpdate": {
+            "firstname": "Ivanka",
+            "lastname": "Trump",
+            "totalprice": 214,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-06-06",
+                "checkout": "2019-06-12"
+            },
+            "additionalneeds" : "Duck feather pillows"
+        },
+        "token": "token"
+    }
 }
