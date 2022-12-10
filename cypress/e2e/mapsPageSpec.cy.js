@@ -40,6 +40,7 @@ describe('Maps page test suite', () => {
         mapsPage.elements.getCityData().each(($el, i) => {
             expect($el.text()).to.include(this.data.cityData[i]);
         })
+    });
 
     it('RF_027.003 |Section with the scale >The scale in the lower right corner changes to "Precipitation, mm/h".', 
         function() {
@@ -84,8 +85,7 @@ describe('Maps page test suite', () => {
                     return false;
                 }
             });
-        });
-    })    
+        });   
     });
 
     it('RF_027.003 |Section with the scale >The scale in the lower right corner changes to "Precipitation, mm/h".',
