@@ -96,5 +96,30 @@
             "checkout" : "2019-01-01"
         },
         "additionalneeds" : "Breakfast"
+    },
+    "artData": {
+        "forCreate": {
+            "firstname": "Ivanka",
+            "lastname": "Roust",
+            "totalprice": 214,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-06-06",
+                "checkout": "2019-06-12"
+            },
+            "additionalneeds" : "Bamboo pillows"
+        },
+        "forUpdate": {
+            "firstname": "Ivanka",
+            "lastname": "Trump",
+            "totalprice": 214,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-06-06",
+                "checkout": "2019-06-12"
+            },
+            "additionalneeds" : "Duck feather pillows"
+        },
+        "token": "token"
     }
 }

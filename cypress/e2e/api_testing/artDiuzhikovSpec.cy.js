@@ -1,50 +1,79 @@
 /// <reference types="cypress"/>
 
 const API_BASE_URL = Cypress.env('apiBaseUrl');
-const API_DATA = require('../../fixtures/apiData.json');
+const API_FIXTURES = require('../../fixtures/apiData.json');
 const DATE_FORMAT = /\d{4}-\d{2}-\d{2}/;
 let CREATION_ID;
+let TOKEN;
 
-describe("artDiuzhikovSpec", function () {
+describe('artDiuzhikovSpec', function () {
+
+    const createAToken = () =>
+        cy.request({
+            method: 'POST',
+            url: `${API_BASE_URL}/auth`,
+            body: API_FIXTURES.admin
+        });
 
     const createABooking = () =>
         cy.request({
-            method: "POST",
+            method: 'POST',
             url: `${API_BASE_URL}/booking`,
-            body: {
-                "firstname": "Ivanka",
-                "lastname": "Roust",
-                "totalprice": 214,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2022-06-06",
-                    "checkout": "2019-06-12"
-                },
-                "additionalneeds": "Duck feather pillows"
-            }
+            body: API_FIXTURES.artData.forCreate
         });
 
     const getTheBooking = () =>
-        cy.request(`${API_BASE_URL}/booking/${CREATION_ID}`);
+        cy.request({
+            method: 'GET',
+            url: `${API_BASE_URL}/booking/${CREATION_ID}`
+        });
 
-    describe("Create a booking test suite", function () {
+    const updateTheBooking = () =>
+        cy.request({
+            method: 'PUT',
+            url: `${API_BASE_URL}/booking/${CREATION_ID}`,
+            headers: {
+                'Cookie': `token=${TOKEN}`
+            },
+            body: API_FIXTURES.artData.forUpdate
+        });
 
-        it('Verify the status of the booking creation', function () {
+    describe('Create a token test suite', function () {
+
+        it('Verify the response body has "token" key and send it to the global variable "TOKEN"', function () {
+            createAToken()
+                .then(createdToken => {
+                    expect(createdToken.body).to.have.key(API_FIXTURES.artData.token);
+                    TOKEN = createdToken.body.token;
+                });
+        });
+    });
+
+    describe('Create a booking test suite', function () {
+
+        it('Verify the status of the booking creation and send the boking ID to the global variable "CREATION_ID"', function () {
             createABooking()
                 .then(createdBooking => {
-                    expect(createdBooking).to.have.property('status', API_DATA.statusOk);
+                    expect(createdBooking).to.have.property('status', API_FIXTURES.statusOk);
                     CREATION_ID = createdBooking.body.bookingid;
                 });
         });
 
-        it('Verify the last name in the latest created booking', function () {
+        it('Verify the "last name" in the created booking', function () {
             getTheBooking()
                 .then(createdBooking => {
-                    expect(createdBooking.body.lastname).to.be.equal('Roust');
+                    expect(createdBooking.body.lastname).to.be.equal(API_FIXTURES.artData.forCreate.lastname);
                 });
         });
 
-        it('Verify the price in the latest created booking', function () {
+        it('Verify the "additional needs" in the created booking', function () {
+            getTheBooking()
+                .then(createdBooking => {
+                    expect(createdBooking.body.additionalneeds).to.be.equal(API_FIXTURES.artData.forCreate.additionalneeds);
+                });
+        });
+
+        it('Verify the "price" in the created booking', function () {
             getTheBooking()
                 .then(createdBooking => {
                     expect(createdBooking.body.totalprice).to.be.equal(214);
@@ -52,7 +81,7 @@ describe("artDiuzhikovSpec", function () {
         });
     });
 
-    describe("Get the booking test suite", function () {
+    describe('Get the booking test suite', function () {
 
         it('Verify the booking ID', function () {
             getTheBooking()
@@ -78,7 +107,24 @@ describe("artDiuzhikovSpec", function () {
         it('Verify the type of "deposit paid" key', function () {
             getTheBooking()
                 .then(booking => {
-                    expect(booking.body.depositpaid).to.be.a(API_DATA.typeBoolean);
+                    expect(booking.body.depositpaid).to.be.a(API_FIXTURES.typeBoolean);
+                });
+        });
+    });
+
+    describe('Update the booking test suite', function () {
+
+        it('Update the "last name" in the created booking and verify it', function () {
+            updateTheBooking()
+                .then(booking => {
+                    expect(booking.body.lastname).to.be.equal(API_FIXTURES.artData.forUpdate.lastname);
+                });
+        });
+
+        it('Verify the "additional needs" in the updated booking', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.body.additionalneeds).to.be.equal(API_FIXTURES.artData.forUpdate.additionalneeds);
                 });
         });
     });
