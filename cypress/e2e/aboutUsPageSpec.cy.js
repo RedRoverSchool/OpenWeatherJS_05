@@ -7,6 +7,8 @@ import SubscriptionsPage from "../pageObjects/SubscriptionsPage";
 import MarketplacePage from "../pageObjects/MarketplacePage";
 import Header from "../pageObjects/Header.js";
 import SignInPage from "../pageObjects/SignInPage.js";
+import NewsAndUpdatesPage from "../pageObjects/NewsAndUpdatesPage";
+import QuestionsPage from "../pageObjects/QuestionsPage";
 
 const footer = new Footer();
 const aboutUs = new AboutUs();
@@ -15,6 +17,8 @@ const subscriptionsPage = new SubscriptionsPage();
 const marketplacePage = new MarketplacePage();
 const singInPage = new SignInPage();
 const header = new Header();
+const newsAndUpdatesPage = new NewsAndUpdatesPage();
+const questionsPage = new QuestionsPage();
 
 describe('About Us', () => {
 
@@ -24,6 +28,9 @@ describe('About Us', () => {
         });
         cy.fixture('signInPage').then(signIn  => {
             this.signIn = signIn;
+        });
+        cy.fixture('questionsPage').then(data => {
+            this.data = data;
         });
         cy.visit('/');
     })
@@ -55,4 +62,29 @@ describe('About Us', () => {
         marketplacePage.elements.getMarketplacePageTitle().should('be.visible')
     });
 
+    it('AT_028.001 | About us > Verify "About us" link redirects to the corresponding page', function () {
+        footer.clickAboutUsLink();
+        cy.url().should('include', '/about-us');
+    });
+
+
+    it('AT_028.005 | Footer > About us > Verify New and Updates button', function() {
+        footer.clickAboutUsLink();
+        aboutUs.clickNewsAndUpdatesButton();
+
+        cy.url().should('include', this.url.newsAndUpdates);
+        newsAndUpdatesPage.elements.getNewsAndUpdatesTitle().should('be.visible');
+        
+    });
+
+    it('AT_028.002 | <Footer> About us, Verify "Contact us" button redirects user to "Questions" page', function () {
+        footer.clickAboutUsLink();
+        aboutUs.clickContactUsButton();
+
+        cy.url().should('include', this.url.questionsUrl);
+        questionsPage.elements
+        .getHeadLine()
+        .should('be.visible')
+        .and('have.text', this.data.headLineText);
+    });
 });
