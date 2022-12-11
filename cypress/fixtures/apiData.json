@@ -105,7 +105,7 @@
             "depositpaid": true,
             "bookingdates": {
                 "checkin": "2022-06-06",
-                "checkout": "2019-06-12"
+                "checkout": "2022-06-12"
             },
             "additionalneeds" : "Bamboo pillows"
         },
@@ -116,9 +116,18 @@
             "depositpaid": true,
             "bookingdates": {
                 "checkin": "2022-06-06",
-                "checkout": "2019-06-12"
+                "checkout": "2022-06-12"
             },
             "additionalneeds" : "Duck feather pillows"
+        },
+        "forPartialUpdate": {
+            "firstname": "Jessie",
+            "lastname": "Alba"
+        },
+        "forDelete": {
+            "statusCreated": "Created",
+            "statusNotFound": "Not Found",
+            "code404": 404
         },
         "token": "token"
     }
