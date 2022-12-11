@@ -6,7 +6,7 @@ let CREATED_ID
 let TOKEN
 describe('IrinadashkSpec', () => {
 
-      describe.skip('GET all bookingIds', () => {
+      describe('GET all bookingIds', () => {
             
             const getResponse = () => 
                   cy.request({
@@ -71,6 +71,13 @@ describe('IrinadashkSpec', () => {
                   .should('be.eq', 200)
             })
 
+            it('Verify response has status 200', () => {
+                  getResponse()
+                  .then(({ status }) => {
+                  expect(status).to.equal(200)
+                  })
+            })
+
             it('Print response', () => {
                   getResponse()
                   .then(response => {
@@ -87,7 +94,14 @@ describe('IrinadashkSpec', () => {
                   CREATED_ID = response.bookingid
                   console.log('CREATED_ID = ', CREATED_ID)
                   })
-            })  
+            }) 
+            
+            it('verify response contains object with key bookingid', () => {
+                  getResponse()
+                  .then(({ body }) => {
+                  expect(body).to.have.any.keys('bookingid') 
+                  })
+            })
       })
       
       describe('AUTH', () => {
