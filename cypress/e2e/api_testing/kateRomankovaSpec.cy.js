@@ -80,8 +80,8 @@ describe('kateRomankovaSpec', () => {
             method: "POST",
             url: `${API_BASE_URL}/auth`,
             body :{
-               "username" : "admin",
-               "password" : "password123"
+               "username" : apiData.usernamefortokenauthorization,
+               "password" : apiData.passwordfortokenauthorization
             }  
         })
 
