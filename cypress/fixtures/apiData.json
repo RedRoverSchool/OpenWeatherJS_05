@@ -124,6 +124,11 @@
             "firstname": "Jessie",
             "lastname": "Alba"
         },
+        "forDelete": {
+            "statusCreated": "Created",
+            "statusNotFound": "Not Found",
+            "code404": 404
+        },
         "token": "token"
     }
 }

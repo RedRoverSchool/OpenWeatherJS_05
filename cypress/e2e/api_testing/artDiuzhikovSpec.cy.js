@@ -25,7 +25,8 @@ describe('artDiuzhikovSpec', function () {
     const getTheBooking = () =>
         cy.request({
             method: 'GET',
-            url: `${API_BASE_URL}/booking/${CREATION_ID}`
+            url: `${API_BASE_URL}/booking/${CREATION_ID}`,
+            failOnStatusCode: false
         });
 
     const updateTheBooking = () =>
@@ -46,6 +47,15 @@ describe('artDiuzhikovSpec', function () {
                 'Cookie': `token=${TOKEN}`
             },
             body: API_FIXTURES.artData.forPartialUpdate
+        });
+
+    const deleteTheBooking = () =>
+        cy.request({
+            method: 'DELETE',
+            url: `${API_BASE_URL}/booking/${CREATION_ID}`,
+            headers: {
+                'Cookie': `token=${TOKEN}`
+            }
         });
 
     describe('Create a token test suite', function () {
@@ -152,6 +162,30 @@ describe('artDiuzhikovSpec', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.body.lastname).to.be.equal(API_FIXTURES.artData.forPartialUpdate.lastname);
+                });
+        });
+    });
+
+    describe('Delete the booking test suite', function () {
+
+        it('Delete the booking and verify the status', function () {
+            deleteTheBooking()
+                .then(deletedBooking => {
+                    expect(deletedBooking.body).to.be.equal(API_FIXTURES.artData.forDelete.statusCreated);
+                });
+        });
+
+        it('Verify the deleted booking doesn\'t exist', function () {
+            getTheBooking()
+                .then(deletedBooking => {
+                    expect(deletedBooking.body).to.be.equal(API_FIXTURES.artData.forDelete.statusNotFound);
+                });
+        });
+
+        it('Verify the status code when retrieving the deleted booking', function () {
+            getTheBooking()
+                .then(deletedBooking => {
+                    expect(deletedBooking).to.have.property('status', API_FIXTURES.artData.forDelete.code404);
                 });
         });
     });
