@@ -38,6 +38,16 @@ describe('artDiuzhikovSpec', function () {
             body: API_FIXTURES.artData.forUpdate
         });
 
+    const partialUpdateTheBooking = () =>
+        cy.request({
+            method: 'PATCH',
+            url: `${API_BASE_URL}/booking/${CREATION_ID}`,
+            headers: {
+                'Cookie': `token=${TOKEN}`
+            },
+            body: API_FIXTURES.artData.forPartialUpdate
+        });
+
     describe('Create a token test suite', function () {
 
         it('Verify the response body has "token" key and send it to the global variable "TOKEN"', function () {
@@ -125,6 +135,23 @@ describe('artDiuzhikovSpec', function () {
             getTheBooking()
                 .then(booking => {
                     expect(booking.body.additionalneeds).to.be.equal(API_FIXTURES.artData.forUpdate.additionalneeds);
+                });
+        });
+    });
+
+    describe('Partial update the booking test suite', function () {
+
+        it('Partial update the created booking and verify the "first name"', function () {
+            partialUpdateTheBooking()
+                .then(booking => {
+                    expect(booking.body.firstname).to.be.equal(API_FIXTURES.artData.forPartialUpdate.firstname);
+                });
+        });
+
+        it('Verify the "last name" in the partially updated booking', function () {
+            getTheBooking()
+                .then(booking => {
+                    expect(booking.body.lastname).to.be.equal(API_FIXTURES.artData.forPartialUpdate.lastname);
                 });
         });
     });
