@@ -8,9 +8,7 @@ class MapsPage {
         getGlobalPrecipitationLabel: () => cy.get('label[for="Global Precipitation"]'),
         getScale: () => cy.get('.scale-details'), 
         getSearchIcon: () => cy.get('[class="leaflet-bar leaflet-control"] div'),
-        getSearchInput: () => cy.get('[class="leaflet-bar leaflet-control"] input'),
         getNameOfCity: () => cy.get('span.city-name'),
-        getTableHeader: () => cy.get('thead > tr .city-param:visible'),
         getTableCountryValue: () => cy.get('tbody tr:nth-child(1) .city-param:visible'),
         getTableTempValue: () => cy.get('tbody tr:nth-child(2) .city-param:visible'),
         getTableCloudsValue: () => cy.get('tbody tr:nth-child(3) .city-param:visible'),
@@ -24,7 +22,6 @@ class MapsPage {
         getGlobalPrecipitationLabel: () => cy.get('label[for="Global Precipitation"]'),
         getScale: () => cy.get('.scale-details'),
         getWindSpeedLabel: () => cy.get('label[for="Wind speed"]'),
-        getSearchIcon: () => cy.get('div.leaflet-control-container a[title="Nominatim Search"]'),
         getInputField: () => cy.get('div.leaflet-control-container form input'),
         getTagWithCityName: () => cy.get('div.city-data span.city-name') ,
         getCityNameExpandedInfo:() => cy.get('div.expanded thead th')        
@@ -50,12 +47,8 @@ class MapsPage {
         this.elements.getSearchInput().type(cityName)
     }
 
-    submitSearch() {
-        this.elements.getSearchInput().type('{enter}')
-    }
-
     waitForInputDisappear() {
-        this.elements.getSearchInput().should('not.be.visible')
+        this.elements.getInputField().should('not.be.visible')
     }
 
     clickCityName() {

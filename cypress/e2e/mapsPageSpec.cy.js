@@ -103,12 +103,14 @@ describe('Maps page test suite', () => {
     it('AT_026.002 | Maps > Verify that user can select any city on the map and see the correct data for Temp row', function () {
         header.clickMapsMenuLink()
         mapsPage.clickOnSearchIcon()
-        mapsPage.typeSearchWord(this.data.cityName2)
-        mapsPage.submitSearch()
+        mapsPage.sendKeysToSearchInput(this.data.cityName2)
         mapsPage.waitForInputDisappear()
-        mapsPage.elements.getNameOfCity().contains(this.data.cityName2).click();
-        mapsPage.elements.getTableTempValue()
-            .contains(new RegExp(`[-.0-9]+`))
-            .contains('º')
+        mapsPage.elements.getNameOfCity().contains(this.data.cityName2).click()
+
+        mapsPage.elements.getTableTempValue().
+        then(element => {
+            const text = element.text()
+            expect(text).to.match(/^[C0-9º.-]*/)
+          })
     });
 });
