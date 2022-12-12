@@ -84,7 +84,6 @@ describe('liliiaFadeevaSpec', () => {
         it('Verify response has headers', () => {
             getResponse()
                 .then(response => {
-                    console.log(response);
                     expect(response).to.have.property('headers');
                 });
         });
