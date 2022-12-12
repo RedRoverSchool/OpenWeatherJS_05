@@ -165,28 +165,29 @@
             },
             "additionalneeds": "Offer"
         },
-        "correctDataReponseTypes": [
+        "correctDataReponseTypes": 
             {
                 "bookingid": "number",
                 "booking": "object"
             },
+            "correctBookingItems":
             {
-                    "firstname": "string",
-                    "lastname": "string",
-                    "totalprice": "number",
-                    "depositpaid": "boolean",
-                    "bookingdates": "object",
-                    "additionalneeds": "string"
-            },
-        {
-                "checkin": "date",
-                "checkout": "date"
+                "firstname": "string",
+                "lastname": "string",
+                "totalprice": "number",
+                "depositpaid": "boolean",
+                "bookingdates": "object",
+                "additionalneeds": "string"
+        },
+        "correctBookingdatesItems":
+    {
+            "checkin": "date",
+            "checkout": "date"
+    },
+        "correctDataReponseProperties":{
+            "obj":["bookingid", "booking"], 
+            "booking":["firstname","lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
+            "bookingdates":["checkin", "checkout"]
         }
-        ],
-        "correctDataReponseProperties": [
-            ["bookingid", "booking"], 
-            ["firstname","lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
-            ["checkin", "checkout"]
-        ]
     }
 }

@@ -68,11 +68,11 @@ describe('andreyLapinSpec', () => {
             createBooking().then((response) => {
                 let responseBody = response.body;
                 Object.keys(responseBody).forEach(el => {
-                    expect(responseBody[el]).to.be.a(apiData.lapData.correctDataReponseTypes[0][el])
-                    if (typeof (responseBody[el]) === 'object') {
+                    expect(responseBody[el]).to.be.a(apiData.lapData.correctDataReponseTypes[el])
+                    if (el === 'booking') {
                         Object.keys(responseBody[el]).forEach(bookingItem => {
-                            expect(responseBody[el][bookingItem]).to.be.a(apiData.lapData.correctDataReponseTypes[1][bookingItem])
-                            if (typeof (responseBody[el][bookingItem]) === 'object') {
+                            expect(responseBody[el][bookingItem]).to.be.a(apiData.lapData.correctBookingItems[bookingItem])
+                            if (bookingItem === 'correctBookingdatesItems') {
                                 Object.keys(responseBody[el][bookingItem]).forEach(bookingdatesItem => {
                                     expect(isNaN(Date.parse(responseBody[el][bookingItem][bookingdatesItem]))).to.eql(false)
                                 });
@@ -87,14 +87,14 @@ describe('andreyLapinSpec', () => {
         it('Verify correct data  in response body properties', () => {
             createBooking().then((response) => {
                 let responseBody = response.body;
-                Object.keys(responseBody).forEach((el,index) => {
-                    expect(el).to.be.eql(apiData.lapData.correctDataReponseProperties[0][index])
-                    if (typeof (responseBody[el]) === 'object') {
+                Object.keys(responseBody).forEach((el, index) => {
+                    expect(el).to.be.eql(apiData.lapData.correctDataReponseProperties.obj[index])
+                    if (el === 'booking') {
                         Object.keys(responseBody[el]).forEach((bookingItem, indexBookingItem) => {
-                            expect(bookingItem).to.be.eql(apiData.lapData.correctDataReponseProperties[1][indexBookingItem])
-                            if (typeof (responseBody[el][bookingItem]) === 'object') {
-                                Object.keys(responseBody[el][bookingItem]).forEach((bookingdatesItem, indexBookingdatesItem)  => {
-                                    expect(bookingdatesItem).to.eql(apiData.lapData.correctDataReponseProperties[2][indexBookingdatesItem])
+                            expect(bookingItem).to.be.eql(apiData.lapData.correctDataReponseProperties.booking[indexBookingItem])
+                            if (bookingItem === 'bookingdates') {
+                                Object.keys(responseBody[el][bookingItem]).forEach((bookingdatesItem, indexBookingdatesItem) => {
+                                    expect(bookingdatesItem).to.eql(apiData.lapData.correctDataReponseProperties.bookingdates[indexBookingdatesItem])
                                 });
                             }
                         });
@@ -103,13 +103,13 @@ describe('andreyLapinSpec', () => {
                 });
             });
         });
-        
+
         // it('Verify GetBookingIds', () => {
         //     getBookingIds().then((response) => {
         //         cy.log(JSON.stringify(response))
         //     })
         // })
 
-        });
+    });
 
 });
