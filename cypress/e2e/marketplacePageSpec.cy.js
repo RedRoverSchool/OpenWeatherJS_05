@@ -160,4 +160,10 @@ describe('Marketplace page test suite', () => {
                   expect(listOfPrice).to.deep.eq(this.historicalWeatherDataByStatePage.listOfPrices);      
             });
       });
-});
+
+      it('AT_009.009 | Main menu > Marketplace> Verifying that History bulk item is displayed', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.elements.getHistoryBulkLink().
+            should('contain', this.marketPlacePageData.h5HistoryBulk).and('be.visible')
+          }) 
+      });
