@@ -3,9 +3,9 @@
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 let authToken
 
-describe("First Api test", () => {
+describe("firstApiTestSpec", () => {
 
-    describe("Get autorzed Token", () => {
+    describe("Get authorised Token", () => {
 
         const getAuthResponse = () =>
             cy.request({
@@ -23,6 +23,7 @@ describe("First Api test", () => {
                 .then(response => {
                     console.log(response)
                     expect(response.status).to.equal(200)
+                    cy.log(response.status)
                 })
         });
 
@@ -33,20 +34,23 @@ describe("First Api test", () => {
                     console.log(authToken)
                     expect(authToken.body).to.have.key('token')
                     authToken = authToken.body.token
+                    cy.log(authToken)
                 })
         });
 
         it('Verify response type is string', () => {
             getAuthResponse()
                 .then(authToken => {
-                    expect(authToken.body.token).to.have.be.a('string')
+                    expect(authToken.body.token).to.have.string(authToken.body.token)
+                    cy.log(typeof authToken)
                 })
         });
 
-        it("Verify token is not empty", () => {
+        it("Verify token has length ", () => {
             getAuthResponse()
                 .then(authToken => {
-                    expect(authToken.body.token).to.have.value
+                    expect(authToken.body.token).to.have.ownProperty('length')
+                    cy.log(authToken.body.token.length)
                 })
         });
 
@@ -55,10 +59,9 @@ describe("First Api test", () => {
             getAuthResponse()
                 .then(response => {
                     expect(response.headers['content-type']).to.contain('application/json')
-
+                    cy.log(response.headers['content-type'])
                 })
         });
-
     });
 })
 
