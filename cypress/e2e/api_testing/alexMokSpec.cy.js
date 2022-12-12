@@ -93,7 +93,7 @@ describe('API Test Suit', () => {
             cy.request({
                 method: "GET",
                 url: `${API_BASE_URL}/booking/${CREATED_ID}`,
-                followRedirect: false 
+                failOnStatusCode: false
             });
 
         const getUpdateResponse = () =>
@@ -120,6 +120,17 @@ describe('API Test Suit', () => {
                 body: dataFixtures.romData.partialUpdate
             })
 
+            const getDeleteResponse = () =>
+            cy.request({
+                method: "DELETE",
+                url: `${API_BASE_URL}/booking/${CREATED_ID}`,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": dataFixtures.romData.authorizationHeader,
+                    "Cookie": `token=${TOKEN_AUTH}`
+                }
+            });
+
         it('print Response and verify status', () => {
             getCreateResponse()
             .then(response => {
@@ -130,7 +141,6 @@ describe('API Test Suit', () => {
             });
         });
 
-    
         it('verify Response in body has firstName and lastName', () => {
             getResponseID()
             .then(({body}) => {
@@ -160,6 +170,19 @@ describe('API Test Suit', () => {
                 expect(body.bookingdates.checkin).to.eq(dataFixtures.romData.partialUpdate.bookingdates.checkin);
                 expect(body.bookingdates.checkout).to.eq(dataFixtures.romData.partialUpdate.bookingdates.checkout);
             })
+        });
+
+        it('verify delet booking', () => {
+            getDeleteResponse()
+            .then(({body}) => {
+                expect(body).to.equal("Created");
+            });
+        });
+
+        it('verify booking has been deleted', () => {
+            getResponseID().then(({status}) => {
+                expect(status).to.eq(404);
+            });
         });
     });
 });
