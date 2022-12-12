@@ -1,8 +1,9 @@
 /// <reference types="cypress"/>
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
+let CREATED_ID 
 
-describe("API Tests with Cypress", () => {
+describe("OlgaForostinkoSpec", () => {
 
     describe("Get BookingId Tests", () => {
 
@@ -40,7 +41,6 @@ describe("API Tests with Cypress", () => {
             })
         })
 
-
         it('Verify response has requestHeaders', () => {
             getResponse()
             .then(response => {
@@ -66,6 +66,54 @@ describe("API Tests with Cypress", () => {
             getResponse()
             .then(response => {
                 expect(response).to.have.property('duration')
+            })
+        })
+
+        it('Verify tatus - anoter option', () => {
+            getResponse()
+            .then(response => {
+                expect(response).to.have.property('status', 200)   
+            })  
+        })
+        
+        describe('Create New Booking', () => {
+
+            const getResponse = () => 
+                cy.request({
+                    method: "POST",
+                    url: `${API_BASE_URL}/booking`,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: {
+                        "firstname" : "Elon",
+                        "lastname" : "Musk",
+                        "totalprice" : 1150,
+                        "depositpaid" : true,
+                        "bookingdates" : {
+                            "checkin" : "2023-01-01",
+                            "checkout" : "2023-01-05"
+                        },
+                        "additionalneeds" : "Breakfast"
+                    }
+                })
+            
+            it('print response', () => {
+                getResponse()
+                .then(response => {
+                    console.log(response.body)
+                    expect(response.status).to.eq(200)
+                })
+            })  
+            
+            it('verify response has key bookingid', () => {
+                getResponse()
+                .its('body')
+                .then(response => {
+                    expect(response).to.have.any.keys('bookingid')
+                    CREATED_ID = response.bookingid
+                    console.log('CREATED_ID = ', CREATED_ID)
+                })   
             })
         })
     })
