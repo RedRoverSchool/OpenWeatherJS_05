@@ -70,7 +70,7 @@ describe("TimothyHuxxSpec ", () => {
         });
     });
 
-    describe.only("Booking - GetBooking test suit", () => {
+    describe("Booking - GetBooking test suit", () => {
 
         before(() => {
             cy.request('https://restful-booker.herokuapp.com/booking')
