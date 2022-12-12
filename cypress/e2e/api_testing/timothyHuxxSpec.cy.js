@@ -2,9 +2,9 @@
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 const apiData = require('../../fixtures/apiData.json')
-let TOKEN
+let TOKEN;
 
-describe("API test suit", () => {
+describe("TimothyHuxxSpec ", () => {
 
     describe('Auth - Create token', () => {
 
@@ -62,10 +62,53 @@ describe("API test suit", () => {
         });
 
         it("Verify the response header keys", () => {
-            
+
             getAuthResponse()
                 .then(response => {
-                     expect(Object.keys(response.headers)).to.eql(apiData.arrOfHeadersKeys)
+                    expect(Object.keys(response.headers)).to.eql(apiData.arrOfHeadersKeys)
+                })
+        });
+    });
+
+    describe("Booking - GetBooking test suit", () => {
+        const dataType = {
+            "firstname": "string",
+            "lastname": "string",
+            "totalprice": "number",
+            "depositpaid": "boolean",
+            "bookingdates": "object",
+            "additionalneeds": "string"
+
+        }
+
+        before(() => {
+            cy.request('https://restful-booker.herokuapp.com/booking')
+                .then(({ body }) => {
+                    return body[Math.floor(Math.random() * body.length)].bookingid
+                }).as('bookingRequest')
+        });
+
+        it.only("Verify random Booking body has required keys", function () {
+            cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
+                .its('body')
+                .then((response) => {
+                    expect(response).to.have.keys(["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"])
+                })
+        });
+
+        it.only("Verify Booking body response type is object ", function () {
+            cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
+                .should(({ body }) => {
+                    expect(body).to.be.an('object')
+                })
+        });
+
+        it.only("Verify Booking body response key's data type ", function () {
+            cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
+                .should(({ body }) => {
+                    for (let key in body) {
+                        expect(typeof body[key]).to.eq(dataType[key])
+                    }
                 })
         });
     });
