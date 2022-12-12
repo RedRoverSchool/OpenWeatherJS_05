@@ -70,16 +70,7 @@ describe("TimothyHuxxSpec ", () => {
         });
     });
 
-    describe("Booking - GetBooking test suit", () => {
-        const dataType = {
-            "firstname": "string",
-            "lastname": "string",
-            "totalprice": "number",
-            "depositpaid": "boolean",
-            "bookingdates": "object",
-            "additionalneeds": "string"
-
-        }
+    describe.only("Booking - GetBooking test suit", () => {
 
         before(() => {
             cy.request('https://restful-booker.herokuapp.com/booking')
@@ -88,26 +79,26 @@ describe("TimothyHuxxSpec ", () => {
                 }).as('bookingRequest')
         });
 
-        it.only("Verify random Booking body has required keys", function () {
+        it("Verify random Booking body has required keys", function () {
             cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
                 .its('body')
                 .then((response) => {
-                    expect(response).to.have.keys(["firstname", "lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"])
+                    expect(response).to.have.keys(apiData.timothyData.booking.getBooking)
                 })
         });
 
-        it.only("Verify Booking body response type is object ", function () {
+        it("Verify Booking body response type is object ", function () {
             cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
                 .should(({ body }) => {
                     expect(body).to.be.an('object')
                 })
         });
 
-        it.only("Verify Booking body response key's data type ", function () {
+        it("Verify Booking body response key's data type ", function () {
             cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
                 .should(({ body }) => {
                     for (let key in body) {
-                        expect(typeof body[key]).to.eq(dataType[key])
+                        expect(typeof body[key]).to.eq(apiData.timothyData.booking.dataType[key])
                     }
                 })
         });
