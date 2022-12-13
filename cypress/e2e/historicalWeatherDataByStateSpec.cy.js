@@ -57,6 +57,19 @@ describe ('historical wether page', function() {
             })    
         })
     })
+
+    it('Verify zipCode state Alaska', function () {
+        header.clickMarketplaceMenuLink()
+        marketplace.clickHistoricalDataArchivesDocumentationLink()
+       
+        historicalWeather.elements.getFullListOfStates().each(($el,index,$list) => {
+            const text = $el.text().trim();
+            if(text == this.data.dataStates[1][0]){
+                historicalWeather.elements.getFullListOfStates().eq(index).next().then(function(zip) {
+                    const zipCode = zip.text().trim();
+                    expect(zipCode).to.equal(this.data.dataStates[1][1]);
+                });
+            }
+        })
+    })
 })
-
-
