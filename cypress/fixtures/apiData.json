@@ -189,5 +189,29 @@
             "booking":["firstname","lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
             "bookingdates":["checkin", "checkout"]
         }
+    },
+    "timothyData": {
+        "booking": {
+            "getBooking": {
+                    "firstname": "Sally",
+                    "lastname": "Brown",
+                    "totalprice": 111,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2013-02-23",
+                        "checkout": "2014-10-23"
+                    },
+                    "additionalneeds": "Breakfast"
+            },
+
+            "dataType": {
+                "firstname": "string",
+                "lastname": "string",
+                "totalprice": "number",
+                "depositpaid": "boolean",
+                "bookingdates": "object",
+                "additionalneeds": "string"
+            }
+        }
     }
 }
