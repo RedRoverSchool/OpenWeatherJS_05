@@ -213,5 +213,32 @@
                 "additionalneeds": "string"
             }
         }
+    },
+    "anzhelaData": {
+        "createBooking": {
+            "firstname": "Howard",
+            "lastname": "Roark",
+            "totalprice": 153,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2018-01-01",
+                "checkout": "2019-01-01"
+            },
+            "additionalneeds": "Breakfast"
+        },
+        "updateBooking": {
+            "firstname": "Dominique",
+            "lastname": "Frankon",
+            "totalprice": 249,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-01-01",
+                "checkout": "2023-01-01"
+            },
+            "additionalneeds": "Breakfast, car rental"
+        }
+    },
+    "headersAccept": {
+        "Accept": "application/json"
     }
 }
