@@ -1,4 +1,4 @@
-class UserMyprofile {
+class UserMyProfile {
 	elements = {
 		getMyProfileTabmenu: () => cy.get('#myTab a[href="/home"]'),
 		getNewPasswordImput: () => cy.get('#password_form_password'),
@@ -23,4 +23,4 @@ class UserMyprofile {
 	};
 };
 
-export default UserMyprofile;
+export default UserMyProfile;

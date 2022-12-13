@@ -2,11 +2,9 @@
 
 import Header from "../pageObjects/Header";
 import SignInPage from "../pageObjects/SignInPage";
-import UserMyprofile from "../pageObjects/UserMyprofilePage";
 
 const header = new Header();
 const signInPage = new SignInPage();
-const usermyprofile = new UserMyprofile();
 
 describe('SignIn test suit', () => {
 
@@ -90,15 +88,6 @@ describe('SignIn test suit', () => {
     signInPage.elements.getAllert().should('have.text', this.data.signOutAllertMessage);
   })
   
-  it('AT_032.001 | Sign in > My profile Tab menu > Verify Password Change', function () {
-    header.clickSignInMenuLink()
-    signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
-
-    usermyprofile.passwordChange(this.data.userProfileLtByJS.newpassword)
-
-    usermyprofile.elements.getAllertMessage().should('have.text', this.data.messageSuccessPasswordChange)
-  })
-
   it('AT_031.002 | Sign In > Account Dropdown Menu > Verify user is able to log out', function () {
     header.clickSignInMenuLink()
     signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
