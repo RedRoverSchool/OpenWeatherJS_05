@@ -188,7 +188,13 @@
             "obj":["bookingid", "booking"], 
             "booking":["firstname","lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
             "bookingdates":["checkin", "checkout"]
+        },
+    "getBookingHeaders":{
+        "properties":["server","connection","x-powered-by","content-type","content-length","etag","date","via"],
+        "content-type": {
+            "content-type":"application/json; charset=utf-8"
         }
+    }
     },
     "timothyData": {
         "booking": {
