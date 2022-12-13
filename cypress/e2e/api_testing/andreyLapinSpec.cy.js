@@ -95,6 +95,12 @@ describe('andreyLapinSpec', () => {
                 });
             });
         });
+
+        it('Verify correct date checkin/checkout', () => {
+            createBooking().then(({ body }) => {
+                expect(new Date(body.booking.bookingdates.checkout)).to.be.above(new Date(body.booking.bookingdates.checkin))
+            })
+        })
     });
     describe('GetBooking', () => {
         const getBooking = () => {
@@ -120,7 +126,7 @@ describe('andreyLapinSpec', () => {
         });
 
         it('Verify GetBooking data headers', () => {
-            getBooking().then(({headers}) => {
+            getBooking().then(({ headers }) => {
                 cy.log(JSON.stringify(headers))
                 expect(headers).to.be.a('object')
                 expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
