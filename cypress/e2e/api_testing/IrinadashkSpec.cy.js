@@ -2,11 +2,21 @@
 
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
+const API_DATA = require('../../fixtures/apiData.json')
+let apiData
 let CREATED_ID
 let TOKEN
+
 describe('IrinadashkSpec', () => {
 
-      describe('GET all bookingIds', () => {
+      beforeEach(function () {
+            cy.fixture('apiData').then(data => {
+                  apiData = data
+                  return apiData
+            })
+      })
+
+      describe('GET all booking Ids', () => {
             
             const getResponse = () => 
                   cy.request({
@@ -43,43 +53,40 @@ describe('IrinadashkSpec', () => {
             })
       })
 
-      describe('Greate Booking', () => {
+      describe('Create Booking', () => {
             
-            const getResponse = () => 
+            const createBookingRequest = () => 
                   cy.request({
                         method:"Post",
                         url: `${API_BASE_URL}/booking`,
                         headers: {
                               "Content-Type": "application/json"
                         },
-                        body: {
-                              "firstname" : "Jim",
-                              "lastname" : "Brown",
-                              "totalprice" : 111,
-                              "depositpaid" : true,
-                              "bookingdates" : {
-                                    "checkin" : "2018-01-01",
-                                    "checkout" : "2019-01-01"
-                              },
-                              "additionalneeds" : "Breakfast"
-                        }
+                        body: API_DATA.bodyCreateBooking
                   })
             
             it('Verify response has status 200', () => {
-                  getResponse()
+                  createBookingRequest()
                   .its('status')
                   .should('be.eq', 200)
             })
 
             it('Verify response has status 200', () => {
-                  getResponse()
+                  createBookingRequest()
                   .then(({ status }) => {
                   expect(status).to.equal(200)
                   })
             })
 
+            it('Verify response is object', () => {
+                  createBookingRequest()
+                  .then(({ body }) => {
+                        expect(body).to.be.an('object')
+                  })
+            })
+
             it('Print response', () => {
-                  getResponse()
+                  createBookingRequest()
                   .then(response => {
                   console.log(response.body)
                   expect(response.status).to.equal(200)
@@ -87,7 +94,7 @@ describe('IrinadashkSpec', () => {
             })  
             
             it('Print response has key bookingid', () => {
-                  getResponse()
+                  createBookingRequest()
                   .its('body')
                   .then(response => {
                   expect(response).to.have.any.keys('bookingid') 
@@ -97,11 +104,67 @@ describe('IrinadashkSpec', () => {
             }) 
             
             it('verify response contains object with key bookingid', () => {
-                  getResponse()
+                  createBookingRequest()
                   .then(({ body }) => {
                   expect(body).to.have.any.keys('bookingid') 
                   })
             })
+
+            it('verify that request creates booking', () => {
+                  createBookingRequest()
+                  .then(response => {
+                        expect(response.body.booking.lastname).to.equal(API_DATA.bodyCreateBooking.lastname)
+                  })
+            }) 
+      })
+
+      describe('Verify body of created booking has requested values', () => {
+            it('verify that created booking has requested first name ', () => {
+                  cy.request(`${API_BASE_URL}/booking/${CREATED_ID}`)
+                  .then(({ body }) => {
+                        expect(body.firstname).to.equal(API_DATA.bodyCreateBooking.firstname)
+                  })
+
+            });
+      })
+
+      describe('Get booking Ids', () => {
+
+            const getBookingIds = () =>
+                  cy.request(`${API_BASE_URL}/booking`)
+
+            it('verify response status', () => {
+                  getBookingIds()
+                  .then(({ status }) => {
+                        expect(status).to.equal(200)
+                  })
+            });
+
+            it('verify response is array', () => {
+                  getBookingIds()
+                  .its('body')
+                  .should('be.an', 'array')
+            });
+
+            it('verify response is array', () => {
+                  getBookingIds()
+                  .then(({ body }) => 
+                  expect(body).to.be.an('array'))
+            });
+      });
+
+      describe('Get booking by filter lastnames', () => {
+            
+            const filterBylastName = () =>
+                  cy.request(`${API_BASE_URL}/booking?lastname=${API_DATA.lastname}`)
+
+            it('Verify status', () => {
+                  filterBylastName()
+                  .then(response => {
+                  expect(response.status).to.equal(200)
+                  console.log(response.body)
+                  })
+            });
       })
       
       describe('AUTH', () => {
@@ -142,5 +205,48 @@ describe('IrinadashkSpec', () => {
                   console.log('TOKEN = ', TOKEN)
                   })
             }) 
-      }) 
+      });
+
+      describe('Delete booking by ID', () => {
+            const deleteBooking = () => 
+             cy.request({
+                  method: "DELETE",
+                  url: `https://restful-booker.herokuapp.com/booking/${CREATED_ID}`,
+                  headers:{
+                        "Content-Type": "application/json",
+                        "Cookie": `token=${TOKEN}`
+                  }
+            })
+            
+            
+            it('Delete created booking', () => {
+                 deleteBooking()
+                 .then(({ status }) => {
+                        expect(status).to.equal(201)
+                  })
+            });
+
+            it('Delete not existing booking Negative', () => {
+                  cy.request({
+                        method: "DELETE",
+                        url: `https://restful-booker.herokuapp.com/booking/${CREATED_ID}`,
+                        headers:{
+                              "Content-Type": "application/json",
+                              "Cookie": `token=${TOKEN}`
+                        },
+                        failOnStatusCode: false
+                  }).then(({ status }) => {
+                        expect(status).to.equal(405)
+                  })
+            });
+
+            it('Get non existing booking by ID Negative', () => {
+                  cy.request({
+                        url: `${API_BASE_URL}/booking/${CREATED_ID}`,
+                        failOnStatusCode: false
+                  }).then(({status}) =>{
+                        expect(status).to.equal(404)
+                  })
+            })
+      })
 })
