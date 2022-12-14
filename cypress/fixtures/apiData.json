@@ -188,6 +188,63 @@
             "obj":["bookingid", "booking"], 
             "booking":["firstname","lastname", "totalprice", "depositpaid", "bookingdates", "additionalneeds"],
             "bookingdates":["checkin", "checkout"]
+        },
+    "getBookingHeaders":{
+        "properties":["server","connection","x-powered-by","content-type","content-length","etag","date","via"],
+        "content-type": {
+            "content-type":"application/json; charset=utf-8"
         }
+    }
+    },
+    "timothyData": {
+        "booking": {
+            "getBooking": {
+                    "firstname": "Sally",
+                    "lastname": "Brown",
+                    "totalprice": 111,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2013-02-23",
+                        "checkout": "2014-10-23"
+                    },
+                    "additionalneeds": "Breakfast"
+            },
+
+            "dataType": {
+                "firstname": "string",
+                "lastname": "string",
+                "totalprice": "number",
+                "depositpaid": "boolean",
+                "bookingdates": "object",
+                "additionalneeds": "string"
+            }
+        }
+    },
+    "anzhelaData": {
+        "createBooking": {
+            "firstname": "Howard",
+            "lastname": "Roark",
+            "totalprice": 153,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2018-01-01",
+                "checkout": "2019-01-01"
+            },
+            "additionalneeds": "Breakfast"
+        },
+        "updateBooking": {
+            "firstname": "Dominique",
+            "lastname": "Frankon",
+            "totalprice": 249,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-01-01",
+                "checkout": "2023-01-01"
+            },
+            "additionalneeds": "Breakfast, car rental"
+        }
+    },
+    "headersAccept": {
+        "Accept": "application/json"
     }
 }
