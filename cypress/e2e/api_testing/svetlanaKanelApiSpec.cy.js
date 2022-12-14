@@ -3,27 +3,22 @@
 const API_BASE_URL = Cypress.env('apiBaseUrl');
 let CREATED_ID;
 let CREATED_TOKEN;
+let bookingData;
 
-describe("svetlanaKanelApiSpec", () => {
+describe("svetlanaKanelApiSpec", function () {
+
+    beforeEach(function () {
+        cy.fixture('apiData').then(data => {
+            bookingData = data;            
+        })
+    });
 
     const createBooking = () =>
         cy.request({
             method: "POST",
             url: `${API_BASE_URL}/booking`,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: {
-                "firstname": "Jim",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additionalneeds": "Breakfast"
-            }
+            headers: bookingData.headersContentType,
+            body: bookingData.artData.forCreate
         });
 
     const getCreatedBooking = () =>
@@ -39,13 +34,8 @@ describe("svetlanaKanelApiSpec", () => {
         cy.request({
             method: "POST",
             url: `${API_BASE_URL}/auth`,
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: {
-                "username": "admin",
-                "password": "password123"
-            }
+            headers: bookingData.headersContentType,
+            body: bookingData.admin
         });
 
     const updateBooking = () => 
@@ -57,22 +47,12 @@ describe("svetlanaKanelApiSpec", () => {
                 "Accept": "application/json",
                 "Cookie": `token=${CREATED_TOKEN}`
             },
-            body: {
-                "firstname": "Jumanji",
-                "lastname": "Brown",
-                "totalprice": 111,
-                "depositpaid": true,
-                "bookingdates": {
-                    "checkin": "2018-01-01",
-                    "checkout": "2019-01-01"
-                },
-                "additionalneeds": "Breakfast + aperol spritz"
-            }
+            body: bookingData.artData.forUpdate
         })
 
-    describe("Create a booking test suite", () => {
+    describe("Create a booking test suite", function () {
 
-        it('check response', () => {
+        it('check response', function () {
             createBooking()
                 .then(response => {
                     expect(response.status).to.equal(200);
@@ -146,7 +126,7 @@ describe("svetlanaKanelApiSpec", () => {
             updateBooking()
             .its('body')
             .then(response => {
-                expect(response.firstname).to.eq("Jumanji");
+                expect(response.firstname).to.eq("Ivanka");
             })            
         })
     });
