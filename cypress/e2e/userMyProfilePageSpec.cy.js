@@ -2,7 +2,7 @@
 
 import Header from "../pageObjects/Header";
 import SignInPage from "../pageObjects/SignInPage";
-import UserMyProfilePage from "../pageObjects/UserMyprofilePage";
+import UserMyProfilePage from "../pageObjects/UserMyProfilePage";
 
 const header = new Header();
 const signInPage = new SignInPage();
