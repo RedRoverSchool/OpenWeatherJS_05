@@ -3,54 +3,54 @@
 const API_BASE_URL = Cypress.env('apiBaseUrl')
 const apiData = require('../../fixtures/apiData.json')
 let BOOKING_ID
-let token1
+let TOKEN
 
 describe('kateRomankovaSpec', () => {
 
-    describe("Update booking", () => {
-
-        const createBooking = () =>
+    const createBooking = () =>
 		cy.request({
 			method: "POST",
 			url: `${API_BASE_URL}/booking`,
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: {
-                "firstname" : apiData.firstname,
-                "lastname" : apiData.lastname,
-                "totalprice" : apiData.totalprice,
-                "depositpaid" : apiData.depositpaid,
-                "bookingdates" : {
-                    "checkin" : apiData.bookingdates.checkin,
-                    "checkout" : apiData.bookingdates.checkout
-                },
-                "additionalneeds" : apiData.additionalneeds
-            }
+			headers: apiData.headersContentType,
+			body: apiData.createBookingInfo
 		})  
-        
-        const updateBooking = () =>
+
+    const updateBooking = () =>
 		cy.request({
 			method: "PATCH",
 			url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
-			headers: {
-				"Content-Type": "application/json",
-                "Accept": "application/json", 
-                "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
-			},
+			headers: apiData.headersForUpdate,
             body: {
                 "lastname" : apiData.newInformation.lastname,
                 "totalprice" : apiData.newInformation.totalprice
             }
 		})
 
+    const getResponseWithToken = () => 
+        cy.request({
+            method: "POST",
+            url: `${API_BASE_URL}/auth`,
+            body: apiData.admin
+        })
+
+    const deleteBooking = () =>
+        cy.request({
+            method: "DELETE",
+            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            headers: {
+                "Content-Type": "application/json", "Cookie": `token = ${TOKEN}`
+            }
+       })
+
+    describe("Update booking", () => {
+
         it('create booking', () => {
             createBooking()
             .then(response => {
                 expect(response.status).to.equal(200)
-                expect(response.body.booking).has.property('firstname',  apiData.firstname)
-                expect(response.body.booking).has.property('lastname', apiData.lastname)
-                expect(response.body.booking).has.property('totalprice', apiData.totalprice)
+                expect(response.body.booking).has.property('firstname',  apiData.createBookingInfo.firstname)
+                expect(response.body.booking).has.property('lastname', apiData.createBookingInfo.lastname)
+                expect(response.body.booking).has.property('totalprice', apiData.createBookingInfo.totalprice)
                 BOOKING_ID = response.body.bookingid
             })
         })
@@ -58,15 +58,15 @@ describe('kateRomankovaSpec', () => {
         it ('verify status of created bookingid', ()  => {
             cy.request( "GET", `${API_BASE_URL}/booking/${BOOKING_ID}`)
              .then(response => {
-                expect(response.status).to.equal(200)
+                expect(response.status).to.equal(apiData.statusOk)
             })
         })
 
         it('update information', () => {
             updateBooking()
             .then(response => {
-                expect(response.status).to.equal(200)
-                expect(response.body).has.property('firstname', apiData.firstname)
+                expect(response.status).to.equal(apiData.statusOk)
+                expect(response.body).has.property('firstname', apiData.createBookingInfo.firstname)
                 expect(response.body).has.property('lastname', apiData.newInformation.lastname)
                 expect(response.body).has.property('totalprice', apiData.newInformation.totalprice)
             })          
@@ -74,50 +74,11 @@ describe('kateRomankovaSpec', () => {
     })
 
     describe('delete booking', () => {
-
-        const getResponseWithToken = () => 
-        cy.request({
-            method: "POST",
-            url: `${API_BASE_URL}/auth`,
-            body :{
-               "username" : apiData.usernamefortokenauthorization,
-               "password" : apiData.passwordfortokenauthorization
-            }  
-        })
-
-        const createBooking = () =>
-        cy.request({
-            method: "POST",
-            url: `${API_BASE_URL}/booking`,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: {
-                "firstname" : apiData.firstname,
-                "lastname" : apiData.lastname,
-                "totalprice" : apiData.totalprice,
-                "depositpaid" : apiData.depositpaid,
-                "bookingdates" : {
-                    "checkin" : apiData.bookingdates.checkin,
-                    "checkout" : apiData.bookingdates.checkout
-                },
-                "additionalneeds" : apiData.additionalneeds
-            }
-        })
-        
-        const deleteBooking = () =>
-        cy.request({
-            method: "DELETE",
-            url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
-            headers: {
-                "Content-Type": "application/json", "Cookie": `token = ${token1}`
-            }
-       })
        
        it('create bookingID', () => {
             createBooking() 
                 .then(response => {
-                    expect(response.status).to.equal(200)
+                    expect(response.status).to.equal(apiData.statusOk)
                     BOOKING_ID = response.body.bookingid
                 })           
         })
@@ -125,15 +86,15 @@ describe('kateRomankovaSpec', () => {
         it('verify response body has key token and send it to the global variable TOKEN', () => {
 			getResponseWithToken()
 				.then(response => {
-					expect(response.body).to.have.key('token')
-					token1 = response.body.token
+					expect(response.body).to.have.key(apiData.artData.token)
+					TOKEN = response.body.token
 				})
 		})
 
         it('delete booking', () => {
             deleteBooking()
                 .then(response => {
-                    expect(response.status).to.equal(201)
+                    expect(response.status).to.equal(apiData.responsestatusafterdeletebooking)
                     expect(response.body).to.equal(apiData.responsebobyafterdeletebooking)
                 })          
         })
@@ -144,7 +105,7 @@ describe('kateRomankovaSpec', () => {
                 url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
                 failOnStatusCode: false
             }).then(response => {
-                expect(response.status).to.equal(404)
+                expect(response.status).to.equal(apiData.artData.forDelete.code404)
             })          
         })
     })
