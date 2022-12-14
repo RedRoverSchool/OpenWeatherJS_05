@@ -2,11 +2,11 @@
 
 import Header from "../pageObjects/Header";
 import SignInPage from "../pageObjects/SignInPage";
-import UserMyProfile from "../pageObjects/UserMyProfilePage";
+import UserMyProfilePage from "../pageObjects/UserMyProfilePage";
 
 const header = new Header();
 const signInPage = new SignInPage();
-const usermyprofile = new UserMyProfile();
+const usermyprofile = new UserMyProfilePage();
 
 describe('Change password test suit', () => {
 
