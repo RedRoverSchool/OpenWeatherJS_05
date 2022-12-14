@@ -31,7 +31,6 @@ describe("API testing with Cypress", () => {
                 .then((response) => {
                     expect(response[0])
                     .to.have.property("bookingid")
-                BOOKING_ID = response.body.bookingid
                     
                 });
         });
