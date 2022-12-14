@@ -4,6 +4,7 @@
 const apiData = require('../../fixtures/apiData.json')
 const API_BASE_URL = Cypress.env('apiBaseUrl');
 let AUTH_TOKEN;
+let BOOKING_ID;
 
 describe('andreyLapinSpec', () => {
 
@@ -36,7 +37,7 @@ describe('andreyLapinSpec', () => {
 
     });
 
-    describe('Booking', () => {
+    describe('Create Booking', () => {
         const createBooking = () => {
             return cy.request({
                 method: "POST",
@@ -48,18 +49,9 @@ describe('andreyLapinSpec', () => {
             });
         }
 
-        const getBookingIds = () => {
-            return cy.request({
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                url: `${API_BASE_URL}/booking`,
-            });
-        }
-
-        it('Create Booking', () => {
+        it('Verify Create Booking status', () => {
             createBooking().then((response) => {
+                BOOKING_ID = response.body.bookingid
                 expect(response.status).to.eql(200);
             });
         });
@@ -72,7 +64,7 @@ describe('andreyLapinSpec', () => {
                     if (el === 'booking') {
                         Object.keys(responseBody[el]).forEach(bookingItem => {
                             expect(responseBody[el][bookingItem]).to.be.a(apiData.lapData.correctBookingItems[bookingItem])
-                            if (bookingItem === 'correctBookingdatesItems') {
+                            if (bookingItem === 'bookingdates') {
                                 Object.keys(responseBody[el][bookingItem]).forEach(bookingdatesItem => {
                                     expect(isNaN(Date.parse(responseBody[el][bookingItem][bookingdatesItem]))).to.eql(false)
                                 });
@@ -103,13 +95,40 @@ describe('andreyLapinSpec', () => {
                 });
             });
         });
-
-        // it('Verify GetBookingIds', () => {
-        //     getBookingIds().then((response) => {
-        //         cy.log(JSON.stringify(response))
-        //     })
-        // })
-
     });
+    describe('GetBooking', () => {
+        const getBooking = () => {
+            return cy.request({
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            });
+        }
+
+        it('Verify GetBooking status', () => {
+            getBooking().then((response) => {
+                expect(response.status).to.eql(200)
+            });
+        });
+
+        it('Verify GetBooking data body response', () => {
+            getBooking().then(({ body }) => {
+                expect(body).to.deep.eql(apiData.lapData.created)
+            });
+        });
+
+        it('Verify GetBooking data headers', () => {
+            getBooking().then(({headers}) => {
+                cy.log(JSON.stringify(headers))
+                expect(headers).to.be.a('object')
+                expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
+                expect(Object.keys(headers)).to.deep.eql(apiData.lapData.getBookingHeaders.properties)
+                expect(headers).to.deep.include(apiData.lapData.getBookingHeaders['content-type'])
+            })
+        })
+    });
+
 
 });
