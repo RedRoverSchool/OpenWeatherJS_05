@@ -13,32 +13,32 @@ describe("API testing with Cypress", () => {
                 url: `${API_BASE_URL}/booking`,
             });
 
-        it("verify response has headers and not empty", () => {
+        it("verify response has headers", () => {
             getResponse().then((response) => {
                 console.log(response);
                 expect(response).to.have.property("headers")
-                .and.not.be.empty;
+                .to.not.be.empty
             });
         });
 
         it("verify response has status 200", () => {
-            getResponse()
-            .its("status")
-            .should("be.eq", 200);
-        });
-
-        it("verify response is array", () => {
-            getResponse().its("body").should("be.an", "array");
+            getResponse().its("status").should("be.eq", 200);
         });
 
         it("verify response body has BookingId", () => {
             getResponse()
                 .its("body")
                 .then((response) => {
-                    expect(response[0]).to.have.property("bookingid")
-                    CREATED_ID = response.bookingid
+                    expect(response[0])
+                    .to.have.property("bookingid")
+                    
                 });
         });
+
+        it("verify response body ia array", () => {
+            getResponse().its("body").should("be.an", "array");
+        });
+    });
 
     describe("Create Bookings", () => {
         const createResponse = () =>
@@ -59,24 +59,31 @@ describe("API testing with Cypress", () => {
                     },
                 },
             });
-            
+
+        it("verify that total price is number and equal 111", () => {
+            createResponse().then((response) => {
+                expect(response.body.booking.totalprice)
+                    .to.be.a("number")
+                    .to.be.equal(111)
+            });
+        });
+
+        it("verify that depositpaid is true", () => {
+            createResponse().then((response) => {
+                expect(response.body.booking.depositpaid).to.eq(true);
+            });
+        });
+
         it("verify response body is an Object", () => {
             createResponse().its("body").should("be.an", "object");
         });
 
         it("verify response has lastName Test and not empty", () => {
             createResponse().then((response) => {
-                expect(response.body.booking.lastname).to.equal("Test")
-                .to.be.a('string')
-                .to.not.be.empty;
-            });
-        });
-
-        it("verify that total price is number and equal 111", () => {
-            createResponse().then((response) => {
-                expect(response.body.booking.totalprice)
-                    .to.be.a("number")
-                    .to.be.equal(111);
+                expect(response.body.booking.lastname)
+                    .to.equal("Test")
+                    .to.be.a("string")
+                    .to.not.be.empty;
             });
         });
 
@@ -106,20 +113,19 @@ describe("API testing with Cypress", () => {
             });
         });
 
+        it("verify correct date checkin/checkout", () => {
+            createResponse()
+            .then(({ body }) => {
+                expect(new Date(body.booking.bookingdates.checkout))
+                .to.be.above(new Date(body.booking.bookingdates.checkin));
+            });
+        });
+
         it("verify depositpaid is boolean", () => {
             createResponse().then((response) => {
                 expect(response.body.booking.depositpaid)
                 .to.be.a(apiData.typeBoolean);
             });
         });
-
-        it("verify correct date checkin/checkout", () => {
-            createResponse().then(({ body }) => {
-                expect(
-                    new Date(body.booking.bookingdates.checkout))
-                    .to.be.above(new Date(body.booking.bookingdates.checkin));
-            });
-        });
     });
-})
-})
+});

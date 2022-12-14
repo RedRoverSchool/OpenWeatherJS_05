@@ -4,7 +4,6 @@
 const apiData = require('../../fixtures/apiData.json')
 const API_BASE_URL = Cypress.env('apiBaseUrl');
 let AUTH_TOKEN;
-let BOOKING_ID;
 
 describe('andreyLapinSpec', () => {
 
@@ -37,7 +36,7 @@ describe('andreyLapinSpec', () => {
 
     });
 
-    describe('Create Booking', () => {
+    describe('Create Create Booking', () => {
         const createBooking = () => {
             return cy.request({
                 method: "POST",
@@ -64,7 +63,7 @@ describe('andreyLapinSpec', () => {
                     if (el === 'booking') {
                         Object.keys(responseBody[el]).forEach(bookingItem => {
                             expect(responseBody[el][bookingItem]).to.be.a(apiData.lapData.correctBookingItems[bookingItem])
-                            if (bookingItem === 'bookingdates') {
+                            if (bookingItem === 'correctBookingdatesItems') {
                                 Object.keys(responseBody[el][bookingItem]).forEach(bookingdatesItem => {
                                     expect(isNaN(Date.parse(responseBody[el][bookingItem][bookingdatesItem]))).to.eql(false)
                                 });
@@ -113,6 +112,29 @@ describe('andreyLapinSpec', () => {
             });
         });
 
+        it('Verify correct date checkin/checkout', () => {
+            createBooking().then(({ body }) => {
+                expect(new Date(body.booking.bookingdates.checkout)).to.be.above(new Date(body.booking.bookingdates.checkin))
+            })
+        })
+    });
+    describe('GetBooking', () => {
+        const getBooking = () => {
+            return cy.request({
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            });
+        }
+
+        it('Verify GetBooking status', () => {
+            getBooking().then((response) => {
+                expect(response.status).to.eql(200)
+            });
+        });
+
         it('Verify GetBooking data body response', () => {
             getBooking().then(({ body }) => {
                 expect(body).to.deep.eql(apiData.lapData.created)
@@ -121,6 +143,15 @@ describe('andreyLapinSpec', () => {
 
         it('Verify GetBooking data headers', () => {
             getBooking().then(({headers}) => {
+                cy.log(JSON.stringify(headers))
+                expect(headers).to.be.a('object')
+                expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
+                expect(Object.keys(headers)).to.deep.eql(apiData.lapData.getBookingHeaders.properties)
+                expect(headers).to.deep.include(apiData.lapData.getBookingHeaders['content-type'])
+            })
+        })
+        it('Verify GetBooking data headers', () => {
+            getBooking().then(({ headers }) => {
                 cy.log(JSON.stringify(headers))
                 expect(headers).to.be.a('object')
                 expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
