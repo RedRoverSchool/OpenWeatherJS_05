@@ -25,12 +25,12 @@ describe('andreyLapinSpec', () => {
                 expect(response.status).to.eql(200);
                 expect(response.body).to.have.property('token');
                 expect(response.body).not.have.property('reason');
-                AUTH_TOKEN = response.body.token;
             });
         });
 
         it('TypeOf Token is String', () => {
             createToken().then((response) => {
+                AUTH_TOKEN = response.body.token;
                 expect(response.body.token).to.be.a('string')
             });
         });
@@ -51,7 +51,6 @@ describe('andreyLapinSpec', () => {
 
         it('Verify Create Booking status', () => {
             createBooking().then((response) => {
-                BOOKING_ID = response.body.bookingid
                 expect(response.status).to.eql(200);
             });
         });
@@ -78,6 +77,7 @@ describe('andreyLapinSpec', () => {
 
         it('Verify correct data  in response body properties', () => {
             createBooking().then((response) => {
+                BOOKING_ID = response.body.bookingid;
                 let responseBody = response.body;
                 Object.keys(responseBody).forEach((el, index) => {
                     expect(el).to.be.eql(apiData.lapData.correctDataReponseProperties.obj[index])
@@ -120,15 +120,108 @@ describe('andreyLapinSpec', () => {
         });
 
         it('Verify GetBooking data headers', () => {
-            getBooking().then(({headers}) => {
-                cy.log(JSON.stringify(headers))
+            getBooking().then(({ headers }) => {
                 expect(headers).to.be.a('object')
                 expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
                 expect(Object.keys(headers)).to.deep.eql(apiData.lapData.getBookingHeaders.properties)
                 expect(headers).to.deep.include(apiData.lapData.getBookingHeaders['content-type'])
-            })
-        })
+            });
+        });
     });
 
+    describe('UpdateBooking', () => {
+        let newPutData = JSON.parse(JSON.stringify(apiData.lapData.created));
+        newPutData.firstname = "Andrew";
+
+        const getBooking = () => {
+            return cy.request({
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            });
+        }
+        const updateBookingPut = () => {
+            return cy.request({
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Cookie": `token=${AUTH_TOKEN}`
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+                body: newPutData
+            });
+        }
+
+        it('Verify UpdateBooking changes', () => {
+            let beforeFirstName;
+
+            getBooking().then(({ body }) => {
+                beforeFirstName = body.firstname
+            });
+            updateBookingPut().then((response) => {
+                let currentFirstName = response.body.firstname;
+                expect(response.status).to.be.eql(200)
+                expect(currentFirstName).not.be.eql(beforeFirstName) // Andrew !== Andrey
+                expect(response.body).to.deep.eql(newPutData)
+            });
+        });
+        
+        it('Verify UpdateBooking data headers', () => {
+            updateBookingPut().then(({ headers }) => {
+                expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
+                expect(Object.keys(headers)).to.deep.eql(apiData.lapData.getBookingHeaders.properties)
+                expect(headers).to.deep.include(apiData.lapData.getBookingHeaders['content-type'])
+            });
+        });
+
+    });
+
+    describe('PartialUpdateBooking', () => {
+        const getBooking = () => {
+            return cy.request({
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+            });
+        }
+
+        const updateBookingPatch = () => {
+            return cy.request({
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Cookie": `token=${AUTH_TOKEN}`
+                },
+                url: `${API_BASE_URL}/booking/${BOOKING_ID}`,
+                body: apiData.lapData.patchUpdate
+            });
+        }
+
+        it('Verify PartialUpdateBooking changes', () => {
+            let additionalneeds;
+
+            getBooking().then(({ body }) => {
+                additionalneeds = body.additionalneeds;
+            });
+            updateBookingPatch().then((response) => {
+                expect(response.status).to.be.eql(200)
+                expect(response.body.additionalneeds).not.be.eql(additionalneeds) // get Offer !== Offer
+            });
+        });
+
+        it('Vetify PartialUpdateBooking data headers', () => {
+            updateBookingPatch().then(({ headers }) => {
+                expect(Object.entries(headers)).to.have.length(apiData.lapData.getBookingHeaders.properties.length)
+                expect(Object.keys(headers)).to.deep.eql(apiData.lapData.getBookingHeaders.properties)
+                expect(headers).to.deep.include(apiData.lapData.getBookingHeaders['content-type'])
+            });
+        });
+    });
 
 });
