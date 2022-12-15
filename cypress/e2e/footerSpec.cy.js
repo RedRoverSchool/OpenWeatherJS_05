@@ -134,7 +134,7 @@ describe('Footer test suite', () => {
         cy.title().should('include', 'LinkedIn Login');
     });
     
-    it.only('AT_022.007| Footer > Social media > Verify Telegram icon redirection', function () {
+    it('AT_022.007| Footer > Social media > Verify Telegram icon redirection', function () {
         footer.elements.getTelegram().should('be.visible');
         footer.clickTelegram()
 
