@@ -117,7 +117,7 @@ describe('Widgets page test suite', () => {
         apiKeysPage.actionWithKey(this.keys.keyNames.newNameKey, apiKeysPage.locators.DeleteKeysButton)
     })
 
-    it.skip('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
+    it('AT_021.008 | Footer > Widgets > The widget code is visible', function() {
         header.clickSignInMenuLink();
         singInPage.signIn(this.signIn.userProfileLtByJS.realEmail, this.signIn.userProfileLtByJS.password);
         header.clickUserDropDownMenu();
