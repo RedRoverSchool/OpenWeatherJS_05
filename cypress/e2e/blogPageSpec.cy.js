@@ -55,4 +55,15 @@ describe('Blog page test suite', () => {
         
         blogPage.elements.getWeatherFilter().should('have.text', this.data.weatherFilter);
     });
+
+    it('AT_013.010 | Blog > Weather  10 posts are displayed on the first page', function () {
+        header.clickBlogMenuLink();
+
+        cy.url().should('eq', this.data.url);
+        blogPage.elements.getAllPosts()
+          .should('have.length', 10)
+          .each(($el)=>{
+            cy.wrap($el).should('be.visible')
+          })
+      });
 });

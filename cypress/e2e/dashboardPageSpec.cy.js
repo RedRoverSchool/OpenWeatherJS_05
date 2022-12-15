@@ -52,4 +52,24 @@ describe('Dashboard page test suite', () => {
         cy.url().should('eq', this.urlData.questionsUrl)
         questionsPage.elements.getHeadLine().should('have.text', this.questionsData.headLineText)
     });
+
+    it('AT_025.001 | Main menu > After clicking the Dashboard menu User is redirected to the Dashboard page', function () {
+        header.clickDashboardMenu();
+        
+        cy.url().should('be.equal', this.data.url)
+        dashboardPage.elements.getWeatherDashboardTitle().should('have.text', this.data.h1Title)
+    });
+
+    it('AT_025.002 | Main menu > Dashboard > After clicking the first "Try the Dashboard" button not authorized User is redirected to Sign in page', function () {
+        header.elements.getUserDropDownMenu().should('not.exist');
+
+        header.clickDashboardMenu()
+        dashboardPage.elements.getWeatherDashboardTitle().should('be.visible').and('have.text', this.data.h1Title);
+        dashboardPage.elements.getTryTheDashboardFirstButton().should('include.text','Try the Dashboard');
+        dashboardPage.clickTryTheDashboardFirstButton();
+        
+        cy.url().should('eq', this.signInData.signInUrlUsers)
+        signInPage.elements.getSignInForm().should('exist');
+        signInPage.elements.getSignOutAllert().should('have.text', this.signInData.signOutAllertMessage)
+    });
 });
