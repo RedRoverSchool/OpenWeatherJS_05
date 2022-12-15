@@ -210,8 +210,8 @@ describe("lauraBSpec", () => {
                     "totalprice": 111,
                     "depositpaid": true,
                     "bookingdates": {
-                        "checkin": "2013-02-23",
-                        "checkout": "2014-10-23"
+                        "checkin": "2013-03-24",
+                        "checkout": "2014-11-24"
                     },
                     "additionalneeds": "Breakfast"
                 }
@@ -220,7 +220,7 @@ describe("lauraBSpec", () => {
         const filterByDate = () =>
             cy.request({
                 method: 'GET',
-                url: `${API_BASE_URL}/booking?checkin=2014-03-13&checkout=2014-05-21`
+                url: `${API_BASE_URL}/booking?checkin=2013-03-24&checkout=2014-11-24`
             })
 
         it('verify response has headers', () => {
