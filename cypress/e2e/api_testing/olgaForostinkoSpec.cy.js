@@ -1,13 +1,16 @@
 /// <reference types="cypress"/>
 
 const API_BASE_URL = Cypress.env('apiBaseUrl')
-let CREATED_ID 
+const API_DATA = require('../../fixtures/apiData.json')
+let CREATED_BOOKINGID
+let NEW_TOKEN
+
 
 describe("OlgaForostinkoSpec", () => {
 
     describe("Get BookingId Tests", () => {
 
-        const getResponse = () => 
+        const getResponse = () =>
             cy.request({
                 method: "GET",
                 url: `${API_BASE_URL}/booking`
@@ -15,37 +18,37 @@ describe("OlgaForostinkoSpec", () => {
 
         it('Verify response has a body', () => {
             getResponse()
-            .then(response => {
-                console.log(response)
-                expect(response).to.have.property('body')
-            })
+                .then(response => {
+                    console.log(response)
+                    expect(response).to.have.property('body')
+                })
         })
 
-        it('Verify response status',() => {
+        it('Verify response status', () => {
             getResponse()
-            .its('status')
-            .should('be.eq', 200)
+                .its('status')
+                .should('be.eq', 200)
         })
 
         it('Verify response has headers', () => {
             getResponse()
-            .then(response => {
-                expect(response).to.have.property('headers')
-            })
+                .then(response => {
+                    expect(response).to.have.property('headers')
+                })
         })
 
         it('Verify response statusText', () => {
             getResponse()
-            .then(response => {
-                console.log(response.statusText)
-            })
+                .then(response => {
+                    console.log(response.statusText)
+                })
         })
 
         it('Verify response has requestHeaders', () => {
             getResponse()
-            .then(response => {
-                expect(response).to.have.property('requestHeaders')
-            })
+                .then(response => {
+                    expect(response).to.have.property('requestHeaders')
+                })
         })
 
         it('Verify response body is an array', () => {
@@ -56,65 +59,142 @@ describe("OlgaForostinkoSpec", () => {
 
         it('Verify response body has BookingId', () => {
             getResponse()
-            .its('body')
-            .then(response => {
-                expect(response[0]).to.have.property('bookingid')
-            })
+                .its('body')
+                .then(response => {
+                    expect(response[0]).to.have.property('bookingid')
+                })
         })
 
         it('Verify response body has a duration', () => {
             getResponse()
-            .then(response => {
-                expect(response).to.have.property('duration')
-            })
+                .then(response => {
+                    expect(response).to.have.property('duration')
+                })
         })
 
         it('Verify tatus - anoter option', () => {
             getResponse()
-            .then(response => {
-                expect(response).to.have.property('status', 200)   
-            })  
+                .then(response => {
+                    expect(response).to.have.property('status', 200)
+                })
+        })
+
+    describe('Create, create token, verify, update, partial, delete', () => {
+
+        const createToken = () => 
+        cy.request({
+            method: "POST",
+            url: `${API_BASE_URL}/auth`,
+            geaders: API_DATA.headersAccept,
+            body: API_DATA.admin
         })
         
-        describe('Create New Booking', () => {
-
-            const getResponse = () => 
-                cy.request({
-                    method: "POST",
-                    url: `${API_BASE_URL}/booking`,
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: {
-                        "firstname" : "Elon",
-                        "lastname" : "Musk",
-                        "totalprice" : 1150,
-                        "depositpaid" : true,
-                        "bookingdates" : {
-                            "checkin" : "2023-01-01",
-                            "checkout" : "2023-01-05"
-                        },
-                        "additionalneeds" : "Breakfast"
-                    }
-                })
-            
-            it('print response', () => {
-                getResponse()
-                .then(response => {
-                    console.log(response.body)
-                    expect(response.status).to.eq(200)
-                })
-            })  
-            
-            it('verify response has key bookingid', () => {
-                getResponse()
-                .its('body')
-                .then(response => {
-                    expect(response).to.have.any.keys('bookingid')
-                    CREATED_ID = response.bookingid
-                    console.log('CREATED_ID = ', CREATED_ID)
-                })   
+        const createBooking = () =>
+            cy.request({
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                headers: API_DATA.headersContentType,
+                body: API_DATA.bodyCreateBooking
             })
+
+        const createdBooking = () =>
+        cy.request({
+            method: "GET",
+            url: `${API_BASE_URL}/booking/${CREATED_BOOKINGID}`
         })
+
+        const updateBooking = () =>
+        cy.request({
+            method: "PUT",
+            url: `${API_BASE_URL}/booking/${CREATED_BOOKINGID}`,
+            headers: {
+                "Cookie": `token=${NEW_TOKEN}`
+            },
+            body: API_DATA.updateBookingInfo
+        })
+
+        const partialUpdateBooking = () =>
+        cy.request({
+            method: "PATCH",
+            url: `${API_BASE_URL}/booking/${CREATED_BOOKINGID}`,
+            headers: {
+                "Cookie": `token=${NEW_TOKEN}`
+            },
+            body: API_DATA.romData.partialUpdate
+        })
+    
+    describe('Auth - Create Token', () => {
+
+        it('Verify token is created', () => {
+            createToken().then(({ body }) => {
+                expect(body).to.have.key('token')
+                NEW_TOKEN = body.token
+            })    
+        });       
+    })
+
+    describe('Create booking', () => {
+        
+        it('Verify status is created', () => {
+            createBooking().then(({ status }) => {
+                    expect(status).to.eq(200)
+                })
+        });
+
+        it('Verify responce has key bookingId', () => {
+            createBooking().then(({ body }) => {
+                    expect(body).to.have.any.keys('bookingid')
+                    CREATED_BOOKINGID = body.bookingid
+                    console.log('CREATED_BOOKINGID ', CREATED_BOOKINGID)
+                    console.log(body)
+                })
+        })
+
+    describe('Verify created booking', () => {
+
+        it('Verify status', () => {
+            createdBooking().then(({ status }) => {
+                    expect(status).to.eq(200)
+                })
+        })
+
+        it('Verify first name', () => {
+            createdBooking().then(({ body }) => {
+                expect(body.firstname).to.eq(API_DATA.bodyCreateBooking.firstname)
+            })    
+        })
+//не работает разобраться
+        // it('Verify checkout', () => {
+        //     createBooking().then(({ body }) =>{
+        //         expect(body.checkout).to.eq(API_DATA.bodyCreateBooking.bookingdates.checkout)
+        //     })    
+        // });
+
+    describe('Update booking', () => {
+
+        it('Verify status booking updates', () => {
+            updateBooking().then(({ status }) => {
+                expect(status).to.eq(200)
+            })    
+        });
+        
+        it('Verify first name is updated', () => {
+            updateBooking().then(({ body}) => {
+                expect(body.firstname).to.eq(API_DATA.updateBookingInfo.firstname)
+            })    
+        });
+//дописать!        
+    describe('Partial Update Booking', () => {
+
+        it('Verify status partial update booking ', () => {
+            partialUpdateBooking().then(({ status }) => {
+                expect(status).to.eq(200)
+            })    
+        })
+    })    
+})
     })
 })
+    })
+})
+})    
