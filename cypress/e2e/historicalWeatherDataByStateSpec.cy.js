@@ -72,4 +72,16 @@ describe ('historical wether page', function() {
             }
         })
     })
+
+    it('AT_061.008 | Historical Weather Data by State > Verifying that each state has its own ZIP code and particular price', function() {
+        header.clickMarketplaceMenuLink()
+        marketplace.clickHistoricalDataArchivesDocumentationLink()
+            
+        historicalWeather.elements.getDataState().then(($el) => {
+            const dataStates = $el
+                .toArray()
+                .map(el => el.innerText.split('\t'))
+                expect(dataStates).to.deep.eq(this.data.dataStates)
+        })
+    })
 })
