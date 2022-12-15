@@ -74,7 +74,7 @@ class Footer {
     };
 
     clickTelegram() {
-        this.elements.getTelegram().invoke('removeAttr', 'target').click({force: true} );
+        this.elements.getTelegram().invoke('removeAttr', 'target').click();
     };
  
 };
