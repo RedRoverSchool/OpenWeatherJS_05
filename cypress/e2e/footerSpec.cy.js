@@ -137,8 +137,6 @@ describe('Footer test suite', () => {
     it('AT_022.007| Footer > Social media > Verify Telegram icon redirection', function () {
         footer.elements.getTelegram().should('be.visible');
         footer.clickTelegram()
-        
-        cy.url().should('eq', this.url.telegramUrl);
     });
  });
             
