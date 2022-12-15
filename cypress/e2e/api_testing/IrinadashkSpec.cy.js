@@ -248,5 +248,15 @@ describe('IrinadashkSpec', () => {
                         expect(status).to.equal(404)
                   })
             })
+
+            it('The error message "Not Found" appears when we Get not existing booking by ID', () => {
+                  cy.request({
+                        url: `${API_BASE_URL}/booking/${CREATED_ID}`,
+                        failOnStatusCode: false
+                  }).then(response =>{
+                        cy.log(response)
+                        expect(response.body).to.contains('Not Found')
+                  })
+            })
       })
 })
