@@ -109,4 +109,37 @@ describe('kateRomankovaSpec', () => {
             })          
         })
     })
+
+    describe('Create Booking', () => {
+            
+        it('check status', () => {
+            createBooking()
+                .then(response => {
+                    expect(response.status).to.equal(apiData.statusOk)
+                })
+        })
+
+        it('verify that booking created', () => {
+            createBooking()
+                .then(response => {
+                    expect(response.body.booking).has.property('firstname', apiData.createBookingInfo.firstname)
+                    expect(response.body.booking).has.property('lastname', apiData.createBookingInfo.lastname)
+                    expect(response.body).to.have.property(apiData.lapData.correctDataReponseProperties.obj[1])
+                })               
+        })
+
+        it('verify that total price value is number', () => {
+            createBooking() 
+                .then(response => {
+                    expect(response.body.booking.totalprice).to.be.a(apiData.lapData.correctBookingItems.totalprice)
+                })
+        })
+
+        it('verify that total price', () => {
+            createBooking() 
+                .then(response => {
+                    expect(response.body.booking.totalprice).to.be.equal(apiData.createBookingInfo.totalprice)
+                })
+        })
+    })   
 })
