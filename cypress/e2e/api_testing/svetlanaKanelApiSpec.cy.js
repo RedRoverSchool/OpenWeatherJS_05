@@ -50,6 +50,19 @@ describe("svetlanaKanelApiSpec", function () {
             body: bookingData.artData.forUpdate
         })
 
+    const partialUpdateBooking = () =>
+        cy.request({
+            method: "PATCH",
+            url: `${API_BASE_URL}/booking/${CREATED_ID}`,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Cookie": `token=${CREATED_TOKEN}`
+            },
+            body: {"additionalneeds": "get Offer" }           
+        })
+     
+
     describe("Create a booking test suite", function () {
 
         it('check response', function () {
@@ -97,6 +110,7 @@ describe("svetlanaKanelApiSpec", function () {
                 .its('body')
                 .then(response => {
                     expect(response).to.include.keys('additionalneeds');
+                    expect(response.additionalneeds).to.eq('Bamboo pillows')
                 })
         })
     })
@@ -126,17 +140,28 @@ describe("svetlanaKanelApiSpec", function () {
             updateBooking()
             .its('body')
             .then(response => {
-                expect(response.firstname).to.eq("Ivanka");
+                expect(response.additionalneeds).to.eq("Duck feather pillows");
             })            
         })
     });
+
+    describe('Partial update booking', () => {
+
+        it('verify partial updation', function () {
+            partialUpdateBooking()
+            .its('body')
+            .then(response => {
+                console.log(response);
+                expect(response.additionalneeds).to.eq("get Offer")
+            })
+        })
+    })
 
     describe("Get all BookingsIds", () => {
 
         it('verify response has headers', () => {
             getAllBookings()
                 .then(response => {
-                    console.log(response)
                     expect(response).to.have.property('headers')
                 })
         })
