@@ -3,6 +3,7 @@
 const API_BASE_URL = Cypress.env("apiBaseUrl");
 const apiData = require("../../fixtures/apiData.json");
 const VALIDATE_DATE = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+let CREATE_ID 
 
 describe("API testing with Cypress", () => {
     describe("Get BookingIds", () => {
@@ -84,6 +85,14 @@ describe("API testing with Cypress", () => {
                     .to.equal("Test")
                     .to.be.a("string")
                     .to.not.be.empty;
+            });
+        });
+
+        it("verify response has new booking id", () => {
+            createResponse()
+            .then(response => {
+                expect(response.status).to.equal(200)
+                CREATE_ID = response.body.bookingid
             });
         });
 
