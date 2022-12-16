@@ -104,7 +104,7 @@ describe("TimothyHuxxSpec ", () => {
         });
     });
 
-    describe.only('Booking - Create booking test suite', () => {
+    describe('Booking - Create booking test suite', () => {
 
         let createBookingResponse
         let createBookingNoFirstNameResponse
