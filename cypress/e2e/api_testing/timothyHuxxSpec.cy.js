@@ -70,7 +70,7 @@ describe("TimothyHuxxSpec ", () => {
         });
     });
 
-    describe("Booking - GetBooking test suit", () => {
+    describe("Booking - GetBooking test suite", () => {
 
         before(() => {
             cy.request('https://restful-booker.herokuapp.com/booking')
@@ -87,14 +87,14 @@ describe("TimothyHuxxSpec ", () => {
                 })
         });
 
-        it("Verify Booking body response type is object ", function () {
+        it("Verify random Booking body response type is object ", function () {
             cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
                 .should(({ body }) => {
                     expect(body).to.be.an('object')
                 })
         });
 
-        it("Verify Booking body response key's data type ", function () {
+        it("Verify random Booking body response key's data type ", function () {
             cy.request(`${API_BASE_URL}/booking/${this.bookingRequest}`)
                 .should(({ body }) => {
                     for (let key in body) {
@@ -103,4 +103,88 @@ describe("TimothyHuxxSpec ", () => {
                 })
         });
     });
+
+    describe.only('Booking - Create booking test suite', () => {
+
+        let createBookingResponse
+        let createBookingNoFirstNameResponse
+        let createBookingNoAdditionalneedsResponse
+
+        before('Create Booking and return its ID', () => {
+            cy.request({
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                body: apiData.timothyData.createBooking.createBookingValidBody
+            }).then((response) => {
+                createBookingResponse = response
+            });
+
+            cy.request({
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                body: apiData.timothyData.createBooking.createBookingNoFirstNameBody,
+                failOnStatusCode: false
+            }).then((response) => {
+                createBookingNoFirstNameResponse = response
+            });
+
+            cy.request({
+                method: "POST",
+                url: `${API_BASE_URL}/booking`,
+                body: apiData.timothyData.createBooking.createBookingNoAdditionalneedsBody,
+                failOnStatusCode: false
+            }).then((response) => {
+                createBookingNoAdditionalneedsResponse = response
+            })
+
+        });
+
+        it('Verify after creating a booking it has all the passed values', () => {
+            expect(createBookingResponse.body.booking).to.be.eql(apiData.timothyData.createBooking.createBookingValidBody)
+        })
+
+        it('Verify createBookingResponse status is 200', () => {
+            expect(createBookingResponse.status).to.eq(200)
+        });
+
+        it('Verify data type of ID is a number', () => {
+            expect(createBookingResponse.body.bookingid).to.be.a("number")
+        });
+        
+        it('Verify after creating a booking it has all the passed keys', () => {
+            expect(createBookingResponse.body.booking).has.all.keys(apiData.timothyData.createBooking.createBookingValidBody)
+        });
+
+        it('Verify the data type of created booking keys value ', () => {
+            for(let key in createBookingResponse.body.booking){
+                expect(typeof createBookingResponse.body.booking[key]).to.be.eq(apiData.timothyData.booking.dataType[key])
+            }
+        });
+
+        it('Verify the booking statusText is OK ', () => {
+            expect(createBookingResponse.statusText).to.be.eq("OK")
+        });
+
+        it('Negative - No firstname passed in the request. Verify the booking status is 500 ', () => {
+            expect(createBookingNoFirstNameResponse.status).to.be.eq(500)
+        });
+
+        it('Negative - No firstname passed in the request. Verify key isOkStatusCode is equal to false ', () => {
+            cy.log(createBookingNoFirstNameResponse)
+            expect(createBookingNoFirstNameResponse.isOkStatusCode).to.be.false
+        });
+
+        it('Negative - No firstname passed in the request. Verify key body is equal to "Internal Server Error" ', () => {
+            
+            expect(createBookingNoFirstNameResponse.body).to.be.eq("Internal Server Error")
+        });
+
+        it('Negative - No additionalneeds passed in the request. Verify status is equal 200', () => {
+            expect(createBookingNoAdditionalneedsResponse.status).to.be.eql(200)
+        });
+
+        it('Negative - No additionalneeds passed in the request. Verify booking created without additionalneeds key ', () => {
+            expect(createBookingNoAdditionalneedsResponse.body.booking).to.be.eql(apiData.timothyData.createBooking.createBookingNoAdditionalneedsBody)
+        });
+    })
 })
