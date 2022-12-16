@@ -289,5 +289,20 @@
         "Content-Type": "application/json",
         "Accept": "application/json", 
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+    },
+
+    "lauraData": {
+        "firstBooking": {
+            "firstname" : "JamesArk",
+            "lastname" : "BrownArk",
+            "totalprice" : 101010,
+            "depositpaid" : true,
+            "bookingdates" : {
+                "checkin" : "2019-05-05",
+                "checkout" : "2020-05-05"
+            },
+            "additionalneeds" : "Breakfast, Dinner"
+        }
     }
+
 }
