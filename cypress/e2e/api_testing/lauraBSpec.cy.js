@@ -51,7 +51,7 @@ describe("lauraBSpec", () => {
             })
         })
 
-        it('verify response cobtains body with promise then', () =>{
+        it('verify response contains body with promise then', () =>{
             getResponse()
             .then(({body}) => {
                 expect(body[0]).to.have.keys('bookingid')
@@ -82,7 +82,7 @@ describe("lauraBSpec", () => {
                 method: "POST",
                 url: `${API_BASE_URL}/booking`,
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 },
                 body: {
                     "firstname" : "Jim",
@@ -191,6 +191,49 @@ describe("lauraBSpec", () => {
                 expect(response.status).to.eq(404)
                 cy.log(`result of deleted booking = ${response.status}`)
                 console.log(`result of deleted booking = ${response.status}`)
+            })
+        })
+    })
+
+    describe('Get bookingid filter by checkin/checkout date', () => {
+
+        const getResponse = () =>
+            cy.request({
+                method: 'POST',
+                url: `${API_BASE_URL}/booking`,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    "firstname": "Sally",
+                    "lastname": "Brown",
+                    "totalprice": 111,
+                    "depositpaid": true,
+                    "bookingdates": {
+                        "checkin": "2013-03-24",
+                        "checkout": "2014-11-24"
+                    },
+                    "additionalneeds": "Breakfast"
+                }
+            })
+
+        const filterByDate = () =>
+            cy.request({
+                method: 'GET',
+                url: `${API_BASE_URL}/booking?checkin=2013-03-24&checkout=2014-11-24`
+            })
+
+        it('verify response has headers', () => {
+            getResponse()
+                .its('status')
+                .should('be.eq', 200)
+        })
+
+        it('verify status filter by date response', () => {
+
+            filterByDate()
+            .then(response => {
+                expect(response.status).to.equal(200)
             })
         })
     })
