@@ -150,13 +150,13 @@ describe("TimothyHuxxSpec ", () => {
         it('Verify data type of ID is a number', () => {
             expect(createBookingResponse.body.bookingid).to.be.a("number")
         });
-        
+
         it('Verify after creating a booking it has all the passed keys', () => {
             expect(createBookingResponse.body.booking).has.all.keys(apiData.timothyData.createBooking.createBookingValidBody)
         });
 
         it('Verify the data type of created booking keys value ', () => {
-            for(let key in createBookingResponse.body.booking){
+            for (let key in createBookingResponse.body.booking) {
                 expect(typeof createBookingResponse.body.booking[key]).to.be.eq(apiData.timothyData.booking.dataType[key])
             }
         });
@@ -175,7 +175,7 @@ describe("TimothyHuxxSpec ", () => {
         });
 
         it('Negative - No firstname passed in the request. Verify key body is equal to "Internal Server Error" ', () => {
-            
+
             expect(createBookingNoFirstNameResponse.body).to.be.eq("Internal Server Error")
         });
 
