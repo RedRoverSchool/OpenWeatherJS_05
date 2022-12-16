@@ -303,6 +303,36 @@
             },
             "additionalneeds" : "Breakfast, Dinner"
         }
+    },
+
+    "nadiaData": {
+        "create": {
+            "firstname": "Nadia",
+            "lastname": "QA",
+            "totalprice": 1000000,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-15",
+                "checkout": "2023-12-15"
+                },
+            "additionalneeds": "Seafood"
+        },
+
+        "update": {
+            "firstname": "Nadzeya",
+            "lastname": "QA",
+            "totalprice": 1500000,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2022-12-15",
+                "checkout": "2023-01-15"
+                },
+
+            "additionalneeds": "Halal"
+        },
+        
+        "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+
     }
 
 }
