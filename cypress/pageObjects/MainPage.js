@@ -82,7 +82,7 @@ class MainPage {
     }
 
     clickDifferentWeatherMenu() {
-        this.elements.getDifferentWeatherMenu().click({force: true});
+        this.elements.getDifferentWeatherMenu().click();
     }
 
     clickToggleTempretureDefault() {
