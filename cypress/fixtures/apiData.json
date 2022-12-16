@@ -202,15 +202,15 @@
     "timothyData": {
         "booking": {
             "getBooking": {
-                    "firstname": "Sally",
-                    "lastname": "Brown",
-                    "totalprice": 111,
-                    "depositpaid": true,
-                    "bookingdates": {
-                        "checkin": "2013-02-23",
-                        "checkout": "2014-10-23"
-                    },
-                    "additionalneeds": "Breakfast"
+                "firstname": "Sally",
+                "lastname": "Brown",
+                "totalprice": 111,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2013-02-23",
+                    "checkout": "2014-10-23"
+                },
+                "additionalneeds": "Breakfast"
             },
 
             "dataType": {
@@ -220,6 +220,40 @@
                 "depositpaid": "boolean",
                 "bookingdates": "object",
                 "additionalneeds": "string"
+            }
+        },
+        "createBooking": {
+            "createBookingValidBody": {
+                "firstname" : "Timothy",
+                "lastname" : "Huxx",
+                "totalprice" : 999,
+                "depositpaid" : true,
+                "bookingdates" : {
+                    "checkin" : "2022-01-01",
+                    "checkout" : "2022-12-31"
+                },
+                "additionalneeds" : "Three red M&Ms on the nightstand on the right side of the bed. NOT packaged, just three single M&Ms. One for me, one for my imaginary friend, and one to split if we get hungry late at night."
+            },
+            "createBookingNoFirstNameBody": {
+                
+                "lastname" : "Huxx",
+                "totalprice" : 999,
+                "depositpaid" : true,
+                "bookingdates" : {
+                    "checkin" : "2022-01-01",
+                    "checkout" : "2022-12-31"
+                },
+                "additionalneeds" : "Three red M&Ms on the nightstand on the right side of the bed. NOT packaged, just three single M&Ms. One for me, one for my imaginary friend, and one to split if we get hungry late at night."
+            },
+            "createBookingNoAdditionalneedsBody": {
+                "firstname" : "Timothy",
+                "lastname" : "Huxx",
+                "totalprice" : 999,
+                "depositpaid" : true,
+                "bookingdates" : {
+                    "checkin" : "2022-01-01",
+                    "checkout" : "2022-12-31"
+                }
             }
         }
     },
