@@ -170,12 +170,10 @@ describe("TimothyHuxxSpec ", () => {
         });
 
         it('Negative - No firstname passed in the request. Verify key isOkStatusCode is equal to false ', () => {
-            cy.log(createBookingNoFirstNameResponse)
             expect(createBookingNoFirstNameResponse.isOkStatusCode).to.be.false
         });
 
         it('Negative - No firstname passed in the request. Verify key body is equal to "Internal Server Error" ', () => {
-
             expect(createBookingNoFirstNameResponse.body).to.be.eq("Internal Server Error")
         });
 
