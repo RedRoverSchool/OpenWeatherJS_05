@@ -4,10 +4,12 @@
 import GuidePage from "../pageObjects/GuidePage.js";
 import Header from "../pageObjects/Header.js";
 import TopicPage from "../pageObjects/TopicPage.js";
+import MainPage from "../pageObjects/MainPage.js";
 
 const guidePage = new GuidePage();
 const header = new Header();
 const topicPage = new TopicPage();
+const mainPage = new MainPage();
 
 
 describe('Topic Page test suite', () => {
@@ -42,4 +44,13 @@ describe('Topic Page test suite', () => {
 
             topicPage.elements.getHeadlineGuide().should('contain', this.topic.headlineGuide);
         });
+
+        it('AT_051.002 | Main menu > API > Testing the "Home" link redirected to the Home page', function () {
+            header.clickApiMenuLink()
+           
+            topicPage.clickHomePageButton()
+    
+            mainPage.elements.getMainPageContent()
+                  .should('have.text', 'OpenWeather')
+        });   
 })

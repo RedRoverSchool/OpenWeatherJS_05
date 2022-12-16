@@ -4,7 +4,7 @@ import Header from "../pageObjects/Header";
 import MarketplacePage from "../pageObjects/MarketplacePage";
 import HistoricalWeatherDataByStatePage from "../pageObjects/HistoricalWeatherDataByStatePage";
 
-const heder = new Header();
+const header = new Header();
 const marketplace = new MarketplacePage();
 const historicalWeather = new HistoricalWeatherDataByStatePage();
 
@@ -19,7 +19,7 @@ describe ('historical wether page', function() {
     })
 
     it('AT_061.005 | Historical Weather Data by State > Verifying that each state has its own ZIP code and particular price', function() {
-        heder.clickMarketplaceMenuLink()
+        header.clickMarketplaceMenuLink()
         marketplace.clickHistoricalDataArchivesDocumentationLink()
         cy.url().should('contain', this.data.urn)
         historicalWeather.elements.getTitlePage().should('have.text', this.data.titlePage)
@@ -38,7 +38,50 @@ describe ('historical wether page', function() {
                 expect(arr[i][2]).to.eq(this.data.dataStates[i][2])
             })
         })
-    })              
+    })
+    
+    it('AT_061.007 | Historical Weather Data by State > Verify each state has an appropriate ZIP code', function() {
+        header.clickMarketplaceMenuLink()
+        marketplace.clickHistoricalDataArchivesDocumentationLink()
+
+        historicalWeather.elements.getDataStateTable().should('be.visible')
+
+        historicalWeather.elements.getDataState().then(($tableRow) => {
+            const statesAndZipCodeArray = $tableRow
+                .toArray()
+                .map(el => el.innerText.split('\t').slice(0,2))
+
+            statesAndZipCodeArray.forEach((el, i, arr) => {
+                expect(arr[i][0]).to.eq(this.data.dataStates[i][0])
+                expect(arr[i][1]).to.eq(this.data.dataStates[i][1])
+            })    
+        })
+    })
+
+    it('Verify zipCode state Alaska', function () {
+        header.clickMarketplaceMenuLink()
+        marketplace.clickHistoricalDataArchivesDocumentationLink()
+       
+        historicalWeather.elements.getFullListOfStates().each(($el,index,$list) => {
+            const text = $el.text().trim();
+            if(text == this.data.dataStates[1][0]){
+                historicalWeather.elements.getFullListOfStates().eq(index).next().then(function(zip) {
+                    const zipCode = zip.text().trim();
+                    expect(zipCode).to.equal(this.data.dataStates[1][1]);
+                });
+            }
+        })
+    })
+
+    it('AT_061.008 | Historical Weather Data by State > Verifying that each state has its own ZIP code and particular price', function() {
+        header.clickMarketplaceMenuLink()
+        marketplace.clickHistoricalDataArchivesDocumentationLink()
+            
+        historicalWeather.elements.getDataState().then(($el) => {
+            const dataStates = $el
+                .toArray()
+                .map(el => el.innerText.split('\t'))
+                expect(dataStates).to.deep.eq(this.data.dataStates)
+        })
+    })
 })
-
-

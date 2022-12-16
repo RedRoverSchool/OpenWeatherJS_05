@@ -8,7 +8,12 @@ class UserHomePage {
         getPasswordInput: () => cy.get('#password_form_password'),
         getConfirmPasswordInput: () => cy.get('#password_form_password_confirmation'),
         getChangePasswordButton: () => cy.get('input[value="Change Password"]'),
-        getNoticeSuccessPasswordChange: () => cy.get('.panel-green .panel-body')
+        getNoticeSuccessPasswordChange: () => cy.get('.panel-green .panel-body'),
+        getMyAccountDropDownMenu: () => cy.get('#user-dropdown'),
+        getVisibleDropDownMenu: () => cy.get('[class= "dropdown-menu dropdown-visible"]'),
+        getMyServicesOnDropDownMenu: () => cy.get('.dropdown-visible [href="/myservices"]'),
+        getMyProfileTabmenu: () => cy.get('#myTab a[href="/home"]'),
+
     }  
 
     clickBillingPlanLink() {
@@ -29,5 +34,16 @@ class UserHomePage {
         this.elements.getChangePasswordButton().click()
     }
 
+    clickMyAccountDropDownMenu() {
+        this.elements.getMyAccountDropDownMenu().click();
+    }
+
+    clickMyServicesOnDropDownMenu() {
+        this.elements.getMyServicesOnDropDownMenu().click();
+    }
+
+    clickMyProfileTabmenu() {
+		this.elements.getMyProfileTabmenu().click()
+	}
 }
 export default UserHomePage;

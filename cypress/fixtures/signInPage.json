@@ -34,6 +34,12 @@
     "newpassword": "12345678"
     },
 
+    "userProfileAJS": {
+      "userName": "Asia Tester",
+      "email": "test_group_2022@mail.ru",
+      "password": "abc2323.zksl20zm"
+    },
+
     "messageSuccessPasswordChange": "Password was changed successfully"
     
 }

@@ -27,6 +27,9 @@ describe('Marketplace page test suite', () => {
             cy.fixture('historicalWeatherDataByStatePage').then(data => {
                   this.historicalWeatherDataByStatePage = data;
             });
+            cy.fixture('historyBulksNew').then(data => {
+                  this.historyBulksNew = data;
+            });
             cy.visit('/');
       });
       
@@ -120,4 +123,47 @@ describe('Marketplace page test suite', () => {
                   expect(stringOfPriceNames).to.eql(this.historicalWeatherDataByStatePage.listOfPrices.join(' '));
             });
       });
-});
+
+      it('AT_010.003 | Marketplace > Verify link “History Forecast Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+            cy.url().should('eql', this.urls.MarketPage);        
+            
+            marketplacePage.clickHistoryForecastBulk();
+            cy.url().should('include', this.urls.historyForecastBulk);
+          });
+
+      it('AT_010.005 | Marketplace > Verify link “Historical Weather Data by State for all ZIP codes, USA” are clickable', function () {
+            header.clickMarketplaceMenuLink(); 
+            cy.url().should('eql', this.urls.MarketPage);
+      
+            marketplacePage.clickHistoricalWeatherData ()
+            cy.url().should('include', this.urls.historicalWeatherData);
+      });
+      
+      it('AT_010.002 | Marketplace > Verify link “History Bulk” are clickable', function () {
+            header.clickMarketplaceMenuLink();
+        
+            marketplacePage.clickHistoryBulkLink();
+            cy.url().should('eq', this.urls.placeOrderHistoryBulk);
+            historyBulksNew.elements.getHistoryBulksNewTitle().should('have.text', this.historyBulksNew.historyBulksNewTitle);
+      });
+      
+      it('AT_061.006 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verify that the price for each state is correct', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
+
+            historicalWeatherDataByStatePage.elements.getFullListOfPrices().then(($arrayOfPrice) => {
+                  const listOfPrice = $arrayOfPrice
+                        .toArray()
+                        .map(el => el.innerText);
+                        
+                  expect(listOfPrice).to.deep.eq(this.historicalWeatherDataByStatePage.listOfPrices);      
+            });
+      });
+
+      it('AT_009.009 | Main menu > Marketplace> Verifying that History bulk item is displayed', function () {
+            header.clickMarketplaceMenuLink();
+            marketplacePage.elements.getHistoryBulkLink().
+            should('contain', this.marketPlacePageData.h5HistoryBulk).and('be.visible')
+          }) 
+      });

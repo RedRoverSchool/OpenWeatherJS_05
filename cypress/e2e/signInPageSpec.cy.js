@@ -88,18 +88,6 @@ describe('SignIn test suit', () => {
     signInPage.elements.getAllert().should('have.text', this.data.signOutAllertMessage);
   })
   
-  it('AT_032.001 | Sign in > My profile Tab menu > Verify Password Change', function () {
-    header.clickSignInMenuLink()
-    signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
-
-    signInPage.passwordChange(this.data.userProfileLtByJS.newpassword)
-
-    signInPage.elements.getAllertMessage().should('have.text', this.data.messageSuccessPasswordChange)
-
-    header.clickUserDropDownMenu()
-    header.clickUserLogoutLink()
-  })
-
   it('AT_031.002 | Sign In > Account Dropdown Menu > Verify user is able to log out', function () {
     header.clickSignInMenuLink()
     signInPage.signIn(this.data.userProfileLtByJS.realEmail, this.data.userProfileLtByJS.password)
@@ -110,4 +98,12 @@ describe('SignIn test suit', () => {
     
     signInPage.elements.getAllertMessage().should('be.visible').and('have.text', this.data.signOutAllertMessage)
   })
+
+  it('AT_006.001 | Sign in > After successful sign in new window should display text "Signed in successfully."', function() {
+    header.clickSignInMenuLink();
+    cy.url().should('eq', this.data.signInUrlUsers)
+
+    signInPage.signInWithRememberMe(this.data.userProfileBugHunters.email, this.data.userProfileBugHunters.password)
+    signInPage.elements.getNoticeAfterSigned().should('have.text', 'Signed in successfully.')  
+  });
 });

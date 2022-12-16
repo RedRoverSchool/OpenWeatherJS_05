@@ -4,11 +4,15 @@ import UserPageBillingPlan from "../pageObjects/UserPageBillingPlan";
 import SignInPage from "../pageObjects/SignInPage";
 import Header from "../pageObjects/Header";
 import UserHomePage from "../pageObjects/UserHomePage";
+import BillingPlans from "../pageObjects/BillingPlansPage"
+import PricingPage from "../pageObjects/PricingPage"
 
 const userPageBillingPlan = new UserPageBillingPlan()
 const signInPage = new SignInPage();
 const header = new Header();
 const userHomePage = new UserHomePage();
+const billingPlans = new BillingPlans();
+const pricingPage = new PricingPage();
 
 describe('User Page Billing plans suite', () => {
 
@@ -23,7 +27,7 @@ describe('User Page Billing plans suite', () => {
             cy.visit('/');
     });
 
-    it('AT_048.004 | User page > Billing plans > Verify that after the user clicks on the link "One Call by Call" subscription plan" open a new page url.', function() {
+    it('AT_048.004 | User page > Billing plans > Verify that link "One Call by Call" subscription plan" open a new page url.', function() {
       
         header.clickSignInMenuLink()
         signInPage.signIn(this.data.userProfile.email, this.data.userProfile.password)
@@ -37,7 +41,7 @@ describe('User Page Billing plans suite', () => {
         .should('be.visible')
     userPageBillingPlan.clickOneCallByCallLink()
 
-    userPageBillingPlan.elements.getTitle()
+    pricingPage.elements.getTitle()
         .should('be.visible')
         .and('have.text', this.data.titleText)
 
@@ -56,4 +60,24 @@ describe('User Page Billing plans suite', () => {
         userPageBillingPlan.elements.getTitle().should('contain', this.data.titleText);
 
     });
+
+    it('AT_048.005 | User page > Billing plans > Verify information about billing plans is available', function(){
+        let nameAndPrice = 'b';
+        header.clickSignInMenuLink();
+        signInPage.signIn(this.login.userProfileAJS.email, this.login.userProfileAJS.password);
+        
+        userHomePage.elements.getVisibleDropDownMenu().should('not.exist');
+        userHomePage.clickMyAccountDropDownMenu();
+        userHomePage.elements.getVisibleDropDownMenu().should('exist');
+        userHomePage.clickMyServicesOnDropDownMenu();
+        userHomePage.clickBillingPlanLink();
+        billingPlans.elements.getAllBillingPlansTables().each(($el,i) => {
+            cy.wrap($el).find(nameAndPrice).then((tables) => {
+                let currentTable = tables.toArray().map(el => el.innerText)
+
+                expect(currentTable).to.deep.eql(this.data.billingPlansTables[i])
+            });
+        });
+    });
+
 });
