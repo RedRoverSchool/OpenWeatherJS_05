@@ -71,7 +71,8 @@ describe("API testing with Cypress", () => {
 
         it("verify that depositpaid is true", () => {
             createResponse().then((response) => {
-                expect(response.body.booking.depositpaid).to.eq(true);
+                expect(response.body.booking.depositpaid)
+                .to.eq(true);
             });
         });
 
