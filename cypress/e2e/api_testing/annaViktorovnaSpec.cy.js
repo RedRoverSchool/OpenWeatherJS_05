@@ -3,7 +3,8 @@
 const API_BASE_URL = Cypress.env("apiBaseUrl");
 const apiData = require("../../fixtures/apiData.json");
 const VALIDATE_DATE = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-let CREATE_ID 
+let CREATE_ID;
+let TOKEN;
 
 describe("API testing with Cypress", () => {
     describe("Get BookingIds", () => {
@@ -16,28 +17,24 @@ describe("API testing with Cypress", () => {
         it("verify response has headers", () => {
             getResponse().then((response) => {
                 console.log(response);
-                expect(response).to.have.property("headers")
-                .to.not.be.empty
+                expect(response).to.have.property("headers").to.not.be.empty;
             });
         });
 
         it("verify response has status 200", () => {
-            getResponse().its("status")
-            .should("be.eq", 200);
+            getResponse().its("status").should("be.eq", 200);
         });
 
         it("verify response body has BookingId", () => {
             getResponse()
                 .its("body")
                 .then((response) => {
-                    expect(response[0])
-                    .to.have.property("bookingid")
+                    expect(response[0]).to.have.property("bookingid");
                 });
         });
 
         it("verify response body ia array", () => {
-            getResponse().its("body")
-            .should("be.an", "array");
+            getResponse().its("body").should("be.an", "array");
         });
     });
 
@@ -65,7 +62,7 @@ describe("API testing with Cypress", () => {
             createResponse().then((response) => {
                 expect(response.body.booking.totalprice)
                     .to.be.a("number")
-                    .to.be.equal(111)
+                    .to.be.equal(111);
             });
         });
 
@@ -89,10 +86,9 @@ describe("API testing with Cypress", () => {
         });
 
         it("verify response has new booking id", () => {
-            createResponse()
-            .then(response => {
-                expect(response.status).to.equal(200)
-                CREATE_ID = response.body.bookingid
+            createResponse().then((response) => {
+                expect(response.status).to.equal(200);
+                CREATE_ID = response.body.bookingid;
             });
         });
 
@@ -105,6 +101,12 @@ describe("API testing with Cypress", () => {
         it("verify that depositpaid is true", () => {
             createResponse().then((response) => {
                 expect(response.body.booking.depositpaid).to.eq(true);
+            });
+        });
+
+        it("verify that depositpaid is an object", () => {
+            createResponse().then((response) => {
+                expect(response.body.booking.bookingdates).to.be.a("object");
             });
         });
 
@@ -123,8 +125,7 @@ describe("API testing with Cypress", () => {
         });
 
         it("verify date checkin early then checkout", () => {
-            createResponse()
-            .then(({ body }) => {
+            createResponse().then(({ body }) => {
                 expect(new Date(body.booking.bookingdates.checkout))
                 .to.be.above(new Date(body.booking.bookingdates.checkin));
             });
@@ -134,6 +135,78 @@ describe("API testing with Cypress", () => {
             createResponse().then((response) => {
                 expect(response.body.booking.depositpaid)
                 .to.be.a(apiData.typeBoolean);
+            });
+        });
+
+    describe("UpdateBooking", () => {
+        const updateBooking = () =>
+            cy.request({
+                method: "PUT",
+                url: `${API_BASE_URL}/booking/${CREATE_ID}`,
+                headers: {
+                    Cookie: `token=${TOKEN}`,
+                    Authorization: "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+                    },
+                body: {
+                    firstname: "James",
+                    lastname: "Brown",
+                    totalprice: 111,
+                    depositpaid: true,
+                    bookingdates: {
+                        checkin: "2018-01-01",
+                        checkout: "2019-01-01",
+                        },
+                    additionalneeds: "Breakfast",
+                    },
+        });
+
+        it("verify depositpaid has status 200", () => {
+            updateBooking().then((response) => {
+                expect(response.status).to.equal(200);
+            });
+        });
+
+
+        it("verify additionalneeds is equal breakfast", () => {
+            updateBooking().then((response) => {
+                    expect(response.body.additionalneeds).to.eq("Breakfast");
+                });
+            });
+
+        it("verify update booking has keys", () => {
+            updateBooking()
+                .its("body")
+                .then((response) => {
+            expect(response).to.have.any.keys(
+                    "firstname",
+                    "lastname",
+                    "additionalneeds",
+                    "depositpaid"
+                );
+            });
+
+        const deleteBooking = () =>
+            cy.request({
+                method: "DELETE",
+                url: `${API_BASE_URL}/booking/${CREATE_ID}`,
+                headers: {
+                    "Content-Type": "application/json",
+                Authorization: "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+                Cookie: `token=${TOKEN}`,
+                        },
+            });
+
+        it("verify response message is created", () => {
+            deleteBooking().then(({ body }) => {
+                expect(body).to.eq("Created");
+                    });
+                });
+
+        it("verify delete status 201", () => {
+            deleteBooking().then((response) => {
+                expect(response.status).to.equal(201);
+                    });
+                });
             });
         });
     });
