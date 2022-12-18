@@ -98,7 +98,9 @@ describe('User Home Page suite', () => {
         cy.url().should('be.equal', this.data.myProfileURL)
         userHomePage.changePassword(this.signIn.userProfileBugHunters.password, this.signIn.userProfileBugHunters.newPassword)
         
-        userHomePage.elements.getNoticeSuccessPasswordChange().should('be.visible').and('have.text', this.data.noticeSuccessPasswordChange)
+        userHomePage.elements.getNoticeSuccessPasswordChange()
+            .should('be.visible')
+            .and('have.text', this.data.noticeSuccessPasswordChange)
     })
 
     it('AT_020.001 | Sign in > Dropdown menu > Verify dropdown menu options', function () {
