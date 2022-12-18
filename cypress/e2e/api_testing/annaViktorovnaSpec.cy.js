@@ -36,8 +36,7 @@ describe("API testing with Cypress", () => {
         });
 
         it("verify response body ia array", () => {
-            getResponse().its("body")
-            .should("be.an", "array");
+            getResponse().its("body").should("be.an", "array");
         });
     });
 
