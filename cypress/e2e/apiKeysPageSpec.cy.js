@@ -49,7 +49,7 @@ describe('API keys', () => {
         header.clickUserDropDownMenu()
         header.clickMyApiKyesLink()
         cy.url().should('include', this.data.urn)
-        apiKeys.elements.getAPIkyes().should('have.length', 1)
+        apiKeys.elements.getAPIkyes().should('have.length', 3)
         apiKeys.elements.getNamesAPIkeys().should('have.text', this.data.keyNames.defaultNameKey)
         apiKeys.elements.getCreateKeyField().type(this.data.keyNames.newNameKey)
         apiKeys.clickGenerateButton()
