@@ -70,7 +70,7 @@ describe('API keys', () => {
             .and('include.text', this.data.EditedKeyNotice.shortNotice)
             .and('be.visible')
 
-        //delete renamed API key 
+        //delete renamed API  key 
         apiKeys.actionWithKey(this.data.keyNames.renameKey, apiKeys.locators.DeleteKeysButton)
     })
 
