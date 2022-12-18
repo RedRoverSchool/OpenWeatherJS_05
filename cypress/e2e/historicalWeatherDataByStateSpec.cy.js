@@ -84,4 +84,18 @@ describe ('historical wether page', function() {
                 expect(dataStates).to.deep.eq(this.data.dataStates)
         })
     })
+
+    it ('AT_061.009 | Historical Weather Data by State > Verify that the table "List of states, ZIP codes and price" has all 50 states and Washington DC; their names are in alphabetic order.', function () {
+        header.clickMarketplaceMenuLink();
+        marketplace.clickHistoricalDataArchivesDocumentationLink();
+
+        historicalWeather.elements.getFullListOfStates().then(($data) => {
+            const stateNameData = $data
+            .toArray()
+            .map(el => el.innerText)
+            console.log(stateNameData);
+            expect(stateNameData.length).to.equal(this.data.listOfStatesInAlphabeticalOrder.length);
+            expect(stateNameData).to.deep.eq(this.data.listOfStatesInAlphabeticalOrder);
+        })
+    })
 })
