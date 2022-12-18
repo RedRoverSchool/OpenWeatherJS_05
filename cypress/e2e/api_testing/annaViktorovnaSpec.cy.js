@@ -107,7 +107,8 @@ describe("API testing with Cypress", () => {
 
         it("verify that depositpaid is an object", () => {
             createResponse().then((response) => {
-                expect(response.body.booking.bookingdates).to.be.a("object");
+                expect(response.body.booking.bookingdates)
+                .to.be.a("object");
             });
         });
 
