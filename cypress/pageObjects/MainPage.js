@@ -24,11 +24,21 @@ class MainPage {
         getWeatherIcon: () => cy.get('div.current-temp .owm-weather-icon'),
         getToggleMetric: () => cy.get('#selected[style="left: 2pt;"]'),
         getTemperatureHeading: () => cy.get('div.current-temp .heading'),
-        getDifferentWeatherMenu: () => cy.get('#weather-widget span.owm-switch'),
         getFullConvertToDegreesCelsius: () => cy.get('#selected').filter(':not(".slideLeft")'),
         getFullConvertToDegreesFahrenheit: () => cy.get('#selected').filter(':not(".slideRight")'),
         getSearchNotFoundMessage: () => cy.get('.sub.not-found'),
-        getSearchNotFoundWidgetNotification: () => cy.get('div.widget-notification')
+        getSearchNotFoundWidgetNotification: () => cy.get('div.widget-notification'),
+        getDifferentWeatherMenu: () => cy.get('#weather-widget span.owm-switch'),
+        getDifferentWeatherPopup: () => cy.get('div.pop-up-container'),
+        getDifferentWeatherIcons: () => cy.get('ul.icons span'),
+        getDifferentWeatherMoreOptionsBtn: () => cy.get('div.more-options'),
+        getDifferentWeatherWindStrongBtn: () => cy.get('#strong'),
+        getDiffWeathDataSourseDropdown: () => cy.get('.dropdown-selector svg.icon-down'),
+        getDifferentWeatherDataSourseItem: () => cy.get('div.menu-item span'),
+        getDifferentWeatherTemperatureField: () => cy.get('[type="number"]'),
+        getDifferentWeatherEmail: () => cy.get('input[type="email"]'),
+        getDifferentWeatherAddInfo: () => cy.get('.owm_textarea'),
+        getDifferentWeatherSendBtn: () => cy.get('.pop-up-footer .button-round'),
     }
 
     clickSearchBtn() {
@@ -81,6 +91,39 @@ class MainPage {
 
     clickToggleTempreture() {
         this.elements.getToggleTempreture().click()
+    }
+
+    clickDifferentWeatherIcon (iconText) {
+        this.elements.getDifferentWeatherIcons().contains(iconText).click()
+    }
+
+    clickDifferentWeatherMoreOptionsBtn() {
+        this.elements.getDifferentWeatherMoreOptionsBtn().click()
+    }
+
+    checkDifferentWeatherWindStrong() {
+        this.elements.getDifferentWeatherWindStrongBtn().check({force: true})
+    }
+
+    selectItemDiffWeathDataSourseDropdown(itemText) {
+        this.elements.getDiffWeathDataSourseDropdown().click()
+        this.elements.getDifferentWeatherDataSourseItem().contains(itemText).click()
+    }
+
+    clickDifferentWeatherSendBtn() {
+        this.elements.getDifferentWeatherSendBtn().click()
+    }
+
+    fillDifferentWeatherTemperatureField(temperature) {
+        this.elements.getDifferentWeatherTemperatureField().clear().type(temperature)
+    }
+
+    fillDifferentWeatherEmail(email) {
+        this.elements.getDifferentWeatherEmail().type(email)
+    }
+
+    fillDifferentWeatherAddInfo(additionalInfo) {
+        this.elements.getDifferentWeatherAddInfo().type(additionalInfo)
     }
 }
 
