@@ -3,5 +3,26 @@
     "weatherFilter": "WEATHER",
     "postsQuantity": 10,
     "postsLink": "https://openweather.co.uk/blog/post/",
-    "postCategoryNameArray": ["ALL", "WEATHER", "AGRO", "PLATFORM", "TECHNOLOGIES", "TEAM&COMPANY"]
+    "postCategoryNameArray": ["ALL", "WEATHER", "AGRO", "PLATFORM", "TECHNOLOGIES", "TEAM&COMPANY"],
+    "urlPostsWeather": ["post/how-circular-economy-can-tackle-todays-global-challenges", 
+    "post/climate-change-are-there-causes-optimism", 
+    "how-our-cities-are-creating-sustainable-and-healthy-human-environment", 
+    "post/how-our-cities-are-becoming-more-sustainable", 
+    "post/growing-world-urban-agriculture", 
+    "post/road-new-thinking-transport-power", 
+    "post/race-create-super-crops", 
+    "post/strategy-climate-change-part-2", 
+    "post/strategy-climate-change", 
+    "post/dawn-new-climate"],
+    "weatherPostsTextOnNewpPage": [
+    "How the Circular Economy Can Tackle Today’s Global Challenges", 
+    "Climate Change - Are there causes for optimism?", "How our cities are creating a sustainable and healthy human environment.", 
+    "How Our Cities Are Becoming More Sustainable", 
+    "The Growing World of Urban Agriculture", 
+    "The Road to a New Thinking in Transport Power", 
+    "The Race to Create Super-Crops", 
+    "The Strategy of Climate Change - part 2", 
+    "The Strategy of Climate Change", 
+    "The Dawn of a new Climate"
+    ]
 }

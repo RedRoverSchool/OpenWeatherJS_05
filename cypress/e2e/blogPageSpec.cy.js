@@ -35,19 +35,10 @@ describe('Blog page test suite', () => {
         blogPage.elements.getAllPosts().should('have.length', this.data.postsQuantity);
     });
 
-    it('AT_013.009 | Blog > Weather > All posts links are clickable and redirect a user to the posts in a new page', () => {
+    it('AT_013.009 | Blog > Weather > All posts links are clickable and redirect a user to the posts in a new page', function () {
         header.clickBlogMenuLink();
 
-        blogPage.elements.getAllPosts().each((el, i) => {
-            blogPage.elements.getAllPostsLinks()
-                .eq(i)
-                .invoke('attr', 'href').then((endpoint) => {
-                    cy.request(endpoint).then(($response) => {
-
-                        cy.wrap($response).its('status').should('eq', 200);
-                    });
-                });
-        });
+            blogPage.clickAndRedirectingAllPosts(this.data.urlPostsWeather, this.data.weatherPostsTextOnNewpPage);
     });
 
     it('AT_013.006 | Blog > Weather > Verify that after clicking the Blog menu a user is redirected to the blog page', function () {
