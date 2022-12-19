@@ -185,4 +185,10 @@ describe("TimothyHuxxSpec ", () => {
             expect(createBookingNoAdditionalneedsResponse.body.booking).to.be.eql(apiData.timothyData.createBooking.createBookingNoAdditionalneedsBody)
         });
     })
+
+    describe('Special test', () => {
+        it(" Try to solve me", () => {
+            expect("SOLVE THIS => ").to.be.eq("https://jsbin.com/gowajuvabo/edit?js,console")
+        })
+    });
 })
