@@ -8,6 +8,21 @@
     },
 
 "titleText": "Pricing",
-"billingPlansTables":[["Base plan","0.15 USD"], ["Free plan","Free","Startup plan","40 USD","Developer plan","180 USD","Professional plan","470 USD","Enterprise plan","2000 USD"], ["Starter plan","150 USD","Medium plan","950 USD"]]
+"billingPlansTables":[
+    [
+        ["Base plan","2,000","0.15 USD per 100 calls","Subscribe"]
+    ], 
+[
+    ["Free plan","60","Free","Default"], 
+    ["Startup plan","600","40 USD","Subscribe"], 
+    ["Developer plan","3,000","180 USD","Subscribe"],
+    ["Professional plan","30,000","470 USD","Subscribe"],
+    ["Enterprise plan","200,000","2000 USD","Subscribe"]
+],
+[
+    ["Starter plan","5,000","150 USD","Subscribe"],
+    ["Medium plan","50,000","950 USD","Subscribe"]
+    ]
+]
 
 }
