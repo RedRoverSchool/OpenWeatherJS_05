@@ -10,9 +10,9 @@ class BlogPage {
         getTechnologiesLink: () => cy.get('a[href="/blog/category/technologies"]'),
         getTeamAndCompanyLink: () => cy.get('a[href="/blog/category/teamandcompany"]'),
     }
-     
+
     clickFirstPostsLink() {
-        this.elements.getFirstPostsLink().click({force: true})
+        this.elements.getFirstPostsLink().click({ force: true })
     }
 
     clickAgroLink() {
@@ -29,6 +29,15 @@ class BlogPage {
 
     clickTeamAndCompanyLink() {
         this.elements.getTeamAndCompanyLink().click();
+    }
+
+    clickAndRedirectingAllPosts(url, textOnPage) {
+        this.elements.getAllPostsLinks().each((el, i) => {
+            this.elements.getAllPostsLinks().eq(i).click();
+            cy.url().should('include', url[i]);
+            cy.get('h1').should('have.text', textOnPage[i]);
+            cy.go(-1);
+        });
     }
 }
 export default BlogPage;
