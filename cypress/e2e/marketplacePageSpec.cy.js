@@ -97,19 +97,6 @@ describe('Marketplace page test suite', () => {
             });
       });
 
-      it('AT_061.003 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verify sorted by names', function () {
-            let statesArr = Array();
-            header.clickMarketplaceMenuLink();
-            marketplacePage.clickHistoricalDataArchivesDocumentationLink();
-    
-            historyBulksNew.elements.getAllStateNames().then((list) => {
-                    statesArr = list.toArray().map(el => el.innerText)
-                    let sortStates = [...statesArr].sort((a, b) => a.localeCompare(b))
-    
-                    expect(JSON.stringify(sortStates)).to.eql(JSON.stringify(statesArr))
-            });
-        });
-
       it('AT_061.004 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verifying price for any state is correct', function () {
             header.clickMarketplaceMenuLink();
             marketplacePage.clickHistoricalDataArchivesDocumentationLink();
