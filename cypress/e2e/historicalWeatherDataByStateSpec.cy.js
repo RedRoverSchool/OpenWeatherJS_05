@@ -85,6 +85,19 @@ describe ('historical wether page', function() {
         })
     })
 
+    it('AT_061.003 | Marketplace > Historical Data Archives > Historical Weather Data by State > Verify sorted by names', function () {
+        let currentStatesArr = Array();
+        header.clickMarketplaceMenuLink();
+        marketplace.clickHistoricalDataArchivesDocumentationLink();
+
+        historicalWeather.elements.getFullListOfStates().then((list) => {
+              currentStatesArr = list.toArray().map(el => el.innerText)
+                let sortedByNames = [...currentStatesArr].sort((a, b) => a.localeCompare(b))
+
+                expect(currentStatesArr).to.deep.eql(sortedByNames)
+        });
+    });
+
     it ('AT_061.009 | Historical Weather Data by State > Verify that the table "List of states, ZIP codes and price" has all 50 states and Washington DC; their names are in alphabetic order.', function () {
         header.clickMarketplaceMenuLink();
         marketplace.clickHistoricalDataArchivesDocumentationLink();
