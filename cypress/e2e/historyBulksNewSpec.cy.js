@@ -23,6 +23,7 @@ describe('HistoryBulksNewPage page test suite', () => {
         header.clickMarketplaceMenuLink()
         marketplacePage.clickHistoryBulkLink();
 
+        historyBulksNew.elements.getMessageNoLocations().should("be.visible");
         historyBulksNew.clickOnSearchField();
         historyBulksNew.waitForSearchPopUpAppear();
         historyBulksNew.clickOnImportOnSearchPopUp();

@@ -9,7 +9,7 @@ class HistoryBulksNewPage {
         getImportCSVfileButton: () => cy.get('div.import-block button'),
         getHiddenInputFile: () => cy.get('#importCSV'),
         getLocationsName: () => cy.get('.material-table tbody tr td:nth-child(2)'),
-
+        getMessageNoLocations: () => cy.get('.location-table table tbody tr td'),
     }
 
 

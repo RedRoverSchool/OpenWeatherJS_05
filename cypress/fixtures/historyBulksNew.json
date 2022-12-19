@@ -1,4 +1,5 @@
 {
   "historyBulksNewTitle": "Create New History Bulk",
-  "locationCityNames" : ["Riga","Vilnius","Baghdad"]
+  "locationCityNames" : ["Riga","Vilnius","Baghdad"],
+  "messageNoLocations" : "No selected locations."
 }
