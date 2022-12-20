@@ -186,3 +186,21 @@ describe('API Test Suit', () => {
         });
     });
 });
+
+let temp
+describe('Testing UI with API requests', () => {
+    it('Verify temperature on UI and API are equal', () => {
+        cy.request('https://openweathermap.org/data/2.5/onecall?lat=39.5145&lon=-76.4111&units=metric&appid=439d4b804bc8187953eb36d2a8c26a02')
+        .then(({ body }) => {
+            temp = Math.round(body.current.temp)
+
+                cy.visit('https://openweathermap.org')
+                cy.get('.section-content .heading')
+                .then($el => {
+                    let accualTemp = parseInt($el.text())
+                    expect(temp).to.be.eq(accualTemp)
+                })
+            cy.log(temp)
+        })
+    });
+});
