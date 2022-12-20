@@ -7,7 +7,7 @@ let CREATED_ID
 let CREATED_TOKEN
 
 
-describe.only('NinaPrud API tests Cypress', () => {
+describe('NinaPrud API tests Cypress', () => {
 
     describe('Create Token', () => {
 
@@ -15,13 +15,8 @@ describe.only('NinaPrud API tests Cypress', () => {
             cy.request({
                 method: 'POST',
                 url: `${API_BASE_URL}/auth`,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    "username": "admin",
-                    "password": "password123"
-                }
+                headers: apiData.headersContentType,
+                body: apiData.admin
             });
 
         it('verify created token', () => {
@@ -31,7 +26,6 @@ describe.only('NinaPrud API tests Cypress', () => {
                     CREATED_TOKEN = body.token
                     console.log(`Token is ${CREATED_TOKEN}`)
                 });
-
         });
     });
 
@@ -41,17 +35,8 @@ describe.only('NinaPrud API tests Cypress', () => {
             cy.request({
                 method: 'POST',
                 url: `${API_BASE_URL}/booking`,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    "firstname": apiData.firstname,
-                    "lastname": apiData.lastname,
-                    "totalprice": apiData.totalprice,
-                    "depositpaid": apiData.depositpaid,
-                    "bookingdates": apiData.bookingdates,
-                    "additionalneeds": apiData.additionalneeds
-                }
+                headers: apiData.headersContentType,
+                body: apiData.bodyCreateBooking
             });
 
         it('verify response has key bookingid', () => {
@@ -101,7 +86,6 @@ describe.only('NinaPrud API tests Cypress', () => {
                 .then(({ body }) => {
                     expect(body.totalprice).to.be.a('number')
                 })
-
         });
     });
 
@@ -123,7 +107,6 @@ describe.only('NinaPrud API tests Cypress', () => {
                     expect(response.status).to.eq(201)
                     console.log('Created booking is delete')
                 })
-
         });
 
         it('verify booking is delete', () => {
@@ -135,7 +118,5 @@ describe.only('NinaPrud API tests Cypress', () => {
                 expect(status).to.eq(404)
             })
         });
-
     });
-
 });
