@@ -163,9 +163,9 @@ describe("OlgaForostinkoSpec", () => {
                 expect(body.firstname).to.eq(API_DATA.bodyCreateBooking.firstname)
             })    
         })
-//не работает разобраться
-        it.skip('Verify checkout', () => {
-            createBooking().then(({ body }) =>{
+
+        it('Verify checkout', () => {
+            createdBooking().then(({ body }) =>{
                 expect(body.bookingdates.checkout).to.eq(API_DATA.bodyCreateBooking.bookingdates.checkout)
             })    
         })
@@ -219,6 +219,21 @@ describe("OlgaForostinkoSpec", () => {
             })    
         })
     })
+
+    describe('7. Ping - HealthCheck', () => {
+
+        const getResponceOfServer = () => 
+            cy.request({
+                method: "GET",
+                url: `${API_BASE_URL}/ping`
+            })
+
+        it('Verify that server response with ping', () => {
+            getResponceOfServer().then(({ status }) => {
+                expect(status).to.eq(201)
+            })   
+        })    
+    });
 })
     })
 })
