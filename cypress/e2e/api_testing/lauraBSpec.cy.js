@@ -4,6 +4,8 @@ const API_BASE_URL = Cypress.env('apiBaseUrl')
 const API_DATA = require('../../fixtures/apiData.json')
 let CREATED_ID
 let CREATED_TOKEN 
+let CREATED_NEW_ID
+let CREATED_NEW_TOKEN
 
 describe("lauraBSpec", () => {
 
@@ -235,6 +237,21 @@ describe("lauraBSpec", () => {
             .then(response => {
                 expect(response.status).to.equal(200)
             })
+        })
+    })
+  
+    describe('get server response with ping', () => {
+        
+        const getResponseOfServer = () => 
+            cy.request({
+                method: "GET",
+                url: `${API_BASE_URL}/ping`
+            })
+
+        it('verify server response with ping', () => {
+            getResponseOfServer()
+            .its('status')
+            .should('be.eq', 201)
         })
     })
 })

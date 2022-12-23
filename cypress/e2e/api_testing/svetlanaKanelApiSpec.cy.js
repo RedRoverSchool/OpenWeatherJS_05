@@ -59,7 +59,7 @@ describe("svetlanaKanelApiSpec", function () {
                 "Accept": "application/json",
                 "Cookie": `token=${CREATED_TOKEN}`
             },
-            body: {"additionalneeds": "get Offer" }           
+            body: bookingData.lapData.patchUpdate           
         })
      
 

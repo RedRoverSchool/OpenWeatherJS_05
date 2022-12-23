@@ -281,30 +281,7 @@
             "additionalneeds": "Breakfast, car rental"
         }
     },
-    "illiaData": {
-        "createBooking": {
-            "firstname": "Harry",
-            "lastname": "Potter",
-            "totalprice": 999,
-            "depositpaid": true,
-            "bookingdates": {
-                "checkin": "2018-01-01",
-                "checkout": "2019-01-01"
-            },
-            "additionalneeds": "Dinner"
-        },
-        "updateBooking": {
-            "firstname": "Carlos",
-            "lastname": "Jameson",
-            "totalprice": 777,
-            "depositpaid": true,
-            "bookingdates": {
-                "checkin": "2022-01-01",
-                "checkout": "2023-01-01"
-            },
-            "additionalneeds": 100
-        }, 
-        "token": "token", 
+ 
 
     "headersAccept": {
         "Accept": "application/json"
@@ -314,6 +291,31 @@
         "Content-Type": "application/json",
         "Accept": "application/json", 
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
+        },
+
+    "illiaData": {
+            "createBooking": {
+                "firstname": "Harry",
+                "lastname": "Potter",
+                "totalprice": 999,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2018-01-01",
+                    "checkout": "2019-01-01"
+                },
+                "additionalneeds": "Dinner"
+            },
+            "updateBooking": {
+                "firstname": "Carlos",
+                "lastname": "Jameson",
+                "totalprice": 777,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2022-01-01",
+                    "checkout": "2023-01-01"
+                },
+                "additionalneeds": 100
+            }, 
+            "token": "token"
+        }
     }
-  }
-}

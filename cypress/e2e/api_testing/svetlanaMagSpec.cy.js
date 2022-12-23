@@ -45,6 +45,18 @@ describe('svetlanaMagSpec', () => {
             body: API_DATA.updateBookingInfo
         })
 
+    const partialUpdateBooking = () =>
+        cy.request({
+            method: "PATCH",
+            url: `${API_BASE_URL}/booking/${CREATED_BOOKINGID}`,
+            headers:{
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Cookie": `token=${TOKEN}`
+            },
+            body: API_DATA.lapData.patchUpdate
+        })
+
     const deleteBooking = () =>
         cy.request({
             method: "DELETE",
@@ -89,7 +101,7 @@ describe('svetlanaMagSpec', () => {
 
         it('Verify response has key bookingid', () => {
             createBooking()
-            .then(({body}) => {
+            .then(({ body }) => {
                 expect(body).to.have.any.keys('bookingid')
                 CREATED_BOOKINGID = body.bookingid
                 console.log('CREATED_BOOKINGID = ', CREATED_BOOKINGID)
@@ -109,32 +121,40 @@ describe('svetlanaMagSpec', () => {
 
         it('Verify status', () => {
             getCreatedBooking()
-            .then(({status}) => {
+            .then(({ status }) => {
                 expect(status).to.equal(200)
             })
         });
 
         it('Verify last name', () => {
             getCreatedBooking()
-            .then(({body}) => {
+            .then(({ body }) => {
                 expect(body.lastname).to.equal(API_DATA.bodyCreateBooking.lastname)
             })
         });
 
-        it('Verify checkin date', () =>{
+        it('Verify checkin date', () => {
             getCreatedBooking()
-            .then(({body}) => {
+            .then(({ body }) => {
                 expect(body.bookingdates.checkin).to.equal(API_DATA.bodyCreateBooking.bookingdates.checkin)
             })
         });
 
-        it('Verify keys in created booking', () =>{
+        it('Verify bodykeys in created booking', () => {
             getCreatedBooking()
-            .then(({body}) => {
+            .then(({ body }) => {
                 let responseBodyKeysArray = Object.keys(body)
                 responseBodyKeysArray.forEach((el,i,arr) => {
                     expect(arr[i]).to.equal(API_DATA.arrOfBodyKeys[i])
                 })
+            })
+        });
+
+        it('Verify headers in created booking', () => {
+            getCreatedBooking()
+            .then(({ headers }) => {
+                let responseHeadersKeysArray = Object.keys(headers)
+                expect(responseHeadersKeysArray).to.deep.eq(API_DATA.arrOfHeadersKeys)
             })
         });
     });
@@ -143,7 +163,7 @@ describe('svetlanaMagSpec', () => {
 
         it('Verify token is created', () => {
             createToken()
-            .then(({body}) => {
+            .then(({ body }) => {
                 expect(body).to.have.key('token')
                 TOKEN = body.token
             })
@@ -154,17 +174,35 @@ describe('svetlanaMagSpec', () => {
   
         it('Verify status booking updates', () => {
             updateBooking()
-            .then(({status}) => {
+            .then(({ status }) => {
                 expect(status).to.equal(200)
             })
         });
 
         it('Verify lastname is updated', () => {
             getCreatedBooking()
-            .then(({body}) => {
+            .then(({ body }) => {
                 expect(body.lastname).to.equal(API_DATA.updateBookingInfo.lastname)
             })
         });
+    });
+
+    describe('Partial update booking', () => {
+
+        it('Verify status', () => {
+            partialUpdateBooking()
+            .then(({ status }) => {
+                expect(status).to.eq(200)
+            })
+        });
+
+        it('Verify updated data and its type', () => {
+            partialUpdateBooking()
+            .then(({ body }) => {
+                expect(body.additionalneeds).to.be.a('string')
+                expect(body.additionalneeds).to.equal(API_DATA.lapData.patchUpdate.additionalneeds)
+            })
+        });    
     });
 
     describe('Delete booking', () => {
@@ -184,6 +222,7 @@ describe('svetlanaMagSpec', () => {
             })
             .then(response => {
                 expect(response.status).to.equal(404)
+                expect(response.body).contains('Not Found')
             })
         })
     });

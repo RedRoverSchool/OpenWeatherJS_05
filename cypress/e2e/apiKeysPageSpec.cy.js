@@ -43,7 +43,7 @@ describe('API keys', () => {
         apiKeys.actionWithKey(this.data.keyNames.newNameKey, apiKeys.locators.DeleteKeysButton)     
     })
 
-    it('AT_056.002 | My API keys > Managing API keys> Rename an API key', function() {
+    it.skip('AT_056.002 | My API keys > Managing API keys> Rename an API key', function() {
         header.clickSignInMenuLink()
         signInPage.signIn(this.data.userDataRenameKey.login, this.data.userDataRenameKey.password)
         header.clickUserDropDownMenu()
@@ -70,7 +70,7 @@ describe('API keys', () => {
             .and('include.text', this.data.EditedKeyNotice.shortNotice)
             .and('be.visible')
 
-        //delete renamed API key 
+        //delete renamed API  key 
         apiKeys.actionWithKey(this.data.keyNames.renameKey, apiKeys.locators.DeleteKeysButton)
     })
 

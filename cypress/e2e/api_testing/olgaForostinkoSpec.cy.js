@@ -79,7 +79,7 @@ describe("OlgaForostinkoSpec", () => {
                 })
         })
 
-    describe('Create, create token, verify, update, partial, delete', () => {
+    describe('Create, create token, verify, update, partial', () => {
 
         const createToken = () => 
         cy.request({
@@ -123,7 +123,7 @@ describe("OlgaForostinkoSpec", () => {
             body: API_DATA.romData.partialUpdate
         })
     
-    describe('Auth - Create Token', () => {
+    describe('1. Auth - Create Token', () => {
 
         it('Verify token is created', () => {
             createToken().then(({ body }) => {
@@ -133,7 +133,7 @@ describe("OlgaForostinkoSpec", () => {
         });       
     })
 
-    describe('Create booking', () => {
+    describe('2. Create booking', () => {
         
         it('Verify status is created', () => {
             createBooking().then(({ status }) => {
@@ -150,7 +150,7 @@ describe("OlgaForostinkoSpec", () => {
                 })
         })
 
-    describe('Verify created booking', () => {
+    describe('3. Verify created booking', () => {
 
         it('Verify status', () => {
             createdBooking().then(({ status }) => {
@@ -163,35 +163,77 @@ describe("OlgaForostinkoSpec", () => {
                 expect(body.firstname).to.eq(API_DATA.bodyCreateBooking.firstname)
             })    
         })
-//не работает разобраться
-        // it('Verify checkout', () => {
-        //     createBooking().then(({ body }) =>{
-        //         expect(body.checkout).to.eq(API_DATA.bodyCreateBooking.bookingdates.checkout)
-        //     })    
-        // });
 
-    describe('Update booking', () => {
+        it('Verify checkout', () => {
+            createdBooking().then(({ body }) =>{
+                expect(body.bookingdates.checkout).to.eq(API_DATA.bodyCreateBooking.bookingdates.checkout)
+            })    
+        })
+
+    describe('4. Update booking', () => {
 
         it('Verify status booking updates', () => {
             updateBooking().then(({ status }) => {
                 expect(status).to.eq(200)
             })    
-        });
+        })
         
         it('Verify first name is updated', () => {
             updateBooking().then(({ body}) => {
                 expect(body.firstname).to.eq(API_DATA.updateBookingInfo.firstname)
             })    
-        });
-//дописать!        
-    describe('Partial Update Booking', () => {
+        })
+      
+    describe('5. Partial Update Booking', () => {
 
-        it('Verify status partial update booking ', () => {
-            partialUpdateBooking().then(({ status }) => {
-                expect(status).to.eq(200)
+        it('Verify firstname partial update booking', () => {
+            partialUpdateBooking().then(({ body }) => {
+                expect(body.firstname).to.eq(API_DATA.romData.partialUpdate.firstname)
             })    
         })
-    })    
+    })
+    
+    describe('6. Delete Booking', () => {
+
+        const deleteBooking = () =>
+        cy.request({
+            method: "DELETE",
+            url: `${API_BASE_URL}/booking/${CREATED_BOOKINGID}`,
+            headers: {
+                "Authorization": API_DATA.headersContentType,
+                "Cookie": `token=${NEW_TOKEN}`
+            },
+            failOnStatusCode: false    
+        })
+
+        it('Verify that default HTTP 201 response', () => {
+            deleteBooking().then(({ status }) => {
+                expect(status).to.eq(201)
+            })            
+        })
+
+        it('The error message "Method Not Allowed" appears when we Get not existing booking by ID', () => {
+            deleteBooking().then(({ body }) => {
+                cy.log(body)
+                expect(body).to.contain("Method Not Allowed")
+            })    
+        })
+    })
+
+    describe('7. Ping - HealthCheck', () => {
+
+        const getResponceOfServer = () => 
+            cy.request({
+                method: "GET",
+                url: `${API_BASE_URL}/ping`
+            })
+
+        it('Verify that server response with ping', () => {
+            getResponceOfServer().then(({ status }) => {
+                expect(status).to.eq(201)
+            })   
+        })    
+    });
 })
     })
 })
