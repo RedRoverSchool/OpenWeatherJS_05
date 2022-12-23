@@ -291,7 +291,7 @@
         "Content-Type": "application/json",
         "Accept": "application/json", 
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
-        },
+    },
    
     "lauraData": {
         "firstBooking": {
@@ -332,7 +332,6 @@
 
             "additionalneeds": "Halal"
         },
-
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
 
     },
