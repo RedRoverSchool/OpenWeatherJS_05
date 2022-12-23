@@ -281,6 +281,8 @@
             "additionalneeds": "Breakfast, car rental"
         }
     },
+ 
+
     "headersAccept": {
         "Accept": "application/json"
     },
@@ -290,7 +292,7 @@
         "Accept": "application/json", 
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
     },
-
+   
     "lauraData": {
         "firstBooking": {
             "firstname" : "JamesArk",
@@ -330,9 +332,35 @@
 
             "additionalneeds": "Halal"
         },
-        
+
         "Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="
 
-    }
+    },
 
-}
+    "illiaData": {
+            "createBooking": {
+                "firstname": "Harry",
+                "lastname": "Potter",
+                "totalprice": 999,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2018-01-01",
+                    "checkout": "2019-01-01"
+                },
+                "additionalneeds": "Dinner"
+            },
+            "updateBooking": {
+                "firstname": "Carlos",
+                "lastname": "Jameson",
+                "totalprice": 777,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2022-01-01",
+                    "checkout": "2023-01-01"
+                },
+                "additionalneeds": 100
+            }, 
+            "token": "token"
+        }
+    }
+    
